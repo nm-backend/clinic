@@ -1,52 +1,35 @@
-# Сеть клиник — Backend
+# Clinic Network API
 
-## Быстрый запуск (Windows PowerShell)
+Базовый Django REST API для сети медицинских центров.
 
-```powershell
-cd C:\Users\User\Desktop\clinic
+## Быстрый старт
 
-# 1. Виртуальное окружение
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
+1. Создайте виртуальное окружение и установите зависимости:
+   ```bash
+   python -m venv .venv
+   .venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
+2. Выполните миграции:
+   ```bash
+   python manage.py migrate
+   ```
+3. Запустите сервер:
+   ```bash
+   python manage.py runserver
+   ```
 
-# 2. Зависимости
-pip install -r requirements.txt
+## Документация API
 
-# 3. Конфиг
-copy .env.example .env
+- Swagger: /api/v1/swagger/
+- Redoc: /api/v1/redoc/
+- Schema: /api/v1/schema/
 
-# 4a. PostgreSQL через Docker (рекомендуется)
-docker compose up -d
+## Основные возможности
 
-# 4b. ИЛИ SQLite без Docker — в .env добавьте: USE_SQLITE=True
-
-# 5. БД + тестовые данные
-python manage.py migrate
-python manage.py seed_data
-
-# 6. Сервер
-python manage.py runserver
-```
-
-Откройте http://127.0.0.1:8000/
-
-## API
-
-- GET  `/api/clinics/`
-- GET  `/api/doctors/?clinic_id=1&specialty=терапевт`
-- GET  `/api/services/?clinic_id=1`
-- GET  `/api/appointments/?patient_phone=+79001234567`
-- POST `/api/appointments/`
-- GET/PATCH/DELETE `/api/appointments/<id>/`
-
-## Структура
-
-```
-clinics/
-├── models.py
-├── serializers.py
-├── views.py
-├── urls.py
-└── admin.py
-clinic_network/       — settings, корневые urls
-```
+- каталоги клиник, врачей и услуг;
+- фильтрация врачей по клинике и специальности;
+- фильтрация услуг по клинике и направлению;
+- запись на приём с проверкой занятых слотов;
+- просмотр истории записей пациента;
+- базовая регистрация пользователя и профиль.

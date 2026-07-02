@@ -1,4 +1,4 @@
-const API = '/api';
+const API = '/api/v1';
 
 async function apiRequest(method, path, body = null) {
     const options = {
@@ -50,11 +50,24 @@ document.getElementById('btn-load-doctors').addEventListener('click', async () =
     showOutput('out-doctors', result);
 });
 
+document.getElementById('btn-load-categories').addEventListener('click', async () => {
+    const result = await apiRequest('GET', '/service-categories/');
+    showOutput('out-categories', result);
+});
+
 document.getElementById('btn-load-services').addEventListener('click', async () => {
     const clinicId = document.getElementById('filter-service-clinic').value;
     const query = buildQuery({ clinic_id: clinicId });
     const result = await apiRequest('GET', '/services/' + query);
     showOutput('out-services', result);
+});
+
+document.getElementById('btn-load-slots').addEventListener('click', async () => {
+    const doctorId = document.getElementById('slot-doctor-id').value;
+    const date = document.getElementById('slot-date').value;
+    const query = buildQuery({ doctor_id: doctorId, date });
+    const result = await apiRequest('GET', '/available-slots/' + query);
+    showOutput('out-slots', result);
 });
 
 document.getElementById('form-appointment').addEventListener('submit', async (e) => {

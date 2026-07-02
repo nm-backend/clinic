@@ -1,8 +1,18 @@
+from django.contrib.auth import get_user_model
 from django.utils import timezone
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
-from clinics.models import Appointment, Clinic, Doctor, Patient, Service
+from clinics.models import (
+    Appointment,
+    Clinic,
+    ClinicUser,
+    Doctor,
+    DoctorScheduleSlot,
+    Patient,
+    Service,
+    ServiceCategory,
+)
 
 
 class ClinicModelSerializer(ModelSerializer):
@@ -13,6 +23,7 @@ class ClinicModelSerializer(ModelSerializer):
 
 class DoctorModelSerializer(ModelSerializer):
     clinic_name = serializers.CharField(source='clinic.name', read_only=True)
+    category_name = serializers.CharField(source='category.name', read_only=True)
 
     class Meta:
         model = Doctor
@@ -27,12 +38,19 @@ class DoctorDetailSerializer(ModelSerializer):
         fields = '__all__'
 
 
+class ServiceCategoryModelSerializer(ModelSerializer):
+    class Meta:
+        model = ServiceCategory
+        fields = '__all__'
+
+
 class ServiceModelSerializer(ModelSerializer):
     clinic_name = serializers.CharField(
         source='clinic.name',
         read_only=True,
         default='Доступна во всей сети',
     )
+    category_name = serializers.CharField(source='category.name', read_only=True)
 
     class Meta:
         model = Service
@@ -43,6 +61,38 @@ class PatientModelSerializer(ModelSerializer):
     class Meta:
         model = Patient
         fields = '__all__'
+
+
+class RegisterSerializer(serializers.Serializer):
+    username = serializers.CharField(max_length=150)
+    email = serializers.EmailField(required=False, allow_blank=True)
+    password = serializers.CharField(write_only=True, min_length=8)
+    password_confirm = serializers.CharField(write_only=True, min_length=8)
+    role = serializers.ChoiceField(choices=ClinicUser.Role.choices, default=ClinicUser.Role.PATIENT)
+
+    def validate(self, attrs):
+        if attrs['password'] != attrs['password_confirm']:
+            raise serializers.ValidationError({'password_confirm': 'Пароли не совпадают'})
+        if get_user_model().objects.filter(username=attrs['username']).exists():
+            raise serializers.ValidationError({'username': 'Пользователь уже существует'})
+        return attrs
+
+    def create(self, validated_data):
+        validated_data.pop('password_confirm')
+        password = validated_data.pop('password')
+        role = validated_data.pop('role')
+        user = get_user_model().objects.create_user(**validated_data, password=password)
+        ClinicUser.objects.create(user=user, role=role)
+        return user
+
+
+class CurrentUserSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(source='user.username', read_only=True)
+    email = serializers.CharField(source='user.email', read_only=True)
+
+    class Meta:
+        model = ClinicUser
+        fields = ('username', 'email', 'role', 'clinic')
 
 
 class AppointmentModelSerializer(ModelSerializer):
@@ -70,10 +120,13 @@ class AppointmentCreateSerializer(serializers.Serializer):
     patient_birth_date = serializers.DateField(required=False, allow_null=True)
     doctor_id = serializers.IntegerField(min_value=1)
     service_id = serializers.IntegerField(min_value=1)
-    scheduled_at = serializers.DateTimeField()
+    slot_id = serializers.IntegerField(min_value=1, required=False, allow_null=True)
+    scheduled_at = serializers.DateTimeField(required=False, allow_null=True)
     notes = serializers.CharField(required=False, allow_blank=True, default='')
 
     def validate_scheduled_at(self, value):
+        if value is None:
+            return value
         if value <= timezone.now():
             raise serializers.ValidationError('Дата приёма должна быть в будущем')
         return value
@@ -102,12 +155,32 @@ class AppointmentCreateSerializer(serializers.Serializer):
                 'Услуга недоступна в клинике выбранного врача',
             )
 
-        self._check_slot_available(doctor, service, data['scheduled_at'])
+        slot = None
+        if data.get('slot_id'):
+            slot = DoctorScheduleSlot.objects.filter(
+                pk=data['slot_id'],
+                doctor=doctor,
+                is_available=True,
+            ).first()
+            if slot is None:
+                raise serializers.ValidationError({'slot_id': 'Слот не найден или уже занят'})
+            if slot.start_at <= timezone.now():
+                raise serializers.ValidationError({'slot_id': 'Слот уже неактуален'})
+            data['scheduled_at'] = slot.start_at
+        else:
+            if data.get('scheduled_at') is None:
+                raise serializers.ValidationError({'scheduled_at': 'Обязательное поле'})
+            self._check_slot_available(doctor, service, data['scheduled_at'])
+
+        if slot is not None:
+            self._check_slot_available(doctor, service, slot.start_at, slot=slot)
+
         data['doctor'] = doctor
         data['service'] = service
+        data['slot'] = slot
         return data
 
-    def _check_slot_available(self, doctor, service, scheduled_at, exclude_id=None):
+    def _check_slot_available(self, doctor, service, scheduled_at, exclude_id=None, slot=None):
         end_time = scheduled_at + timezone.timedelta(minutes=service.duration_minutes)
         busy = Appointment.objects.filter(
             doctor=doctor,
@@ -116,6 +189,8 @@ class AppointmentCreateSerializer(serializers.Serializer):
         )
         if exclude_id:
             busy = busy.exclude(pk=exclude_id)
+        if slot is not None:
+            busy = busy.filter(slot__in=[slot, None])
 
         for existing in busy:
             existing_end = existing.scheduled_at + timezone.timedelta(
@@ -154,13 +229,21 @@ class AppointmentCreateSerializer(serializers.Serializer):
                 patient.email = email
             patient.save(update_fields=['first_name', 'last_name', 'email'])
 
-        return Appointment.objects.create(
+        slot = validated_data.pop('slot', None)
+        scheduled_at = validated_data.pop('scheduled_at')
+
+        appointment = Appointment.objects.create(
             patient=patient,
             doctor=doctor,
             service=service,
-            scheduled_at=validated_data.pop('scheduled_at'),
+            slot=slot,
+            scheduled_at=scheduled_at,
             notes=validated_data.pop('notes', ''),
         )
+        if slot is not None:
+            slot.is_available = False
+            slot.save(update_fields=['is_available'])
+        return appointment
 
 
 class AppointmentUpdateSerializer(serializers.Serializer):
@@ -174,6 +257,8 @@ class AppointmentUpdateSerializer(serializers.Serializer):
     notes = serializers.CharField(required=False, allow_blank=True)
 
     def validate_scheduled_at(self, value):
+        if value is None:
+            return value
         if value <= timezone.now():
             raise serializers.ValidationError('Дата приёма должна быть в будущем')
         return value

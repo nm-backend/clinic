@@ -3,13 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сеть клиник — тест API</title>
+    <title>Сеть клиник</title>
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
     <header class="header">
-        <h1>Сеть клиник</h1>
-        <p class="subtitle">Минимальный интерфейс для проверки REST API</p>
+        <div class="container header__inner">
+            <div>
+                <p class="eyebrow">Сеть клиник</p>
+                <h1>Запись к врачу без очередей</h1>
+                <p class="subtitle">Базовая логика для каталога услуг, врачей и приёма пациентов.</p>
+            </div>
+        </div>
     </header>
 
     <main class="container">
@@ -36,13 +41,31 @@
         </section>
 
         <section class="panel">
-            <h2>Услуги</h2>
+            <h2>Направления и услуги</h2>
+            <button type="button" id="btn-load-categories">Показать направления</button>
+            <pre id="out-categories" class="output"></pre>
             <label>
                 Клиника (id):
                 <input type="number" id="filter-service-clinic" placeholder="необязательно">
             </label>
             <button type="button" id="btn-load-services">Загрузить услуги</button>
             <pre id="out-services" class="output"></pre>
+        </section>
+
+        <section class="panel">
+            <h2>Свободные слоты</h2>
+            <div class="filters">
+                <label>
+                    ID врача:
+                    <input type="number" id="slot-doctor-id" placeholder="1">
+                </label>
+                <label>
+                    Дата:
+                    <input type="date" id="slot-date">
+                </label>
+            </div>
+            <button type="button" id="btn-load-slots">Показать слоты</button>
+            <pre id="out-slots" class="output"></pre>
         </section>
 
         <section class="panel">
@@ -104,3 +127,4 @@
     <script src="/static/js/app.js"></script>
 </body>
 </html>
+

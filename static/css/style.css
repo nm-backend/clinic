@@ -4,27 +4,121 @@
   box-sizing: border-box;
 }
 
+:root {
+  color-scheme: light;
+}
+
 body {
-  margin: 0;
-  font-family: Inter, system-ui, -apple-system, sans-serif;
-  font-size: 15px;
-  line-height: 1.5;
-  color: #1f2937;
-  background: #f3f7fb;
+  background-color: #ffffff;
+  color: #1a1a1a;
+  min-height: 100vh;
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 1.5rem;
 }
 
-.header {
-  background: linear-gradient(135deg, #0f4c81, #2d8cff);
-  color: white;
+header {
+  background: white;
+  /* color: white; */
 }
 
-.header__inner {
+.header_topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0.75rem 1.5rem;
+  h1 {
+    width: 231;
+    height: 22;
+    angle: 0 deg;
+    opacity: 1;
+    top: 29px;
+    left: 150px;
+
+    font-family: Raleway;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 16px;
+    leading-trim: NONE;
+    line-height: 140%;
+    letter-spacing: 0%;
+
+    color: #686868;
+  }
+
+  h2 {
+    width: 232;
+    height: 25;
+    angle: 0 deg;
+    opacity: 1;
+
+    font-family: Raleway;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 18px;
+    leading-trim: NONE;
+    line-height: 140%;
+    letter-spacing: 0%;
+
+    color: #686868;
+  }
+}
+
+.header_social {
+  display: flex;
+  gap: 20px;
+
+  .header_phone {
+    width: 202;
+    height: 31;
+    angle: 0 deg;
+    opacity: 1;
+    font-family: Raleway;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 22px;
+    leading-trim: NONE;
+    line-height: 140%;
+    letter-spacing: 0%;
+    color: #000000;
+  }
+  button {
+    background: linear-gradient(180deg, #3bb96d 0%, #279a59 100%);
+    width: 196px;
+    height: 36px;
+    left: 222px;
+    border-radius: 30px;
+  }
+}
+
+.header_navbar {
+  display: flex;
+  .header_logo {
+    width: 144px;
+    height: 38px;
+    /* angle: 0 deg; */
+    /* opacity: 1; */
+  }
+  .header_nav {
+    display: flex;
+    gap: 34px;
+    width: 74px;
+    height: 25px;
+    font-family: Raleway;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 18px;
+    leading-trim: NONE;
+    line-height: 140%;
+    letter-spacing: 0%;
+    color: #0d233b;
+  }
+}
+
+.headerinner {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -140,4 +234,3 @@ button:hover {
   background: #f0fdf4;
   border-color: #bbf7d0;
 }
-

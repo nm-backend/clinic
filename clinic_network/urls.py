@@ -3,12 +3,15 @@ from django.shortcuts import redirect
 from django.urls import include, path
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 
+from clinics.views import index
+
 
 def redirect_to_v1_docs(request):
     return redirect('/api/v1/swagger/')
 
 
 urlpatterns = [
+    path('', index, name='index'),
     path('admin/', admin.site.urls),
     path('api/', include('clinics.urls')),
     path('api/v1/', include('clinics.urls')),

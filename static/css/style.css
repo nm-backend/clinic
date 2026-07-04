@@ -102,19 +102,18 @@ header {
     /* angle: 0 deg; */
     /* opacity: 1; */
   }
-  .header_nav {
+  .header_nav a {
     display: flex;
-    gap: 34px;
-    width: 74px;
-    height: 25px;
+    align-items: center; /* Выравнивает логотип и ссылки по вертикали */
+    justify-content: space-between; /* Толкает логотип влево, а меню вправо */
+    width: 100%;
     font-family: Raleway;
     font-weight: 400;
-    font-style: Regular;
+    font-style: normal;
     font-size: 18px;
-    leading-trim: NONE;
     line-height: 140%;
-    letter-spacing: 0%;
     color: #0d233b;
+    text-decoration: none; /* Убирает подчеркивание */
   }
 }
 

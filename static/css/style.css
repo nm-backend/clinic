@@ -30,8 +30,9 @@ header {
 /* Верхняя панель */
 .header_topbar {
   display: flex;
+  gap: 114px;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   padding: 0.75rem 1.5rem;
 }
 

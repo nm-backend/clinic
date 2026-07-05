@@ -13,7 +13,8 @@ body {
   color: #1a1a1a;
   min-height: 100vh;
   margin: 0;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
+  max-width: 100%;
 }
 
 .container {
@@ -37,7 +38,7 @@ header {
 }
 
 .header_topbar h1 {
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   font-weight: 500;
   font-size: 16px;
   line-height: 140%;
@@ -46,7 +47,7 @@ header {
 }
 
 .header_topbar h2 {
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   font-weight: 500;
   font-size: 18px;
   line-height: 140%;
@@ -62,7 +63,7 @@ header {
 }
 
 .header_phone {
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   font-weight: 500;
   font-size: 22px;
   line-height: 140%;
@@ -78,7 +79,7 @@ header {
   border: none;
   border-radius: 30px;
   cursor: pointer;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   font-size: 14px;
   font-weight: 500;
 }
@@ -110,7 +111,7 @@ header {
 }
 
 .header_nav a {
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   font-weight: 400;
   font-size: 18px;
   line-height: 140%;
@@ -144,18 +145,75 @@ header {
 }
 
 .panel {
-  background: white;
+  display: flex;
+  background: rgb(55, 178, 105);
   border: 1px solid #dce7f2;
   border-radius: 12px;
   padding: 1.25rem;
   margin-bottom: 1rem;
   box-shadow: 0 8px 24px rgba(15, 76, 129, 0.06);
+  img {
+    width: 580px;
+    height: 569px;
+    angle: 0 deg;
+    opacity: 1;
+  }
+  .panel-text {
+    h1 {
+      width: 504px;
+      height: 198px;
+      angle: 0 deg;
+      opacity: 1;
+      font-family: Raleway;
+      font-weight: 700;
+      font-style: Bold;
+      font-size: 60px;
+      leading-trim: NONE;
+      line-height: 110.00000000000001%;
+      letter-spacing: 0%;
+      color: white;
+    }
+    p {
+      width: 449px;
+      height: 88px;
+      angle: 0 deg;
+      opacity: 1;
+      font-family: Raleway;
+      font-weight: 400;
+      font-style: Regular;
+      font-size: 16px;
+      leading-trim: NONE;
+      line-height: 140%;
+      letter-spacing: 0%;
+      color: white;
+    }
+    button {
+      width: 220px;
+      height: 48px;
+      top: 336px;
+      angle: 0 deg;
+      opacity: 1;
+      border-radius: 30px;
+      background: #ffffff;
+      /* width: 91px; */
+      /* height: 22px; */
+      angle: 0 deg;
+      opacity: 1;
+      font-family: Raleway;
+      font-weight: 700;
+      font-style: Bold;
+      font-size: 16px;
+      leading-trim: NONE;
+      line-height: 140%;
+      letter-spacing: 0%;
+      color: (180deg, #3BB96D 0%, #279A59 100%);
+    }
+  }
 }
 
-.panel h2 {
-  margin: 0 0 1rem;
-  font-size: 1.1rem;
-  color: #0f4c81;
+.some-about{
+  display: flex;
+  some-text
 }
 
 .filters,

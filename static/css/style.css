@@ -649,10 +649,10 @@ button:not(.header_social button):active {
     margin: 1rem 0;
   }
 
-  .panel h2 {
-    font-size: 18px;
+  /* .panel h2 {
+    font-size: 1px;
     margin-bottom: 1rem;
-  }
+  } */
 
   .container {
     padding: 0 0.75rem;

@@ -1,3 +1,4 @@
+/* Reset and Base Styles */
 *,
 *::before,
 *::after {
@@ -6,29 +7,52 @@
 
 :root {
   color-scheme: light;
+  --primary-color: #3bb96d;
+  --primary-dark: #279a59;
+  --text-dark: #0d233b;
+  --text-light: #686868;
+  --border-light: #f0f0f0;
+  --white: #ffffff;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background-color: #ffffff;
-  color: #1a1a1a;
-  min-height: 100vh;
   margin: 0;
-  font-family: "Raleway", sans-serif;
-  max-width: 100%;
+  padding: 0;
+  font-family: 'Raleway', sans-serif;
+  background-color: var(--white);
+  color: #1a1a1a;
+  line-height: 1.4;
+}
+
+main {
+  width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  font-family: 'Raleway', sans-serif;
 }
 
 .container {
-  max-width: 1440px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 1.5rem;
+  padding: 0 1.5rem;
 }
 
+/* Header Styles */
 header {
-  background: white;
-  border-bottom: 1px solid #f0f0f0;
+  background: var(--white);
+  border-bottom: 1px solid var(--border-light);
 }
 
-/* Верхняя панель */
 .header_topbar {
   display: flex;
   gap: 114px;
@@ -38,24 +62,21 @@ header {
 }
 
 .header_topbar h1 {
-  font-family: "Raleway", sans-serif;
   font-weight: 500;
   font-size: 16px;
   line-height: 140%;
-  color: #686868;
+  color: var(--text-light);
   margin: 0;
 }
 
 .header_topbar h2 {
-  font-family: "Raleway", sans-serif;
   font-weight: 500;
   font-size: 18px;
   line-height: 140%;
-  color: #686868;
+  color: var(--text-light);
   margin: 0;
 }
 
-/* Блок с телефоном и кнопкой */
 .header_social {
   display: flex;
   align-items: center;
@@ -63,7 +84,6 @@ header {
 }
 
 .header_phone {
-  font-family: "Raleway", sans-serif;
   font-weight: 500;
   font-size: 22px;
   line-height: 140%;
@@ -72,23 +92,26 @@ header {
 }
 
 .header_social button {
-  background: linear-gradient(180deg, #3bb96d 0%, #279a59 100%);
+  background: linear-gradient(180deg, var(--primary-color) 0%, var(--primary-dark) 100%);
   color: white;
   width: 196px;
   height: 36px;
   border: none;
   border-radius: 30px;
   cursor: pointer;
-  font-family: "Raleway", sans-serif;
   font-size: 14px;
   font-weight: 500;
+  transition: opacity 0.3s ease;
 }
 
-/* Главная навигация (Лого + Меню) */
+.header_social button:hover {
+  opacity: 0.9;
+}
+
 .header_navbar {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Разносит логотип влево, а ссылки вправо */
+  justify-content: space-between;
   padding: 1rem 1.5rem;
 }
 
@@ -106,25 +129,94 @@ header {
 
 .header_nav {
   display: flex;
-  gap: 34px; /* Расстояние между ссылками */
+  gap: 34px;
   align-items: center;
 }
 
 .header_nav a {
-  font-family: "Raleway", sans-serif;
   font-weight: 400;
   font-size: 18px;
   line-height: 140%;
-  color: #0d233b;
-  text-decoration: none; /* Убирает подчеркивание */
+  color: var(--text-dark);
+  text-decoration: none;
   white-space: nowrap;
+  transition: color 0.3s ease;
 }
 
 .header_nav a:hover {
-  color: #279a59; /* Цвет при наведении */
+  color: var(--primary-color);
 }
 
-/* Остальные элементы интерфейса */
+/* Hero Section */
+.hero {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  background: linear-gradient(135deg, #3bb96d 0%, #2d9b5f 100%);
+  border-radius: 12px;
+  padding: 3rem;
+  margin: 2rem 0;
+  min-height: 500px;
+}
+
+.hero_content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero h1 {
+  font-size: 60px;
+  font-weight: 700;
+  line-height: 110%;
+  color: var(--white);
+  margin-bottom: 1.5rem;
+  max-width: 600px;
+}
+
+.hero p {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 140%;
+  color: var(--white);
+  margin-bottom: 2rem;
+  max-width: 500px;
+}
+
+.hero_button {
+  width: 220px;
+  height: 48px;
+  padding: 0;
+  background: var(--white);
+  color: var(--primary-color);
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.hero_button:hover {
+  background: #f0f0f0;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.hero_image {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero_image img {
+  width: 100%;
+  height: auto;
+  max-width: 500px;
+}
+
+/* Utility Styles */
 .headerinner {
   display: flex;
   align-items: center;
@@ -144,78 +236,7 @@ header {
   opacity: 0.9;
 }
 
-.panel {
-  display: flex;
-  background: rgb(55, 178, 105);
-  border: 1px solid #dce7f2;
-  border-radius: 12px;
-  padding: 1.25rem;
-  margin-bottom: 1rem;
-  box-shadow: 0 8px 24px rgba(15, 76, 129, 0.06);
-  img {
-    width: 580px;
-    height: 569px;
-    angle: 0 deg;
-    opacity: 1;
-  }
-  .panel-text {
-    h1 {
-      width: 504px;
-      height: 198px;
-      angle: 0 deg;
-      opacity: 1;
-      font-family: Raleway;
-      font-weight: 700;
-      font-style: Bold;
-      font-size: 60px;
-      leading-trim: NONE;
-      line-height: 110.00000000000001%;
-      letter-spacing: 0%;
-      color: white;
-    }
-    p {
-      width: 449px;
-      height: 88px;
-      angle: 0 deg;
-      opacity: 1;
-      font-family: Raleway;
-      font-weight: 400;
-      font-style: Regular;
-      font-size: 16px;
-      leading-trim: NONE;
-      line-height: 140%;
-      letter-spacing: 0%;
-      color: white;
-    }
-    button {
-      width: 220px;
-      height: 48px;
-      top: 336px;
-      angle: 0 deg;
-      opacity: 1;
-      border-radius: 30px;
-      background: #ffffff;
-      /* width: 91px; */
-      /* height: 22px; */
-      angle: 0 deg;
-      opacity: 1;
-      font-family: Raleway;
-      font-weight: 700;
-      font-style: Bold;
-      font-size: 16px;
-      leading-trim: NONE;
-      line-height: 140%;
-      letter-spacing: 0%;
-      color: (180deg, #3BB96D 0%, #279A59 100%);
-    }
-  }
-}
-
-.some-about{
-  display: flex;
-  some-text
-}
-
+/* Form Styles */
 .filters,
 .form-grid {
   display: grid;
@@ -254,6 +275,7 @@ button {
   cursor: pointer;
   font: inherit;
   margin-top: 0.25rem;
+  transition: background 0.3s ease;
 }
 
 button:hover {
@@ -275,6 +297,7 @@ button:hover {
   background: #b91c1c;
 }
 
+/* Output Styles */
 .output {
   margin-top: 0.75rem;
   padding: 0.75rem;
@@ -297,4 +320,27 @@ button:hover {
 .output.success {
   background: #f0fdf4;
   border-color: #bbf7d0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    padding: 2rem;
+    min-height: auto;
+  }
+
+  .hero h1 {
+    font-size: 40px;
+  }
+
+  .header_nav {
+    gap: 20px;
+    font-size: 16px;
+  }
+
+  .header_topbar {
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
 }

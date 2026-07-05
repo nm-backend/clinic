@@ -19,13 +19,31 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Typography and Spacing Improvements */
+h1 {
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+h2 {
+  font-weight: 600;
+  letter-spacing: -0.25px;
+}
+
+p {
+  line-height: 1.6;
+  letter-spacing: 0.3px;
+}
+
+/* Better spacing and sizing */
 body {
   margin: 0;
   padding: 0;
   font-family: 'Raleway', sans-serif;
   background-color: var(--white);
   color: #1a1a1a;
-  line-height: 1.4;
+  line-height: 1.5;
+  letter-spacing: 0.3px;
 }
 
 main {
@@ -41,10 +59,22 @@ button {
   font-family: 'Raleway', sans-serif;
 }
 
+/* Container with improved sizing */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1.5rem;
+}
+
+/* Enhanced typography for different elements */
+label {
+  letter-spacing: 0.2px;
+  line-height: 1.5;
+}
+
+textarea {
+  line-height: 1.6;
+  letter-spacing: 0.3px;
 }
 
 /* Header Styles */
@@ -184,8 +214,8 @@ header {
   gap: 3rem;
   background: linear-gradient(135deg, #3bb96d 0%, #2d9b5f 100%);
   border-radius: 12px;
-  padding: 3rem;
-  margin: 2rem 0;
+  padding: 3.5rem;
+  margin: 2.5rem 0;
   min-height: 500px;
   box-shadow: 0 8px 32px rgba(59, 185, 109, 0.15);
 }
@@ -203,7 +233,7 @@ header {
   font-weight: 700;
   line-height: 110%;
   color: var(--white);
-  margin-bottom: 1.5rem;
+  margin: 0 0 1.5rem 0;
   max-width: 600px;
   letter-spacing: -0.5px;
 }
@@ -211,11 +241,12 @@ header {
 .hero p {
   font-size: 16px;
   font-weight: 400;
-  line-height: 140%;
+  line-height: 1.6;
   color: var(--white);
-  margin-bottom: 2rem;
+  margin: 0 0 2rem 0;
   max-width: 500px;
   opacity: 0.95;
+  letter-spacing: 0.3px;
 }
 
 .hero_button {
@@ -231,6 +262,7 @@ header {
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  letter-spacing: 0.3px;
 }
 
 .hero_button:hover {
@@ -263,10 +295,10 @@ header {
   background: var(--white);
   border: 1px solid #e2e8f0;
   border-radius: 12px;
-  padding: 2rem;
-  margin: 2rem 0;
+  padding: 2.5rem;
+  margin: 2.5rem 0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  transition: box-shadow 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .panel:hover {
@@ -277,9 +309,10 @@ header {
   font-size: 28px;
   font-weight: 600;
   color: var(--text-dark);
-  margin-bottom: 1.5rem;
+  margin: 0 0 1.5rem 0;
   border-bottom: 2px solid var(--border-light);
   padding-bottom: 1rem;
+  letter-spacing: -0.25px;
 }
 
 section {

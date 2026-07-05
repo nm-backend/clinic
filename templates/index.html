@@ -1,103 +1,114 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Сеть клиник — главная{% endblock %}
 
 {% block content %}
-    <section class="panel">
-        <div class="panel-text">
-            <h1>Lorem ipsum dolor sit amet, consectetur</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra amet dolor sed mi tincidunt pharetra montes. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra amet dolor sed mi tincidunt pharetra montes.</p>
-            <button>Подробнее ></button>
-        </div>
-        <img src="/static/img/panel.svg" alt="">
-    </section>
+    <div class="container">
+        <section class="hero">
+            <div class="hero_content">
+                <h1>Lorem ipsum dolor sit amet, consectetur</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra amet dolor sed mi tincidunt pharetra montes. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra amet dolor sed mi tincidunt pharetra montes.</p>
+                <button class="hero_button">Подробнее ></button>
+            </div>
+            <div class="hero_image">
+                <img src="{% static 'img/panel.svg' %}" alt="Консультация врача">
+            </div>
+        </section>
 
-    <section class="some-about">
-        <h2>Врачи</h2>
-        <div class="filters">
+        <!-- Additional Sections -->
+        <section id="doctors" class="panel">
+            <h2>Врачи</h2>
+            <div class="filters">
+                <label>
+                    Клиника (id):
+                    <input type="number" id="filter-clinic-id" placeholder="необязательно">
+                </label>
+                <label>
+                    Специальность:
+                    <input type="text" id="filter-specialty" placeholder="например, терапевт">
+                </label>
+            </div>
+            <button type="button" id="btn-load-doctors">Загрузить врачей</button>
+            <pre id="out-doctors" class="output"></pre>
+        </section>
+
+        <section id="services" class="panel">
+            <h2>Направления и услуги</h2>
+            <button type="button" id="btn-load-categories">Показать направления</button>
+            <pre id="out-categories" class="output"></pre>
             <label>
                 Клиника (id):
-                <input type="number" id="filter-clinic-id" placeholder="необязательно">
+                <input type="number" id="filter-service-clinic" placeholder="необязательно">
             </label>
+            <button type="button" id="btn-load-services">Загрузить услуги</button>
+            <pre id="out-services" class="output"></pre>
+        </section>
+
+        <section class="panel">
+            <h2>Свободные слоты</h2>
+            <div class="filters">
+                <label>
+                    ID врача:
+                    <input type="number" id="slot-doctor-id" placeholder="1">
+                </label>
+                <label>
+                    Дата:
+                    <input type="date" id="slot-date">
+                </label>
+            </div>
+            <button type="button" id="btn-load-slots">Показать слоты</button>
+            <pre id="out-slots" class="output"></pre>
+        </section>
+
+        <section class="panel">
+            <h2>Запись на приём</h2>
+            <form id="form-appointment" class="form-grid">
+                <label>Имя <input type="text" name="patient_first_name" required></label>
+                <label>Фамилия <input type="text" name="patient_last_name" required></label>
+                <label>Телефон <input type="tel" name="patient_phone" required placeholder="+79001234567"></label>
+                <label>Email <input type="email" name="patient_email"></label>
+                <label>ID врача <input type="number" name="doctor_id" required min="1"></label>
+                <label>ID услуги <input type="number" name="service_id" required min="1"></label>
+                <label>Дата и время <input type="datetime-local" name="scheduled_at" required></label>
+                <label class="full-width">Комментарий <textarea name="notes" rows="2"></textarea></label>
+                <button type="submit">Создать запись</button>
+            </form>
+            <pre id="out-create" class="output"></pre>
+        </section>
+
+        <section class="panel">
+            <h2>Мои записи</h2>
             <label>
-                Специальность:
-                <input type="text" id="filter-specialty" placeholder="например, терапевт">
+                Телефон пациента:
+                <input type="tel" id="search-phone" placeholder="+79001234567">
             </label>
-        </div>
-        <button type="button" id="btn-load-doctors">Загрузить врачей</button>
-        <pre id="out-doctors" class="output"></pre>
-    </section>
+            <button type="button" id="btn-load-appointments">Найти записи</button>
+            <pre id="out-appointments" class="output"></pre>
+        </section>
 
-    <section class="panel">
-        <h2>Направления и услуги</h2>
-        <button type="button" id="btn-load-categories">Показать направления</button>
-        <pre id="out-categories" class="output"></pre>
-        <label>
-            Клиника (id):
-            <input type="number" id="filter-service-clinic" placeholder="необязательно">
-        </label>
-        <button type="button" id="btn-load-services">Загрузить услуги</button>
-        <pre id="out-services" class="output"></pre>
-    </section>
-
-    <section class="panel">
-        <h2>Свободные слоты</h2>
-        <div class="filters">
-            <label>
-                ID врача:
-                <input type="number" id="slot-doctor-id" placeholder="1">
-            </label>
-            <label>
-                Дата:
-                <input type="date" id="slot-date">
-            </label>
-        </div>
-        <button type="button" id="btn-load-slots">Показать слоты</button>
-        <pre id="out-slots" class="output"></pre>
-    </section>
-
-    <section class="panel">
-        <h2>Запись на приём</h2>
-        <form id="form-appointment" class="form-grid">
-            <label>Имя <input type="text" name="patient_first_name" required></label>
-            <label>Фамилия <input type="text" name="patient_last_name" required></label>
-            <label>Телефон <input type="tel" name="patient_phone" required placeholder="+79001234567"></label>
-            <label>Email <input type="email" name="patient_email"></label>
-            <label>ID врача <input type="number" name="doctor_id" required min="1"></label>
-            <label>ID услуги <input type="number" name="service_id" required min="1"></label>
-            <label>Дата и время <input type="datetime-local" name="scheduled_at" required></label>
-            <label class="full-width">Комментарий <textarea name="notes" rows="2"></textarea></label>
-            <button type="submit">Создать запись</button>
-        </form>
-        <pre id="out-create" class="output"></pre>
-    </section>
-
-    <section class="panel">
-        <h2>Мои записи</h2>
-        <label>
-            Телефон пациента:
-            <input type="tel" id="search-phone" placeholder="+79001234567">
-        </label>
-        <button type="button" id="btn-load-appointments">Найти записи</button>
-        <pre id="out-appointments" class="output"></pre>
-    </section>
-
-    <section class="panel">
-        <h2>Управление записью</h2>
-        <div class="filters">
-            <label>
-                ID записи:
-                <input type="number" id="appointment-id" min="1">
-            </label>
-        </div>
-        <div class="btn-row">
-            <button type="button" id="btn-get-appointment">Получить</button>
-            <button type="button" id="btn-cancel-appointment" class="btn-danger">Отменить</button>
-        </div>
-        <form id="form-update" class="form-grid">
-            <label>Новый ID врача <input type="number" name="doctor_id" min="1"></label>
-            <label>Новый ID услуги <input type="number" name="service_id" min="1"></label>
-            <label>Новая дата <input type="datetime-local" name="scheduled_at"></label>
+        <section class="panel">
+            <h2>Управление записью</h2>
+            <div class="filters">
+                <label>
+                    ID записи:
+                    <input type="number" id="appointment-id" min="1">
+                </label>
+            </div>
+            <div class="btn-row">
+                <button type="button" id="btn-get-appointment">Получить</button>
+                <button type="button" id="btn-cancel-appointment" class="btn-danger">Отменить</button>
+            </div>
+            <form id="form-update" class="form-grid">
+                <label>Новый ID врача <input type="number" name="doctor_id" min="1"></label>
+                <label>Новый ID услуги <input type="number" name="service_id" min="1"></label>
+                <label>Новая дата <input type="datetime-local" name="scheduled_at"></label>
+                <button type="submit">Обновить запись</button>
+            </form>
+            <pre id="out-update" class="output"></pre>
+        </section>
+    </div>
+{% endblock %}
             <label>
                 Статус
                 <select name="status">

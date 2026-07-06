@@ -39,7 +39,7 @@ p {
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   background-color: var(--white);
   color: #1a1a1a;
   line-height: 1.5;
@@ -50,13 +50,18 @@ main {
   width: 100%;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0;
   padding: 0;
 }
 
 button {
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
 }
 
 /* Container with improved sizing */
@@ -132,7 +137,11 @@ header {
 }
 
 .header_social button {
-  background: linear-gradient(180deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  background: linear-gradient(
+    180deg,
+    var(--primary-color) 0%,
+    var(--primary-dark) 100%
+  );
   color: white;
   width: 196px;
   height: 36px;
@@ -141,7 +150,9 @@ header {
   cursor: pointer;
   font-size: 14px;
   font-weight: 500;
-  transition: opacity 0.3s ease, transform 0.2s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.2s ease;
 }
 
 .header_social button:hover {
@@ -189,7 +200,7 @@ header {
 }
 
 .header_nav a::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -4px;
   left: 0;
@@ -213,9 +224,7 @@ header {
   align-items: center;
   gap: 3rem;
   background: linear-gradient(135deg, #3bb96d 0%, #2d9b5f 100%);
-  border-radius: 12px;
   padding: 3.5rem;
-  margin: 2.5rem 0;
   min-height: 500px;
   box-shadow: 0 8px 32px rgba(59, 185, 109, 0.15);
 }
@@ -289,20 +298,63 @@ header {
   max-width: 500px;
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
 }
+/* some-about */
+.some-about {
+  margin-top: 130px;
+  margin-bottom: 130px;
+  display: flex;
+  gap: 20px;
+  .some-text {
+    h1 {
+      width: 286px;
+      height: 56px;
+      top: 872px;
+      left: 150px;
+      angle: 0 deg;
+      opacity: 1;
+      font-family: Raleway;
+      font-weight: 700;
+      font-style: Bold;
+      font-size: 40px;
+      leading-trim: NONE;
+      line-height: 140%;
+      letter-spacing: 0%;
+      color: rgba(13, 35, 59, 1);
+    }
+    p {
+      width: 463px;
+      height: 330px;
+      top: 948px;
+      left: 150px;
+      angle: 0 deg;
+      opacity: 1;
+      font-family: Raleway;
+      font-weight: 400;
+      font-style: Regular;
+      font-size: 16px;
+      leading-trim: NONE;
+      line-height: 140%;
+      letter-spacing: 0%;
+      color: rgba(104, 104, 104, 1);
+    }
+  }
+  img {
+    width: 657px;
+    height: 406px;
+    top: 872px;
+    left: 633px;
+    angle: 0 deg;
+    opacity: 1;
+  }
+}
 
 /* Panel Sections */
 .panel {
   background: var(--white);
   border: 1px solid #e2e8f0;
-  border-radius: 12px;
   padding: 2.5rem;
-  margin: 2.5rem 0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
-}
-
-.panel:hover {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
 .panel h2 {
@@ -446,7 +498,7 @@ button:not(.header_social button):active {
   border: 1px solid #e2e8f0;
   border-radius: 8px;
   font-size: 0.85rem;
-  font-family: 'Courier New', monospace;
+  font-family: "Courier New", monospace;
   overflow-x: auto;
   min-height: 2rem;
   white-space: pre-wrap;
@@ -543,6 +595,8 @@ button:not(.header_social button):active {
   .header_nav a {
     padding: 0.5rem 0;
   }
+
+  /* header is over */
 
   .panel {
     padding: 1.5rem;

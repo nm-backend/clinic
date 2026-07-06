@@ -17,20 +17,14 @@
         </section>
 
         <!-- Additional Sections -->
-        <section id="doctors" class="panel">
-            <h2>Врачи</h2>
-            <div class="filters">
-                <label>
-                    Клиника (id):
-                    <input type="number" id="filter-clinic-id" placeholder="необязательно">
-                </label>
-                <label>
-                    Специальность:
-                    <input type="text" id="filter-specialty" placeholder="например, терапевт">
-                </label>
-            </div>
-            <button type="button" id="btn-load-doctors">Загрузить врачей</button>
-            <pre id="out-doctors" class="output"></pre>
+        <section class="some-about">
+                <div class="some-text">
+                    <h1>Немного о нас</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ipsum diam pretium risus, ultrices felis a. Adipiscing maecenas mattis ullamcorper magnis eget varius. At lobortis tristique mattis orci aenean. Pretium, posuere tristique id potenti ac. Ac praesent arcu vitae arcu. Velit ut et, leo, augue bibendum euismod in. Turpis massa, commodo vestibulum bibendum amet orci velit, risus. Semper mauris curabitur auctor id amet mauris lacus. Ut quis nisi, ac consequat sed massa egestas. Sed adipiscing scelerisque enim, id amet eget. Ipsum dui a bibendum quisque in. <br>
+
+<br> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ipsum diam pretium risus, ultrices felis a. Adipiscing maecenas mattis ullamcorper magnis eget varius. At lobortis tristique mattis orci aenean. Pretium, posuere tristique id potenti ac. </p>
+                </div>
+                <img src="/static/img/74922074873a326445ab9fe1ef0143e0c900ff42.jpg" alt="">
         </section>
 
         <section id="services" class="panel">
@@ -103,22 +97,17 @@
                 <label>Новый ID врача <input type="number" name="doctor_id" min="1"></label>
                 <label>Новый ID услуги <input type="number" name="service_id" min="1"></label>
                 <label>Новая дата <input type="datetime-local" name="scheduled_at"></label>
+                <label>
+                    Статус
+                    <select name="status">
+                        <option value="">— не менять —</option>
+                        <option value="scheduled">scheduled</option>
+                        <option value="confirmed">confirmed</option>
+                    </select>
+                </label>
                 <button type="submit">Обновить запись</button>
             </form>
             <pre id="out-update" class="output"></pre>
         </section>
     </div>
-{% endblock %}
-            <label>
-                Статус
-                <select name="status">
-                    <option value="">— не менять —</option>
-                    <option value="scheduled">scheduled</option>
-                    <option value="confirmed">confirmed</option>
-                </select>
-            </label>
-            <button type="submit">Обновить запись</button>
-        </form>
-        <pre id="out-manage" class="output"></pre>
-    </section>
 {% endblock %}

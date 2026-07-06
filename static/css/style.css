@@ -348,6 +348,36 @@ header {
   }
 }
 
+/* services где есть же карточки болезни */
+.services {
+  width: 1140px;
+  height: 401px;
+  top: 1408px;
+  left: 150px;
+  angle: 0 deg;
+  opacity: 1;
+  .secvices-text {
+    display: flex;
+    justify-content: space-between;
+    h1 {
+      width: 563px;
+      height: 56px;
+      top: 1408px;
+      left: 150px;
+      angle: 0 deg;
+      opacity: 1;
+      font-family: Raleway;
+      font-weight: 700;
+      font-style: Bold;
+      font-size: 40px;
+      leading-trim: NONE;
+      line-height: 140%;
+      letter-spacing: 0%;
+      color: rgba(13, 35, 59, 1);
+    }
+  }
+}
+
 /* Panel Sections */
 .panel {
   background: var(--white);

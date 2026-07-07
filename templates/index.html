@@ -5,76 +5,88 @@
 
 {% block content %}
     <div class="container">
+        <!-- Hero Section -->
         <section class="hero">
             <div class="hero_content">
                 <h1>Lorem ipsum dolor sit amet, consectetur</h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra amet dolor sed mi tincidunt pharetra montes. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra amet dolor sed mi tincidunt pharetra montes.</p>
-                <button class="hero_button">Подробнее ></button>
+                <button class="hero_button">Подробнее &gt;</button>
             </div>
             <div class="hero_image">
                 <img src="{% static 'img/panel.svg' %}" alt="Консультация врача">
             </div>
         </section>
 
-        <!-- Additional Sections -->
-        <section class="some-about">
-                <div class="some-text">
-                    <h1>Немного о нас</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ipsum diam pretium risus, ultrices felis a. Adipiscing maecenas mattis ullamcorper magnis eget varius. At lobortis tristique mattis orci aenean. Pretium, posuere tristique id potenti ac. Ac praesent arcu vitae arcu. Velit ut et, leo, augue bibendum euismod in. Turpis massa, commodo vestibulum bibendum amet orci velit, risus. Semper mauris curabitur auctor id amet mauris lacus. Ut quis nisi, ac consequat sed massa egestas. Sed adipiscing scelerisque enim, id amet eget. Ipsum dui a bibendum quisque in. <br>
-
-<br> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ipsum diam pretium risus, ultrices felis a. Adipiscing maecenas mattis ullamcorper magnis eget varius. At lobortis tristique mattis orci aenean. Pretium, posuere tristique id potenti ac. </p>
-                </div>
-                <img src="/static/img/74922074873a326445ab9fe1ef0143e0c900ff42.jpg" alt="">
+        <!-- About Section -->
+        <section class="about">
+            <div class="about-text">
+                <h2>Немного о нас</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ipsum diam pretium risus, ultrices felis a. Adipiscing maecenas mattis ullamcorper magnis eget varius. At lobortis tristique mattis orci aenean. Pretium, posuere tristique id potenti ac. Ac praesent arcu vitae arcu. Velit ut et, leo, augue bibendum euismod in. Turpis massa, commodo vestibulum bibendum amet orci velit, risus. Semper mauris curabitur auctor id amet mauris lacus. Ut quis nisi, ac consequat sed massa egestas. Sed adipiscing scelerisque enim, id amet eget. Ipsum dui a bibendum quisque in.<br><br>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ipsum diam pretium risus, ultrices felis a. Adipiscing maecenas mattis ullamcorper magnis eget varius. At lobortis tristique mattis orci aenean. Pretium, posuere tristique id potenti ac.</p>
+            </div>
+            <div class="about-image">
+                <img src="{% static 'img/74922074873a326445ab9fe1ef0143e0c900ff42.jpg' %}" alt="О нас">
+            </div>
         </section>
 
-        <section id="services" class="secvices">
-            <div class="services-text">
-                <h1>Направления нашей работы</h1>
-                <button>Все направления ></button>
+        <!-- Services Section -->
+        <section id="services" class="services">
+            <div class="services-header">
+                <h2>Направления нашей работы</h2>
+                <button class="btn-all-services">Все направления &gt;</button>
             </div>
-            <div class="services-card">
-                <div class="genegolog">
-                    <img src="/static/img/1c9410ce457535aeb2f35e575aeda1995d241f2b.png" alt="">
-                    <h1>Гинекология</h1>
-                    <h3>Подробнее</h3>
+            <div class="services-grid">
+                <div class="service-card">
+                    <img src="{% static 'img/1c9410ce457535aeb2f35e575aeda1995d241f2b.png' %}" alt="Гинекология">
+                    <div class="service-card-body">
+                        <h3>Гинекология</h3>
+                        <a href="#" class="card-link">Подробнее</a>
+                    </div>
                 </div>
-                <div class="genegolog">
-                    <img src="/static/img/1c9410ce457535aeb2f35e575aeda1995d241f2b.png" alt="">
-                    <h1>Урология</h1>
-                    <h3>Подробнее</h3>
+                <div class="service-card">
+                    <img src="{% static 'img/1c9410ce457535aeb2f35e575aeda1995d241f2b.png' %}" alt="Урология">
+                    <div class="service-card-body">
+                        <h3>Урология</h3>
+                        <a href="#" class="card-link">Подробнее</a>
+                    </div>
                 </div>
-                <div class="genegolog">
-                    <img src="/static/img/1c9410ce457535aeb2f35e575aeda1995d241f2b.png" alt="">
-                    <h1>Отоларингология</h1>
-                    <h3>Подробнее</h3>
+                <div class="service-card">
+                    <img src="{% static 'img/1c9410ce457535aeb2f35e575aeda1995d241f2b.png' %}" alt="Отоларингология">
+                    <div class="service-card-body">
+                        <h3>Отоларингология</h3>
+                        <a href="#" class="card-link">Подробнее</a>
+                    </div>
                 </div>
-                <div class="genegolog">
-                    <img src="/static/img/1c9410ce457535aeb2f35e575aeda1995d241f2b.png" alt="">
-                    <h1>Неврология</h1>
-                    <h3>Подробнее</h3>
+                <div class="service-card">
+                    <img src="{% static 'img/1c9410ce457535aeb2f35e575aeda1995d241f2b.png' %}" alt="Неврология">
+                    <div class="service-card-body">
+                        <h3>Неврология</h3>
+                        <a href="#" class="card-link">Подробнее</a>
+                    </div>
                 </div>  
             </div>
         </section>
 
+        <!-- Free Slots Panel -->
         <section class="panel">
             <h2>Свободные слоты</h2>
-            <div class="filters">
+            <form action="/api/v1/available-slots/" method="GET" class="filters">
                 <label>
                     ID врача:
-                    <input type="number" id="slot-doctor-id" placeholder="1">
+                    <input type="number" name="doctor_id" placeholder="1">
                 </label>
                 <label>
                     Дата:
-                    <input type="date" id="slot-date">
+                    <input type="date" name="date">
                 </label>
-            </div>
-            <button type="button" id="btn-load-slots">Показать слоты</button>
-            <pre id="out-slots" class="output"></pre>
+                <button type="submit">Показать слоты</button>
+            </form>
         </section>
 
+        <!-- Appointment Panel -->
         <section class="panel">
             <h2>Запись на приём</h2>
-            <form id="form-appointment" class="form-grid">
+            <form action="/api/v1/appointments/" method="POST" class="form-grid">
                 <label>Имя <input type="text" name="patient_first_name" required></label>
                 <label>Фамилия <input type="text" name="patient_last_name" required></label>
                 <label>Телефон <input type="tel" name="patient_phone" required placeholder="+79001234567"></label>
@@ -85,46 +97,48 @@
                 <label class="full-width">Комментарий <textarea name="notes" rows="2"></textarea></label>
                 <button type="submit">Создать запись</button>
             </form>
-            <pre id="out-create" class="output"></pre>
         </section>
 
+        <!-- My Appointments Panel -->
         <section class="panel">
             <h2>Мои записи</h2>
-            <label>
-                Телефон пациента:
-                <input type="tel" id="search-phone" placeholder="+79001234567">
-            </label>
-            <button type="button" id="btn-load-appointments">Найти записи</button>
-            <pre id="out-appointments" class="output"></pre>
+            <form action="/api/v1/appointments/" method="GET">
+                <label style="margin-bottom: 1rem;">
+                    Телефон пациента:
+                    <input type="tel" name="patient_phone" placeholder="+79001234567" style="max-width: 300px;">
+                </label>
+                <button type="submit">Найти записи</button>
+            </form>
         </section>
 
+        <!-- Manage Appointment Panel -->
         <section class="panel">
             <h2>Управление записью</h2>
-            <div class="filters">
-                <label>
-                    ID записи:
-                    <input type="number" id="appointment-id" min="1">
-                </label>
-            </div>
-            <div class="btn-row">
-                <button type="button" id="btn-get-appointment">Получить</button>
-                <button type="button" id="btn-cancel-appointment" class="btn-danger">Отменить</button>
-            </div>
-            <form id="form-update" class="form-grid">
-                <label>Новый ID врача <input type="number" name="doctor_id" min="1"></label>
-                <label>Новый ID услуги <input type="number" name="service_id" min="1"></label>
-                <label>Новая дата <input type="datetime-local" name="scheduled_at"></label>
-                <label>
-                    Статус
-                    <select name="status">
-                        <option value="">— не менять —</option>
-                        <option value="scheduled">scheduled</option>
-                        <option value="confirmed">confirmed</option>
-                    </select>
-                </label>
-                <button type="submit">Обновить запись</button>
+            <form action="#" method="POST">
+                <div class="filters">
+                    <label>
+                        ID записи:
+                        <input type="number" name="appointment_id" min="1">
+                    </label>
+                </div>
+                <div class="form-grid">
+                    <label>Новый ID врача <input type="number" name="doctor_id" min="1"></label>
+                    <label>Новый ID услуги <input type="number" name="service_id" min="1"></label>
+                    <label>Новая дата <input type="datetime-local" name="scheduled_at"></label>
+                    <label>
+                        Статус
+                        <select name="status">
+                            <option value="">— не менять —</option>
+                            <option value="scheduled">scheduled</option>
+                            <option value="confirmed">confirmed</option>
+                        </select>
+                    </label>
+                    <div class="btn-row full-width">
+                        <button type="submit">Обновить запись</button>
+                        <button type="button" class="btn-danger">Отменить запись</button>
+                    </div>
+                </div>
             </form>
-            <pre id="out-update" class="output"></pre>
         </section>
     </div>
 {% endblock %}

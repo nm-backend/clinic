@@ -69,18 +69,40 @@
 
         <!-- Free Slots Panel -->
         <section class="panel">
-            <h2>Свободные слоты</h2>
-            <form action="/api/v1/available-slots/" method="GET" class="filters">
-                <label>
-                    ID врача:
-                    <input type="number" name="doctor_id" placeholder="1">
-                </label>
-                <label>
-                    Дата:
-                    <input type="date" name="date">
-                </label>
-                <button type="submit">Показать слоты</button>
-            </form>
+            <div class="doctors-header">
+                <h2>Наши специалисты</h2>
+                <button class="btn-all-services">Все направления &gt;</button>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <img src="{% static 'img/1c9410ce457535aeb2f35e575aeda1995d241f2b.png' %}" alt="Гинекология">
+                    <div class="service-card-body">
+                        <h3>Гинекология</h3>
+                        <a href="#" class="card-link">Подробнее</a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="{% static 'img/1c9410ce457535aeb2f35e575aeda1995d241f2b.png' %}" alt="Урология">
+                    <div class="service-card-body">
+                        <h3>Урология</h3>
+                        <a href="#" class="card-link">Подробнее</a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="{% static 'img/1c9410ce457535aeb2f35e575aeda1995d241f2b.png' %}" alt="Отоларингология">
+                    <div class="service-card-body">
+                        <h3>Отоларингология</h3>
+                        <a href="#" class="card-link">Подробнее</a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="{% static 'img/1c9410ce457535aeb2f35e575aeda1995d241f2b.png' %}" alt="Неврология">
+                    <div class="service-card-body">
+                        <h3>Неврология</h3>
+                        <a href="#" class="card-link">Подробнее</a>
+                    </div>
+                </div>  
+            </div>
         </section>
 
         <!-- Appointment Panel -->

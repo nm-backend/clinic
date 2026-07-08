@@ -80,7 +80,7 @@ textarea {
 header {
   background: var(--white);
   border-bottom: 1px solid var(--border-light);
-  position: sticky;
+  /* position: sticky; */
   top: 0;
   z-index: 100;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -897,3 +897,100 @@ footer {
     padding: 0 0.75rem;
   }
 }
+
+/* Additions for Premium Look */
+body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%);
+}
+
+.glass-panel {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+    padding: 2.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-panel:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+}
+
+.hero.glass-panel {
+    background: linear-gradient(135deg, rgba(59, 185, 109, 0.9) 0%, rgba(39, 154, 89, 0.9) 100%);
+    color: white;
+    border: none;
+}
+
+.hero_content h1 {
+    color: white;
+}
+
+.hero_content p {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+
+.glass-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+}
+
+.modern-btn {
+    background: linear-gradient(135deg, #3bb96d 0%, #279a59 100%);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 24px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(59, 185, 109, 0.3);
+}
+
+.modern-btn:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(59, 185, 109, 0.4);
+}
+
+.hero_button.modern-btn {
+    background: white;
+    color: #279a59;
+}
+
+.rounded-image {
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+input, select, textarea {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border-radius: 8px !important;
+    border: 1px solid #cbd5e1 !important;
+    transition: all 0.3s ease !important;
+}
+
+input:focus, select:focus, textarea:focus {
+    box-shadow: 0 0 0 3px rgba(59, 185, 109, 0.2) !important;
+    border-color: #3bb96d !important;
+}
+
+
+/* Container overrides for flex sections */
+.hero { display: block; }
+.hero-container { display: flex; align-items: center; gap: 3rem; }
+.about { display: block; }
+.about-container { display: flex; align-items: center; gap: 3rem; }
+

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Лечение по ОМС — Сеть клиник Томской области{% endblock %}
+
+{% block breadcrumbs %}
+  {% include 'components/breadcrumbs.html' with title='Лечение по ОМС' %}
+{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h1 class="page-title">Лечение по ОМС</h1>
+    <p class="page-text">
+      Мы работаем по программе обязательного медицинского страхования. Каждый гражданин РФ
+      с полисом ОМС может получить квалифицированную медицинскую помощь бесплатно.
+    </p>
+
+    <div class="steps">
+      <h2 class="section-title">Как получить лечение?</h2>
+      <div class="steps-grid">
+        <div class="step-card">
+          <span class="step-number">01</span>
+          <h3 class="step-title">Выберите поликлинику</h3>
+          <p class="step-text">Прикрепитесь к нашей клинике по полису ОМС</p>
+        </div>
+        <div class="step-card">
+          <span class="step-number">02</span>
+          <h3 class="step-title">Запишитесь на приём</h3>
+          <p class="step-text">Позвоните нам или оставьте заявку на сайте</p>
+        </div>
+        <div class="step-card">
+          <span class="step-number">03</span>
+          <h3 class="step-title">Получите лечение</h3>
+          <p class="step-text">Пройти диагностику и лечение можно бесплатно</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="services-block">
+      <h2 class="section-title">Что можно получить по ОМС</h2>
+      <div class="benefit-list">
+        <div class="benefit-item">Первичная медико-санитарная помощь</div>
+        <div class="benefit-item">Специализированная медицинская помощь</div>
+        <div class="benefit-item">Диагностика: УЗИ, рентген, лабораторные исследования</div>
+        <div class="benefit-item">Диспансеризация взрослого населения</div>
+        <div class="benefit-item">Вакцинация в рамках национального календаря</div>
+        <div class="benefit-item">Неотложная помощь</div>
+      </div>
+    </div>
+
+    <div class="cta-block">
+      <h2 class="cta-title">Остались вопросы по ОМС?</h2>
+      <button type="button" class="btn btn-primary" data-modal-open="callback">Заказать звонок</button>
+    </div>
+  </div>
+</section>
+{% endblock %}

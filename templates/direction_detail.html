@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ category.name }} — Сеть клиник Томской области{% endblock %}
+
+{% block breadcrumbs %}
+  {% include 'components/breadcrumbs.html' with title=category.name %}
+{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h1 class="page-title">{{ category.name }}</h1>
+    {% if category.description %}
+      <p class="page-text">{{ category.description }}</p>
+    {% endif %}
+
+    <div class="when-block">
+      <h2 class="section-title">Когда нужно обратиться?</h2>
+      <div class="when-grid">
+        <div class="when-card">
+          <h3 class="when-title">Боли и дискомфорт</h3>
+          <p class="when-text">Если вас беспокоят боли или неприятные ощущения, откладывать визит к врачу не стоит.</p>
+        </div>
+        <div class="when-card">
+          <h3 class="when-title">Профилактический осмотр</h3>
+          <p class="when-text">Регулярный осмотр помогает выявить проблемы со здоровьем на ранней стадии.</p>
+        </div>
+        <div class="when-card">
+          <h3 class="when-title">Направление врача</h3>
+          <p class="when-text">Если вас направил другой специалист для уточнения диагноза или лечения.</p>
+        </div>
+        <div class="when-card">
+          <h3 class="when-title">Результаты анализов</h3>
+          <p class="when-text">Сомнительные или отклоняющиеся от нормы результаты обследования требуют консультации.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="steps">
+      <h2 class="section-title">Как записаться на прием?</h2>
+      <div class="steps-grid">
+        <div class="step-card">
+          <span class="step-number">01</span>
+          <h3 class="step-title">Оставьте заявку</h3>
+          <p class="step-text">Заполните форму или закажите обратный звонок</p>
+        </div>
+        <div class="step-card">
+          <span class="step-number">02</span>
+          <h3 class="step-title">С вами свяжутся</h3>
+          <p class="step-text">Администратор подберёт удобное время приёма</p>
+        </div>
+        <div class="step-card">
+          <span class="step-number">03</span>
+          <h3 class="step-title">Приходите на приём</h3>
+          <p class="step-text">Врач примет вас в назначенное время</p>
+        </div>
+      </div>
+    </div>
+
+    {% if services %}
+      <div class="services-block">
+        <h2 class="section-title">Стоимость услуг</h2>
+        <table class="price-table">
+          <thead>
+            <tr>
+              <th>Услуга</th>
+              <th>Длительность</th>
+              <th>Цена</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for service in services %}
+              <tr>
+                <td><a href="{% url 'service_detail' pk=service.pk %}">{{ service.name }}</a></td>
+                <td>{{ service.duration_minutes }} мин</td>
+                <td>{{ service.price }} ₽</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% endif %}
+
+    {% if doctors %}
+      <div class="doctors-block">
+        <h2 class="section-title">Наши специалисты</h2>
+        <div class="doctors-grid">
+          {% for doctor in doctors %}
+            <div class="doctor-card">
+              <div class="doctor-photo">
+                {% if doctor.photo %}
+                  <img src="{% static 'img/'|add:doctor.photo %}" alt="{{ doctor.full_name }}" />
+                {% endif %}
+              </div>
+              <div class="doctor-card-info">
+                <h3 class="doctor-name">{{ doctor.full_name }}</h3>
+                <p class="doctor-specialty">{{ doctor.specialty }}</p>
+                {% if doctor.experience_years %}
+                  <p class="doctor-experience">Стаж: {{ doctor.experience_years }} лет</p>
+                {% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+
+    {% if reviews %}
+      <div class="reviews-block">
+        <div class="section-header">
+          <h2 class="section-title">Отзывы пациентов</h2>
+          <a class="section-link" href="{% url 'reviews' %}">Все отзывы</a>
+        </div>
+        <div class="reviews-grid">
+          {% for review in reviews %}
+            <div class="review-card">
+              <div class="review-head">
+                <span class="review-name">{{ review.patient_name }}</span>
+                <span class="review-stars">{{ review.rating }}★</span>
+              </div>
+              <p class="review-text">{{ review.text|truncatechars:140 }}</p>
+              <span class="review-date">{{ review.created_at|date:'d.m.Y' }}</span>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+
+    <div class="cta-block">
+      <h2 class="cta-title">Запишитесь на приём к специалисту</h2>
+      <button type="button" class="btn btn-primary" data-modal-open="appointment">Записаться на прием</button>
+    </div>
+  </div>
+</section>
+{% endblock %}

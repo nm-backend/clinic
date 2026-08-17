@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}О клинике — Сеть клиник Томской области{% endblock %}
+
+{% block breadcrumbs %}
+  {% include 'components/breadcrumbs.html' with title='О клинике' %}
+{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h1 class="page-title">О клинике</h1>
+    <p class="page-text">
+      Клиника «МЕДСЕРВИС» — многопрофильный медицинский центр полного цикла. Мы работаем с 2003 года
+      и за это время помогли более 120 000 пациентов. В наших стенах трудятся врачи высшей и первой
+      категории, кандидаты медицинских наук, специалисты с многолетним практическим опытом.
+    </p>
+    <p class="page-text">
+      Мы оснащены современным диагностическим оборудованием: МРТ, компьютерный томограф,
+      цифровой рентген, аппараты УЗИ экспертного класса. Диагностика и лечение проводятся
+      по современным стандартам доказательной медицины.
+    </p>
+
+    <div class="about-teaser-inner">
+      <div class="about-teaser-image">
+        <img src="{% static 'img/74922074873a326445ab9fe1ef0143e0c900ff42.jpg' %}" alt="О клинике" />
+      </div>
+      <div class="about-teaser-info">
+        <h2 class="section-title">Наша миссия</h2>
+        <p class="section-text">
+          Быть близкими к пациентам и своему делу. Мы создаём комфортную атмосферу,
+          внимательно относимся к каждому и стремимся сделать медицину доступной.
+        </p>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <h2 class="section-title">Наша история</h2>
+      <div class="timeline-list">
+        <div class="timeline-item">
+          <span class="timeline-year">2003</span>
+          <span class="timeline-text">Открытие первой клиники в Томске</span>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-year">2008</span>
+          <span class="timeline-text">Запуск направления диагностики: УЗИ, рентген</span>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-year">2013</span>
+          <span class="timeline-text">Открытие второго филиала в центре города</span>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-year">2018</span>
+          <span class="timeline-text">Установка МРТ и компьютерного томографа</span>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-year">2022</span>
+          <span class="timeline-text">Более 50 направлений и 800 специалистов</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-header">
+      <h2 class="section-title">Наши лицензии</h2>
+    </div>
+    <div class="licenses">
+      <img src="{% static 'img/5e2bfba032ba844b201cd81430b9b18c5f5a8bce.png' %}" alt="Лицензии" />
+    </div>
+
+    {% if reviews %}
+      <div class="section-header">
+        <h2 class="section-title">Отзывы пациентов</h2>
+      </div>
+      <div class="reviews-grid">
+        {% for review in reviews %}
+          <div class="review-card">
+            <div class="review-head">
+              <span class="review-name">{{ review.patient_name }}</span>
+              <span class="review-stars">{{ review.rating }}★</span>
+            </div>
+            <p class="review-text">{{ review.text|truncatechars:140 }}</p>
+            <span class="review-date">{{ review.created_at|date:'d.m.Y' }}</span>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

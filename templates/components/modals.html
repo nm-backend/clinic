@@ -1,0 +1,57 @@
+{% load static %}
+
+<div class="modal-overlay" data-modal="appointment">
+  <div class="modal modal-small">
+    <button type="button" class="modal-close" data-modal-close aria-label="Закрыть">
+      <img src="{% static 'img/close.svg' %}" alt="" />
+    </button>
+    <h2 class="modal-title">Записаться на приём</h2>
+    <form class="modal-form" action="{% url 'appointment-request' %}" method="post" data-form>
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{ request.path }}">
+      <div class="form-field">
+        <label for="appointment-name">Ваше ФИО</label>
+        <input type="text" id="appointment-name" name="full_name" placeholder="Иванов Иван Иванович" required />
+      </div>
+      <div class="form-field">
+        <label for="appointment-phone">Номер телефона</label>
+        <input type="tel" id="appointment-phone" name="phone" placeholder="+7 (___) ___-__-__" required data-phone />
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Записаться на приём</button>
+      <p class="form-note">Нажимая на кнопку «Записаться на приём» вы соглашаетесь с политикой конфиденциальности</p>
+    </form>
+  </div>
+</div>
+
+<div class="modal-overlay" data-modal="callback">
+  <div class="modal modal-callback">
+    <button type="button" class="modal-close" data-modal-close aria-label="Закрыть">
+      <img src="{% static 'img/close.svg' %}" alt="" />
+    </button>
+    <div class="callback-card">
+      <div class="callback-photo">
+        <img src="{% static 'img/1b758ab0212d9897dbada094d2e596b142fdb30b.png' %}" alt="Врач" />
+      </div>
+      <div class="callback-form">
+        <h2 class="callback-title">Хотите, мы Вам перезвоним?</h2>
+        <p class="callback-subtitle">Оставьте заявку и мы подробно ответим на все Ваши вопросы!</p>
+        <form action="{% url 'callback-request' %}" method="post" data-form>
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{{ request.path }}">
+          <div class="form-field">
+            <label for="callback-name">Ваше ФИО</label>
+            <input type="text" id="callback-name" name="full_name" placeholder="Иванов Иван Иванович" required />
+          </div>
+          <div class="form-field">
+            <label for="callback-phone">Номер телефона</label>
+            <input type="tel" id="callback-phone" name="phone" placeholder="+7 (___) ___-__-__" required data-phone />
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Заказать звонок</button>
+          <p class="form-note">Нажимая на кнопку «Заказать звонок» вы соглашаетесь с политикой конфиденциальности</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" data-toast></div>

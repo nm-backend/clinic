@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Услуги — Сеть клиник Томской области{% endblock %}
+
+{% block breadcrumbs %}
+  {% include 'components/breadcrumbs.html' with title='Услуги' %}
+{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h1 class="page-title">Наши услуги</h1>
+
+    {% for group in grouped_services %}
+      <div class="services-block" id="cat-{{ group.category.slug }}">
+        <h2 class="section-title">{{ group.category.name }}</h2>
+        <table class="price-table">
+          <thead>
+            <tr>
+              <th>Услуга</th>
+              <th>Длительность</th>
+              <th>Цена</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for service in group.services %}
+              <tr>
+                <td><a href="{% url 'service_detail' pk=service.pk %}">{{ service.name }}</a></td>
+                <td>{{ service.duration_minutes }} мин</td>
+                <td>{{ service.price }} ₽</td>
+              </tr>
+            {% empty %}
+              <tr><td colspan="3">Услуг пока нет</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% endfor %}
+
+    <div class="cta-block">
+      <h2 class="cta-title">Не нашли нужную услугу?</h2>
+      <button type="button" class="btn btn-primary" data-modal-open="callback">Заказать звонок</button>
+    </div>
+  </div>
+</section>
+{% endblock %}

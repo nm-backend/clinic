@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ service.name }} — Сеть клиник Томской области{% endblock %}
+
+{% block breadcrumbs %}
+  {% include 'components/breadcrumbs.html' with title=service.name %}
+{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="service-header">
+      <div class="service-info">
+        <h1 class="page-title">{{ service.name }}</h1>
+        <p class="page-text">{{ service.description }}</p>
+        <div class="service-meta">
+          <span class="service-price">{{ service.price }} ₽</span>
+          <span class="service-duration">{{ service.duration_minutes }} мин</span>
+        </div>
+        <button type="button" class="btn btn-primary" data-modal-open="appointment">Записаться на приём</button>
+      </div>
+    </div>
+
+    {% if doctors %}
+      <div class="doctors-block">
+        <h2 class="section-title">Кто оказывает услугу</h2>
+        <div class="doctors-grid">
+          {% for doctor in doctors %}
+            <div class="doctor-card">
+              <div class="doctor-photo">
+                {% if doctor.photo %}
+                  <img src="{% static 'img/'|add:doctor.photo %}" alt="{{ doctor.full_name }}" />
+                {% endif %}
+              </div>
+              <div class="doctor-card-info">
+                <h3 class="doctor-name">{{ doctor.full_name }}</h3>
+                <p class="doctor-specialty">{{ doctor.specialty }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}ДМС — Сеть клиник Томской области{% endblock %}
+
+{% block breadcrumbs %}
+  {% include 'components/breadcrumbs.html' with title='ДМС' %}
+{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h1 class="page-title">ДМС</h1>
+    <p class="page-text">
+      Мы работаем по договорам добровольного медицинского страхования с крупнейшими
+      страховыми компаниями России. Лечение по полису ДМС не требует оплаты на месте.
+    </p>
+
+    <div class="insurers">
+      <h2 class="section-title">Страховые компании</h2>
+      <div class="insurers-list">
+        <span class="insurer-item">АльфаСтрахование</span>
+        <span class="insurer-item">ВСК</span>
+        <span class="insurer-item">СОГАЗ</span>
+        <span class="insurer-item">РЕСО-Гарантия</span>
+        <span class="insurer-item">Ингосстрах</span>
+        <span class="insurer-item">Росгосстрах</span>
+        <span class="insurer-item">СберСтрахование</span>
+        <span class="insurer-item">Совкомбанк Страхование</span>
+        <span class="insurer-item">Тинькофф Страхование</span>
+        <span class="insurer-item">Капитал МС</span>
+        <span class="insurer-item">Макс-М</span>
+        <span class="insurer-item">Согаз-Мед</span>
+      </div>
+    </div>
+
+    <div class="services-block">
+      <h2 class="section-title">Преимущества лечения по ДМС</h2>
+      <div class="benefit-list">
+        <div class="benefit-item">Удобная запись без очередей</div>
+        <div class="benefit-item">Широкий выбор специалистов и клиник</div>
+        <div class="benefit-item">Современная диагностика: МРТ, КТ, УЗИ</div>
+        <div class="benefit-item">Лечение и профилактика по программе</div>
+        <div class="benefit-item">Восстановление и реабилитация</div>
+        <div class="benefit-item">Круглосуточная поддержка</div>
+      </div>
+    </div>
+
+    <div class="cta-block">
+      <h2 class="cta-title">Не нашли свою страховую компанию?</h2>
+      <button type="button" class="btn btn-primary" data-modal-open="callback">Заказать звонок</button>
+    </div>
+  </div>
+</section>
+{% endblock %}

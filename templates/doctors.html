@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Врачи — Сеть клиник Томской области{% endblock %}
+
+{% block breadcrumbs %}
+  {% include 'components/breadcrumbs.html' with title='Врачи' %}
+{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h1 class="page-title">Наши специалисты</h1>
+
+    <div class="filters">
+      <form class="search-form" method="get" action="{% url 'doctors' %}">
+        {% if active_category %}<input type="hidden" name="category" value="{{ active_category }}">{% endif %}
+        <input type="search" name="q" value="{{ search }}" placeholder="Поиск по фамилии или специальности" />
+        <button type="submit" class="btn btn-primary">Найти</button>
+      </form>
+      <div class="filter-chips">
+        <a href="{% url 'doctors' %}" class="chip {% if not active_category %}chip-active{% endif %}">Все</a>
+        {% for category in categories %}
+          <a href="{% url 'doctors' %}?category={{ category.slug }}"
+             class="chip {% if active_category == category.slug %}chip-active{% endif %}">{{ category.name }}</a>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="doctors-grid">
+      {% for doctor in doctors %}
+        <div class="doctor-card {% if forloop.counter > 8 %}is-extra{% endif %}">
+          <div class="doctor-photo">
+            {% if doctor.photo %}
+              <img src="{% static 'img/'|add:doctor.photo %}" alt="{{ doctor.full_name }}" />
+            {% endif %}
+          </div>
+          <div class="doctor-card-info">
+            <h3 class="doctor-name">{{ doctor.full_name }}</h3>
+            <p class="doctor-specialty">{{ doctor.specialty }}</p>
+            {% if doctor.experience_years %}
+              <p class="doctor-experience">Стаж: {{ doctor.experience_years }} лет</p>
+            {% endif %}
+            {% if doctor.qualification %}
+              <p class="doctor-qualification">{{ doctor.qualification }}</p>
+            {% endif %}
+            <p class="doctor-clinic">{{ doctor.clinic.name }}</p>
+          </div>
+        </div>
+      {% empty %}
+        <p class="empty-text">Ничего не найдено. Попробуйте изменить запрос.</p>
+      {% endfor %}
+    </div>
+
+    {% if doctors.count > 8 %}
+      <div class="show-more">
+        <button type="button" class="btn btn-outline" data-show-more>Показать еще</button>
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

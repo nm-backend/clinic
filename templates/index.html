@@ -3,58 +3,36 @@
 
 {% block content %}
 
-<section class="hero">
+<div class="home">
+
+<section class="hero hero-bg">
   <div class="container hero-inner">
-    <div class="hero-info">
+    <div class="hero-content">
       <h1 class="hero-title">Близкие к Вам<br>и своим делом</h1>
       <p class="hero-text">
         Название нашей клиники выбрано не случайно. Работаем с 2003 года, лечим детей и взрослых.
         Нас выбирают, потому что мы рядом.
       </p>
-      <button type="button" class="btn btn-primary" data-modal-open="appointment">Записаться на прием</button>
-    </div>
-    <div class="hero-image">
-      <img src="{% static 'img/32318bd57cfad221927c3a40505a844ee4c0fee5.png' %}" alt="Наша клиника" />
+      <a href="{% url 'about' %}" class="btn hero-btn">Подробнее</a>
     </div>
   </div>
 </section>
 
-<section class="section about-teaser">
-  <div class="container about-teaser-inner">
-    <div class="about-teaser-image">
-      <img src="{% static 'img/74922074873a326445ab9fe1ef0143e0c900ff42.jpg' %}" alt="О клинике" />
-    </div>
-    <div class="about-teaser-info">
-      <h2 class="section-title">Профессиональные врачи</h2>
+<section class="section">
+  <div class="container about-inner">
+    <div class="about-text">
+      <h2 class="section-title">Немного о нас</h2>
       <p class="section-text">
-        В нашей клинике работают специалисты с большим опытом работы и высоким уровнем квалификации.
+        Наша клиника работает в Томске с 2003 года и объединяет специалистов более чем по 20 направлениям.
         Мы помогаем пациентам справиться с любыми заболеваниями, используя современное оборудование
         и проверенные методики лечения.
       </p>
-      <div class="about-teaser-actions">
-        <a href="{% url 'about' %}" class="btn btn-outline">Подробнее</a>
-        <a href="{% url 'doctors' %}" class="btn btn-outline">Наши врачи</a>
-      </div>
+      <p class="section-text">
+        Нас выбирают, потому что мы рядом: диагностика, анализы, приёмы врачей и стационар — всё в одном месте.
+      </p>
     </div>
-  </div>
-</section>
-
-<section class="section section-gray">
-  <div class="container">
-    <div class="section-header">
-      <h2 class="section-title">Направления нашей работы</h2>
-      <a class="section-link" href="{% url 'directions' %}">Все направления</a>
-    </div>
-    <div class="directions-grid">
-      {% for category in categories %}
-        <a class="direction-card" href="{% url 'direction_detail' slug=category.slug %}">
-          {% if category.image %}
-            <img src="{% static 'img/'|add:category.image %}" alt="{{ category.name }}" />
-          {% endif %}
-          <h3 class="direction-card-title">{{ category.name }}</h3>
-          <span class="direction-card-more">Записаться на прием</span>
-        </a>
-      {% endfor %}
+    <div class="about-image">
+      <img src="{% static 'img/74922074873a326445ab9fe1ef0143e0c900ff42.jpg' %}" alt="О клинике" />
     </div>
   </div>
 </section>
@@ -62,11 +40,38 @@
 <section class="section">
   <div class="container">
     <div class="section-header">
+      <h2 class="section-title">Направления нашей работы</h2>
+      <a href="{% url 'directions' %}" class="btn btn-primary">Все направления</a>
+    </div>
+    <div class="directions-grid">
+      {% for category in categories|slice:':4' %}
+        <a class="direction-card" href="{% url 'direction_detail' slug=category.slug %}">
+          {% if category.image %}
+            <img src="{% static 'img/'|add:category.image %}" alt="{{ category.name }}" />
+          {% endif %}
+          <h3 class="direction-card-title">{{ category.name }}</h3>
+          <span class="direction-card-more">Подробнее</span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section-gray">
+  <div class="container">
+    <div class="section-header">
       <h2 class="section-title">Наши специалисты</h2>
-      <a class="section-link" href="{% url 'doctors' %}">Все врачи</a>
+      <div class="specialists-nav">
+        <button type="button" class="specialists-nav-btn" aria-label="Назад">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <button type="button" class="specialists-nav-btn" aria-label="Вперёд">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+      </div>
     </div>
     <div class="doctors-grid">
-      {% for doctor in doctors %}
+      {% for doctor in doctors|slice:':4' %}
         <div class="doctor-card">
           <div class="doctor-photo">
             {% if doctor.photo %}
@@ -76,10 +81,48 @@
           <div class="doctor-card-info">
             <h3 class="doctor-name">{{ doctor.full_name }}</h3>
             <p class="doctor-specialty">{{ doctor.specialty }}</p>
-            <p class="doctor-clinic">{{ doctor.clinic.name }}</p>
+            <button type="button" class="btn btn-primary doctor-card-btn" data-modal-open="appointment">Записаться</button>
           </div>
         </div>
       {% endfor %}
+    </div>
+    <div class="text-center specialists-more">
+      <a href="{% url 'doctors' %}" class="btn btn-primary">Все специалисты</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Наши акции</h2>
+    </div>
+    <div class="promo-layout">
+      <div class="promo-featured">
+        <div class="promo-featured-info">
+          <h3 class="promo-featured-title">{{ promotions.0.title }}</h3>
+          <p class="promo-featured-text">{{ promotions.0.description }}</p>
+          <div class="promo-featured-date">
+            <span class="promo-date-label">Акция действует до</span>
+            <span class="promo-date-value">{{ promotions.0.valid_until|date:'d.m.Y' }}</span>
+          </div>
+          <button type="button" class="btn promo-featured-btn" data-modal-open="appointment">Подробнее</button>
+        </div>
+        <img class="promo-featured-image" src="{% static 'img/2cf9f4594d091cb8c094edd35e77a980b8f7187a.png' %}" alt="Акция" />
+      </div>
+      <div class="promo-singles">
+        {% for promo in promotions %}
+          <div class="promo-single {% if promo.color %}promo-single-colored{% endif %} {% if promo.color == 'ffdb5c' %}promo-single-dark{% endif %}"
+               {% if promo.color %}style="background-color: #{{ promo.color }};"{% endif %}>
+            <h3 class="promo-single-title">{{ promo.title }}</h3>
+            <p class="promo-single-date">
+              <span class="promo-date-label">Акция действует до</span>
+              <span class="promo-date-value">{{ promo.valid_until|date:'d.m.Y' }}</span>
+            </p>
+            <button type="button" class="btn promo-single-btn" data-modal-open="appointment">Подробнее</button>
+          </div>
+        {% endfor %}
+      </div>
     </div>
   </div>
 </section>
@@ -87,22 +130,31 @@
 <section class="section section-gray">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title">Наши акции</h2>
-      <a class="section-link" href="{% url 'promotions' %}">Все акции</a>
+      <h2 class="section-title">Стационар</h2>
     </div>
-    <div class="promo-grid">
-      {% for promo in promotions %}
-        <div class="promo-card {% if promo.color %}promo-card-colored{% endif %}"
-             {% if promo.color %}style="background-color: #{{ promo.color }};"{% endif %}>
-          <h3 class="promo-card-title">{{ promo.title }}</h3>
-          <p class="promo-card-text">{{ promo.description }}</p>
-          {% if promo.valid_until %}
-            <p class="promo-card-date">Акция действует до {{ promo.valid_until|date:'d.m.Y' }}</p>
-          {% endif %}
-          <button type="button" class="btn promo-card-btn" data-modal-open="appointment">Подробнее</button>
-        </div>
-      {% endfor %}
+    <div class="stacionar-pills">
+      <div class="stacionar-pill">
+        <svg width="37" height="37" viewBox="0 0 37 37" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="8" width="27" height="17" rx="2"></rect><line x1="12" y1="29" x2="25" y2="29"></line></svg>
+        <span>Отлично оборудованные операционные</span>
+      </div>
+      <div class="stacionar-pill">
+        <svg width="37" height="37" viewBox="0 0 37 37" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.5 10 C13 14, 9 18, 9 22 a9.5 9.5 0 0 0 19 0 C28 18 24 14 18.5 10 Z"></path></svg>
+        <span>Полный контроль за состоянием пациентов</span>
+      </div>
+      <div class="stacionar-pill">
+        <svg width="37" height="37" viewBox="0 0 37 37" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 26 a4 4 0 0 0 4 4 h17 a4 4 0 0 0 4 -4"></path><line x1="10" y1="26" x2="10" y2="14"></line><line x1="27" y1="26" x2="27" y2="14"></line><path d="M10 14 h17 a5 5 0 0 1 -5 5 h-7 a5 5 0 0 1 -5 -5 Z"></path></svg>
+        <span>Комфорт и забота после операции</span>
+      </div>
     </div>
+    <div class="stacionar-inner">
+      <p class="section-text stacionar-text">
+        В нашем стационаре пациенты находятся под круглосуточным наблюдением медицинского персонала.
+        Операционные оснащены современным оборудованием, палаты рассчитаны на комфортное пребывание,
+        а питание и уход организованы так, чтобы восстановление после операции проходило быстрее.
+      </p>
+      <img src="{% static 'img/74922074873a326445ab9fe1ef0143e0c900ff42.jpg' %}" alt="Стационар" />
+    </div>
+    <a href="{% url 'about' %}" class="btn btn-primary">Подробнее</a>
   </div>
 </section>
 
@@ -112,9 +164,16 @@
       <h2 class="section-title">Наше оборудование</h2>
     </div>
     <div class="equipment-grid">
-      {% for item in equipment %}
+      {% for item in equipment|slice:':3' %}
         <div class="equipment-card">
           <h3 class="equipment-name">{{ item.name }}</h3>
+          {% if 'МРТ' in item.name %}
+            <img class="equipment-image" src="{% static 'img/2cf9f4594d091cb8c094edd35e77a980b8f7187a.png' %}" alt="{{ item.name }}" />
+          {% elif 'томограф' in item.name %}
+            <img class="equipment-image" src="{% static 'img/bc751aada3dd438da4af22bbfba2f60b222d8fd7.png' %}" alt="{{ item.name }}" />
+          {% elif 'рентген' in item.name %}
+            <img class="equipment-image" src="{% static 'img/e012e560ae205e6da86f2a0007fa80bbcd3922c8.png' %}" alt="{{ item.name }}" />
+          {% endif %}
           <p class="equipment-text">{{ item.description }}</p>
         </div>
       {% endfor %}
@@ -122,24 +181,31 @@
   </div>
 </section>
 
-<section class="section section-gray">
+<section class="section">
   <div class="container">
-    <div class="stats-grid">
-      <div class="stat-card">
-        <span class="stat-number">20</span>
-        <span class="stat-label">лет на рынке<br>медицинских услуг</span>
+    <div class="section-header">
+      <h2 class="section-title">Наши преимущества</h2>
+    </div>
+    <div class="advantages-layout">
+      <div class="advantages-card">
+        <div class="advantage-item"><span class="advantage-dot"></span>Квалифицированные врачи с опытом от 6 лет</div>
+        <div class="advantage-item"><span class="advantage-dot"></span>Современное оборудование экспертного класса</div>
+        <div class="advantage-item"><span class="advantage-dot"></span>Собственная клинико-диагностическая лаборатория</div>
+        <div class="advantage-item"><span class="advantage-dot"></span>Лечение по ОМС и ДМС</div>
+        <div class="advantage-item"><span class="advantage-dot"></span>Запись на приём без ожидания в очереди</div>
+        <div class="advantage-item"><span class="advantage-dot"></span>Работаем с 2003 года</div>
+        <div class="advantage-item"><span class="advantage-dot"></span>Стационар с комфортными палатами</div>
+        <div class="advantage-item"><span class="advantage-dot"></span>Лечение детей и взрослых</div>
+        <div class="advantage-item"><span class="advantage-dot"></span>Доступные цены на услуги</div>
       </div>
-      <div class="stat-card">
-        <span class="stat-number">800</span>
-        <span class="stat-label">высококвалифицированных<br>специалистов</span>
-      </div>
-      <div class="stat-card">
-        <span class="stat-number">24/7</span>
-        <span class="stat-label">клиника<br>работает для Вас</span>
-      </div>
-      <div class="stat-card">
-        <span class="stat-number">120 000</span>
-        <span class="stat-label">пациентов<br>нам доверяют</span>
+      <div class="advantages-main">
+        <h3 class="advantages-title">Профессионализм</h3>
+        <p class="section-text">
+          Врачи нашей клиники регулярно повышают квалификацию, участвуют в научных конференциях
+          и применяют только доказательные методики лечения. Каждый специалист несёт личную
+          ответственность за результат и здоровье пациента.
+        </p>
+        <img class="advantages-image" src="{% static 'img/27d078fc5f910ac9b6a38deb4edd56162a412c8a.png' %}" alt="Наши врачи" />
       </div>
     </div>
   </div>
@@ -153,11 +219,19 @@
     <div class="partners">
       <img src="{% static 'img/96f7815b1f3e416f16270d2ee8ff5a4b7c8e45c0.png' %}" alt="Наши партнеры" />
     </div>
+  </div>
+</section>
+
+<section class="section section-gray">
+  <div class="container">
     <div class="section-header">
       <h2 class="section-title">Наши лицензии</h2>
     </div>
-    <div class="licenses">
-      <img src="{% static 'img/5e2bfba032ba844b201cd81430b9b18c5f5a8bce.png' %}" alt="Лицензии" />
+    <div class="licenses-grid">
+      <img src="{% static 'img/5e2bfba032ba844b201cd81430b9b18c5f5a8bce.png' %}" alt="Лицензия" />
+      <img src="{% static 'img/5e2bfba032ba844b201cd81430b9b18c5f5a8bce.png' %}" alt="Лицензия" />
+      <img src="{% static 'img/5e2bfba032ba844b201cd81430b9b18c5f5a8bce.png' %}" alt="Лицензия" />
+      <img src="{% static 'img/5e2bfba032ba844b201cd81430b9b18c5f5a8bce.png' %}" alt="Лицензия" />
     </div>
   </div>
 </section>
@@ -165,17 +239,22 @@
 <section class="section section-contacts">
   <div class="container contacts-inner">
     <div class="contacts-info">
-      <h2 class="section-title section-title-light">Остались вопросы?<br>Оставьте заявку</h2>
-      <p class="section-text section-text-light">
-        Оставьте заявку и мы подробно ответим на все Ваши вопросы!
-      </p>
-      <button type="button" class="btn btn-primary" data-modal-open="callback">Заказать звонок</button>
-      <div class="contacts-address">
-        <span class="contacts-city">г. Томск</span>
-        <span class="contacts-line">ул. 79 Гвардейской дивизии, 6</span>
-        <span class="contacts-line">8 (3822) 50-00-49</span>
-        <span class="contacts-line">info@docnear.ru</span>
+      <h2 class="section-title section-title-light">Наши контакты</h2>
+      <div class="contacts-list">
+        <div class="contacts-item">
+          <span class="contacts-label">Адрес</span>
+          <span class="contacts-value">г. Томск, ул. 79 Гвардейской дивизии, 6</span>
+        </div>
+        <div class="contacts-item">
+          <span class="contacts-label">Телефон</span>
+          <span class="contacts-value">8 (3822) 50-00-49</span>
+        </div>
+        <div class="contacts-item">
+          <span class="contacts-label">Почта</span>
+          <span class="contacts-value">info@docnear.ru</span>
+        </div>
       </div>
+      <button type="button" class="btn btn-primary" data-modal-open="appointment">Записаться на прием</button>
     </div>
     <div class="contacts-map">
       <img src="{% static 'img/62b0d02c35be20a1bede65edbbb5550765dab45b.png' %}" alt="Карта проезда" />
@@ -183,25 +262,6 @@
   </div>
 </section>
 
-<section class="section section-gray">
-  <div class="container">
-    <div class="section-header">
-      <h2 class="section-title">Отзывы наших пациентов</h2>
-      <a class="section-link" href="{% url 'reviews' %}">Все отзывы</a>
-    </div>
-    <div class="reviews-grid">
-      {% for review in reviews %}
-        <div class="review-card">
-          <div class="review-head">
-            <span class="review-name">{{ review.patient_name }}</span>
-            <span class="review-stars">{{ review.rating }}★</span>
-          </div>
-          <p class="review-text">{{ review.text|truncatechars:140 }}</p>
-          <span class="review-date">{{ review.created_at|date:'d.m.Y' }}</span>
-        </div>
-      {% endfor %}
-    </div>
-  </div>
-</section>
+</div>
 
 {% endblock %}

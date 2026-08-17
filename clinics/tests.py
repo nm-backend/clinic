@@ -257,18 +257,16 @@ class ContentApiTests(TestCase):
 
     def test_index_renders_new_blocks(self):
         Promotion.objects.create(title='Скидка -20%', description='на МРТ')
-        Review.objects.create(
-            patient_name='Анна Петрова',
-            text='Отличный врач',
-            rating=5,
-            doctor=self.doctor,
-        )
         Equipment.objects.create(name='Компьютерный томограф')
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Скидка -20%')
         self.assertContains(response, 'Компьютерный томограф')
-        self.assertContains(response, 'Анна Петрова')
+        self.assertContains(response, 'Петров Иван')
+        self.assertContains(response, 'Немного о нас')
+        self.assertContains(response, 'Наши преимущества')
+        self.assertContains(response, 'Стационар')
+        self.assertContains(response, 'Наши контакты')
 
     def test_callback_request_creates_record(self):
         response = self.client.post(

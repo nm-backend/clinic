@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Направления — Сеть клиник Томской области{% endblock %}
+
+{% block breadcrumbs %}
+  {% include 'components/breadcrumbs.html' with title='Направления' %}
+{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h1 class="page-title">Направления</h1>
+    <div class="directions-grid">
+      {% for category in categories %}
+        <a class="direction-card" href="{% url 'direction_detail' slug=category.slug %}">
+          {% if category.image %}
+            <img src="{% static 'img/'|add:category.image %}" alt="{{ category.name }}" />
+          {% endif %}
+          <h3 class="direction-card-title">{{ category.name }}</h3>
+          <span class="direction-card-more">Записаться на прием</span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,212 +1,207 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Сеть клиник — главная{% endblock %}
-
 {% block content %}
-<!-- Hero Section -->
-<section class="hero glass-panel">
-  <div class="container hero-container">
-    <div class="hero_content">
-      <h1>Lorem ipsum dolor sit amet, consectetur</h1>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra amet
-        dolor sed mi tincidunt pharetra montes. Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit. Viverra amet dolor sed mi tincidunt
-        pharetra montes.
+
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-info">
+      <h1 class="hero-title">Близкие к Вам<br>и своим делом</h1>
+      <p class="hero-text">
+        Название нашей клиники выбрано не случайно. Работаем с 2003 года, лечим детей и взрослых.
+        Нас выбирают, потому что мы рядом.
       </p>
-      <button class="hero_button modern-btn">Подробнее &gt;</button>
+      <button type="button" class="btn btn-primary" data-modal-open="appointment">Записаться на прием</button>
     </div>
-    <div class="hero_image">
-      <img src="{% static 'img/panel.svg' %}" alt="Консультация врача" />
+    <div class="hero-image">
+      <img src="{% static 'img/32318bd57cfad221927c3a40505a844ee4c0fee5.png' %}" alt="Наша клиника" />
     </div>
   </div>
 </section>
 
-<!-- About Section -->
-<section class="about glass-panel">
-  <div class="container about-container">
-    <div class="about-text">
-      <h2>Немного о нас</h2>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ipsum diam
-        pretium risus, ultrices felis a. Adipiscing maecenas mattis ullamcorper
-        magnis eget varius. At lobortis tristique mattis orci aenean. Pretium,
-        posuere tristique id potenti ac. Ac praesent arcu vitae arcu. Velit ut
-        et, leo, augue bibendum euismod in. Turpis massa, commodo vestibulum
-        bibendum amet orci velit, risus. Semper mauris curabitur auctor id amet
-        mauris lacus. Ut quis nisi, ac consequat sed massa egestas. Sed
-        adipiscing scelerisque enim, id amet eget. Ipsum dui a bibendum quisque
-        in.<br /><br />
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ipsum diam
-        pretium risus, ultrices felis a. Adipiscing maecenas mattis ullamcorper
-        magnis eget varius. At lobortis tristique mattis orci aenean. Pretium,
-        posuere tristique id potenti ac.
+<section class="section about-teaser">
+  <div class="container about-teaser-inner">
+    <div class="about-teaser-image">
+      <img src="{% static 'img/74922074873a326445ab9fe1ef0143e0c900ff42.jpg' %}" alt="О клинике" />
+    </div>
+    <div class="about-teaser-info">
+      <h2 class="section-title">Профессиональные врачи</h2>
+      <p class="section-text">
+        В нашей клинике работают специалисты с большим опытом работы и высоким уровнем квалификации.
+        Мы помогаем пациентам справиться с любыми заболеваниями, используя современное оборудование
+        и проверенные методики лечения.
       </p>
-    </div>
-    <div class="about-image">
-      <img
-        src="{% static 'img/74922074873a326445ab9fe1ef0143e0c900ff42.jpg' %}"
-        alt="О нас"
-        class="rounded-image"
-      />
-    </div>
-  </div>
-</section>
-
-<!-- Services Section -->
-<section id="services" class="services">
-  <div class="container">
-    <div class="services-header">
-      <h2>Направления нашей работы</h2>
-      <button class="btn-all-services modern-btn">Все направления &gt;</button>
-    </div>
-    <div class="services-grid">
-      <div class="service-card glass-card">
-        <img
-          src="{% static 'img/1c9410ce457535aeb2f35e575aeda1995d241f2b.png' %}"
-          alt="Гинекология"
-        />
-        <div class="service-card-body">
-          <h3>Гинекология</h3>
-          <a href="#" class="card-link">Подробнее</a>
-        </div>
-      </div>
-      <div class="service-card glass-card">
-        <img
-          src="{% static 'img/1c9410ce457535aeb2f35e575aeda1995d241f2b.png' %}"
-          alt="Урология"
-        />
-        <div class="service-card-body">
-          <h3>Урология</h3>
-          <a href="#" class="card-link">Подробнее</a>
-        </div>
-      </div>
-      <div class="service-card glass-card">
-        <img
-          src="{% static 'img/1c9410ce457535aeb2f35e575aeda1995d241f2b.png' %}"
-          alt="Отоларингология"
-        />
-        <div class="service-card-body">
-          <h3>Отоларингология</h3>
-          <a href="#" class="card-link">Подробнее</a>
-        </div>
-      </div>
-      <div class="service-card glass-card">
-        <img
-          src="{% static 'img/1c9410ce457535aeb2f35e575aeda1995d241f2b.png' %}"
-          alt="Неврология"
-        />
-        <div class="service-card-body">
-          <h3>Неврология</h3>
-          <a href="#" class="card-link">Подробнее</a>
-        </div>
+      <div class="about-teaser-actions">
+        <a href="{% url 'about' %}" class="btn btn-outline">Подробнее</a>
+        <a href="{% url 'doctors' %}" class="btn btn-outline">Наши врачи</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Free Slots Panel (Наши специалисты) -->
-<section class="panel glass-panel">
+<section class="section section-gray">
   <div class="container">
-    <div class="doctors-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-      <h2>Наши специалисты</h2>
-      <button class="btn-all-services modern-btn">Все врачи &gt;</button>
+    <div class="section-header">
+      <h2 class="section-title">Направления нашей работы</h2>
+      <a class="section-link" href="{% url 'directions' %}">Все направления</a>
     </div>
-    <div class="services-grid">
-      <div class="service-card glass-card">
-        <img src="{% static 'img/service_card.png' %}" alt="Специалист" />
-        <div class="service-card-body">
-          <h3>Гинеколог</h3>
-          <a href="#" class="card-link">Записаться</a>
-        </div>
-      </div>
-      <div class="service-card glass-card">
-        <img src="{% static 'img/service_card.png' %}" alt="Специалист" />
-        <div class="service-card-body">
-          <h3>Уролог</h3>
-          <a href="#" class="card-link">Записаться</a>
-        </div>
-      </div>
-      <div class="service-card glass-card">
-        <img src="{% static 'img/service_card.png' %}" alt="Специалист" />
-        <div class="service-card-body">
-          <h3>Отоларинголог</h3>
-          <a href="#" class="card-link">Записаться</a>
-        </div>
-      </div>
-      <div class="service-card glass-card">
-        <img src="{% static 'img/service_card.png' %}" alt="Специалист" />
-        <div class="service-card-body">
-          <h3>Невролог</h3>
-          <a href="#" class="card-link">Записаться</a>
-        </div>
-      </div>
+    <div class="directions-grid">
+      {% for category in categories %}
+        <a class="direction-card" href="{% url 'direction_detail' slug=category.slug %}">
+          {% if category.image %}
+            <img src="{% static 'img/'|add:category.image %}" alt="{{ category.name }}" />
+          {% endif %}
+          <h3 class="direction-card-title">{{ category.name }}</h3>
+          <span class="direction-card-more">Записаться на прием</span>
+        </a>
+      {% endfor %}
     </div>
   </div>
 </section>
 
-<!-- Appointment Panel -->
-<section class="panel glass-panel">
+<section class="section">
   <div class="container">
-    <h2>Запись на приём</h2>
-    <form action="/api/v1/appointments/" method="POST" class="form-grid">
-      <label>Имя <input type="text" name="patient_first_name" required /></label>
-      <label>Фамилия <input type="text" name="patient_last_name" required /></label>
-      <label>Телефон <input type="tel" name="patient_phone" required placeholder="+79001234567" /></label>
-      <label>Email <input type="email" name="patient_email" /></label>
-      <label>ID врача <input type="number" name="doctor_id" required min="1" /></label>
-      <label>ID услуги <input type="number" name="service_id" required min="1" /></label>
-      <label>Дата и время <input type="datetime-local" name="scheduled_at" required /></label>
-      <label class="full-width">Комментарий <textarea name="notes" rows="2"></textarea></label>
-      <button type="submit" class="modern-btn">Создать запись</button>
-    </form>
-  </div>
-</section>
-
-<!-- My Appointments Panel -->
-<section class="panel glass-panel">
-  <div class="container">
-    <h2>Мои записи</h2>
-    <form action="/api/v1/appointments/" method="GET">
-      <label style="margin-bottom: 1rem">
-        Телефон пациента:
-        <input type="tel" name="patient_phone" placeholder="+79001234567" style="max-width: 300px" />
-      </label>
-      <button type="submit" class="modern-btn">Найти записи</button>
-    </form>
-  </div>
-</section>
-
-<!-- Manage Appointment Panel -->
-<section class="panel glass-panel">
-  <div class="container">
-    <h2>Управление записью</h2>
-    <form action="#" method="POST">
-      <div class="filters">
-        <label>
-          ID записи:
-          <input type="number" name="appointment_id" min="1" />
-        </label>
-      </div>
-      <div class="form-grid">
-        <label>Новый ID врача <input type="number" name="doctor_id" min="1" /></label>
-        <label>Новый ID услуги <input type="number" name="service_id" min="1" /></label>
-        <label>Новая дата <input type="datetime-local" name="scheduled_at" /></label>
-        <label>
-          Статус
-          <select name="status">
-            <option value="">— не менять —</option>
-            <option value="scheduled">scheduled</option>
-            <option value="confirmed">confirmed</option>
-          </select>
-        </label>
-        <div class="btn-row full-width">
-          <button type="submit" class="modern-btn">Обновить запись</button>
-          <button type="button" class="btn-danger modern-btn">Отменить запись</button>
+    <div class="section-header">
+      <h2 class="section-title">Наши специалисты</h2>
+      <a class="section-link" href="{% url 'doctors' %}">Все врачи</a>
+    </div>
+    <div class="doctors-grid">
+      {% for doctor in doctors %}
+        <div class="doctor-card">
+          <div class="doctor-photo">
+            {% if doctor.photo %}
+              <img src="{% static 'img/'|add:doctor.photo %}" alt="{{ doctor.full_name }}" />
+            {% endif %}
+          </div>
+          <div class="doctor-card-info">
+            <h3 class="doctor-name">{{ doctor.full_name }}</h3>
+            <p class="doctor-specialty">{{ doctor.specialty }}</p>
+            <p class="doctor-clinic">{{ doctor.clinic.name }}</p>
+          </div>
         </div>
-      </div>
-    </form>
+      {% endfor %}
+    </div>
   </div>
 </section>
+
+<section class="section section-gray">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Наши акции</h2>
+      <a class="section-link" href="{% url 'promotions' %}">Все акции</a>
+    </div>
+    <div class="promo-grid">
+      {% for promo in promotions %}
+        <div class="promo-card {% if promo.color %}promo-card-colored{% endif %}"
+             {% if promo.color %}style="background-color: #{{ promo.color }};"{% endif %}>
+          <h3 class="promo-card-title">{{ promo.title }}</h3>
+          <p class="promo-card-text">{{ promo.description }}</p>
+          {% if promo.valid_until %}
+            <p class="promo-card-date">Акция действует до {{ promo.valid_until|date:'d.m.Y' }}</p>
+          {% endif %}
+          <button type="button" class="btn promo-card-btn" data-modal-open="appointment">Подробнее</button>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Наше оборудование</h2>
+    </div>
+    <div class="equipment-grid">
+      {% for item in equipment %}
+        <div class="equipment-card">
+          <h3 class="equipment-name">{{ item.name }}</h3>
+          <p class="equipment-text">{{ item.description }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section-gray">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-number">20</span>
+        <span class="stat-label">лет на рынке<br>медицинских услуг</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">800</span>
+        <span class="stat-label">высококвалифицированных<br>специалистов</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">24/7</span>
+        <span class="stat-label">клиника<br>работает для Вас</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">120 000</span>
+        <span class="stat-label">пациентов<br>нам доверяют</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Наши партнеры</h2>
+    </div>
+    <div class="partners">
+      <img src="{% static 'img/96f7815b1f3e416f16270d2ee8ff5a4b7c8e45c0.png' %}" alt="Наши партнеры" />
+    </div>
+    <div class="section-header">
+      <h2 class="section-title">Наши лицензии</h2>
+    </div>
+    <div class="licenses">
+      <img src="{% static 'img/5e2bfba032ba844b201cd81430b9b18c5f5a8bce.png' %}" alt="Лицензии" />
+    </div>
+  </div>
+</section>
+
+<section class="section section-contacts">
+  <div class="container contacts-inner">
+    <div class="contacts-info">
+      <h2 class="section-title section-title-light">Остались вопросы?<br>Оставьте заявку</h2>
+      <p class="section-text section-text-light">
+        Оставьте заявку и мы подробно ответим на все Ваши вопросы!
+      </p>
+      <button type="button" class="btn btn-primary" data-modal-open="callback">Заказать звонок</button>
+      <div class="contacts-address">
+        <span class="contacts-city">г. Томск</span>
+        <span class="contacts-line">ул. 79 Гвардейской дивизии, 6</span>
+        <span class="contacts-line">8 (3822) 50-00-49</span>
+        <span class="contacts-line">info@docnear.ru</span>
+      </div>
+    </div>
+    <div class="contacts-map">
+      <img src="{% static 'img/62b0d02c35be20a1bede65edbbb5550765dab45b.png' %}" alt="Карта проезда" />
+    </div>
+  </div>
+</section>
+
+<section class="section section-gray">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Отзывы наших пациентов</h2>
+      <a class="section-link" href="{% url 'reviews' %}">Все отзывы</a>
+    </div>
+    <div class="reviews-grid">
+      {% for review in reviews %}
+        <div class="review-card">
+          <div class="review-head">
+            <span class="review-name">{{ review.patient_name }}</span>
+            <span class="review-stars">{{ review.rating }}★</span>
+          </div>
+          <p class="review-text">{{ review.text|truncatechars:140 }}</p>
+          <span class="review-date">{{ review.created_at|date:'d.m.Y' }}</span>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
 {% endblock %}

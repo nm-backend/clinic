@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Отзывы — Сеть клиник Томской области{% endblock %}
+
+{% block breadcrumbs %}
+  {% include 'components/breadcrumbs.html' with title='Отзывы' %}
+{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h1 class="page-title">Отзывы наших пациентов</h1>
+    <div class="reviews-grid">
+      {% for review in reviews %}
+        <div class="review-card">
+          <div class="review-head">
+            <span class="review-name">{{ review.patient_name }}</span>
+            <span class="review-stars">{{ review.rating }}★</span>
+          </div>
+          {% if review.doctor %}
+            <p class="review-doctor">Врач: {{ review.doctor.last_name }} {{ review.doctor.first_name }}</p>
+          {% endif %}
+          <p class="review-text">{{ review.text }}</p>
+          <span class="review-date">{{ review.created_at|date:'d.m.Y' }}</span>
+        </div>
+      {% empty %}
+        <p class="empty-text">Отзывов пока нет. Станьте первым!</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

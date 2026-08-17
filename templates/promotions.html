@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Акции — Сеть клиник Томской области{% endblock %}
+
+{% block breadcrumbs %}
+  {% include 'components/breadcrumbs.html' with title='Акции' %}
+{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h1 class="page-title">Акции</h1>
+
+    {% for promo in promotions %}
+      <div class="promo-card promo-card-wide {% if promo.color %}promo-card-colored{% endif %}"
+           {% if promo.color %}style="background-color: #{{ promo.color }};"{% endif %}>
+        <div class="promo-card-body">
+          <h2 class="promo-card-title">{{ promo.title }}</h2>
+          <p class="promo-card-text">{{ promo.description }}</p>
+          {% if promo.valid_until %}
+            <p class="promo-card-date">Акция действует до {{ promo.valid_until|date:'d.m.Y' }}</p>
+          {% endif %}
+          <button type="button" class="btn promo-card-btn" data-modal-open="appointment">Подробнее</button>
+        </div>
+        {% if promo.image %}
+          <div class="promo-card-image">
+            <img src="{% static 'img/'|add:promo.image %}" alt="{{ promo.title }}" />
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+
+    <div class="cta-block">
+      <h2 class="cta-title">Хотите узнать подробнее об акциях?</h2>
+      <button type="button" class="btn btn-primary" data-modal-open="callback">Заказать звонок</button>
+    </div>
+  </div>
+</section>
+{% endblock %}

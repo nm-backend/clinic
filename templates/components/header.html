@@ -1,28 +1,37 @@
 {% load static %}
-<header>
-  <div class="header_topbar">
-    <p>Сеть клиник Томской области</p>
-    <a href="#" class="accessibility-link">Версия для слабовидящих</a>
-    <div class="header_social">
-      <a class="header_phone" href="tel:+79780000000">+7 (978) 00-00-000</a>
-      <button class="btn-appointment">Записаться на прием</button>
+<header class="site-header">
+  <div class="container">
+    <div class="header-topbar">
+      <span class="header-tagline">Сеть клиник Томской области</span>
+      <span class="header-accessibility">Версия для слабовидящих</span>
+    </div>
+    <div class="header-navbar">
+      <a class="header-logo" href="{% url 'index' %}">
+        <img src="{% static 'img/6fa4e09bdc18a460f722958684d333b5b55f8b08.png' %}" alt="Ваш Доктор Рядом" />
+      </a>
+      <nav class="header-menu">
+        <a href="{% url 'doctors' %}">Врачи</a>
+        <a href="{% url 'services' %}">Услуги</a>
+        <a href="{% url 'directions' %}">Диагностика</a>
+        <a href="{% url 'analyses' %}">Анализы</a>
+        <a href="{% url 'promotions' %}">Акции</a>
+        <div class="header-dropdown">
+          <a href="#" class="header-dropdown-toggle">Пациентам</a>
+          <div class="header-dropdown-menu">
+            <a href="{% url 'oms' %}">Лечение по ОМС</a>
+            <a href="{% url 'dms' %}">ДМС</a>
+            <a href="{% url 'analyses' %}">Анализы</a>
+            <a href="{% url 'legal' %}">Нормативно-правовая информация</a>
+          </div>
+        </div>
+        <a href="{% url 'about' %}">О клинике</a>
+        <a href="{% url 'reviews' %}">Отзывы</a>
+        <a href="{% url 'contacts' %}">Контакты</a>
+      </nav>
+      <div class="header-actions">
+        <a class="header-phone" href="tel:+79820000000">+ 7 (978) 00-00-000</a>
+        <button type="button" class="btn-appointment" data-modal-open="appointment">Записаться на прием</button>
+      </div>
     </div>
   </div>
-
-  <nav class="header_navbar">
-    <a class="header_logo" href="/">
-      <img src="{% static 'img/6fa4e09bdc18a460f722958684d333b5b55f8b08.png' %}" alt="Ваш Доктор Рядом" />
-    </a>
-    <div class="header_nav">
-      <a href="#doctors">Врачи</a>
-      <a href="#services">Услуги</a>
-      <a href="#diagnostics">Диагностика</a>
-      <a href="#analysis">Анализы</a>
-      <a href="#promotions">Акции</a>
-      <a href="#patients">Пациентам</a>
-      <a href="#about">О клинике</a>
-      <a href="#reviews">Отзывы</a>
-      <a href="#contacts">Контакты</a>
-    </div>
-  </nav>
 </header>

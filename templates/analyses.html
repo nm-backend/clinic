@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Анализы — Сеть клиник Томской области{% endblock %}
+
+{% block breadcrumbs %}
+  {% include 'components/breadcrumbs.html' with title='Анализы' %}
+{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h1 class="page-title">Анализы</h1>
+    <p class="page-text">
+      Собственная лаборатория клиники выполняет более 300 видов исследований.
+      Результаты готовы в короткие сроки, их можно получить в клинике или по электронной почте.
+    </p>
+
+    <div class="section-header">
+      <h2 class="section-title">Популярные анализы</h2>
+    </div>
+    <div class="analyses-grid">
+      <div class="analysis-card">
+        <h3 class="analysis-title">Клинический анализ крови</h3>
+        <p class="analysis-text">Общий анализ крови с лейкоцитарной формулой</p>
+      </div>
+      <div class="analysis-card">
+        <h3 class="analysis-title">Биохимический анализ крови</h3>
+        <p class="analysis-text">Оценка работы печени, почек, обмена веществ</p>
+      </div>
+      <div class="analysis-card">
+        <h3 class="analysis-title">Анализ мочи</h3>
+        <p class="analysis-text">Общий анализ мочи с микроскопией осадка</p>
+      </div>
+      <div class="analysis-card">
+        <h3 class="analysis-title">Гормональные исследования</h3>
+        <p class="analysis-text">Щитовидная железа, половые гормоны, инсулин</p>
+      </div>
+    </div>
+
+    <div class="services-block">
+      <h2 class="section-title">Подготовка к сдаче анализов</h2>
+      <div class="benefit-list">
+        <div class="benefit-item">Кровь сдаётся строго натощак, утром</div>
+        <div class="benefit-item">За 2–3 дня исключите алкоголь и жирную пищу</div>
+        <div class="benefit-item">Не курите за час до исследования</div>
+        <div class="benefit-item">Уточните правила подготовки у администратора</div>
+      </div>
+    </div>
+
+    <div class="cta-block">
+      <h2 class="cta-title">Узнать стоимость анализов</h2>
+      <button type="button" class="btn btn-primary" data-modal-open="callback">Заказать звонок</button>
+    </div>
+  </div>
+</section>
+{% endblock %}

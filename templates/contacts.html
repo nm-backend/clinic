@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Контакты — Сеть клиник Томской области{% endblock %}
+
+{% block breadcrumbs %}
+  {% include 'components/breadcrumbs.html' with title='Контакты' %}
+{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h1 class="page-title">Контакты</h1>
+
+    <div class="contacts-inner">
+      <div class="contacts-info">
+        <div class="contact-block">
+          <span class="contact-block-label">Адрес</span>
+          <span class="contact-block-value">г. Томск, ул. 79 Гвардейской дивизии, 6</span>
+        </div>
+        <div class="contact-block">
+          <span class="contact-block-label">Телефон</span>
+          <a class="contact-block-value" href="tel:+7382250049">8 (3822) 50-00-49</a>
+        </div>
+        <div class="contact-block">
+          <span class="contact-block-label">Почта</span>
+          <a class="contact-block-value" href="mailto:info@docnear.ru">info@docnear.ru</a>
+        </div>
+        <div class="contact-block">
+          <span class="contact-block-label">Часы работы</span>
+          <span class="contact-block-value">Пн–пт: 8.00–20.00, сб–вс: 9.00–17.00</span>
+        </div>
+        <button type="button" class="btn btn-primary" data-modal-open="callback">Заказать звонок</button>
+      </div>
+      <div class="contacts-map">
+        <img src="{% static 'img/62b0d02c35be20a1bede65edbbb5550765dab45b.png' %}" alt="Карта проезда" />
+      </div>
+    </div>
+
+    {% if doctors %}
+      <div class="doctors-block">
+        <h2 class="section-title">Наши специалисты</h2>
+        <div class="doctors-grid">
+          {% for doctor in doctors %}
+            <div class="doctor-card">
+              <div class="doctor-photo">
+                {% if doctor.photo %}
+                  <img src="{% static 'img/'|add:doctor.photo %}" alt="{{ doctor.full_name }}" />
+                {% endif %}
+              </div>
+              <div class="doctor-card-info">
+                <h3 class="doctor-name">{{ doctor.full_name }}</h3>
+                <p class="doctor-specialty">{{ doctor.specialty }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

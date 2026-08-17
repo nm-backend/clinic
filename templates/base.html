@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Сеть клиник Томской области{% endblock %}</title>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;900&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     {% block extra_head %}{% endblock %}
 </head>
@@ -13,10 +15,14 @@
     {% include 'components/header.html' %}
 
     <main>
+        {% block breadcrumbs %}{% endblock %}
         {% block content %}{% endblock %}
     </main>
 
     {% include 'components/footer.html' %}
+    {% include 'components/modals.html' %}
+
+    <script src="{% static 'js/main.js' %}"></script>
     {% block extra_scripts %}{% endblock %}
 </body>
 </html>

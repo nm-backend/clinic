@@ -284,9 +284,8 @@ class ContentApiTests(TestCase):
         response = self.client.post(
             '/forms/callback/',
             {'full_name': 'И', 'phone': '123'},
-            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
         )
-        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.status_code, 302)
         self.assertFalse(CallbackRequest.objects.exists())
 
     def test_appointment_request_creates_record(self):

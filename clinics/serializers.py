@@ -19,6 +19,29 @@ from clinics.models import (
 )
 
 
+def check_slot_available(doctor, service, scheduled_at, exclude_id=None, slot=None):
+    """Проверяет, нет ли пересечений с другими записями у врача."""
+    end_time = scheduled_at + timezone.timedelta(minutes=service.duration_minutes)
+    busy = Appointment.objects.filter(
+        doctor=doctor,
+        status__in=[Appointment.Status.SCHEDULED, Appointment.Status.CONFIRMED],
+        scheduled_at__lt=end_time,
+    )
+    if exclude_id:
+        busy = busy.exclude(pk=exclude_id)
+    if slot is not None:
+        busy = busy.filter(slot__in=[slot, None])
+
+    for existing in busy:
+        existing_end = existing.scheduled_at + timezone.timedelta(
+            minutes=existing.service.duration_minutes,
+        )
+        if existing.scheduled_at < end_time and existing_end > scheduled_at:
+            raise serializers.ValidationError(
+                'У врача уже есть запись на это время',
+            )
+
+
 class ClinicModelSerializer(ModelSerializer):
     class Meta:
         model = Clinic
@@ -212,36 +235,15 @@ class AppointmentCreateSerializer(serializers.Serializer):
         else:
             if data.get('scheduled_at') is None:
                 raise serializers.ValidationError({'scheduled_at': 'Обязательное поле'})
-            self._check_slot_available(doctor, service, data['scheduled_at'])
+            check_slot_available(doctor, service, data['scheduled_at'])
 
         if slot is not None:
-            self._check_slot_available(doctor, service, slot.start_at, slot=slot)
+            check_slot_available(doctor, service, slot.start_at, slot=slot)
 
         data['doctor'] = doctor
         data['service'] = service
         data['slot'] = slot
         return data
-
-    def _check_slot_available(self, doctor, service, scheduled_at, exclude_id=None, slot=None):
-        end_time = scheduled_at + timezone.timedelta(minutes=service.duration_minutes)
-        busy = Appointment.objects.filter(
-            doctor=doctor,
-            status__in=[Appointment.Status.SCHEDULED, Appointment.Status.CONFIRMED],
-            scheduled_at__lt=end_time,
-        )
-        if exclude_id:
-            busy = busy.exclude(pk=exclude_id)
-        if slot is not None:
-            busy = busy.filter(slot__in=[slot, None])
-
-        for existing in busy:
-            existing_end = existing.scheduled_at + timezone.timedelta(
-                minutes=existing.service.duration_minutes,
-            )
-            if existing.scheduled_at < end_time and existing_end > scheduled_at:
-                raise serializers.ValidationError(
-                    'У врача уже есть запись на это время',
-                )
 
     def create(self, validated_data):
         validated_data.pop('doctor_id')
@@ -351,8 +353,7 @@ class AppointmentUpdateSerializer(serializers.Serializer):
 
         scheduled_at = data.get('scheduled_at', instance.scheduled_at)
         if 'scheduled_at' in data or 'doctor_id' in data or 'service_id' in data:
-            create_serializer = AppointmentCreateSerializer()
-            create_serializer._check_slot_available(
+            check_slot_available(
                 doctor, service, scheduled_at, exclude_id=instance.pk,
             )
 
@@ -364,16 +365,9 @@ class AppointmentUpdateSerializer(serializers.Serializer):
         validated_data.pop('doctor_id', None)
         validated_data.pop('service_id', None)
 
-        if 'doctor' in validated_data:
-            instance.doctor = validated_data.pop('doctor')
-        if 'service' in validated_data:
-            instance.service = validated_data.pop('service')
-        if 'scheduled_at' in validated_data:
-            instance.scheduled_at = validated_data.pop('scheduled_at')
-        if 'status' in validated_data:
-            instance.status = validated_data.pop('status')
-        if 'notes' in validated_data:
-            instance.notes = validated_data.pop('notes')
+        for field in ('doctor', 'service', 'scheduled_at', 'status', 'notes'):
+            if field in validated_data:
+                setattr(instance, field, validated_data.pop(field))
 
         instance.save()
         return instance

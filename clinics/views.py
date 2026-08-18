@@ -1,7 +1,6 @@
 from datetime import date, datetime, time
 
 from django.db.models import Q
-from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 from django.views.decorators.http import require_POST
@@ -188,45 +187,26 @@ def legal(request):
 
 @require_POST
 def appointment_request(request):
-    full_name = request.POST.get('full_name', '').strip()
-    phone = request.POST.get('phone', '').strip()
     serializer = CallbackRequestModelSerializer(data={
         'request_type': CallbackRequest.Type.APPOINTMENT,
-        'full_name': full_name,
-        'phone': phone,
+        'full_name': request.POST.get('full_name', '').strip(),
+        'phone': request.POST.get('phone', '').strip(),
     })
     if serializer.is_valid():
         serializer.save()
-    else:
-        errors = '; '.join(
-            f'{field}: {" ".join(msg for msg in msgs)}'
-            for field, msgs in serializer.errors.items()
-        )
-        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-            return JsonResponse({'detail': errors}, status=400)
     return redirect(request.POST.get('next', '/'))
 
 
 @require_POST
 def callback_request(request):
-    full_name = request.POST.get('full_name', '').strip()
-    phone = request.POST.get('phone', '').strip()
-    comment = request.POST.get('comment', '').strip()
     serializer = CallbackRequestModelSerializer(data={
         'request_type': CallbackRequest.Type.CALLBACK,
-        'full_name': full_name,
-        'phone': phone,
-        'comment': comment,
+        'full_name': request.POST.get('full_name', '').strip(),
+        'phone': request.POST.get('phone', '').strip(),
+        'comment': request.POST.get('comment', '').strip(),
     })
     if serializer.is_valid():
         serializer.save()
-    else:
-        errors = '; '.join(
-            f'{field}: {" ".join(msg for msg in msgs)}'
-            for field, msgs in serializer.errors.items()
-        )
-        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-            return JsonResponse({'detail': errors}, status=400)
     return redirect(request.POST.get('next', '/'))
 
 

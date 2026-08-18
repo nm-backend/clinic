@@ -159,25 +159,25 @@ class Command(BaseCommand):
             categories[item['name']] = ServiceCategory.objects.create(**item)
 
         doctors = {}
+        specialty_to_category = {
+            'Гинеколог': 'Гинекология',
+            'Уролог': 'Урология',
+            'Отоларинголог': 'Отоларингология',
+            'Невролог': 'Неврология',
+            'Кардиолог': 'Кардиология',
+            'Терапевт': 'Терапия',
+            'Педиатр': 'Педиатрия',
+            'Гастроэнтеролог': 'Гастроэнтерология',
+            'Эндокринолог': 'Эндокринология',
+            'Хирург': 'Хирургия',
+            'Ревматолог': 'Ревматология',
+            'Дерматолог': 'Дерматология',
+        }
         for idx, (last, first, specialty, experience, bio) in enumerate(DOCTORS):
-            name_map = {
-                'Гинеколог': 'Гинекология',
-                'Уролог': 'Урология',
-                'Отоларинголог': 'Отоларингология',
-                'Невролог': 'Неврология',
-                'Кардиолог': 'Кардиология',
-                'Терапевт': 'Терапия',
-                'Педиатр': 'Педиатрия',
-                'Гастроэнтеролог': 'Гастроэнтерология',
-                'Эндокринолог': 'Эндокринология',
-                'Хирург': 'Хирургия',
-                'Ревматолог': 'Ревматология',
-                'Дерматолог': 'Дерматология',
-            }
             clinic = clinic1 if idx % 3 != 2 else clinic2
             doctors[specialty] = Doctor.objects.create(
                 clinic=clinic,
-                category=categories[name_map[specialty]],
+                category=categories[specialty_to_category[specialty]],
                 first_name=first,
                 last_name=last,
                 specialty=specialty,

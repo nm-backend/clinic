@@ -1,12 +1,17 @@
 {% load static %}
 
-<div class="modal-overlay" data-modal="appointment">
-  <div class="modal modal-small">
-    <button type="button" class="modal-close" data-modal-close aria-label="Закрыть">
+<!-- ==========================================
+     Модальное окно "Записаться на приём"
+     Открывается через <dialog>.showModal()
+     Закрывается через <dialog>.close()
+     ========================================== -->
+<dialog id="modal-appointment" class="modal-dialog">
+  <div class="modal-inner">
+    <button type="button" class="modal-close" onclick="this.closest('dialog').close()" aria-label="Закрыть">
       <img src="{% static 'img/close.svg' %}" alt="" />
     </button>
     <h2 class="modal-title">Записаться на приём</h2>
-    <form class="modal-form" action="{% url 'appointment-request' %}" method="post" data-form>
+    <form class="modal-form" action="{% url 'appointment-request' %}" method="post">
       {% csrf_token %}
       <input type="hidden" name="next" value="{{ request.path }}">
       <div class="form-field">
@@ -21,11 +26,15 @@
       <p class="form-note">Нажимая на кнопку «Записаться на приём» вы соглашаетесь с политикой конфиденциальности</p>
     </form>
   </div>
-</div>
+</dialog>
 
-<div class="modal-overlay" data-modal="callback">
-  <div class="modal modal-callback">
-    <button type="button" class="modal-close" data-modal-close aria-label="Закрыть">
+
+<!-- ==========================================
+     Модальное окно "Заказать звонок"
+     ========================================== -->
+<dialog id="modal-callback" class="modal-dialog">
+  <div class="modal-inner modal-callback">
+    <button type="button" class="modal-close" onclick="this.closest('dialog').close()" aria-label="Закрыть">
       <img src="{% static 'img/close.svg' %}" alt="" />
     </button>
     <div class="callback-card">
@@ -35,7 +44,7 @@
       <div class="callback-form">
         <h2 class="callback-title">Хотите, мы Вам перезвоним?</h2>
         <p class="callback-subtitle">Оставьте заявку и мы подробно ответим на все Ваши вопросы!</p>
-        <form action="{% url 'callback-request' %}" method="post" data-form>
+        <form action="{% url 'callback-request' %}" method="post">
           {% csrf_token %}
           <input type="hidden" name="next" value="{{ request.path }}">
           <div class="form-field">
@@ -52,6 +61,4 @@
       </div>
     </div>
   </div>
-</div>
-
-<div class="toast" data-toast></div>
+</dialog>

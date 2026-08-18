@@ -5,19 +5,90 @@
 
 <div class="home">
 
-<section class="hero hero-bg">
-  <div class="container hero-inner">
-    <div class="hero-content">
-      <h1 class="hero-title">Близкие к Вам<br>и своим делом</h1>
-      <p class="hero-text">
-        Название нашей клиники выбрано не случайно. Работаем с 2003 года, лечим детей и взрослых.
-        Нас выбирают, потому что мы рядом.
-      </p>
-      <a href="{% url 'about' %}" class="btn hero-btn">Подробнее</a>
+<!-- ===== HERO (статический) ===== -->
+<section class="hero-section">
+  <div class="container hero-slide-inner">
+    <div class="hero-slide-content">
+      <h1 class="hero-slide-title">Lorem ipsum dolor sit amet, consectetur</h1>
+      <p class="hero-slide-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra amet dolor sed mi tincidunt pharetra montes. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra amet dolor sed mi tincidunt pharetra montes.</p>
+      <a href="{% url 'about' %}" class="btn hero-slide-btn">Подробнее &rsaquo;</a>
     </div>
+    <div class="hero-slide-illustration">
+      <svg viewBox="0 0 560 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Decorative green arc behind -->
+        <circle cx="280" cy="260" r="230" stroke="rgba(255,255,255,0.15)" stroke-width="6" fill="none"/>
+        <path d="M100 400 A230 230 0 0 1 100 120" stroke="rgba(255,255,255,0.12)" stroke-width="4" fill="none"/>
+        
+        <!-- Desk -->
+        <rect x="80" y="310" width="300" height="14" rx="7" fill="#8B6F47"/>
+        <rect x="100" y="324" width="12" height="110" rx="4" fill="#7A5F3A"/>
+        <rect x="348" y="324" width="12" height="110" rx="4" fill="#7A5F3A"/>
+        
+        <!-- Laptop on desk -->
+        <rect x="160" y="275" width="100" height="35" rx="5" fill="#2c3e50"/>
+        <rect x="155" y="310" width="110" height="6" rx="3" fill="#34495e"/>
+        <rect x="170" y="281" width="80" height="23" rx="3" fill="#4dc9a0"/>
+        
+        <!-- Doctor (left, white coat, glasses) -->
+        <!-- Body / white coat -->
+        <rect x="100" y="210" width="80" height="100" rx="12" fill="white"/>
+        <!-- Collar -->
+        <path d="M120 210 L140 230 L160 210" fill="#e8e8e8" stroke="#ddd" stroke-width="1"/>
+        <!-- Arms -->
+        <rect x="85" y="220" width="20" height="55" rx="10" fill="white"/>
+        <rect x="175" y="220" width="20" height="55" rx="10" fill="white"/>
+        <!-- Hands on desk -->
+        <circle cx="95" cy="305" r="9" fill="#e8b89d"/>
+        <circle cx="185" cy="305" r="9" fill="#e8b89d"/>
+        <!-- Head -->
+        <circle cx="140" cy="180" r="32" fill="#e8b89d"/>
+        <!-- Hair -->
+        <path d="M108 170 C108 148 172 148 172 170 C172 158 108 158 108 170Z" fill="#2c1810"/>
+        <!-- Glasses -->
+        <circle cx="128" cy="180" r="9" stroke="#333" stroke-width="2" fill="none"/>
+        <circle cx="152" cy="180" r="9" stroke="#333" stroke-width="2" fill="none"/>
+        <line x1="137" y1="180" x2="143" y2="180" stroke="#333" stroke-width="2"/>
+        <!-- Smile -->
+        <path d="M130 192 Q140 200 150 192" stroke="#c0846a" stroke-width="2" fill="none" stroke-linecap="round"/>
+        
+        <!-- Patient (right, yellow dress) -->
+        <!-- Body / dress -->
+        <rect x="330" y="215" width="70" height="95" rx="14" fill="#f5c842"/>
+        <!-- Arms -->
+        <rect x="318" y="225" width="16" height="50" rx="8" fill="#f5c842"/>
+        <rect x="396" y="225" width="16" height="50" rx="8" fill="#f5c842"/>
+        <!-- Hands -->
+        <circle cx="326" cy="305" r="8" fill="#e8b89d"/>
+        <circle cx="404" cy="305" r="8" fill="#e8b89d"/>
+        <!-- Head -->
+        <circle cx="365" cy="183" r="30" fill="#e8b89d"/>
+        <!-- Hair -->
+        <path d="M335 173 C335 148 395 148 395 173 C395 158 335 158 335 173Z" fill="#3a2a1a"/>
+        <!-- Hair sides -->
+        <path d="M335 175 Q330 200 340 210" stroke="#3a2a1a" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <path d="M395 175 Q400 200 390 210" stroke="#3a2a1a" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <!-- Smile -->
+        <path d="M355 193 Q365 201 375 193" stroke="#c0846a" stroke-width="2" fill="none" stroke-linecap="round"/>
+        
+        <!-- Chat bubble -->
+        <rect x="270" y="110" width="110" height="45" rx="12" fill="white" opacity="0.92"/>
+        <polygon points="320,155 330,155 315,170" fill="white" opacity="0.92"/>
+        <circle cx="295" cy="132" r="4" fill="#ddd"/>
+        <circle cx="310" cy="132" r="4" fill="#ddd"/>
+        <circle cx="325" cy="132" r="4" fill="#ddd"/>
+      </svg>
+    </div>
+  </div>
+  <div class="hero-pagination" aria-hidden="true">
+    <span class="hero-dot is-active"></span>
+    <span class="hero-dot"></span>
+    <span class="hero-dot"></span>
+    <span class="hero-dot"></span>
+    <span class="hero-dot"></span>
   </div>
 </section>
 
+<!-- ===== НЕМНОГО О НАС ===== -->
 <section class="section">
   <div class="container about-inner">
     <div class="about-text">
@@ -37,11 +108,12 @@
   </div>
 </section>
 
+<!-- ===== НАПРАВЛЕНИЯ ===== -->
 <section class="section">
   <div class="container">
     <div class="section-header">
       <h2 class="section-title">Направления нашей работы</h2>
-      <a href="{% url 'directions' %}" class="btn btn-primary">Все направления</a>
+      <a href="{% url 'directions' %}" class="btn btn-primary">Все направления &rsaquo;</a>
     </div>
     <div class="directions-grid">
       {% for category in categories|slice:':4' %}
@@ -57,16 +129,17 @@
   </div>
 </section>
 
+<!-- ===== СПЕЦИАЛИСТЫ ===== -->
 <section class="section section-gray">
   <div class="container">
     <div class="section-header">
       <h2 class="section-title">Наши специалисты</h2>
       <div class="specialists-nav">
         <button type="button" class="specialists-nav-btn" aria-label="Назад">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
         </button>
         <button type="button" class="specialists-nav-btn" aria-label="Вперёд">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
         </button>
       </div>
     </div>
@@ -81,17 +154,18 @@
           <div class="doctor-card-info">
             <h3 class="doctor-name">{{ doctor.full_name }}</h3>
             <p class="doctor-specialty">{{ doctor.specialty }}</p>
-            <button type="button" class="btn btn-primary doctor-card-btn" data-modal-open="appointment">Записаться</button>
+            <button type="button" class="btn btn-primary doctor-card-btn" onclick="document.getElementById('modal-appointment').showModal()">Запись на приём</button>
           </div>
         </div>
       {% endfor %}
     </div>
     <div class="text-center specialists-more">
-      <a href="{% url 'doctors' %}" class="btn btn-primary">Все специалисты</a>
+      <a href="{% url 'doctors' %}" class="btn btn-outline">Все специалисты</a>
     </div>
   </div>
 </section>
 
+<!-- ===== АКЦИИ ===== -->
 <section class="section">
   <div class="container">
     <div class="section-header">
@@ -106,20 +180,29 @@
             <span class="promo-date-label">Акция действует до</span>
             <span class="promo-date-value">{{ promotions.0.valid_until|date:'d.m.Y' }}</span>
           </div>
-          <button type="button" class="btn promo-featured-btn" data-modal-open="appointment">Подробнее</button>
+          <button type="button" class="btn promo-featured-btn" onclick="document.getElementById('modal-appointment').showModal()">Подробнее &rsaquo;</button>
         </div>
+        {% if promotions.0.image %}
+        <img class="promo-featured-image" src="{% static 'img/'|add:promotions.0.image %}" alt="{{ promotions.0.title }}" />
+        {% else %}
         <img class="promo-featured-image" src="{% static 'img/2cf9f4594d091cb8c094edd35e77a980b8f7187a.png' %}" alt="Акция" />
+        {% endif %}
       </div>
       <div class="promo-singles">
         {% for promo in promotions %}
           <div class="promo-single {% if promo.color %}promo-single-colored{% endif %} {% if promo.color == 'ffdb5c' %}promo-single-dark{% endif %}"
                {% if promo.color %}style="background-color: #{{ promo.color }};"{% endif %}>
-            <h3 class="promo-single-title">{{ promo.title }}</h3>
-            <p class="promo-single-date">
-              <span class="promo-date-label">Акция действует до</span>
-              <span class="promo-date-value">{{ promo.valid_until|date:'d.m.Y' }}</span>
-            </p>
-            <button type="button" class="btn promo-single-btn" data-modal-open="appointment">Подробнее</button>
+            <div class="promo-single-content">
+              <h3 class="promo-single-title">{{ promo.title }}</h3>
+              <p class="promo-single-date">
+                <span class="promo-date-label">Акция действует до</span>
+                <span class="promo-date-value">{{ promo.valid_until|date:'d.m.Y' }}</span>
+              </p>
+              <button type="button" class="btn promo-single-btn" onclick="document.getElementById('modal-appointment').showModal()">Подробнее &rsaquo;</button>
+            </div>
+            {% if promo.image %}
+              <img class="promo-single-image" src="{% static 'img/'|add:promo.image %}" alt="{{ promo.title }}" />
+            {% endif %}
           </div>
         {% endfor %}
       </div>
@@ -127,6 +210,7 @@
   </div>
 </section>
 
+<!-- ===== СТАЦИОНАР ===== -->
 <section class="section section-gray">
   <div class="container">
     <div class="section-header">
@@ -147,17 +231,24 @@
       </div>
     </div>
     <div class="stacionar-inner">
-      <p class="section-text stacionar-text">
-        В нашем стационаре пациенты находятся под круглосуточным наблюдением медицинского персонала.
-        Операционные оснащены современным оборудованием, палаты рассчитаны на комфортное пребывание,
-        а питание и уход организованы так, чтобы восстановление после операции проходило быстрее.
-      </p>
+      <div class="stacionar-text">
+        <p class="section-text">
+          В нашем стационаре пациенты находятся под круглосуточным наблюдением медицинского персонала.
+          Операционные оснащены современным оборудованием, палаты рассчитаны на комфортное пребывание,
+          а питание и уход организованы так, чтобы восстановление после операции проходило быстрее.
+        </p>
+        <p class="section-text" style="margin-top: 16px;">
+          Мы предлагаем полный цикл медицинской помощи: от диагностики до хирургического лечения
+          и реабилитации. Каждый пациент получает индивидуальный подход и заботу на всех этапах.
+        </p>
+        <a href="{% url 'about' %}" class="btn btn-primary" style="margin-top: 32px;">Подробнее</a>
+      </div>
       <img src="{% static 'img/74922074873a326445ab9fe1ef0143e0c900ff42.jpg' %}" alt="Стационар" />
     </div>
-    <a href="{% url 'about' %}" class="btn btn-primary">Подробнее</a>
   </div>
 </section>
 
+<!-- ===== ОБОРУДОВАНИЕ ===== -->
 <section class="section">
   <div class="container">
     <div class="section-header">
@@ -166,7 +257,6 @@
     <div class="equipment-grid">
       {% for item in equipment|slice:':3' %}
         <div class="equipment-card">
-          <h3 class="equipment-name">{{ item.name }}</h3>
           {% if 'МРТ' in item.name %}
             <img class="equipment-image" src="{% static 'img/2cf9f4594d091cb8c094edd35e77a980b8f7187a.png' %}" alt="{{ item.name }}" />
           {% elif 'томограф' in item.name %}
@@ -174,54 +264,172 @@
           {% elif 'рентген' in item.name %}
             <img class="equipment-image" src="{% static 'img/e012e560ae205e6da86f2a0007fa80bbcd3922c8.png' %}" alt="{{ item.name }}" />
           {% endif %}
-          <p class="equipment-text">{{ item.description }}</p>
+          <h3 class="equipment-name">{{ item.name }}</h3>
+          <ul class="equipment-specs">
+            <li>1.5 тесла / до 200 кг</li>
+            <li>3D/4D запись исследования</li>
+            <li>МР маммография</li>
+            <li>МРТ всего тела за 1.5 часа</li>
+            <li>МРТ суставов</li>
+          </ul>
         </div>
       {% endfor %}
     </div>
   </div>
 </section>
 
+<!-- ===== ПРЕИМУЩЕСТВА (табы на CSS) ===== -->
 <section class="section">
   <div class="container">
     <div class="section-header">
       <h2 class="section-title">Наши преимущества</h2>
     </div>
-    <div class="advantages-layout">
-      <div class="advantages-card">
-        <div class="advantage-item"><span class="advantage-dot"></span>Квалифицированные врачи с опытом от 6 лет</div>
-        <div class="advantage-item"><span class="advantage-dot"></span>Современное оборудование экспертного класса</div>
-        <div class="advantage-item"><span class="advantage-dot"></span>Собственная клинико-диагностическая лаборатория</div>
-        <div class="advantage-item"><span class="advantage-dot"></span>Лечение по ОМС и ДМС</div>
-        <div class="advantage-item"><span class="advantage-dot"></span>Запись на приём без ожидания в очереди</div>
-        <div class="advantage-item"><span class="advantage-dot"></span>Работаем с 2003 года</div>
-        <div class="advantage-item"><span class="advantage-dot"></span>Стационар с комфортными палатами</div>
-        <div class="advantage-item"><span class="advantage-dot"></span>Лечение детей и взрослых</div>
-        <div class="advantage-item"><span class="advantage-dot"></span>Доступные цены на услуги</div>
+    <div class="advantages-tabs">
+      <!-- Скрытые radio-кнопки (первые в DOM для CSS-селектора ~) -->
+      <input type="radio" name="advantage" id="adv-0" class="sr-only" checked />
+      <input type="radio" name="advantage" id="adv-1" class="sr-only" />
+      <input type="radio" name="advantage" id="adv-2" class="sr-only" />
+      <input type="radio" name="advantage" id="adv-3" class="sr-only" />
+      <input type="radio" name="advantage" id="adv-4" class="sr-only" />
+      <input type="radio" name="advantage" id="adv-5" class="sr-only" />
+      <input type="radio" name="advantage" id="adv-6" class="sr-only" />
+      <input type="radio" name="advantage" id="adv-7" class="sr-only" />
+      <input type="radio" name="advantage" id="adv-8" class="sr-only" />
+
+      <!-- Кнопки табов ( labels ссылаются на radio ) -->
+      <div class="advantages-tabs-list">
+        <label for="adv-0" class="advantages-tab"><span class="advantages-tab-num">01</span><span class="advantages-tab-text">Профессионализм</span></label>
+        <label for="adv-1" class="advantages-tab"><span class="advantages-tab-num">02</span><span class="advantages-tab-text">Широкий спектр услуг</span></label>
+        <label for="adv-2" class="advantages-tab"><span class="advantages-tab-num">03</span><span class="advantages-tab-text">Современное оборудование</span></label>
+        <label for="adv-3" class="advantages-tab"><span class="advantages-tab-num">04</span><span class="advantages-tab-text">Высокий уровень обслуживания</span></label>
+        <label for="adv-4" class="advantages-tab"><span class="advantages-tab-num">05</span><span class="advantages-tab-text">Скорая помощь и служба помощи на дому</span></label>
+        <label for="adv-5" class="advantages-tab"><span class="advantages-tab-num">06</span><span class="advantages-tab-text">Терапевтические и хирургические стационары</span></label>
+        <label for="adv-6" class="advantages-tab"><span class="advantages-tab-num">07</span><span class="advantages-tab-text">Высокий уровень обслуживания</span></label>
+        <label for="adv-7" class="advantages-tab"><span class="advantages-tab-num">08</span><span class="advantages-tab-text">Скорая помощь и служба помощи на дому</span></label>
+        <label for="adv-8" class="advantages-tab"><span class="advantages-tab-num">09</span><span class="advantages-tab-text">Терапевтические и хирургические стационары</span></label>
       </div>
-      <div class="advantages-main">
-        <h3 class="advantages-title">Профессионализм</h3>
-        <p class="section-text">
-          Врачи нашей клиники регулярно повышают квалификацию, участвуют в научных конференциях
-          и применяют только доказательные методики лечения. Каждый специалист несёт личную
-          ответственность за результат и здоровье пациента.
-        </p>
-        <img class="advantages-image" src="{% static 'img/27d078fc5f910ac9b6a38deb4edd56162a412c8a.png' %}" alt="Наши врачи" />
+
+      <!-- Панели с контентом -->
+      <div class="advantages-tabs-content">
+        <div class="advantages-panel" data-panel="0">
+          <h3 class="advantages-panel-title">Профессионализм</h3>
+          <div class="advantages-panel-divider"></div>
+          <p class="advantages-panel-text">Врачи нашей клиники регулярно повышают квалификацию, участвуют в научных конференциях и применяют только доказательные методики лечения. Каждый специалист несёт личную ответственность за результат и здоровье пациента. Мы гордимся нашими врачами — это профессионалы с многолетним опытом работы.</p>
+          <div class="advantages-stats">
+            <div class="advantages-stat"><span class="advantages-stat-number">+2 800</span><span class="advantages-stat-label">пациентов</span></div>
+            <div class="advantages-stat"><span class="advantages-stat-number">+2 800</span><span class="advantages-stat-label">пациентов</span></div>
+            <div class="advantages-stat"><span class="advantages-stat-number">+2 800</span><span class="advantages-stat-label">пациентов</span></div>
+          </div>
+        </div>
+        <div class="advantages-panel" data-panel="1">
+          <h3 class="advantages-panel-title">Широкий спектр услуг</h3>
+          <div class="advantages-panel-divider"></div>
+          <p class="advantages-panel-text">Мы предлагаем более 200 видов медицинских услуг: от консультаций терапевта до сложных хирургических вмешательств. Диагностика, лабораторные исследования, стационар — всё в одном месте.</p>
+          <div class="advantages-stats">
+            <div class="advantages-stat"><span class="advantages-stat-number">+200</span><span class="advantages-stat-label">услуг</span></div>
+            <div class="advantages-stat"><span class="advantages-stat-number">20+</span><span class="advantages-stat-label">направлений</span></div>
+            <div class="advantages-stat"><span class="advantages-stat-number">100%</span><span class="advantages-stat-label">качество</span></div>
+          </div>
+        </div>
+        <div class="advantages-panel" data-panel="2">
+          <h3 class="advantages-panel-title">Современное оборудование</h3>
+          <div class="advantages-panel-divider"></div>
+          <p class="advantages-panel-text">Клиника оснащена МРТ экспертного класса, компьютерным томографом, цифровым рентгеном и аппаратами УЗИ последнего поколения. Диагностика проводится на оборудовании ведущих мировых производителей.</p>
+          <div class="advantages-stats">
+            <div class="advantages-stat"><span class="advantages-stat-number">МРТ</span><span class="advantages-stat-label">1.5 тесла</span></div>
+            <div class="advantages-stat"><span class="advantages-stat-number">КТ</span><span class="advantages-stat-label">низкая нагрузка</span></div>
+            <div class="advantages-stat"><span class="advantages-stat-number">УЗИ</span><span class="advantages-stat-label">экспертный класс</span></div>
+          </div>
+        </div>
+        <div class="advantages-panel" data-panel="3">
+          <h3 class="advantages-panel-title">Высокий уровень обслуживания</h3>
+          <div class="advantages-panel-divider"></div>
+          <p class="advantages-panel-text">Удобная запись, отсутствие очередей, комфортные условия пребывания. Персонал заботится о каждом пациенте и создаёт атмосферу доверия.</p>
+          <div class="advantages-stats">
+            <div class="advantages-stat"><span class="advantages-stat-number">0</span><span class="advantages-stat-label">очередей</span></div>
+            <div class="advantages-stat"><span class="advantages-stat-number">24/7</span><span class="advantages-stat-label">поддержка</span></div>
+            <div class="advantages-stat"><span class="advantages-stat-number">VIP</span><span class="advantages-stat-label">палаты</span></div>
+          </div>
+        </div>
+        <div class="advantages-panel" data-panel="4">
+          <h3 class="advantages-panel-title">Скорая помощь и служба помощи на дому</h3>
+          <div class="advantages-panel-divider"></div>
+          <p class="advantages-panel-text">Круглосуточная служба скорой помощи и вызов врача на дом. Бригады укомплектованы всем необходимым для экстренной помощи.</p>
+          <div class="advantages-stats">
+            <div class="advantages-stat"><span class="advantages-stat-number">24/7</span><span class="advantages-stat-label">скорая помощь</span></div>
+            <div class="advantages-stat"><span class="advantages-stat-number">30 мин</span><span class="advantages-stat-label">время приезда</span></div>
+            <div class="advantages-stat"><span class="advantages-stat-number">+500</span><span class="advantages-stat-label">выездов в месяц</span></div>
+          </div>
+        </div>
+        <div class="advantages-panel" data-panel="5">
+          <h3 class="advantages-panel-title">Терапевтические и хирургические стационары</h3>
+          <div class="advantages-panel-divider"></div>
+          <p class="advantages-panel-text">Дневной и круглосуточный стационар с комфортными палатами. Полный цикл от диагностики до реабилитации.</p>
+          <div class="advantages-stats">
+            <div class="advantages-stat"><span class="advantages-stat-number">50+</span><span class="advantages-stat-label">палат</span></div>
+            <div class="advantages-stat"><span class="advantages-stat-number">5</span><span class="advantages-stat-label">операционных</span></div>
+            <div class="advantages-stat"><span class="advantages-stat-number">100%</span><span class="advantages-stat-label">оснащённость</span></div>
+          </div>
+        </div>
+        <div class="advantages-panel" data-panel="6">
+          <h3 class="advantages-panel-title">Высокий уровень обслуживания</h3>
+          <div class="advantages-panel-divider"></div>
+          <p class="advantages-panel-text">Индивидуальный подход к каждому пациенту. Персональный куратор сопровождает на всех этапах лечения.</p>
+          <div class="advantages-stats">
+            <div class="advantages-stat"><span class="advantages-stat-number">100%</span><span class="advantages-stat-label">внимание</span></div>
+            <div class="advantages-stat"><span class="advantages-stat-number">1 на 1</span><span class="advantages-stat-label">подход</span></div>
+            <div class="advantages-stat"><span class="advantages-stat-number">5★</span><span class="advantages-stat-label">рейтинг</span></div>
+          </div>
+        </div>
+        <div class="advantages-panel" data-panel="7">
+          <h3 class="advantages-panel-title">Скорая помощь и служба помощи на дому</h3>
+          <div class="advantages-panel-divider"></div>
+          <p class="advantages-panel-text">Вызов врача на дом по Томску и области. Терапевт, педиатр, узкие специалисты — приедут в удобное для вас время.</p>
+          <div class="advantages-stats">
+            <div class="advantages-stat"><span class="advantages-stat-number">8:00–22:00</span><span class="advantages-stat-label">время вызова</span></div>
+            <div class="advantages-stat"><span class="advantages-stat-number">+30</span><span class="advantages-stat-label">врачей на выезде</span></div>
+            <div class="advantages-stat"><span class="advantages-stat-number">Бесплатно</span><span class="advantages-stat-label">по ОМС</span></div>
+          </div>
+        </div>
+        <div class="advantages-panel" data-panel="8">
+          <h3 class="advantages-panel-title">Терапевтические и хирургические стационары</h3>
+          <div class="advantages-panel-divider"></div>
+          <p class="advantages-panel-text">Полная программа реабилитации после операций и заболеваний. Физиотерапия, ЛФК, массаж — всё в стационаре.</p>
+          <div class="advantages-stats">
+            <div class="advantages-stat"><span class="advantages-stat-number">14 дней</span><span class="advantages-stat-label">средний срок</span></div>
+            <div class="advantages-stat"><span class="advantages-stat-number">3-х разовое</span><span class="advantages-stat-label">питание</span></div>
+            <div class="advantages-stat"><span class="advantages-stat-number">WiFi</span><span class="advantages-stat-label">в палатах</span></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ===== ПАРТНЁРЫ ===== -->
 <section class="section">
   <div class="container">
     <div class="section-header">
       <h2 class="section-title">Наши партнеры</h2>
     </div>
-    <div class="partners">
-      <img src="{% static 'img/96f7815b1f3e416f16270d2ee8ff5a4b7c8e45c0.png' %}" alt="Наши партнеры" />
+    <div class="partners-grid">
+      <div class="partner-logo">SAMSUNG</div>
+      <div class="partner-logo">SAMSUNG</div>
+      <div class="partner-logo">SAMSUNG</div>
+      <div class="partner-logo partner-logo-highlight">SAMSUNG</div>
+      <div class="partner-logo">SAMSUNG</div>
+      <div class="partner-logo">SAMSUNG</div>
+      <div class="partner-logo">SAMSUNG</div>
+      <div class="partner-logo">SAMSUNG</div>
+      <div class="partner-logo">SAMSUNG</div>
+      <div class="partner-logo">SAMSUNG</div>
+      <div class="partner-logo">SAMSUNG</div>
+      <div class="partner-logo">SAMSUNG</div>
     </div>
   </div>
 </section>
 
+<!-- ===== ЛИЦЕНЗИИ ===== -->
 <section class="section section-gray">
   <div class="container">
     <div class="section-header">
@@ -236,6 +444,7 @@
   </div>
 </section>
 
+<!-- ===== КОНТАКТЫ ===== -->
 <section class="section section-contacts">
   <div class="container contacts-inner">
     <div class="contacts-info">
@@ -254,7 +463,7 @@
           <span class="contacts-value">info@docnear.ru</span>
         </div>
       </div>
-      <button type="button" class="btn btn-primary" data-modal-open="appointment">Записаться на прием</button>
+      <button type="button" class="btn btn-primary" onclick="document.getElementById('modal-appointment').showModal()">Записаться на прием</button>
     </div>
     <div class="contacts-map">
       <img src="{% static 'img/62b0d02c35be20a1bede65edbbb5550765dab45b.png' %}" alt="Карта проезда" />

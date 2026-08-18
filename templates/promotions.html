@@ -21,7 +21,7 @@
           {% if promo.valid_until %}
             <p class="promo-card-date">Акция действует до {{ promo.valid_until|date:'d.m.Y' }}</p>
           {% endif %}
-          <button type="button" class="btn promo-card-btn" data-modal-open="appointment">Подробнее</button>
+          <button type="button" class="btn promo-card-btn" onclick="document.getElementById('modal-appointment').showModal()">Подробнее</button>
         </div>
         {% if promo.image %}
           <div class="promo-card-image">
@@ -33,7 +33,7 @@
 
     <div class="cta-block">
       <h2 class="cta-title">Хотите узнать подробнее об акциях?</h2>
-      <button type="button" class="btn btn-primary" data-modal-open="callback">Заказать звонок</button>
+      <button type="button" class="btn btn-primary" onclick="document.getElementById('modal-callback').showModal()">Заказать звонок</button>
     </div>
   </div>
 </section>

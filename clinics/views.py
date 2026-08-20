@@ -299,7 +299,6 @@ class AvailableSlotsAPIView(APIView):
             is_available=True,
         ).order_by('start_at')
 
-        # Получение списка свободных слотов для врача
         if doctor_slots.exists():
             for slot in doctor_slots:
                 if slot.start_at <= timezone.now():

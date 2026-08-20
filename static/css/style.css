@@ -379,7 +379,6 @@ ul {
 
 .about-image img {
   width: 100%;
-  border-radius: var(--radius);
   box-shadow: var(--shadow);
 }
 
@@ -763,153 +762,42 @@ ul {
   border-bottom: 5px solid transparent;
 }
 
-/* ============ Advantages Tabs ============ */
-.advantages-tabs {
+/* ============ Advantages Grid ============ */
+.advantages-grid {
   display: grid;
-  grid-template-columns: 420px 1fr;
-  gap: 0;
-  background: var(--bg-light);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.advantage-card {
+  background: var(--white);
   border-radius: var(--radius);
-  overflow: hidden;
-  min-height: 450px;
-}
-
-.advantages-tabs-list {
+  box-shadow: var(--shadow);
+  padding: 32px;
   display: flex;
   flex-direction: column;
-  padding: 8px 0;
-}
-
-.advantages-tab {
-  display: flex;
-  align-items: center;
   gap: 16px;
-  padding: 18px 28px;
-  border: none;
-  background: none;
-  font-family: var(--font);
-  font-size: 16px;
-  font-weight: 500;
-  color: var(--text-dark);
-  cursor: pointer;
-  text-align: left;
-  transition: background 0.2s;
-  border-bottom: 1px solid transparent;
 }
 
-.advantages-tab:last-child {
-  border-bottom: none;
-}
-
-.advantages-tab:hover {
-  background: rgba(255, 255, 255, 0.5);
-}
-
-/* Табы работают через CSS :checked, без JS */
-
-/* Подсветка активной label при checked radio */
-#adv-0:checked ~ .advantages-tabs-list label[for="adv-0"],
-#adv-1:checked ~ .advantages-tabs-list label[for="adv-1"],
-#adv-2:checked ~ .advantages-tabs-list label[for="adv-2"],
-#adv-3:checked ~ .advantages-tabs-list label[for="adv-3"],
-#adv-4:checked ~ .advantages-tabs-list label[for="adv-4"],
-#adv-5:checked ~ .advantages-tabs-list label[for="adv-5"],
-#adv-6:checked ~ .advantages-tabs-list label[for="adv-6"],
-#adv-7:checked ~ .advantages-tabs-list label[for="adv-7"],
-#adv-8:checked ~ .advantages-tabs-list label[for="adv-8"] {
-  background: var(--white);
-  font-weight: 700;
-}
-
-#adv-0:checked ~ .advantages-tabs-list label[for="adv-0"] .advantages-tab-num,
-#adv-1:checked ~ .advantages-tabs-list label[for="adv-1"] .advantages-tab-num,
-#adv-2:checked ~ .advantages-tabs-list label[for="adv-2"] .advantages-tab-num,
-#adv-3:checked ~ .advantages-tabs-list label[for="adv-3"] .advantages-tab-num,
-#adv-4:checked ~ .advantages-tabs-list label[for="adv-4"] .advantages-tab-num,
-#adv-5:checked ~ .advantages-tabs-list label[for="adv-5"] .advantages-tab-num,
-#adv-6:checked ~ .advantages-tabs-list label[for="adv-6"] .advantages-tab-num,
-#adv-7:checked ~ .advantages-tabs-list label[for="adv-7"] .advantages-tab-num,
-#adv-8:checked ~ .advantages-tabs-list label[for="adv-8"] .advantages-tab-num {
-  color: var(--green);
-}
-
-.advantages-tab-num {
+.advantage-number {
   font-family: 'Lato', sans-serif;
   font-weight: 900;
-  font-size: 18px;
-  color: var(--green);
-  min-width: 28px;
-}
-
-.advantages-tab-text {
-  flex: 1;
-}
-
-.advantages-tabs-content {
-  background: var(--white);
-  padding: 48px 40px;
-}
-
-.advantages-panel {
-  display: none;
-}
-
-/* Показываем нужную панель при checked radio */
-#adv-0:checked ~ .advantages-tabs-content [data-panel="0"],
-#adv-1:checked ~ .advantages-tabs-content [data-panel="1"],
-#adv-2:checked ~ .advantages-tabs-content [data-panel="2"],
-#adv-3:checked ~ .advantages-tabs-content [data-panel="3"],
-#adv-4:checked ~ .advantages-tabs-content [data-panel="4"],
-#adv-5:checked ~ .advantages-tabs-content [data-panel="5"],
-#adv-6:checked ~ .advantages-tabs-content [data-panel="6"],
-#adv-7:checked ~ .advantages-tabs-content [data-panel="7"],
-#adv-8:checked ~ .advantages-tabs-content [data-panel="8"] {
-  display: block;
-}
-
-.advantages-panel-title {
   font-size: 32px;
+  color: var(--green);
+  opacity: 0.3;
+}
+
+.advantage-card h3 {
+  font-size: 22px;
   font-weight: 700;
   color: var(--text-dark);
-  margin-bottom: 16px;
 }
 
-.advantages-panel-divider {
-  width: 50px;
-  height: 3px;
-  background: var(--green);
-  margin-bottom: 20px;
-}
-
-.advantages-panel-text {
-  font-size: 16px;
+.advantage-card p {
+  font-size: 15px;
   color: var(--text-muted);
-  line-height: 1.7;
-  margin-bottom: 32px;
-}
-
-.advantages-stats {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.advantages-stat {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-}
-
-.advantages-stat-number {
-  font-family: 'Lato', sans-serif;
-  font-size: 40px;
-  font-weight: 900;
-  color: var(--green);
-}
-
-.advantages-stat-label {
-  font-size: 16px;
-  color: var(--text-muted);
+  line-height: 1.6;
+  flex: 1;
 }
 
 /* ============ Partners ============ */
@@ -1066,8 +954,6 @@ ul {
 }
 
 /* ============ Версия для слабовидящих (checkbox + CSS) ============ */
-
-/* Скрываем checkbox визуально, но оставляем доступным */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -1080,24 +966,21 @@ ul {
   border: 0;
 }
 
-/* Текст label: показываем разный текст в зависимости от состояния */
-.header-accessibility .a11y-normal {
+ .header-accessibility .a11y-normal {
   display: inline;
 }
 .header-accessibility .a11y-enabled {
   display: none;
 }
 
-/* Когда checkbox включён — меняем текст */
-#a11y-toggle:checked ~ .site-header .header-accessibility .a11y-normal {
+ #a11y-toggle:checked ~ .site-header .header-accessibility .a11y-normal {
   display: none;
 }
 #a11y-toggle:checked ~ .site-header .header-accessibility .a11y-enabled {
   display: inline;
 }
 
-/* Увеличиваем шрифты когда checkbox включён */
-#a11y-toggle:checked ~ .site-header .header-menu > a,
+ #a11y-toggle:checked ~ .site-header .header-menu > a,
 #a11y-toggle:checked ~ .site-header .header-dropdown-toggle,
 #a11y-toggle:checked ~ footer .footer-col a,
 #a11y-toggle:checked ~ main .hero-slide-text,
@@ -1506,19 +1389,16 @@ ul {
   list-style: none;
 }
 
-/* Убираем стандартный маркер Chrome/Safari */
-.accordion-header::-webkit-details-marker {
+ .accordion-header::-webkit-details-marker {
   display: none;
 }
 
-/* Убираем маркер Firefox */
-.accordion-header::marker {
+ .accordion-header::marker {
   display: none;
   content: '';
 }
 
-/* Стрелка вправо / вниз через CSS */
-.accordion-header::after {
+ .accordion-header::after {
   content: '+';
   font-size: 22px;
   font-weight: 700;
@@ -1527,8 +1407,7 @@ ul {
   transition: transform 0.2s;
 }
 
-/* Стрелка поворачивается когда открыт */
-.accordion-item[open] .accordion-header::after {
+ .accordion-item[open] .accordion-header::after {
   transform: rotate(45deg);
 }
 
@@ -1656,8 +1535,7 @@ ul {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Затемнённый фон за модалкой */
-.modal-dialog::backdrop {
+ .modal-dialog::backdrop {
   background: rgba(33, 36, 33, 0.49);
   animation: backdropFadeIn 0.25s ease;
 }
@@ -1894,6 +1772,10 @@ ul {
     grid-template-columns: 1fr;
   }
 
+  .advantages-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .advantages-tabs-content {
     padding: 32px 24px;
   }
@@ -1928,7 +1810,8 @@ ul {
   .stacionar-pills,
   .promo-singles,
   .licenses-grid,
-  .partners-grid {
+  .partners-grid,
+  .advantages-grid {
     grid-template-columns: 1fr;
   }
 

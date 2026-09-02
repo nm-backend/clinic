@@ -59,13 +59,9 @@ def index(request):
         is_active=True,
         clinic__is_active=True,
     )[:8]
-    promotions = Promotion.objects.filter(is_active=True)[:4]
-    equipment = Equipment.objects.filter(is_active=True)
     context = {
         'categories': categories,
         'doctors': doctors,
-        'promotions': promotions,
-        'equipment': equipment,
     }
     return render(request, 'index.html', context)
 

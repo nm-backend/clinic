@@ -256,17 +256,14 @@ class ContentApiTests(TestCase):
         self.assertEqual(payload[0]['doctor_name'], 'Петров Иван')
 
     def test_index_renders_new_blocks(self):
-        Promotion.objects.create(title='Скидка -20%', description='на МРТ')
-        Equipment.objects.create(name='Компьютерный томограф')
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'Скидка -20%')
-        self.assertContains(response, 'Компьютерный томограф')
         self.assertContains(response, 'Петров Иван')
-        self.assertContains(response, 'Немного о нас')
-        self.assertContains(response, 'Наши преимущества')
-        self.assertContains(response, 'Стационар')
-        self.assertContains(response, 'Наши контакты')
+        self.assertContains(response, 'Направления работы')
+        self.assertContains(response, 'Преимущества лечения')
+        self.assertContains(response, 'Контакты клиники')
+        self.assertContains(response, 'Яндекс')
+        self.assertContains(response, '4,9')
 
     def test_callback_request_creates_record(self):
         response = self.client.post(

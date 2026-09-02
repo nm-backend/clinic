@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}О клинике — Сеть клиник Томской области{% endblock %}
+{% block title %}О клинике — Доктор Рядом{% endblock %}
 
 {% block breadcrumbs %}
   {% include 'components/breadcrumbs.html' with title='О клинике' %}
@@ -10,66 +10,58 @@
 {% block content %}
 <section class="section">
   <div class="container">
-    <h1 class="page-title">О клинике</h1>
-    <p class="page-text">
-      Клиника «МЕДСЕРВИС» — многопрофильный медицинский центр полного цикла. Мы работаем с 2003 года
-      и за это время помогли более 120 000 пациентов. В наших стенах трудятся врачи высшей и первой
-      категории, кандидаты медицинских наук, специалисты с многолетним практическим опытом.
-    </p>
-    <p class="page-text">
-      Мы оснащены современным диагностическим оборудованием: МРТ, компьютерный томограф,
-      цифровой рентген, аппараты УЗИ экспертного класса. Диагностика и лечение проводятся
-      по современным стандартам доказательной медицины.
-    </p>
+    <h1 class="page-title">Клиника &laquo;Доктор Рядом&raquo;: Качественная медицина — рядом с вами!</h1>
 
-    <div class="about-teaser-inner">
-      <div class="about-teaser-image">
-        <img src="{% static 'img/74922074873a326445ab9fe1ef0143e0c900ff42.jpg' %}" alt="О клинике" />
+    <div class="about-features">
+      <div class="about-feature">
+        <h2 class="about-feature-title">Высокое качество</h2>
+        <p class="page-text">«Доктор Рядом» — это клиника, стремящаяся сделать современную медицину доступной для каждого пациента. Миссия клиники — обеспечить высокое качество диагностики и лечения, используя новейшие методы.</p>
       </div>
-      <div class="about-teaser-info">
-        <h2 class="section-title">Наша миссия</h2>
-        <p class="section-text">
-          Быть близкими к пациентам и своему делу. Мы создаём комфортную атмосферу,
-          внимательно относимся к каждому и стремимся сделать медицину доступной.
-        </p>
+      <div class="about-feature">
+        <h2 class="about-feature-title">Многофункциональность</h2>
+        <p class="page-text">Принципом работы клиники является многофункциональность. В ней работают врачи разных специальностей, объединённые высоким профессионализмом и стремлением к благополучию пациентов.</p>
       </div>
     </div>
 
-    <div class="timeline">
-      <h2 class="section-title">Наша история</h2>
-      <div class="timeline-list">
-        <div class="timeline-item">
-          <span class="timeline-year">2003</span>
-          <span class="timeline-text">Открытие первой клиники в Томске</span>
-        </div>
-        <div class="timeline-item">
-          <span class="timeline-year">2008</span>
-          <span class="timeline-text">Запуск направления диагностики: УЗИ, рентген</span>
-        </div>
-        <div class="timeline-item">
-          <span class="timeline-year">2013</span>
-          <span class="timeline-text">Открытие второго филиала в центре города</span>
-        </div>
-        <div class="timeline-item">
-          <span class="timeline-year">2018</span>
-          <span class="timeline-text">Установка МРТ и компьютерного томографа</span>
-        </div>
-        <div class="timeline-item">
-          <span class="timeline-year">2022</span>
-          <span class="timeline-text">Более 50 направлений и 800 специалистов</span>
-        </div>
+    <div class="about-highlight">
+      <div class="about-highlight-content">
+        <h2 class="about-highlight-title">Оториноларингология</h2>
+        <p class="page-text">Особое внимание уделяется оториноларингологии. В клинике собрана уникальная команда ЛОР-врачей, способных решить даже самые сложные случаи у детей и взрослых. Осмотр проводится с помощью оптико-эндоскопического оборудования, а ультразвуковой аппарат «Кавитар» для лечения ЛОР-инфекций является единственным в городе.</p>
       </div>
     </div>
 
-    <div class="section-header">
-      <h2 class="section-title">Наши лицензии</h2>
+    <div class="about-highlight">
+      <div class="about-highlight-content">
+        <h2 class="about-highlight-title">Работаем в праздники</h2>
+        <p class="page-text">Клиника работает круглогодично, включая выходные и праздничные дни. Помимо амбулаторного приёма, в клинике функционирует дневной стационар по направлениям оториноларингологии и неврологии.</p>
+      </div>
     </div>
-    <div class="licenses">
-      <img src="{% static 'img/5e2bfba032ba844b201cd81430b9b18c5f5a8bce.png' %}" alt="Лицензии" />
+
+    <!-- Преимущества -->
+    <div class="section-header" style="margin-top: 48px;">
+      <h2 class="section-title">Преимущества лечения в клинике &laquo;Доктор рядом&raquo;</h2>
+    </div>
+    <div class="advantages-grid advantages-grid-4">
+      <div class="advantage-card">
+        <h3>Современное оборудование</h3>
+        <p>Клиника оснащена новейшим диагностическим оборудованием для точной диагностики и эффективного лечения.</p>
+      </div>
+      <div class="advantage-card">
+        <h3>Сурдологические исследования</h3>
+        <p>Проведение полной диагностики слуха: аудиометрия, тимпанометрия, КСВП, подбор слуховых аппаратов.</p>
+      </div>
+      <div class="advantage-card">
+        <h3>Работа с ОМС и ДМС</h3>
+        <p>Принимаем полисы обязательного и добровольного медицинского страхования ведущих страховых компаний.</p>
+      </div>
+      <div class="advantage-card">
+        <h3>Восемь направлений работы</h3>
+        <p>ЛОР, сурдология, неврология, кардиология, педиатрия, терапия, ревматология, гастроэнтерология и другие.</p>
+      </div>
     </div>
 
     {% if reviews %}
-      <div class="section-header">
+      <div class="section-header" style="margin-top: 48px;">
         <h2 class="section-title">Отзывы пациентов</h2>
       </div>
       <div class="reviews-grid">

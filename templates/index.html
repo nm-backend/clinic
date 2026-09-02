@@ -9,14 +9,12 @@
 <section class="hero-section">
   <div class="container hero-slide-inner">
     <div class="hero-slide-content">
-      <h1 class="hero-slide-title">Lorem ipsum <br> dolor sit amet, <br> consectetur</h1>
-      <p class="hero-slide-text">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra amet dolor sed mi tincidunt pharetra montes. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra amet dolor sed mi tincidunt pharetra montes.
-      </p>
-      <a href="{% url 'about' %}" class="btn hero-slide-btn">Подробнее &rsaquo;</a>
+      <h1 class="hero-slide-title">Lorem ipsum<br>dolor sit amet,<br>consectetur</h1>
+      <p class="hero-slide-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra amet dolor sed mi tincidunt pharetra montes. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra amet dolor sed mi tincidunt pharetra montes.</p>
+      <button type="button" class="btn hero-slide-btn" onclick="document.getElementById('modal-appointment').showModal()">Подробнее &gt;</button>
     </div>
     <div class="hero-slide-illustration">
-      <img src="{% static 'C:\Users\User\Desktop\clinic\static\img\first_s.svg' %}" alt="Наша клиника" />
+      <img src="{% static 'img/first_s.svg' %}" alt="Наша клиника" />
     </div>
   </div>
   <div class="hero-pagination" aria-hidden="true">
@@ -30,28 +28,26 @@
 
 <!-- Немного о нас -->
 <section class="section">
-  <div class="container about-inner">
-    <div class="about-text">
-      <h2 class="section-title">Немного о нас</h2>
-      <p class="section-text">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ipsum diam pretium risus, ultrices felis a. Adipiscing maecenas mattis ullamcorper magnis eget varius. At lobortis tristique mattis orci aenean. Pretium, posuere tristique id potenti ac. Ac praesent arcu vitae arcu. Velit ut et, leo, augue bibendum euismod in. Turpis massa, commodo vestibulum bibendum amet orci velit, risus. Semper mauris curabitur auctor id amet mauris lacus. Ut quis nisi, ac consequat sed massa egestas. Sed adipiscing scelerisque enim, id amet eget. Ipsum dui a bibendum quisque in.
-      </p>
-      <p class="section-text">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ipsum diam pretium risus, ultrices felis a. Adipiscing maecenas mattis ullamcorper magnis eget varius. At lobortis tristique mattis orci aenean. Pretium, posuere tristique id potenti ac. 
-      </p>
-    </div>
-    <div class="about-image">
-      <img src="{% static 'img/74922074873a326445ab9fe1ef0143e0c900ff42.jpg' %}" alt="О клинике" />
+  <div class="container">
+    <div class="about-inner">
+      <div class="about-text">
+        <h2 class="section-title">Немного о нас</h2>
+        <p class="section-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ipsum diam pretium risus, ultrices felis a. Adipiscing maecenas mattis ullamcorper magnis eget varius. At lobortis tristique mattis orci aenean. Pretium, posuere tristique id potenti ac. Ac praesent arcu vitae arcu. Velit ut et, leo, augue bibendum euismod in. Turpis massa, commodo vestibulum bibendum amet orci velit, risus. Semper mauris curabitur auctor id amet mauris lacus. Ut quis nisi, ac consequat sed massa egestas. Sed adipiscing scelerisque enim, id amet eget. Ipsum dui a bibendum quisque in.</p>
+        <p class="section-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ipsum diam pretium risus, ultrices felis a. Adipiscing maecenas mattis ullamcorper magnis eget varius. At lobortis tristique mattis orci aenean. Pretium, posuere tristique id potenti ac.</p>
+      </div>
+      <div class="about-image">
+        <img src="{% static 'img/74922074873a326445ab9fe1ef0143e0c900ff42.jpg' %}" alt="О нашей клинике" />
+      </div>
     </div>
   </div>
 </section>
 
-<!-- Направления -->
+<!-- Направления нашей работы -->
 <section class="section">
   <div class="container">
     <div class="section-header">
       <h2 class="section-title">Направления нашей работы</h2>
-      <a href="{% url 'directions' %}" class="btn btn-primary">Все направления &rsaquo;</a>
+      <a href="{% url 'directions' %}" class="btn btn-primary">Все направления &gt;</a>
     </div>
     <div class="directions-grid">
       {% for category in categories|slice:':4' %}
@@ -67,23 +63,19 @@
   </div>
 </section>
 
-<!-- Специалисты -->
+<!-- Наши специалисты -->
 <section class="section section-gray">
   <div class="container">
     <div class="section-header">
       <h2 class="section-title">Наши специалисты</h2>
       <div class="specialists-nav">
-        <button type="button" class="specialists-nav-btn" aria-label="Назад">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
-        </button>
-        <button type="button" class="specialists-nav-btn" aria-label="Вперёд">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-        </button>
+        <button type="button" class="specialists-nav-btn" aria-label="Назад">&lt;</button>
+        <button type="button" class="specialists-nav-btn" aria-label="Вперёд">&gt;</button>
       </div>
     </div>
-    <div class="doctors-grid">
-      {% for doctor in doctors|slice:':4' %}
-        <div class="doctor-card">
+    <div class="doctors-slider">
+      {% for doctor in doctors %}
+        <div class="doctor-slide-card">
           <div class="doctor-photo">
             {% if doctor.photo %}
               <img src="{% static 'img/'|add:doctor.photo %}" alt="{{ doctor.full_name }}" />
@@ -92,51 +84,59 @@
           <div class="doctor-card-info">
             <h3 class="doctor-name">{{ doctor.full_name }}</h3>
             <p class="doctor-specialty">{{ doctor.specialty }}</p>
-            <button type="button" class="btn btn-primary doctor-card-btn" onclick="document.getElementById('modal-appointment').showModal()">Записаться на приём</button>
+            <button type="button" class="btn btn-primary doctor-card-btn" onclick="document.getElementById('modal-appointment').showModal()">Запись на прием</button>
           </div>
         </div>
       {% endfor %}
     </div>
-    <div class="text-center specialists-more">
+    <div class="specialists-more">
       <a href="{% url 'doctors' %}" class="btn btn-outline">Все специалисты</a>
     </div>
   </div>
 </section>
 
-<!-- Акции -->
+<!-- Наши акции -->
 <section class="section">
   <div class="container">
     <div class="section-header">
       <h2 class="section-title">Наши акции</h2>
     </div>
     <div class="promo-layout">
-      <div class="promo-featured">
-        <div class="promo-featured-info">
-          <h3 class="promo-featured-title">{{ promotions.0.title }}</h3>
-          <p class="promo-featured-text">{{ promotions.0.description }}</p>
-          <div class="promo-featured-date">
-            <span class="promo-date-label">Акция действует до</span>
-            <span class="promo-date-value">{{ promotions.0.valid_until|date:'d.m.Y' }}</span>
+      {% with first_promo=promotions.0 %}
+        {% if first_promo %}
+          <div class="promo-featured" style="{% if first_promo.color %}background-color: #{{ first_promo.color }};{% else %}background-color: var(--green-dark);{% endif %}">
+            <div class="promo-featured-info">
+              <h3 class="promo-featured-title">{{ first_promo.title }}</h3>
+              <p class="promo-featured-text">{{ first_promo.description|truncatechars:150 }}</p>
+              {% if first_promo.valid_until %}
+                <div class="promo-featured-date">
+                  <span class="promo-date-label">Акция действует до</span>
+                  <span class="promo-date-value">{{ first_promo.valid_until|date:'d.m.Y' }}</span>
+                </div>
+              {% endif %}
+              <button type="button" class="btn promo-featured-btn" onclick="document.getElementById('modal-appointment').showModal()">Подробнее &gt;</button>
+            </div>
+            {% if first_promo.image %}
+              <img class="promo-featured-image" src="{% static 'img/'|add:first_promo.image %}" alt="{{ first_promo.title }}" />
+            {% endif %}
           </div>
-          <button type="button" class="btn promo-featured-btn" onclick="document.getElementById('modal-appointment').showModal()">Подробнее &rsaquo;</button>
-        </div>
-        {% if promotions.0.image %}
-        <img class="promo-featured-image" src="{% static 'img/'|add:promotions.0.image %}" alt="{{ promotions.0.title }}" />
-        {% else %}
-        <img class="promo-featured-image" src="{% static 'img/2cf9f4594d091cb8c094edd35e77a980b8f7187a.png' %}" alt="Акция" />
         {% endif %}
-      </div>
+      {% endwith %}
       <div class="promo-singles">
-        {% for promo in promotions %}
-          <div class="promo-single {% if promo.color %}promo-single-colored{% endif %} {% if promo.color == 'ffdb5c' %}promo-single-dark{% endif %}"
-               {% if promo.color %}style="background-color: #{{ promo.color }};"{% endif %}>
+        {% for promo in promotions|slice:'1:5' %}
+          <div class="promo-single"
+               style="{% if promo.color %}background-color: #{{ promo.color }};{% else %}background-color: var(--green-dark);{% endif %}">
             <div class="promo-single-content">
-              <h3 class="promo-single-title">{{ promo.title }}</h3>
-              <p class="promo-single-date">
-                <span class="promo-date-label">Акция действует до</span>
-                <span class="promo-date-value">{{ promo.valid_until|date:'d.m.Y' }}</span>
-              </p>
-              <button type="button" class="btn promo-single-btn" onclick="document.getElementById('modal-appointment').showModal()">Подробнее &rsaquo;</button>
+              <div>
+                <h3 class="promo-single-title">{{ promo.title }}</h3>
+                {% if promo.valid_until %}
+                  <div class="promo-single-date">
+                    <span class="promo-date-label">Акция действует до</span>
+                    <span class="promo-date-value" style="{% if promo.color == 'ffdb5c' or promo.color == 'f57575' %}color: var(--text-dark);{% endif %}">{{ promo.valid_until|date:'d.m.Y' }}</span>
+                  </div>
+                {% endif %}
+              </div>
+              <button type="button" class="btn promo-single-btn" onclick="document.getElementById('modal-appointment').showModal()">Подробнее</button>
             </div>
             {% if promo.image %}
               <img class="promo-single-image" src="{% static 'img/'|add:promo.image %}" alt="{{ promo.title }}" />
@@ -151,192 +151,20 @@
 <!-- Стационар -->
 <section class="section section-gray">
   <div class="container">
-    <div class="section-header">
-      <h2 class="section-title">Стационар</h2>
-    </div>
-    <div class="stacionar-pills">
-      <div class="stacionar-pill">
-        <svg width="37" height="37" viewBox="0 0 37 37" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="8" width="27" height="17" rx="2"></rect><line x1="12" y1="29" x2="25" y2="29"></line></svg>
-        <span>Отлично оборудованные операционные</span>
-      </div>
-      <div class="stacionar-pill">
-        <svg width="37" height="37" viewBox="0 0 37 37" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.5 10 C13 14, 9 18, 9 22 a9.5 9.5 0 0 0 19 0 C28 18 24 14 18.5 10 Z"></path></svg>
-        <span>Полный контроль за состоянием пациентов</span>
-      </div>
-      <div class="stacionar-pill">
-        <svg width="37" height="37" viewBox="0 0 37 37" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 26 a4 4 0 0 0 4 4 h17 a4 4 0 0 0 4 -4"></path><line x1="10" y1="26" x2="10" y2="14"></line><line x1="27" y1="26" x2="27" y2="14"></line><path d="M10 14 h17 a5 5 0 0 1 -5 5 h-7 a5 5 0 0 1 -5 -5 Z"></path></svg>
-        <span>Комфорт и забота после операции</span>
-      </div>
-    </div>
-    <div class="stacionar-inner">
-      <div class="stacionar-text">
-        <p class="section-text">
-          В нашем стационаре пациенты находятся под круглосуточным наблюдением медицинского персонала.
-          Операционные оснащены современным оборудованием, палаты рассчитаны на комфортное пребывание,
-          а питание и уход организованы так, чтобы восстановление после операции проходило быстрее.
-        </p>
-        <p class="section-text" style="margin-top: 16px;">
-          Мы предлагаем полный цикл медицинской помощи: от диагностики до хирургического лечения
-          и реабилитации. Каждый пациент получает индивидуальный подход и заботу на всех этапах.
-        </p>
-        <a href="{% url 'about' %}" class="btn btn-primary" style="margin-top: 32px;">Подробнее</a>
-      </div>
-      <img src="{% static 'img/74922074873a326445ab9fe1ef0143e0c900ff42.jpg' %}" alt="Стационар" />
-    </div>
-  </div>
-</section>
-
-<!-- Оборудование -->
-<section class="section">
-  <div class="container">
-    <div class="section-header">
-      <h2 class="section-title">Наше оборудование</h2>
-    </div>
-    <div class="equipment-grid">
-      {% for item in equipment|slice:':3' %}
-        <div class="equipment-card">
-          {% if 'МРТ' in item.name %}
-            <img class="equipment-image" src="{% static 'img/2cf9f4594d091cb8c094edd35e77a980b8f7187a.png' %}" alt="{{ item.name }}" />
-          {% elif 'томограф' in item.name %}
-            <img class="equipment-image" src="{% static 'img/bc751aada3dd438da4af22bbfba2f60b222d8fd7.png' %}" alt="{{ item.name }}" />
-          {% elif 'рентген' in item.name %}
-            <img class="equipment-image" src="{% static 'img/e012e560ae205e6da86f2a0007fa80bbcd3922c8.png' %}" alt="{{ item.name }}" />
-          {% endif %}
-          <h3 class="equipment-name">{{ item.name }}</h3>
-          <ul class="equipment-specs">
-            <li>1.5 тесла / до 200 кг</li>
-            <li>3D/4D запись исследования</li>
-            <li>МР маммография</li>
-            <li>МРТ всего тела за 1.5 часа</li>
-            <li>МРТ суставов</li>
-          </ul>
+    <h2 class="section-title">Стационар</h2>
+    <div class="stationary-cards">
+      <div class="stationary-card">
+        <div class="stationary-icon">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="16" width="32" height="24" rx="4" stroke="white" stroke-width="2" fill="none"/>
+            <rect x="14" y="22" width="8" height="8" rx="2" stroke="white" stroke-width="2" fill="none"/>
+            <circle cx="34" cy="26" r="4" stroke="white" stroke-width="2" fill="none"/>
+            <line x1="12" y1="12" x2="12" y2="16" stroke="white" stroke-width="2"/>
+            <line x1="36" y1="12" x2="36" y2="16" stroke="white" stroke-width="2"/>
+          </svg>
         </div>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-
-<!-- Преимущества -->
-<section class="section">
-  <div class="container">
-    <div class="section-header">
-      <h2 class="section-title">Наши преимущества</h2>
-    </div>
-    <div class="advantages-grid">
-      <div class="advantage-card">
-        <span class="advantage-number">01</span>
-        <h3>Профессионализм</h3>
-        <p>Врачи регулярно повышают квалификацию, участвуют в научных конференциях и применяют только доказательные методики лечения. Каждый специалист несёт личную ответственность за результат.</p>
+        <p class="stationary-text">Отлично оборудованные операционные</p>
       </div>
-      <div class="advantage-card">
-        <span class="advantage-number">02</span>
-        <h3>Широкий спектр услуг</h3>
-        <p>Более 200 видов медицинских услуг: от консультаций терапевта до сложных хирургических вмешательств. Диагностика, лаборатория, стационар — всё в одном месте.</p>
-      </div>
-      <div class="advantage-card">
-        <span class="advantage-number">03</span>
-        <h3>Современное оборудование</h3>
-        <p>МРТ экспертного класса, компьютерный томограф, цифровой рентген, УЗИ последнего поколения. Диагностика на оборудовании ведущих мировых производителей.</p>
-      </div>
-      <div class="advantage-card">
-        <span class="advantage-number">04</span>
-        <h3>Высокий уровень обслуживания</h3>
-        <p>Удобная запись, отсутствие очередей, комфортные условия. Персонал заботится о каждом пациенте и создаёт атмосферу доверия.</p>
-      </div>
-      <div class="advantage-card">
-        <span class="advantage-number">05</span>
-        <h3>Скорая помощь и помощь на дому</h3>
-        <p>Круглосуточная служба скорой помощи и вызов врача на дом. Бригады укомплектованы всем необходимым для экстренной помощи.</p>
-      </div>
-      <div class="advantage-card">
-        <span class="advantage-number">06</span>
-        <h3>Терапевтические и хирургические стационары</h3>
-        <p>Дневной и круглосуточный стационар с комфортными палатами. Полный цикл от диагностики до реабилитации.</p>
-      </div>
-      <div class="advantage-card">
-        <span class="advantage-number">07</span>
-        <h3>Индивидуальный подход</h3>
-        <p>Персональный куратор сопровождает пациента на всех этапах лечения. 100% внимание и индивидуальный план лечения.</p>
-      </div>
-      <div class="advantage-card">
-        <span class="advantage-number">08</span>
-        <h3>Вызов врача на дом</h3>
-        <p>Терапевт, педиатр, узкие специалисты — приедут в удобное время. Вызов по Томску и области, бесплатно по ОМС.</p>
-      </div>
-      <div class="advantage-card">
-        <span class="advantage-number">09</span>
-        <h3>Реабилитация в стационаре</h3>
-        <p>Полная программа реабилитации после операций. Физиотерапия, ЛФК, массаж — всё в стационаре под наблюдением специалистов.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Партнёры -->
-<section class="section">
-  <div class="container">
-    <div class="section-header">
-      <h2 class="section-title">Наши партнеры</h2>
-    </div>
-    <div class="partners-grid">
-      <div class="partner-logo">SAMSUNG</div>
-      <div class="partner-logo">SAMSUNG</div>
-      <div class="partner-logo">SAMSUNG</div>
-      <div class="partner-logo partner-logo-highlight">SAMSUNG</div>
-      <div class="partner-logo">SAMSUNG</div>
-      <div class="partner-logo">SAMSUNG</div>
-      <div class="partner-logo">SAMSUNG</div>
-      <div class="partner-logo">SAMSUNG</div>
-      <div class="partner-logo">SAMSUNG</div>
-      <div class="partner-logo">SAMSUNG</div>
-      <div class="partner-logo">SAMSUNG</div>
-      <div class="partner-logo">SAMSUNG</div>
-    </div>
-  </div>
-</section>
-
-<!-- Лицензии -->
-<section class="section section-gray">
-  <div class="container">
-    <div class="section-header">
-      <h2 class="section-title">Наши лицензии</h2>
-    </div>
-    <div class="licenses-grid">
-      <img src="{% static 'img/5e2bfba032ba844b201cd81430b9b18c5f5a8bce.png' %}" alt="Лицензия" />
-      <img src="{% static 'img/5e2bfba032ba844b201cd81430b9b18c5f5a8bce.png' %}" alt="Лицензия" />
-      <img src="{% static 'img/5e2bfba032ba844b201cd81430b9b18c5f5a8bce.png' %}" alt="Лицензия" />
-      <img src="{% static 'img/5e2bfba032ba844b201cd81430b9b18c5f5a8bce.png' %}" alt="Лицензия" />
-    </div>
-  </div>
-</section>
-
-<!-- Контакты -->
-<section class="section section-contacts">
-  <div class="container contacts-inner">
-    <div class="contacts-info">
-      <h2 class="section-title section-title-light">Наши контакты</h2>
-      <div class="contacts-list">
-        <div class="contacts-item">
-          <span class="contacts-label">Адрес</span>
-          <span class="contacts-value">г. Томск, ул. 79 Гвардейской дивизии, 6</span>
-        </div>
-        <div class="contacts-item">
-          <span class="contacts-label">Телефон</span>
-          <span class="contacts-value">8 (3822) 50-00-49</span>
-        </div>
-        <div class="contacts-item">
-          <span class="contacts-label">Почта</span>
-          <span class="contacts-value">info@docnear.ru</span>
-        </div>
-      </div>
-      <button type="button" class="btn btn-primary" onclick="document.getElementById('modal-appointment').showModal()">Записаться на приём</button>
-    </div>
-    <div class="contacts-map">
-      <img src="{% static 'img/62b0d02c35be20a1bede65edbbb5550765dab45b.png' %}" alt="Карта проезда" />
-    </div>
-  </div>
-</section>
-
-</div>
-
-{% endblock %}
+      <div class="stationary-card">
+        <div class="stationary-icon">
+          <svg width="48" hei

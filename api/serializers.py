@@ -11,6 +11,8 @@ from clinics.models import (
     Doctor,
     DoctorScheduleSlot,
     Equipment,
+    License,
+    Partner,
     Patient,
     Promotion,
     Review,
@@ -107,6 +109,18 @@ class ReviewModelSerializer(ModelSerializer):
 class EquipmentModelSerializer(ModelSerializer):
     class Meta:
         model = Equipment
+        fields = '__all__'
+
+
+class LicenseModelSerializer(ModelSerializer):
+    class Meta:
+        model = License
+        fields = '__all__'
+
+
+class PartnerModelSerializer(ModelSerializer):
+    class Meta:
+        model = Partner
         fields = '__all__'
 
 

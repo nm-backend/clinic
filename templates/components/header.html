@@ -2,13 +2,13 @@
 <header class="site-header">
   <div class="container">
     <div class="header-topbar">
-      <span class="header-tagline">Сеть клиник Томской области</span>
+      <span class="header-tagline">Мы – клиника рядом с вашим домом</span>
       <label for="a11y-toggle" class="header-accessibility">
         <span class="a11y-normal">👁 Версия для слабовидящих</span>
         <span class="a11y-enabled">Обычная версия</span>
       </label>
       <div class="header-topbar-right">
-        <a class="header-phone" href="tel:+79780000000">+ 7 (978) 00-00-000</a>
+        <a class="header-phone" href="tel:+73822500049">+ 73822500049</a>
         <button type="button" class="btn-appointment" onclick="document.getElementById('modal-appointment').showModal()">Записаться на прием</button>
       </div>
     </div>
@@ -16,7 +16,7 @@
       <a class="header-logo" href="{% url 'index' %}">
         <img src="{% static 'img/6fa4e09bdc18a460f722958684d333b5b55f8b08.png' %}" alt="Ваш Доктор Рядом" />
       </a>
-      <nav class="header-menu">
+      <nav class="header-menu" id="header-menu">
         <a href="{% url 'doctors' %}">Врачи</a>
         <a href="{% url 'services' %}">Услуги</a>
         <a href="{% url 'directions' %}">Диагностика</a>
@@ -35,6 +35,11 @@
         <a href="{% url 'reviews' %}">Отзывы</a>
         <a href="{% url 'contacts' %}">Контакты</a>
       </nav>
+      <button type="button" class="header-burger" id="header-burger" aria-label="Открыть меню" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </div>
 </header>

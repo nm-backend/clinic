@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Контакты — Сеть клиник Томской области{% endblock %}
+{% block title %}Контакты — Доктор Рядом{% endblock %}
 
 {% block breadcrumbs %}
   {% include 'components/breadcrumbs.html' with title='Контакты' %}
@@ -15,22 +15,29 @@
     <div class="contacts-inner">
       <div class="contacts-info">
         <div class="contact-block">
-          <span class="contact-block-label">Адрес</span>
+          <span class="contact-block-label">Адрес:</span>
           <span class="contact-block-value">г. Томск, ул. 79 Гвардейской дивизии, 6</span>
         </div>
         <div class="contact-block">
-          <span class="contact-block-label">Телефон</span>
-          <a class="contact-block-value" href="tel:+7382250049">8 (3822) 50-00-49</a>
+          <span class="contact-block-label">Телефон:</span>
+          <a class="contact-block-value" href="tel:+7382250049">+ 73822500049</a>
         </div>
         <div class="contact-block">
-          <span class="contact-block-label">Почта</span>
+          <span class="contact-block-label">Время работы:</span>
+          <span class="contact-block-value">Пн-Пт 08:00-20:00<br>Сб-Вс 09:00-17:00</span>
+        </div>
+        <div class="contact-block">
+          <span class="contact-block-label">Почта:</span>
           <a class="contact-block-value" href="mailto:info@docnear.ru">info@docnear.ru</a>
         </div>
-        <div class="contact-block">
-          <span class="contact-block-label">Часы работы</span>
-          <span class="contact-block-value">Пн–пт: 8.00–20.00, сб–вс: 9.00–17.00</span>
+        <div class="contacts-transport">
+          <span class="contact-block-label">Как добраться:</span>
+          <div class="contacts-transport-list">
+            <span class="contacts-transport-item contacts-transport-item-dark">🚌 Автобус: 4, 11, 13, 14, 313, 401 — остановка «Говорова»</span>
+            <span class="contacts-transport-item contacts-transport-item-dark">🚎 Троллейбус: 5 — остановка «Говорова»</span>
+          </div>
         </div>
-        <button type="button" class="btn btn-primary" onclick="document.getElementById('modal-callback').showModal()">Заказать звонок</button>
+        <button type="button" class="btn btn-primary" onclick="document.getElementById('modal-appointment').showModal()">Записаться на приём</button>
       </div>
       <div class="contacts-map">
         <img src="{% static 'img/62b0d02c35be20a1bede65edbbb5550765dab45b.png' %}" alt="Карта проезда" />

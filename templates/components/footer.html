@@ -4,19 +4,23 @@
     <div class="footer-inner">
       <div class="footer-brand">
         <a class="footer-logo" href="{% url 'index' %}">
-          <img src="{% static 'img/6fa4e09bdc18a460f722958684d333b5b55f8b08.png' %}" alt="Ваш Доктор Рядом" />
+          <img src="{% static 'img/6fa4e09bdc18a460f722958684d333b5b55f8b08.png' %}" alt="Доктор Рядом" />
         </a>
         <div class="footer-contacts">
           <div class="footer-contact">
-            <span class="footer-contact-label">Адрес</span>
+            <span class="footer-contact-label">Адрес:</span>
             <span class="footer-contact-value">г. Томск, ул. 79 Гвардейской дивизии, 6</span>
           </div>
           <div class="footer-contact">
-            <span class="footer-contact-label">Телефон</span>
-            <span class="footer-contact-value">8 (3822) 50-00-49</span>
+            <span class="footer-contact-label">Телефон:</span>
+            <span class="footer-contact-value">+ 73822500049</span>
           </div>
           <div class="footer-contact">
-            <span class="footer-contact-label">Почта</span>
+            <span class="footer-contact-label">Время работы:</span>
+            <span class="footer-contact-value">Пн-Пт 08:00-20:00<br>Сб-Вс 09:00-17:00</span>
+          </div>
+          <div class="footer-contact">
+            <span class="footer-contact-label">Почта:</span>
             <span class="footer-contact-value">info@docnear.ru</span>
           </div>
         </div>
@@ -26,7 +30,6 @@
         <ul>
           <li><a href="{% url 'about' %}">О нас</a></li>
           <li><a href="{% url 'reviews' %}">Отзывы</a></li>
-          <li><a href="{% url 'about' %}">Наши лицензии</a></li>
           <li><a href="{% url 'contacts' %}">Контакты</a></li>
         </ul>
       </div>
@@ -57,7 +60,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 Сеть клиник Томской области. Все права защищены.</p>
+      <p>&copy; 2026 Клиника «Доктор рядом». Все права защищены.</p>
       <a href="{% url 'legal' %}">Политика конфиденциальности</a>
     </div>
   </div>

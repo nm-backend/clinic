@@ -54,15 +54,26 @@
       <a href="{% url 'directions' %}" class="btn btn-primary">Все направления &rsaquo;</a>
     </div>
     <div class="directions-grid">
-      {% for category in categories|slice:':4' %}
-        <a class="direction-card" href="{% url 'direction_detail' slug=category.slug %}">
-          {% if category.image %}
-            <img src="{% static 'img/'|add:category.image %}" alt="{{ category.name }}" />
-          {% endif %}
-          <h3 class="direction-card-title">{{ category.name }}</h3>
-          <span class="direction-card-more">Подробнее</span>
-        </a>
-      {% endfor %}
+      <div class="directions-card">
+        <img src="/static/img/gynekologiya.svg" alt="Гинекология">
+        <h1>Гинекология</h1>
+        <p>Подробнее</p>
+      </div>
+      <div class="directions-card">
+        <img src="/static/img/urologiya.svg" alt="">
+        <h1>Урология</h1>
+        <p>Подробнее</p>
+      </div>
+      <div class="directions-card">
+        <img src="/static/img/bd4b3cb5032c02f54b1f78de3cea6bf20051a4e9.png" alt="">
+        <h1>Отоларингология</h1>
+        <p>Подробнее</p>
+      </div>
+      <div class="directions-card">
+        <img src="/static/img/624e3afe49fa14ecb401da854cbd7b1fe46a0ca2.png" alt="">
+        <h1>Неврология</h1>
+        <p>Подробнее</p>
+      </div>
     </div>
   </div>
 </section>
@@ -82,20 +93,30 @@
       </div>
     </div>
     <div class="doctors-grid">
-      {% for doctor in doctors|slice:':4' %}
-        <div class="doctor-card">
-          <div class="doctor-photo">
-            {% if doctor.photo %}
-              <img src="{% static 'img/'|add:doctor.photo %}" alt="{{ doctor.full_name }}" />
-            {% endif %}
-          </div>
-          <div class="doctor-card-info">
-            <h3 class="doctor-name">{{ doctor.full_name }}</h3>
-            <p class="doctor-specialty">{{ doctor.specialty }}</p>
-            <button type="button" class="btn btn-primary doctor-card-btn" onclick="document.getElementById('modal-appointment').showModal()">Записаться на приём</button>
-          </div>
-        </div>
-      {% endfor %}
+      <div class="doctors-card">
+        <img src="/static/img/27d078fc5f910ac9b6a38deb4edd56162a412c8a.png" alt="">
+        <h1>Иванов Иван Иванович</h1>
+        <p>Врач-уролог</p>
+        <button>Запись на прием</button>
+      </div>
+      <div class="doctors-card">
+        <img src="/static/img/27d078fc5f910ac9b6a38deb4edd56162a412c8a.png" alt="">
+        <h1>Иванов Иван Иванович</h1>
+        <p>Врач-уролог</p>
+        <button>Запись на прием</button>
+      </div>
+      <div class="doctors-card">
+        <img src="/static/img/27d078fc5f910ac9b6a38deb4edd56162a412c8a.png" alt="">
+        <h1>Иванов Иван Иванович</h1>
+        <p>Врач-уролог</p>
+        <button>Запись на прием</button>
+      </div>
+      <div class="doctors-card">
+        <img src="/static/img/27d078fc5f910ac9b6a38deb4edd56162a412c8a.png" alt="">
+        <h1>Иванов Иван Иванович</h1>
+        <p>Врач-уролог</p>
+        <button>Запись на прием</button>
+      </div>
     </div>
     <div class="text-center specialists-more">
       <a href="{% url 'doctors' %}" class="btn btn-outline">Все специалисты</a>

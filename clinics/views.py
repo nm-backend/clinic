@@ -25,7 +25,7 @@ from clinics.models import (
     Service,
     ServiceCategory,
 )
-from clinics.serializers import (
+from api.serializers import (
     AppointmentCreateSerializer,
     AppointmentDetailSerializer,
     AppointmentModelSerializer,

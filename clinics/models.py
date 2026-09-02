@@ -396,3 +396,42 @@ class CallbackRequest(models.Model):
 
     def __str__(self):
         return f'{self.full_name} — {self.phone} ({self.get_request_type_display()})'
+
+
+class License(models.Model):
+    title = models.CharField('Название', max_length=255)
+    image = models.CharField(
+        'Изображение (файл в static/img)',
+        max_length=200,
+        blank=True,
+        help_text='Имя файла в static/img',
+    )
+    is_active = models.BooleanField('Активна', default=True)
+
+    class Meta:
+        verbose_name = 'Лицензия'
+        verbose_name_plural = 'Лицензии'
+        ordering = ['title']
+
+    def __str__(self):
+        return self.title
+
+
+class Partner(models.Model):
+    name = models.CharField('Название', max_length=200)
+    logo = models.CharField(
+        'Логотип (файл в static/img)',
+        max_length=200,
+        blank=True,
+        help_text='Имя файла в static/img',
+    )
+    url = models.URLField('Сайт партнёра', blank=True)
+    is_active = models.BooleanField('Активен', default=True)
+
+    class Meta:
+        verbose_name = 'Партнёр'
+        verbose_name_plural = 'Партнёры'
+        ordering = ['name']
+
+    def __str__(self):
+        return self.name

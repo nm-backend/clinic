@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'drf_spectacular',
     'clinics',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -65,6 +66,7 @@ DATABASES = {
     }
 }
 
+# USE_SQLITE=True — быстрый старт без PostgreSQL (только для локальной разработки)
 if os.getenv('USE_SQLITE', '').lower() in ('true', '1', 'yes'):
     DATABASES = {
         'default': {

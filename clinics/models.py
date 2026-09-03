@@ -372,32 +372,6 @@ class Equipment(models.Model):
         return self.name
 
 
-class CallbackRequest(models.Model):
-    class Type(models.TextChoices):
-        CALLBACK = 'callback', 'Заказать звонок'
-        APPOINTMENT = 'appointment', 'Записаться на приём'
-
-    request_type = models.CharField(
-        'Тип заявки',
-        max_length=20,
-        choices=Type.choices,
-        default=Type.CALLBACK,
-    )
-    full_name = models.CharField('ФИО', max_length=255)
-    phone = models.CharField('Телефон', max_length=30)
-    comment = models.TextField('Комментарий', blank=True)
-    is_processed = models.BooleanField('Обработана', default=False)
-    created_at = models.DateTimeField('Дата создания', auto_now_add=True)
-
-    class Meta:
-        verbose_name = 'Заявка'
-        verbose_name_plural = 'Заявки на обратный звонок'
-        ordering = ['-created_at']
-
-    def __str__(self):
-        return f'{self.full_name} — {self.phone} ({self.get_request_type_display()})'
-
-
 class License(models.Model):
     title = models.CharField('Название', max_length=255)
     image = models.CharField(
@@ -435,3 +409,29 @@ class Partner(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class CallbackRequest(models.Model):
+    class Type(models.TextChoices):
+        CALLBACK = 'callback', 'Заказать звонок'
+        APPOINTMENT = 'appointment', 'Записаться на приём'
+
+    request_type = models.CharField(
+        'Тип заявки',
+        max_length=20,
+        choices=Type.choices,
+        default=Type.CALLBACK,
+    )
+    full_name = models.CharField('ФИО', max_length=255)
+    phone = models.CharField('Телефон', max_length=30)
+    comment = models.TextField('Комментарий', blank=True)
+    is_processed = models.BooleanField('Обработана', default=False)
+    created_at = models.DateTimeField('Дата создания', auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'Заявка'
+        verbose_name_plural = 'Заявки на обратный звонок'
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f'{self.full_name} — {self.phone} ({self.get_request_type_display()})'

@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
-{% block title %}Врачи — Сеть клиник Томской области{% endblock %}
+{% block title %}Наши специалисты{% endblock %}
 
 {% block breadcrumbs %}
   {% include 'components/breadcrumbs.html' with title='Врачи' %}
@@ -10,53 +9,105 @@
 {% block content %}
 <section class="section">
   <div class="container">
-    <h1 class="page-title">Наши специалисты</h1>
+    <h1 class="page-title">Врачи</h1>
 
-    <div class="filters">
-      <form class="search-form" method="get" action="{% url 'doctors' %}">
-        {% if active_category %}<input type="hidden" name="category" value="{{ active_category }}">{% endif %}
-        <input type="search" name="q" value="{{ search }}" placeholder="Поиск по фамилии или специальности" />
-        <button type="submit" class="btn btn-primary">Найти</button>
-      </form>
-      <div class="filter-chips">
-        <a href="{% url 'doctors' %}" class="chip {% if not active_category %}chip-active{% endif %}">Все</a>
-        {% for category in categories %}
-          <a href="{% url 'doctors' %}?category={{ category.slug }}"
-             class="chip {% if active_category == category.slug %}chip-active{% endif %}">{{ category.name }}</a>
-        {% endfor %}
+    <div class="doctors-filters">
+      <div class="doctors-filter">
+        <label class="doctors-filter-label">Специализация</label>
+        <select class="doctors-filter-select" onchange="window.location.href='?category='+this.value">
+          <option value="">Название</option>
+          {% for cat in categories %}
+          <option value="{{ cat.slug }}"{% if cat.slug == active_category %} selected{% endif %}>{{ cat.name }}</option>
+          {% endfor %}
+        </select>
       </div>
+      <div class="doctors-filter">
+        <label class="doctors-filter-label">Медицинский центр</label>
+        <select class="doctors-filter-select">
+          <option value="">Название</option>
+        </select>
+      </div>
+      <div class="doctors-filter">
+        <label class="doctors-filter-label">Возраст пациента</label>
+        <select class="doctors-filter-select">
+          <option value="">Название</option>
+        </select>
+      </div>
+      <div class="doctors-filter">
+        <label class="doctors-filter-label">ФИО врача</label>
+        <select class="doctors-filter-select">
+          <option value="">Название</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="doctors-sort">
+      <a href="?sort=name" class="doctors-sort-link">по алфавиту</a>
+      <a href="?sort=experience" class="doctors-sort-link">по стажу</a>
     </div>
 
     <div class="doctors-grid">
-      {% for doctor in doctors %}
-        <div class="doctor-card {% if forloop.counter > 8 %}is-extra{% endif %}">
-          <div class="doctor-photo">
-            {% if doctor.photo %}
-              <img src="{% static 'img/'|add:doctor.photo %}" alt="{{ doctor.full_name }}" />
-            {% endif %}
-          </div>
-          <div class="doctor-card-info">
-            <h3 class="doctor-name">{{ doctor.full_name }}</h3>
-            <p class="doctor-specialty">{{ doctor.specialty }}</p>
-            {% if doctor.experience_years %}
-              <p class="doctor-experience">Стаж: {{ doctor.experience_years }} лет</p>
-            {% endif %}
-            {% if doctor.qualification %}
-              <p class="doctor-qualification">{{ doctor.qualification }}</p>
-            {% endif %}
-            <p class="doctor-clinic">{{ doctor.clinic.name }}</p>
-          </div>
+      {% for d in doctors %}
+      <div class="doctor-card">
+        <div class="doctor-photo">
+          {% if d.photo %}
+          <img src="{{ d.photo.url }}" alt="{{ d.full_name }}">
+          {% endif %}
         </div>
+        <div class="doctor-card-info">
+          <div class="doctor-name">{{ d.full_name }}</div>
+          <div class="doctor-specialty">{{ d.specialty }}</div>
+          <a href="{% url 'appointment-request' %}" class="btn btn-primary btn-block doctor-card-btn">Запись на прием</a>
+        </div>
+      </div>
       {% empty %}
-        <p class="empty-text">Ничего не найдено. Попробуйте изменить запрос.</p>
+      <p class="empty-text">Список специалистов скоро появится.</p>
       {% endfor %}
     </div>
 
-    {% if doctors.count > 8 %}
-      <div class="show-more">
-        <button type="button" class="btn btn-outline" data-show-more>Показать еще</button>
-      </div>
+    {% if doctors|length > 4 %}
+    <div class="show-more">
+      <button type="button" class="btn btn-outline" data-show-more>Показать ещё</button>
+    </div>
     {% endif %}
+
+    <div class="pagination">
+      {% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}{% if active_category %}&category={{ active_category }}{% endif %}{% if search %}&q={{ search }}{% endif %}" class="pagination-btn">&larr;</a>
+      {% endif %}
+      <span class="pagination-current">{{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
+      {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}{% if active_category %}&category={{ active_category }}{% endif %}{% if search %}&q={{ search }}{% endif %}" class="pagination-btn">&rarr;</a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<section class="section section-callback">
+  <div class="container">
+    <div class="callback-card">
+      <div class="callback-form">
+        <h2 class="callback-title">Хотите, мы Вам перезвоним?</h2>
+        <p class="callback-subtitle">Оставьте заявку и мы подробно ответим на все Ваши вопросы!</p>
+        <form method="post" action="{% url 'callback-request' %}">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{% url 'doctors' %}">
+          <div class="form-field">
+            <label for="doctors-callback-phone">Номер телефона</label>
+            <input type="tel" id="doctors-callback-phone" name="phone" placeholder="+7 (___) ___-__-__" required data-phone />
+          </div>
+          <div class="form-field">
+            <label for="doctors-callback-name">Ваше ФИО</label>
+            <input type="text" id="doctors-callback-name" name="full_name" placeholder="Иванов Иван Иванович" required />
+          </div>
+          <button type="submit" class="btn btn-primary">Заказать звонок</button>
+          <p class="form-note">Нажимая на кнопку Заказать звонок вы соглашаетесь с <a href="{% url 'legal' %}">политикой конфиденциальности</a></p>
+        </form>
+      </div>
+      <div class="callback-photo">
+        <img src="{% static 'img/1b758ab0212d9897dbada094d2e596b142fdb30b.png' %}" alt="Врач" />
+      </div>
+    </div>
   </div>
 </section>
 {% endblock %}

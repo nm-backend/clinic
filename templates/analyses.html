@@ -16,6 +16,44 @@
       Результаты готовы в короткие сроки, их можно получить в клинике или по электронной почте.
     </p>
 
+    <div class="analyses-promo-grid">
+      <a href="{% url 'appointment-request' %}" class="analyses-promo-card analyses-promo-green">
+        <div class="analyses-promo-icon">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="rgba(255,255,255,0.2)"/><path d="M24 14v20M14 24h20" stroke="#fff" stroke-width="3"/></svg>
+        </div>
+        <div class="analyses-promo-title">Анализы</div>
+        <div class="analyses-promo-text">Более 300 видов исследований</div>
+      </a>
+      <a href="{% url 'appointment-request' %}" class="analyses-promo-card analyses-promo-orange">
+        <div class="analyses-promo-icon">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="rgba(255,255,255,0.2)"/><path d="M24 14v20M14 24h20" stroke="#fff" stroke-width="3"/></svg>
+        </div>
+        <div class="analyses-promo-title">Записаться на прием</div>
+        <div class="analyses-promo-text">Запишитесь на прием для сдачи анализов</div>
+      </a>
+    </div>
+
+    <div class="steps">
+      <h2 class="section-title">Как получить лечение?</h2>
+      <div class="steps-grid">
+        <div class="step-card">
+          <span class="step-number">01</span>
+          <h3 class="step-title">Запишитесь на прием</h3>
+          <p class="step-text">Оставьте заявку на сайте или позвоните по телефону</p>
+        </div>
+        <div class="step-card">
+          <span class="step-number">02</span>
+          <h3 class="step-title">Пройдите обследование</h3>
+          <p class="step-text">Врач проведет осмотр и назначит необходимые обследования</p>
+        </div>
+        <div class="step-card">
+          <span class="step-number">03</span>
+          <h3 class="step-title">Получите результаты</h3>
+          <p class="step-text">Результаты анализов будут готовы в кратчайшие сроки</p>
+        </div>
+      </div>
+    </div>
+
     <div class="section-header">
       <h2 class="section-title">Популярные анализы</h2>
     </div>
@@ -38,19 +76,20 @@
       </div>
     </div>
 
-    <div class="services-block">
-      <h2 class="section-title">Подготовка к сдаче анализов</h2>
-      <div class="benefit-list">
-        <div class="benefit-item">Кровь сдаётся строго натощак, утром</div>
-        <div class="benefit-item">За 2–3 дня исключите алкоголь и жирную пищу</div>
-        <div class="benefit-item">Не курите за час до исследования</div>
-        <div class="benefit-item">Уточните правила подготовки у администратора</div>
+    <div class="lab-types-section">
+      <div class="lab-types-text">
+        <h2 class="section-title">Виды лабораторных анализов</h2>
+        <p class="section-text">Наша лаборатория выполняет широкий спектр лабораторных исследований: клинические, биохимические, гормональные, иммунологические, микробиологические, генетические и другие анализы.</p>
+      </div>
+      <div class="lab-types-image">
+        <img src="{% static 'img/promo.png' %}" alt="Лаборатория">
       </div>
     </div>
 
     <div class="cta-block">
-      <h2 class="cta-title">Узнать стоимость анализов</h2>
-      <button type="button" class="btn btn-primary" onclick="document.getElementById('modal-callback').showModal()">Заказать звонок</button>
+      <h2 class="cta-title">Заказать звонок</h2>
+      <p class="section-text" style="text-align:center;margin-bottom:24px;">Оставьте заявку и мы перезвоним вам в ближайшее время</p>
+      <a href="{% url 'appointment-request' %}" class="btn btn-primary">Заказать звонок</a>
     </div>
   </div>
 </section>

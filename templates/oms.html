@@ -1,57 +1,82 @@
 {% extends 'base.html' %}
 {% load static %}
-
-{% block title %}Лечение по ОМС — Сеть клиник Томской области{% endblock %}
-
-{% block breadcrumbs %}
-  {% include 'components/breadcrumbs.html' with title='Лечение по ОМС' %}
-{% endblock %}
+{% block title %}Полис обязательного медицинского страхования (ОМС){% endblock %}
 
 {% block content %}
+<section class="hero-oms">
+  <div class="container">
+    <div class="hero-oms-inner">
+      <div class="hero-oms-text">
+        <h1 class="page-title">Полис обязательного медицинского страхования (ОМС)</h1>
+        <p class="section-text">Мы работаем по полису ОМС и предоставляем полный спектр медицинских услуг в рамках программы государственных гарантий бесплатного оказания гражданам медицинской помощи.</p>
+      </div>
+      <div class="hero-oms-image">
+        <img src="{% static 'img/promo.png' %}" alt="ОМС">
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="section">
   <div class="container">
-    <h1 class="page-title">Лечение по ОМС</h1>
-    <p class="page-text">
-      Мы работаем по программе обязательного медицинского страхования. Каждый гражданин РФ
-      с полисом ОМС может получить квалифицированную медицинскую помощь бесплатно.
-    </p>
-
-    <div class="steps">
-      <h2 class="section-title">Как получить лечение?</h2>
-      <div class="steps-grid">
-        <div class="step-card">
-          <span class="step-number">01</span>
-          <h3 class="step-title">Выберите поликлинику</h3>
-          <p class="step-text">Прикрепитесь к нашей клинике по полису ОМС</p>
-        </div>
-        <div class="step-card">
-          <span class="step-number">02</span>
-          <h3 class="step-title">Запишитесь на приём</h3>
-          <p class="step-text">Позвоните нам или оставьте заявку на сайте</p>
-        </div>
-        <div class="step-card">
-          <span class="step-number">03</span>
-          <h3 class="step-title">Получите лечение</h3>
-          <p class="step-text">Пройти диагностику и лечение можно бесплатно</p>
-        </div>
+    <h2 class="section-title">Как получить лечение по ОМС?</h2>
+    <div class="steps-grid">
+      <div class="step-card">
+        <span class="step-number">01</span>
+        <div class="step-title">Запишитесь на прием</div>
+        <div class="step-text">Оставьте заявку на сайте или позвоните по телефону</div>
+      </div>
+      <div class="step-card">
+        <span class="step-number">02</span>
+        <div class="step-title">Пройдите обследование</div>
+        <div class="step-text">Врач проведет осмотр и назначит необходимые обследования</div>
+      </div>
+      <div class="step-card">
+        <span class="step-number">03</span>
+        <div class="step-title">Получите лечение</div>
+        <div class="step-text">На основании результатов обследования будет назначено лечение</div>
       </div>
     </div>
+  </div>
+</section>
 
-    <div class="services-block">
-      <h2 class="section-title">Что можно получить по ОМС</h2>
-      <div class="benefit-list">
-        <div class="benefit-item">Первичная медико-санитарная помощь</div>
-        <div class="benefit-item">Специализированная медицинская помощь</div>
-        <div class="benefit-item">Диагностика: УЗИ, рентген, лабораторные исследования</div>
-        <div class="benefit-item">Диспансеризация взрослого населения</div>
-        <div class="benefit-item">Вакцинация в рамках национального календаря</div>
-        <div class="benefit-item">Неотложная помощь</div>
-      </div>
+<section class="section section-gray">
+  <div class="container">
+    <h2 class="section-title">Все направления лечения по ОМС</h2>
+    <div class="benefit-list">
+      <div class="benefit-item">Терапия и педиатрия</div>
+      <div class="benefit-item">Кардиология</div>
+      <div class="benefit-item">Неврология</div>
+      <div class="benefit-item">Хирургия</div>
+      <div class="benefit-item">Ортопедия и травматология</div>
+      <div class="benefit-item">Офтальмология</div>
+      <div class="benefit-item">Отоларингология</div>
+      <div class="benefit-item">Гинекология</div>
+      <div class="benefit-item">Урология</div>
+      <div class="benefit-item">Дерматовенерология</div>
+      <div class="benefit-item">Лабораторная диагностика</div>
+      <div class="benefit-item">Функциональная диагностика</div>
+      <div class="benefit-item">Физиотерапия</div>
     </div>
+  </div>
+</section>
 
+<section class="section">
+  <div class="container">
     <div class="cta-block">
-      <h2 class="cta-title">Остались вопросы по ОМС?</h2>
-      <button type="button" class="btn btn-primary" onclick="document.getElementById('modal-callback').showModal()">Заказать звонок</button>
+      <h3 class="cta-title">Заявка на лечение по ОМС</h3>
+      <form method="post" action="{% url 'appointment-request' %}" class="modal-form" style="max-width:600px;margin:0 auto;">
+        {% csrf_token %}
+        <div class="form-field">
+          <label for="name">Ваше имя</label>
+          <input type="text" id="name" name="full_name" required placeholder="Введите имя">
+        </div>
+        <div class="form-field">
+          <label for="phone">Телефон</label>
+          <input type="tel" id="phone" name="phone" required placeholder="+7 (___) ___-__-__" data-phone>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Оставить заявку</button>
+      </form>
     </div>
   </div>
 </section>

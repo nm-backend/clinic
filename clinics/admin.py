@@ -8,6 +8,8 @@ from clinics.models import (
     Doctor,
     DoctorScheduleSlot,
     Equipment,
+    License,
+    Partner,
     Patient,
     Promotion,
     Review,
@@ -116,3 +118,17 @@ class AppointmentAdmin(admin.ModelAdmin):
     search_fields = ('patient__last_name', 'patient__first_name', 'patient__phone', 'doctor__last_name', 'doctor__first_name')
     raw_id_fields = ('patient', 'doctor', 'service', 'slot')
     date_hierarchy = 'scheduled_at'
+
+
+@admin.register(License)
+class LicenseAdmin(admin.ModelAdmin):
+    list_display = ('title', 'is_active')
+    list_filter = ('is_active',)
+    search_fields = ('title',)
+
+
+@admin.register(Partner)
+class PartnerAdmin(admin.ModelAdmin):
+    list_display = ('name', 'url', 'is_active')
+    list_filter = ('is_active',)
+    search_fields = ('name',)

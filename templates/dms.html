@@ -1,54 +1,93 @@
 {% extends 'base.html' %}
 {% load static %}
-
-{% block title %}ДМС — Сеть клиник Томской области{% endblock %}
-
-{% block breadcrumbs %}
-  {% include 'components/breadcrumbs.html' with title='ДМС' %}
-{% endblock %}
+{% block title %}Добровольное медицинское страхование (ДМС){% endblock %}
 
 {% block content %}
 <section class="section">
   <div class="container">
-    <h1 class="page-title">ДМС</h1>
-    <p class="page-text">
-      Мы работаем по договорам добровольного медицинского страхования с крупнейшими
-      страховыми компаниями России. Лечение по полису ДМС не требует оплаты на месте.
-    </p>
+    <div class="page-title">Добровольное медицинское страхование (ДМС)</div>
+    <p class="page-text">ДМС — это дополнительная медицинская страховка, которая расширяет стандартный пакет услуг по полису ОМС и дает доступ к расширенному спектру медицинских услуг.</p>
 
-    <div class="insurers">
-      <h2 class="section-title">Страховые компании</h2>
-      <div class="insurers-list">
-        <span class="insurer-item">АльфаСтрахование</span>
-        <span class="insurer-item">ВСК</span>
-        <span class="insurer-item">СОГАЗ</span>
-        <span class="insurer-item">РЕСО-Гарантия</span>
-        <span class="insurer-item">Ингосстрах</span>
-        <span class="insurer-item">Росгосстрах</span>
-        <span class="insurer-item">СберСтрахование</span>
-        <span class="insurer-item">Совкомбанк Страхование</span>
-        <span class="insurer-item">Тинькофф Страхование</span>
-        <span class="insurer-item">Капитал МС</span>
-        <span class="insurer-item">Макс-М</span>
-        <span class="insurer-item">Согаз-Мед</span>
+    <div class="dms-layout">
+      <div class="dms-partners">
+        <h3 class="section-title" style="font-size:24px;">Наши партнеры по ДМС</h3>
+        <ul class="dms-partners-list">
+          <li><span class="dms-bullet"></span> РОСНО</li>
+          <li><span class="dms-bullet"></span> АльфаСтрахование</li>
+          <li><span class="dms-bullet"></span> Согласие</li>
+          <li><span class="dms-bullet"></span> Ренессанс</li>
+          <li><span class="dms-bullet"></span> ВСК</li>
+          <li><span class="dms-bullet"></span> Ингосстрах</li>
+          <li><span class="dms-bullet"></span> ЭРГО</li>
+          <li><span class="dms-bullet"></span> Максимум</li>
+          <li><span class="dms-bullet"></span> Спасские ворота</li>
+        </ul>
+      </div>
+
+      <div class="dms-services">
+        <h3 class="section-title" style="font-size:24px;">В рамках ДМС мы предлагаем</h3>
+        <ol class="dms-services-list">
+          <li>Консультации специалистов</li>
+          <li>Диагностические исследования</li>
+          <li>Лабораторные анализы</li>
+          <li>Ультразвуковая диагностика</li>
+          <li>ЭКГ и функциональная диагностика</li>
+          <li>Физиотерапевтические процедуры</li>
+          <li>Массаж</li>
+          <li>Стоматология</li>
+          <li>Гинекология</li>
+          <li>Дерматология</li>
+          <li>Офтальмология</li>
+          <li>Отоларингология</li>
+          <li>Хирургия</li>
+        </ol>
       </div>
     </div>
 
-    <div class="services-block">
-      <h2 class="section-title">Преимущества лечения по ДМС</h2>
-      <div class="benefit-list">
-        <div class="benefit-item">Удобная запись без очередей</div>
-        <div class="benefit-item">Широкий выбор специалистов и клиник</div>
-        <div class="benefit-item">Современная диагностика: МРТ, КТ, УЗИ</div>
-        <div class="benefit-item">Лечение и профилактика по программе</div>
-        <div class="benefit-item">Восстановление и реабилитация</div>
-        <div class="benefit-item">Круглосуточная поддержка</div>
+    <div class="dms-detail-section">
+      <h3 class="section-title" style="font-size:24px;">Мы оказываем услуги ДМС</h3>
+      <div class="dms-detail-grid">
+        <div class="dms-detail-card">
+          <div class="dms-detail-title">Амбулаторно-поликлиническая помощь</div>
+          <p class="dms-detail-text">Консультации врачей-специалистов, диагностические исследования, лабораторные анализы, физиотерапия, массаж.</p>
+        </div>
+        <div class="dms-detail-card">
+          <div class="dms-detail-title">Стоматологическая помощь</div>
+          <p class="dms-detail-text">Лечение зубов, протезирование, имплантация, отбел зубов, профессиональная чистка.</p>
+        </div>
+        <div class="dms-detail-card">
+          <div class="dms-detail-title">Профилактические осмотры</div>
+          <p class="dms-detail-text">Комплексные профилактические осмотры для выявления заболеваний на ранних стадиях.</p>
+        </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <div class="cta-block">
-      <h2 class="cta-title">Не нашли свою страховую компанию?</h2>
-      <button type="button" class="btn btn-primary" onclick="document.getElementById('modal-callback').showModal()">Заказать звонок</button>
+<section class="section section-contacts">
+  <div class="container">
+    <div class="contacts-inner">
+      <div class="contacts-info">
+        <h2 class="section-title section-title-light">Контакты</h2>
+        <div class="contacts-list">
+          <div class="contacts-item">
+            <div class="contacts-label">Адрес</div>
+            <div class="contacts-value">г. Томск, ул. Белинского, 68</div>
+          </div>
+          <div class="contacts-item">
+            <div class="contacts-label">Телефон</div>
+            <div class="contacts-value">+7 (3822) 50-00-49</div>
+          </div>
+          <div class="contacts-item">
+            <div class="contacts-label">Часы работы</div>
+            <div class="contacts-value">Пн-Пт: 8:00 - 19:00</div>
+          </div>
+        </div>
+        <a href="{% url 'appointment-request' %}" class="btn btn-primary" style="margin-top:24px;">Записаться на прием</a>
+      </div>
+      <div class="contacts-map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2680.1234567890123!2d84.9463!3d56.4647!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s56.4647%2C84.9463!5e0!3m2!1sru!2sru!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
+      </div>
     </div>
   </div>
 </section>

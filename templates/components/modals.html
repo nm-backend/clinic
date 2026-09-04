@@ -1,15 +1,12 @@
 {% load static %}
 
-<!-- ==========================================
-     Модальное окно "Записаться на приём"
-     Открывается через <dialog>.showModal()
-     Закрывается через <dialog>.close()
-     ========================================== -->
 <dialog id="modal-appointment" class="modal-dialog">
   <div class="modal-inner">
-    <button type="button" class="modal-close" onclick="this.closest('dialog').close()" aria-label="Закрыть">
-      <img src="{% static 'img/close.svg' %}" alt="" />
-    </button>
+    <form method="dialog" class="modal-close-form">
+      <button type="submit" class="modal-close" aria-label="Закрыть">
+        <img src="{% static 'img/close.svg' %}" alt="" />
+      </button>
+    </form>
     <h2 class="modal-title">Записаться на приём</h2>
     <form class="modal-form" action="{% url 'appointment-request' %}" method="post">
       {% csrf_token %}
@@ -28,15 +25,13 @@
   </div>
 </dialog>
 
-
-<!-- ==========================================
-     Модальное окно "Заказать звонок"
-     ========================================== -->
 <dialog id="modal-callback" class="modal-dialog">
   <div class="modal-inner modal-callback">
-    <button type="button" class="modal-close" onclick="this.closest('dialog').close()" aria-label="Закрыть">
-      <img src="{% static 'img/close.svg' %}" alt="" />
-    </button>
+    <form method="dialog" class="modal-close-form">
+      <button type="submit" class="modal-close" aria-label="Закрыть">
+        <img src="{% static 'img/close.svg' %}" alt="" />
+      </button>
+    </form>
     <div class="callback-card">
       <div class="callback-photo">
         <img src="{% static 'img/1b758ab0212d9897dbada094d2e596b142fdb30b.png' %}" alt="Врач" />

@@ -1,25 +1,31 @@
 {% extends 'base.html' %}
 {% load static %}
-
-{% block title %}Направления — Сеть клиник Томской области{% endblock %}
-
-{% block breadcrumbs %}
-  {% include 'components/breadcrumbs.html' with title='Направления' %}
-{% endblock %}
+{% block title %}Направления нашей работы{% endblock %}
 
 {% block content %}
 <section class="section">
   <div class="container">
-    <h1 class="page-title">Направления</h1>
+    <div class="section-header">
+      <div class="page-title">Направления нашей работы</div>
+      <a href="{% url 'appointment-request' %}" class="btn btn-primary">Записаться на прием</a>
+    </div>
+
     <div class="directions-grid">
-      {% for category in categories %}
-        <a class="direction-card" href="{% url 'direction_detail' slug=category.slug %}">
-          {% if category.image %}
-            <img src="{% static 'img/'|add:category.image %}" alt="{{ category.name }}" />
+      {% for item in directions %}
+      <a href="{% url 'direction_detail' item.pk %}" class="direction-card">
+        {% if item.image %}
+        <img src="{{ item.image.url }}" alt="{{ item.title }}">
+        {% endif %}
+        <div class="direction-card-body">
+          <div class="direction-card-title">{{ item.title }}</div>
+          {% if item.description %}
+          <div class="direction-card-text">{{ item.description|truncatechars:100 }}</div>
           {% endif %}
-          <h3 class="direction-card-title">{{ category.name }}</h3>
-          <span class="direction-card-more">Записаться на прием</span>
-        </a>
+          <div class="direction-card-more">Подробнее</div>
+        </div>
+      </a>
+      {% empty %}
+      <p class="empty-text">Направления скоро появятся.</p>
       {% endfor %}
     </div>
   </div>

@@ -8,15 +8,27 @@
 {% endblock %}
 
 {% block content %}
+<section class="hero-direction">
+  <div class="container">
+    <div class="hero-direction-inner">
+      <div class="hero-direction-text">
+        <h1 class="page-title">{{ category.name }}</h1>
+        {% if category.description %}
+          <p class="section-text">{{ category.description }}</p>
+        {% endif %}
+        <a href="{% url 'appointment-request' %}" class="btn btn-primary">Записаться на прием</a>
+      </div>
+      <div class="hero-direction-image">
+        <img src="{% static 'img/promo.png' %}" alt="{{ category.name }}">
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="section">
   <div class="container">
-    <h1 class="page-title">{{ category.name }}</h1>
-    {% if category.description %}
-      <p class="page-text">{{ category.description }}</p>
-    {% endif %}
-
     <div class="when-block">
-      <h2 class="section-title">Когда нужно обратиться?</h2>
+      <h2 class="section-title">Когда нужно обратиться к {{ category.name }}?</h2>
       <div class="when-grid">
         <div class="when-card">
           <h3 class="when-title">Боли и дискомфорт</h3>
@@ -36,6 +48,58 @@
         </div>
       </div>
     </div>
+
+    {% if doctors %}
+      <div class="doctors-block">
+        <h2 class="section-title">Наши специалисты</h2>
+        <div class="doctors-grid">
+          {% for doctor in doctors %}
+            <div class="doctor-card">
+              <div class="doctor-photo">
+                {% if doctor.photo %}
+                  <img src="{% static 'img/'|add:doctor.photo %}" alt="{{ doctor.full_name }}" />
+                {% endif %}
+              </div>
+              <div class="doctor-card-info">
+                <h3 class="doctor-name">{{ doctor.full_name }}</h3>
+                <p class="doctor-specialty">{{ doctor.specialty }}</p>
+                {% if doctor.experience_years %}
+                  <p class="doctor-experience">Стаж: {{ doctor.experience_years }} лет</p>
+                {% endif %}
+                <div class="doctor-card-actions">
+                  <a href="{% url 'appointment-request' %}" class="btn btn-primary btn-block doctor-card-btn">Запись на прием</a>
+                  <a href="#doctor-{{ doctor.pk }}" class="btn btn-outline btn-block doctor-card-btn">Подробнее</a>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+
+    {% if services %}
+      <div class="services-block">
+        <h2 class="section-title">Стоимость услуг</h2>
+        <table class="price-table">
+          <thead>
+            <tr>
+              <th>Услуга</th>
+              <th>Длительность</th>
+              <th>Цена</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for service in services %}
+              <tr>
+                <td>{{ service.name }}</td>
+                <td>{{ service.duration_minutes }} мин</td>
+                <td>{{ service.price }} ₽</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% endif %}
 
     <div class="steps">
       <h2 class="section-title">Как записаться на прием?</h2>
@@ -57,54 +121,6 @@
         </div>
       </div>
     </div>
-
-    {% if services %}
-      <div class="services-block">
-        <h2 class="section-title">Стоимость услуг</h2>
-        <table class="price-table">
-          <thead>
-            <tr>
-              <th>Услуга</th>
-              <th>Длительность</th>
-              <th>Цена</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for service in services %}
-              <tr>
-                <td><a href="{% url 'service_detail' pk=service.pk %}">{{ service.name }}</a></td>
-                <td>{{ service.duration_minutes }} мин</td>
-                <td>{{ service.price }} ₽</td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-    {% endif %}
-
-    {% if doctors %}
-      <div class="doctors-block">
-        <h2 class="section-title">Наши специалисты</h2>
-        <div class="doctors-grid">
-          {% for doctor in doctors %}
-            <div class="doctor-card">
-              <div class="doctor-photo">
-                {% if doctor.photo %}
-                  <img src="{% static 'img/'|add:doctor.photo %}" alt="{{ doctor.full_name }}" />
-                {% endif %}
-              </div>
-              <div class="doctor-card-info">
-                <h3 class="doctor-name">{{ doctor.full_name }}</h3>
-                <p class="doctor-specialty">{{ doctor.specialty }}</p>
-                {% if doctor.experience_years %}
-                  <p class="doctor-experience">Стаж: {{ doctor.experience_years }} лет</p>
-                {% endif %}
-              </div>
-            </div>
-          {% endfor %}
-        </div>
-      </div>
-    {% endif %}
 
     {% if reviews %}
       <div class="reviews-block">
@@ -129,7 +145,7 @@
 
     <div class="cta-block">
       <h2 class="cta-title">Запишитесь на приём к специалисту</h2>
-      <button type="button" class="btn btn-primary" onclick="document.getElementById('modal-appointment').showModal()">Записаться на прием</button>
+      <a href="{% url 'appointment-request' %}" class="btn btn-primary">Записаться на прием</a>
     </div>
   </div>
 </section>

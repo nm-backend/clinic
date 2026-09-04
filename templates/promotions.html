@@ -12,28 +12,28 @@
   <div class="container">
     <h1 class="page-title">Акции</h1>
 
-    {% for promo in promotions %}
-      <div class="promo-card promo-card-wide {% if promo.color %}promo-card-colored{% endif %}"
-           {% if promo.color %}style="background-color: #{{ promo.color }};"{% endif %}>
-        <div class="promo-card-body">
-          <h2 class="promo-card-title">{{ promo.title }}</h2>
-          <p class="promo-card-text">{{ promo.description }}</p>
+    <div class="promotions-grid">
+      {% for promo in promotions %}
+        <div class="promo-single {% if promo.color %}promo-single-colored{% endif %}"
+             {% if promo.color %}style="background-color: #{{ promo.color }};"{% endif %}>
+          <div class="promo-single-title">{{ promo.title }}</div>
           {% if promo.valid_until %}
-            <p class="promo-card-date">Акция действует до {{ promo.valid_until|date:'d.m.Y' }}</p>
+            <div class="promo-single-date">
+              <span class="promo-date-label">Действует до</span>
+              <span class="promo-date-value">{{ promo.valid_until|date:'d.m.Y' }}</span>
+            </div>
           {% endif %}
-          <button type="button" class="btn promo-card-btn" onclick="document.getElementById('modal-appointment').showModal()">Подробнее</button>
+          <a href="{% url 'appointment-request' %}" class="btn btn-primary promo-single-btn">Подробнее</a>
         </div>
-        {% if promo.image %}
-          <div class="promo-card-image">
-            <img src="{% static 'img/'|add:promo.image %}" alt="{{ promo.title }}" />
-          </div>
-        {% endif %}
-      </div>
-    {% endfor %}
+      {% empty %}
+        <p class="empty-text">Акции скоро появятся.</p>
+      {% endfor %}
+    </div>
 
     <div class="cta-block">
       <h2 class="cta-title">Хотите узнать подробнее об акциях?</h2>
-      <button type="button" class="btn btn-primary" onclick="document.getElementById('modal-callback').showModal()">Заказать звонок</button>
+      <p class="section-text" style="text-align:center;margin-bottom:24px;">Оставьте заявку и мы перезвоним вам</p>
+      <a href="{% url 'appointment-request' %}" class="btn btn-primary">Заказать звонок</a>
     </div>
   </div>
 </section>

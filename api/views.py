@@ -4,11 +4,10 @@ from django.db.models import Q
 from django.utils import timezone
 from rest_framework import status
 from rest_framework.exceptions import ValidationError
-from rest_framework.generics import ListAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import ListAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.viewsets import ModelViewSet
 
 from clinics.models import (
     Appointment,
@@ -25,10 +24,7 @@ from clinics.models import (
     ServiceCategory,
 )
 from api.serializers import (
-    AppointmentCreateSerializer,
     AppointmentDetailSerializer,
-    AppointmentModelSerializer,
-    AppointmentUpdateSerializer,
     CallbackRequestModelSerializer,
     ClinicModelSerializer,
     CurrentUserSerializer,
@@ -40,7 +36,6 @@ from api.serializers import (
     ServiceCategoryModelSerializer,
     ServiceModelSerializer,
 )
-from api.paginations import StandardResultsSetPagination
 
 
 def _get_int_query_param(request, param_name):
@@ -173,7 +168,7 @@ class AvailableSlotsAPIView(APIView):
                     doctor=doctor,
                     status__in=[Appointment.Status.SCHEDULED, Appointment.Status.CONFIRMED],
                     scheduled_at__lt=slot_end,
-                ).filter(scheduled_at__lt=slot_end).exists():
+                ).exists():
                     overlap = False
                     for existing in Appointment.objects.filter(
                         doctor=doctor,
@@ -237,15 +232,6 @@ class EquipmentListAPIView(ListAPIView):
 
     def get_queryset(self):
         return Equipment.objects.filter(is_active=True)
-
-
-class CallbackRequestListCreateAPIView(ListCreateAPIView):
-    serializer_class = CallbackRequestModelSerializer
-
-    def get_queryset(self):
-        if not self.request.user.is_staff:
-            return CallbackRequest.objects.none()
-        return CallbackRequest.objects.all()
 
 
 class RegisterAPIView(APIView):

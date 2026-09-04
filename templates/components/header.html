@@ -1,17 +1,19 @@
 {% load static %}
 <header class="site-header">
-  <div class="container">
-    <div class="header-topbar">
-      <span class="header-tagline">Мы – клиника рядом с вашим домом</span>
+  <div class="header-topbar">
+    <div class="container header-topbar-inner">
+      <span class="header-tagline">Сеть клиник Томской области</span>
       <label for="a11y-toggle" class="header-accessibility">
         <span class="a11y-normal">👁 Версия для слабовидящих</span>
         <span class="a11y-enabled">Обычная версия</span>
       </label>
       <div class="header-topbar-right">
-        <a class="header-phone" href="tel:+73822500049">+ 73822500049</a>
-        <button type="button" class="btn-appointment" onclick="document.getElementById('modal-appointment').showModal()">Записаться на прием</button>
+        <a class="header-phone" href="tel:+73822500049">+ 7 (3822) 50-00-49</a>
+        <a href="{% url 'appointment-request' %}" class="btn-appointment btn-appointment-outline">Записаться на прием</a>
       </div>
     </div>
+  </div>
+  <div class="container">
     <div class="header-navbar">
       <a class="header-logo" href="{% url 'index' %}">
         <img src="{% static 'img/6fa4e09bdc18a460f722958684d333b5b55f8b08.png' %}" alt="Ваш Доктор Рядом" />

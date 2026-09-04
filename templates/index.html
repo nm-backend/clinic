@@ -13,8 +13,18 @@
         Название нашей клиники выбрано не случайно. Работаем с 2003 года, лечим детей и взрослых.
         Нас выбирают, потому что мы рядом.
       </p>
-      <a href="{% url 'about' %}" class="btn hero-btn">Подробнее</a>
+      <a href="{% url 'about' %}" class="btn hero-btn">Подробнее <span class="btn-arrow">›</span></a>
     </div>
+    <div class="hero-image">
+      <img src="{% static 'img/32318bd57cfad221927c3a40505a844ee4c0fee5.png' %}" alt="Врач и пациент" />
+    </div>
+  </div>
+  <div class="hero-dots">
+    <span class="hero-dot hero-dot-active"></span>
+    <span class="hero-dot"></span>
+    <span class="hero-dot"></span>
+    <span class="hero-dot"></span>
+    <span class="hero-dot"></span>
   </div>
 </section>
 
@@ -40,8 +50,8 @@
 <section class="section">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title">Направления работы</h2>
-      <a href="{% url 'directions' %}" class="btn btn-primary">Все направления</a>
+      <h2 class="section-title">Направления нашей работы</h2>
+      <a href="{% url 'directions' %}" class="btn btn-primary">Все направления <span class="btn-arrow">›</span></a>
     </div>
     <div class="directions-grid">
       {% for category in categories|slice:':4' %}
@@ -49,8 +59,10 @@
           {% if category.image %}
             <img src="{% static 'img/'|add:category.image %}" alt="{{ category.name }}" />
           {% endif %}
-          <h3 class="direction-card-title">{{ category.name }}</h3>
-          <span class="direction-card-more">Подробнее</span>
+          <div class="direction-card-body">
+            <h3 class="direction-card-title">{{ category.name }}</h3>
+            <span class="direction-card-more">Подробнее</span>
+          </div>
         </a>
       {% endfor %}
     </div>
@@ -81,13 +93,13 @@
           <div class="doctor-card-info">
             <h3 class="doctor-name">{{ doctor.full_name }}</h3>
             <p class="doctor-specialty">{{ doctor.specialty }}</p>
-            <button type="button" class="btn btn-primary doctor-card-btn" data-modal-open="appointment">Записаться</button>
+            <a href="{% url 'appointment-request' %}" class="btn btn-primary doctor-card-btn">Запись на прием</a>
           </div>
         </div>
       {% endfor %}
     </div>
     <div class="text-center specialists-more">
-      <a href="{% url 'doctors' %}" class="btn btn-primary">Все специалисты</a>
+      <a href="{% url 'doctors' %}" class="btn btn-outline">Все специалисты</a>
     </div>
   </div>
 </section>
@@ -106,7 +118,7 @@
             <span class="promo-date-label">Акция действует до</span>
             <span class="promo-date-value">{{ promotions.0.valid_until|date:'d.m.Y' }}</span>
           </div>
-          <button type="button" class="btn promo-featured-btn" data-modal-open="appointment">Подробнее</button>
+          <a href="{% url 'appointment-request' %}" class="btn promo-featured-btn">Подробнее <span class="btn-arrow">›</span></a>
         </div>
         <img class="promo-featured-image" src="{% static 'img/2cf9f4594d091cb8c094edd35e77a980b8f7187a.png' %}" alt="Акция" />
       </div>
@@ -119,7 +131,7 @@
               <span class="promo-date-label">Акция действует до</span>
               <span class="promo-date-value">{{ promo.valid_until|date:'d.m.Y' }}</span>
             </p>
-            <button type="button" class="btn promo-single-btn" data-modal-open="appointment">Подробнее</button>
+            <a href="{% url 'appointment-request' %}" class="btn promo-single-btn">Подробнее</a>
           </div>
         {% endfor %}
       </div>
@@ -134,15 +146,21 @@
     </div>
     <div class="stacionar-pills">
       <div class="stacionar-pill">
-        <svg width="37" height="37" viewBox="0 0 37 37" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="8" width="27" height="17" rx="2"></rect><line x1="12" y1="29" x2="25" y2="29"></line></svg>
+        <div class="stacionar-pill-icon">
+          <svg width="37" height="37" viewBox="0 0 37 37" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="8" width="27" height="17" rx="2"></rect><line x1="12" y1="29" x2="25" y2="29"></line></svg>
+        </div>
         <span>Отлично оборудованные операционные</span>
       </div>
       <div class="stacionar-pill">
-        <svg width="37" height="37" viewBox="0 0 37 37" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.5 10 C13 14, 9 18, 9 22 a9.5 9.5 0 0 0 19 0 C28 18 24 14 18.5 10 Z"></path></svg>
+        <div class="stacionar-pill-icon">
+          <svg width="37" height="37" viewBox="0 0 37 37" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.5 10 C13 14, 9 18, 9 22 a9.5 9.5 0 0 0 19 0 C28 18 24 14 18.5 10 Z"></path></svg>
+        </div>
         <span>Полный контроль за состоянием пациентов</span>
       </div>
       <div class="stacionar-pill">
-        <svg width="37" height="37" viewBox="0 0 37 37" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 26 a4 4 0 0 0 4 4 h17 a4 4 0 0 0 4 -4"></path><line x1="10" y1="26" x2="10" y2="14"></line><line x1="27" y1="26" x2="27" y2="14"></line><path d="M10 14 h17 a5 5 0 0 1 -5 5 h-7 a5 5 0 0 1 -5 -5 Z"></path></svg>
+        <div class="stacionar-pill-icon">
+          <svg width="37" height="37" viewBox="0 0 37 37" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 26 a4 4 0 0 0 4 4 h17 a4 4 0 0 0 4 -4"></path><line x1="10" y1="26" x2="10" y2="14"></line><line x1="27" y1="26" x2="27" y2="14"></line><path d="M10 14 h17 a5 5 0 0 1 -5 5 h-7 a5 5 0 0 1 -5 -5 Z"></path></svg>
+        </div>
         <span>Комфорт и забота после операции</span>
       </div>
     </div>
@@ -174,7 +192,13 @@
           {% elif 'рентген' in item.name %}
             <img class="equipment-image" src="{% static 'img/e012e560ae205e6da86f2a0007fa80bbcd3922c8.png' %}" alt="{{ item.name }}" />
           {% endif %}
-          <p class="equipment-text">{{ item.description }}</p>
+          <ul class="equipment-features">
+            <li><span class="equipment-feature-icon">▶</span> 1,5 тесла / до 200 кг</li>
+            <li><span class="equipment-feature-icon">▶</span> 3D/4D запись исследования</li>
+            <li><span class="equipment-feature-icon">▶</span> МР маммография</li>
+            <li><span class="equipment-feature-icon">▶</span> МРТ всего тела за 1,5 часа</li>
+            <li><span class="equipment-feature-icon">▶</span> МРТ суставов</li>
+          </ul>
         </div>
       {% endfor %}
     </div>
@@ -184,28 +208,69 @@
 <section class="section">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title">Преимущества лечения</h2>
+      <h2 class="section-title">Наши преимущества</h2>
     </div>
     <div class="advantages-layout">
-      <div class="advantages-card">
-        <div class="advantage-item"><span class="advantage-dot"></span>Квалифицированные врачи с опытом от 6 лет</div>
-        <div class="advantage-item"><span class="advantage-dot"></span>Современное оборудование экспертного класса</div>
-        <div class="advantage-item"><span class="advantage-dot"></span>Собственная клинико-диагностическая лаборатория</div>
-        <div class="advantage-item"><span class="advantage-dot"></span>Лечение по ОМС и ДМС</div>
-        <div class="advantage-item"><span class="advantage-dot"></span>Запись на приём без ожидания в очереди</div>
-        <div class="advantage-item"><span class="advantage-dot"></span>Работаем с 2003 года</div>
-        <div class="advantage-item"><span class="advantage-dot"></span>Стационар с комфортными палатами</div>
-        <div class="advantage-item"><span class="advantage-dot"></span>Лечение детей и взрослых</div>
-        <div class="advantage-item"><span class="advantage-dot"></span>Доступные цены на услуги</div>
+      <div class="advantages-sidebar">
+        <div class="advantage-tab advantage-tab-active" data-tab="1">
+          <span class="advantage-tab-num">01</span>
+          <span class="advantage-tab-text">Профессионализм</span>
+        </div>
+        <div class="advantage-tab" data-tab="2">
+          <span class="advantage-tab-num">02</span>
+          <span class="advantage-tab-text">Широкий спектр услуг</span>
+        </div>
+        <div class="advantage-tab" data-tab="3">
+          <span class="advantage-tab-num">03</span>
+          <span class="advantage-tab-text">Современное оборудование</span>
+        </div>
+        <div class="advantage-tab" data-tab="4">
+          <span class="advantage-tab-num">04</span>
+          <span class="advantage-tab-text">Высокий уровень обслуживания</span>
+        </div>
+        <div class="advantage-tab" data-tab="5">
+          <span class="advantage-tab-num">05</span>
+          <span class="advantage-tab-text">Скорая помощь и служба помощи на дому</span>
+        </div>
+        <div class="advantage-tab" data-tab="6">
+          <span class="advantage-tab-num">06</span>
+          <span class="advantage-tab-text">Терапевтические и хирургические стационары</span>
+        </div>
+        <div class="advantage-tab" data-tab="7">
+          <span class="advantage-tab-num">07</span>
+          <span class="advantage-tab-text">Высокий уровень обслуживания</span>
+        </div>
+        <div class="advantage-tab" data-tab="8">
+          <span class="advantage-tab-num">08</span>
+          <span class="advantage-tab-text">Скорая помощь и служба помощи на дому</span>
+        </div>
+        <div class="advantage-tab" data-tab="9">
+          <span class="advantage-tab-num">09</span>
+          <span class="advantage-tab-text">Терапевтические и хирургические стационары</span>
+        </div>
       </div>
       <div class="advantages-main">
         <h3 class="advantages-title">Профессионализм</h3>
+        <div class="advantages-divider"></div>
         <p class="section-text">
           Врачи нашей клиники регулярно повышают квалификацию, участвуют в научных конференциях
           и применяют только доказательные методики лечения. Каждый специалист несёт личную
           ответственность за результат и здоровье пациента.
         </p>
-        <img class="advantages-image" src="{% static 'img/27d078fc5f910ac9b6a38deb4edd56162a412c8a.png' %}" alt="Наши врачи" />
+        <div class="advantages-stats">
+          <div class="advantages-stat">
+            <span class="advantages-stat-number">+2 800</span>
+            <span class="advantages-stat-label">пациентов</span>
+          </div>
+          <div class="advantages-stat">
+            <span class="advantages-stat-number">+2 800</span>
+            <span class="advantages-stat-label">пациентов</span>
+          </div>
+          <div class="advantages-stat">
+            <span class="advantages-stat-number">+2 800</span>
+            <span class="advantages-stat-label">пациентов</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -239,7 +304,7 @@
 <section class="section section-contacts">
   <div class="container contacts-inner">
     <div class="contacts-info">
-      <h2 class="section-title section-title-light">Контакты клиники</h2>
+      <h2 class="section-title section-title-light">Наши контакты</h2>
       <div class="contacts-list">
         <div class="contacts-item">
           <span class="contacts-label">Адрес</span>
@@ -254,11 +319,10 @@
           <span class="contacts-value">info@docnear.ru</span>
         </div>
       </div>
-      <button type="button" class="btn btn-primary" data-modal-open="appointment">Записаться на прием</button>
+      <a href="{% url 'appointment-request' %}" class="btn btn-primary">Записаться на прием</a>
     </div>
     <div class="contacts-map">
-      <img src="{% static 'img/62b0d02c35be20a1bede65edbbb5550765dab45b.png' %}" alt="Карта проезда Яндекс" />
-      <p class="section-text">Рейтинг на Яндекс Картах: 4,9</p>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2345.678!2d84.95!3d56.47!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTbCsDI4JzEyLjAiTiA4NMKwNTcnMDAuMCJF!5e0!3m2!1sru!2sru!4v1" width="100%" height="400" style="border:0; border-radius: 18px;" allowfullscreen="" loading="lazy"></iframe>
     </div>
   </div>
 </section>

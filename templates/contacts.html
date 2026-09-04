@@ -8,62 +8,85 @@
 {% endblock %}
 
 {% block content %}
-<section class="section">
-  <div class="container">
-    <h1 class="page-title">Контакты</h1>
-
-    <div class="contacts-inner">
-      <div class="contacts-info">
-        <div class="contact-block">
-          <span class="contact-block-label">Адрес:</span>
-          <span class="contact-block-value">г. Томск, ул. 79 Гвардейской дивизии, 6</span>
+<section class="section section-contacts">
+  <div class="container contacts-inner">
+    <div class="contacts-info">
+      <h2 class="section-title section-title-light">Наши контакты</h2>
+      <p class="contacts-company">ООО «МЕДСЕРВИС». ИНН: 70142956ъб. КПП: 701701001. ОГРН: 1177031079180, дата регистрации: 03.08.2017</p>
+      <p class="contacts-chief">Главный врач: Храмов Павел Александрович</p>
+      <p class="contacts-reception">Приём граждан по вопросам качества оказания медицинских услуг — каждый четверг по предварительной записи по телефону: (3822) 50-00-49</p>
+      <div class="contacts-list">
+        <div class="contacts-item">
+          <span class="contacts-label">Адрес</span>
+          <span class="contacts-value">г. Томск, ул. 79 Гвардейской дивизии, 6</span>
         </div>
-        <div class="contact-block">
-          <span class="contact-block-label">Телефон:</span>
-          <a class="contact-block-value" href="tel:+7382250049">+ 73822500049</a>
+        <div class="contacts-item">
+          <span class="contacts-label">Телефон</span>
+          <span class="contacts-value">8 (3822) 50-00-49</span>
         </div>
-        <div class="contact-block">
-          <span class="contact-block-label">Время работы:</span>
-          <span class="contact-block-value">Пн-Пт 08:00-20:00<br>Сб-Вс 09:00-17:00</span>
+        <div class="contacts-item">
+          <span class="contacts-label">Почта</span>
+          <span class="contacts-value">Poshta@gmail.com</span>
         </div>
-        <div class="contact-block">
-          <span class="contact-block-label">Почта:</span>
-          <a class="contact-block-value" href="mailto:info@docnear.ru">info@docnear.ru</a>
+        <div class="contacts-item">
+          <span class="contacts-label">График работы</span>
+          <span class="contacts-value">Понедельник — пятница: 8.00 — 20.00<br>Суббота: 9.00 — 17.00<br>Воскресенье: 10.00 — 16.00</span>
         </div>
-        <div class="contacts-transport">
-          <span class="contact-block-label">Как добраться:</span>
-          <div class="contacts-transport-list">
-            <span class="contacts-transport-item contacts-transport-item-dark">🚌 Автобус: 4, 11, 13, 14, 313, 401 — остановка «Говорова»</span>
-            <span class="contacts-transport-item contacts-transport-item-dark">🚎 Троллейбус: 5 — остановка «Говорова»</span>
-          </div>
-        </div>
-        <button type="button" class="btn btn-primary" onclick="document.getElementById('modal-appointment').showModal()">Записаться на приём</button>
-      </div>
-      <div class="contacts-map">
-        <img src="{% static 'img/62b0d02c35be20a1bede65edbbb5550765dab45b.png' %}" alt="Карта проезда" />
       </div>
     </div>
+    <div class="contacts-map">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2345.678!2d84.95!3d56.47!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTbCsDI4JzEyLjAiTiA4NMKwNTcnMDAuMCJF!5e0!3m2!1sru!2sru!4v1" width="100%" height="400" style="border:0; border-radius: 18px;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
 
-    {% if doctors %}
-      <div class="doctors-block">
-        <h2 class="section-title">Наши специалисты</h2>
-        <div class="doctors-grid">
-          {% for doctor in doctors %}
-            <div class="doctor-card">
-              <div class="doctor-photo">
-                {% if doctor.photo %}
-                  <img src="{% static 'img/'|add:doctor.photo %}" alt="{{ doctor.full_name }}" />
-                {% endif %}
-              </div>
-              <div class="doctor-card-info">
-                <h3 class="doctor-name">{{ doctor.full_name }}</h3>
-                <p class="doctor-specialty">{{ doctor.specialty }}</p>
-              </div>
-            </div>
-          {% endfor %}
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Наши специалисты</h2>
+    <div class="doctors-grid">
+      {% for doctor in doctors %}
+        <div class="doctor-card">
+          <div class="doctor-photo">
+            {% if doctor.photo %}
+              <img src="{% static 'img/'|add:doctor.photo %}" alt="{{ doctor.full_name }}" />
+            {% endif %}
+          </div>
+          <div class="doctor-card-info">
+            <h3 class="doctor-name">{{ doctor.full_name }}</h3>
+            <p class="doctor-specialty">{{ doctor.specialty }}</p>
+            <a href="{% url 'appointment-request' %}" class="btn btn-primary btn-block doctor-card-btn">Запись на прием</a>
+          </div>
         </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section-callback">
+  <div class="container">
+    <div class="callback-card">
+      <div class="callback-form">
+        <h2 class="callback-title">Хотите, мы Вам перезвоним?</h2>
+        <p class="callback-subtitle">Оставьте заявку и мы подробно ответим на все Ваши вопросы!</p>
+        <form method="post" action="{% url 'callback-request' %}">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{% url 'contacts' %}">
+          <div class="form-field">
+            <label for="contacts-callback-phone">Номер телефона</label>
+            <input type="tel" id="contacts-callback-phone" name="phone" placeholder="+7 (___) ___-__-__" required data-phone />
+          </div>
+          <div class="form-field">
+            <label for="contacts-callback-name">Ваше ФИО</label>
+            <input type="text" id="contacts-callback-name" name="full_name" placeholder="Иванов Иван Иванович" required />
+          </div>
+          <button type="submit" class="btn btn-primary">Заказать звонок</button>
+          <p class="form-note">Нажимая на кнопку Заказать звонок вы соглашаетесь с <a href="{% url 'legal' %}">политикой конфиденциальности</a></p>
+        </form>
       </div>
-    {% endif %}
+      <div class="callback-photo">
+        <img src="{% static 'img/1b758ab0212d9897dbada094d2e596b142fdb30b.png' %}" alt="Врач" />
+      </div>
+    </div>
   </div>
 </section>
 {% endblock %}

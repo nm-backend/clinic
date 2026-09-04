@@ -22,8 +22,6 @@ class AppointmentViewSet(ModelViewSet):
         'service',
     )
     serializer_class = AppointmentModelSerializer
-    pagination_class = StandardResultsSetPagination
-
     def get_serializer_class(self):
         if self.action == 'create':
             return AppointmentCreateSerializer

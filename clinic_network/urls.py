@@ -1,14 +1,7 @@
 from django.contrib import admin
 from django.shortcuts import redirect
-from django.urls import converters, include, path, register_converter
+from django.urls import include, path
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
-
-
-class UnicodeSlugConverter(converters.StringConverter):
-    regex = r'[-a-zA-Z0-9_\u0400-\u04ff]+'
-
-
-register_converter(UnicodeSlugConverter, 'uslug')
 
 
 def redirect_to_v1_docs(request):

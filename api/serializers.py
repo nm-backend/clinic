@@ -11,8 +11,6 @@ from clinics.models import (
     Doctor,
     DoctorScheduleSlot,
     Equipment,
-    License,
-    Partner,
     Patient,
     Promotion,
     Review,
@@ -22,7 +20,6 @@ from clinics.models import (
 
 
 def check_slot_available(doctor, service, scheduled_at, exclude_id=None, slot=None):
-    """Проверяет, нет ли пересечений с другими записями у врача."""
     end_time = scheduled_at + timezone.timedelta(minutes=service.duration_minutes)
     busy = Appointment.objects.filter(
         doctor=doctor,
@@ -59,14 +56,6 @@ class DoctorModelSerializer(ModelSerializer):
         fields = '__all__'
 
 
-class DoctorDetailSerializer(ModelSerializer):
-    clinic = ClinicModelSerializer(read_only=True)
-
-    class Meta:
-        model = Doctor
-        fields = '__all__'
-
-
 class ServiceCategoryModelSerializer(ModelSerializer):
     class Meta:
         model = ServiceCategory
@@ -83,12 +72,6 @@ class ServiceModelSerializer(ModelSerializer):
 
     class Meta:
         model = Service
-        fields = '__all__'
-
-
-class PatientModelSerializer(ModelSerializer):
-    class Meta:
-        model = Patient
         fields = '__all__'
 
 
@@ -109,18 +92,6 @@ class ReviewModelSerializer(ModelSerializer):
 class EquipmentModelSerializer(ModelSerializer):
     class Meta:
         model = Equipment
-        fields = '__all__'
-
-
-class LicenseModelSerializer(ModelSerializer):
-    class Meta:
-        model = License
-        fields = '__all__'
-
-
-class PartnerModelSerializer(ModelSerializer):
-    class Meta:
-        model = Partner
         fields = '__all__'
 
 
@@ -249,10 +220,8 @@ class AppointmentCreateSerializer(serializers.Serializer):
         else:
             if data.get('scheduled_at') is None:
                 raise serializers.ValidationError({'scheduled_at': 'Обязательное поле'})
-            check_slot_available(doctor, service, data['scheduled_at'])
 
-        if slot is not None:
-            check_slot_available(doctor, service, slot.start_at, slot=slot)
+        check_slot_available(doctor, service, data['scheduled_at'])
 
         data['doctor'] = doctor
         data['service'] = service
@@ -271,7 +240,7 @@ class AppointmentCreateSerializer(serializers.Serializer):
         email = validated_data.pop('patient_email', '')
         birth_date = validated_data.pop('patient_birth_date', None)
 
-        patient, created = Patient.objects.get_or_create(
+        patient, _ = Patient.objects.update_or_create(
             phone=phone,
             defaults={
                 'first_name': first_name,
@@ -280,12 +249,6 @@ class AppointmentCreateSerializer(serializers.Serializer):
                 'birth_date': birth_date,
             },
         )
-        if not created:
-            patient.first_name = first_name
-            patient.last_name = last_name
-            if email:
-                patient.email = email
-            patient.save(update_fields=['first_name', 'last_name', 'email'])
 
         slot = validated_data.pop('slot', None)
         scheduled_at = validated_data.pop('scheduled_at')

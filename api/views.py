@@ -10,8 +10,6 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from clinics.models import (
-    Appointment,
-    CallbackRequest,
     Clinic,
     ClinicUser,
     Doctor,
@@ -25,7 +23,6 @@ from clinics.models import (
 )
 from api.serializers import (
     AppointmentDetailSerializer,
-    CallbackRequestModelSerializer,
     ClinicModelSerializer,
     CurrentUserSerializer,
     DoctorModelSerializer,

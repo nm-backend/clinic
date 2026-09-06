@@ -11,35 +11,18 @@
   <div class="container">
     <h1 class="page-title">Врачи</h1>
 
-    <div class="doctors-filters">
+    <form method="get" class="doctors-filters">
       <div class="doctors-filter">
         <label class="doctors-filter-label">Специализация</label>
-        <select class="doctors-filter-select" onchange="window.location.href='?category='+this.value">
-          <option value="">Название</option>
+        <select class="doctors-filter-select" name="category" onchange="this.form.submit()">
+          <option value="">Все специализации</option>
           {% for cat in categories %}
           <option value="{{ cat.slug }}"{% if cat.slug == active_category %} selected{% endif %}>{{ cat.name }}</option>
           {% endfor %}
         </select>
       </div>
-      <div class="doctors-filter">
-        <label class="doctors-filter-label">Медицинский центр</label>
-        <select class="doctors-filter-select">
-          <option value="">Название</option>
-        </select>
-      </div>
-      <div class="doctors-filter">
-        <label class="doctors-filter-label">Возраст пациента</label>
-        <select class="doctors-filter-select">
-          <option value="">Название</option>
-        </select>
-      </div>
-      <div class="doctors-filter">
-        <label class="doctors-filter-label">ФИО врача</label>
-        <select class="doctors-filter-select">
-          <option value="">Название</option>
-        </select>
-      </div>
-    </div>
+      <button type="submit" class="btn btn-outline">Применить</button>
+    </form>
 
     <div class="doctors-sort">
       <a href="?sort=name" class="doctors-sort-link">по алфавиту</a>
@@ -57,7 +40,7 @@
         <div class="doctor-card-info">
           <div class="doctor-name">{{ d.full_name }}</div>
           <div class="doctor-specialty">{{ d.specialty }}</div>
-          <a href="{% url 'appointment-request' %}" class="btn btn-primary btn-block doctor-card-btn">Запись на прием</a>
+          <a href="{% url 'appointment-page' %}" class="btn btn-primary btn-block doctor-card-btn">Запись на прием</a>
         </div>
       </div>
       {% empty %}

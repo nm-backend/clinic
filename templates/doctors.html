@@ -51,7 +51,7 @@
       <div class="doctor-card">
         <div class="doctor-photo">
           {% if d.photo %}
-          <img src="{{ d.photo.url }}" alt="{{ d.full_name }}">
+          <img src="{% static 'img/'|add:d.photo %}" alt="{{ d.full_name }}">
           {% endif %}
         </div>
         <div class="doctor-card-info">
@@ -63,50 +63,6 @@
       {% empty %}
       <p class="empty-text">Список специалистов скоро появится.</p>
       {% endfor %}
-    </div>
-
-    {% if doctors|length > 4 %}
-    <div class="show-more">
-      <button type="button" class="btn btn-outline" data-show-more>Показать ещё</button>
-    </div>
-    {% endif %}
-
-    <div class="pagination">
-      {% if page_obj.has_previous %}
-      <a href="?page={{ page_obj.previous_page_number }}{% if active_category %}&category={{ active_category }}{% endif %}{% if search %}&q={{ search }}{% endif %}" class="pagination-btn">&larr;</a>
-      {% endif %}
-      <span class="pagination-current">{{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
-      {% if page_obj.has_next %}
-      <a href="?page={{ page_obj.next_page_number }}{% if active_category %}&category={{ active_category }}{% endif %}{% if search %}&q={{ search }}{% endif %}" class="pagination-btn">&rarr;</a>
-      {% endif %}
-    </div>
-  </div>
-</section>
-
-<section class="section section-callback">
-  <div class="container">
-    <div class="callback-card">
-      <div class="callback-form">
-        <h2 class="callback-title">Хотите, мы Вам перезвоним?</h2>
-        <p class="callback-subtitle">Оставьте заявку и мы подробно ответим на все Ваши вопросы!</p>
-        <form method="post" action="{% url 'callback-request' %}">
-          {% csrf_token %}
-          <input type="hidden" name="next" value="{% url 'doctors' %}">
-          <div class="form-field">
-            <label for="doctors-callback-phone">Номер телефона</label>
-            <input type="tel" id="doctors-callback-phone" name="phone" placeholder="+7 (___) ___-__-__" required data-phone />
-          </div>
-          <div class="form-field">
-            <label for="doctors-callback-name">Ваше ФИО</label>
-            <input type="text" id="doctors-callback-name" name="full_name" placeholder="Иванов Иван Иванович" required />
-          </div>
-          <button type="submit" class="btn btn-primary">Заказать звонок</button>
-          <p class="form-note">Нажимая на кнопку Заказать звонок вы соглашаетесь с <a href="{% url 'legal' %}">политикой конфиденциальности</a></p>
-        </form>
-      </div>
-      <div class="callback-photo">
-        <img src="{% static 'img/1b758ab0212d9897dbada094d2e596b142fdb30b.png' %}" alt="Врач" />
-      </div>
     </div>
   </div>
 </section>

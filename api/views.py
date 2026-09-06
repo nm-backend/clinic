@@ -10,6 +10,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from clinics.models import (
+    Appointment,
     Clinic,
     ClinicUser,
     Doctor,
@@ -22,7 +23,7 @@ from clinics.models import (
     ServiceCategory,
 )
 from api.serializers import (
-    AppointmentDetailSerializer,
+    AppointmentSerializer,
     ClinicModelSerializer,
     CurrentUserSerializer,
     DoctorModelSerializer,
@@ -116,77 +117,29 @@ class AvailableSlotsAPIView(APIView):
             raise ValidationError({'date': 'Неверный формат даты'}) from exc
 
         try:
-            doctor = Doctor.objects.select_related('clinic').get(pk=doctor_id, is_active=True)
+            doctor = Doctor.objects.get(pk=doctor_id, is_active=True)
         except Doctor.DoesNotExist as exc:
             raise ValidationError({'doctor_id': 'Врач не найден'}) from exc
 
-        service = doctor.clinic.services.first()
-        if service is None:
-            service = Service.objects.filter(is_active=True).order_by('duration_minutes').first()
-
-        if service is None:
-            return Response([])
-
-        slots = []
-        doctor_slots = DoctorScheduleSlot.objects.filter(
+        slots = DoctorScheduleSlot.objects.filter(
             doctor=doctor,
             start_at__date=day,
             is_available=True,
-        ).order_by('start_at')
+        ).exclude(
+            appointments__status__in=[Appointment.Status.SCHEDULED, Appointment.Status.CONFIRMED]
+        ).order_by('start_at').values('id', 'start_at', 'end_at')
 
-        if doctor_slots.exists():
-            for slot in doctor_slots:
-                if slot.start_at <= timezone.now():
-                    continue
-                if Appointment.objects.filter(
-                    doctor=doctor,
-                    status__in=[Appointment.Status.SCHEDULED, Appointment.Status.CONFIRMED],
-                    slot=slot,
-                ).exists():
-                    continue
-                slots.append({
-                    'id': slot.id,
-                    'start': slot.start_at.isoformat(),
-                    'end': slot.end_at.isoformat(),
-                })
-        else:
-            start_time = time(8, 0)
-            end_time = time(20, 0)
+        result = [
+            {'id': s['id'], 'start': s['start_at'].isoformat(), 'end': s['end_at'].isoformat()}
+            for s in slots
+            if s['start_at'] > timezone.now()
+        ]
 
-            current = datetime.combine(day, start_time)
-            end_dt = datetime.combine(day, end_time)
-            timezone_info = timezone.get_current_timezone()
-            current = timezone.make_aware(current, timezone_info)
-            end_dt = timezone.make_aware(end_dt, timezone_info)
-
-            while current < end_dt:
-                slot_end = current + timezone.timedelta(minutes=service.duration_minutes)
-                if current > timezone.now() and not Appointment.objects.filter(
-                    doctor=doctor,
-                    status__in=[Appointment.Status.SCHEDULED, Appointment.Status.CONFIRMED],
-                    scheduled_at__lt=slot_end,
-                ).exists():
-                    overlap = False
-                    for existing in Appointment.objects.filter(
-                        doctor=doctor,
-                        status__in=[Appointment.Status.SCHEDULED, Appointment.Status.CONFIRMED],
-                    ):
-                        existing_end = existing.scheduled_at + timezone.timedelta(minutes=existing.service.duration_minutes)
-                        if existing.scheduled_at < slot_end and existing_end > current:
-                            overlap = True
-                            break
-                    if not overlap:
-                        slots.append({
-                            'start': current.isoformat(),
-                            'end': slot_end.isoformat(),
-                        })
-                current += timezone.timedelta(minutes=30)
-
-        return Response(slots)
+        return Response(result)
 
 
 class PatientAppointmentsAPIView(ListAPIView):
-    serializer_class = AppointmentDetailSerializer
+    serializer_class = AppointmentSerializer
 
     def get_queryset(self):
         patient_id = _get_int_query_param(self.request, 'patient_id')

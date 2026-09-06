@@ -11,15 +11,15 @@
     </div>
 
     <div class="directions-grid">
-      {% for item in directions %}
-      <a href="{% url 'direction_detail' item.pk %}" class="direction-card">
-        {% if item.image %}
-        <img src="{{ item.image.url }}" alt="{{ item.title }}">
+      {% for category in categories %}
+      <a href="{% url 'direction_detail' slug=category.slug %}" class="direction-card">
+        {% if category.image %}
+        <img src="{% static 'img/'|add:category.image %}" alt="{{ category.name }}">
         {% endif %}
         <div class="direction-card-body">
-          <div class="direction-card-title">{{ item.title }}</div>
-          {% if item.description %}
-          <div class="direction-card-text">{{ item.description|truncatechars:100 }}</div>
+          <div class="direction-card-title">{{ category.name }}</div>
+          {% if category.description %}
+          <div class="direction-card-text">{{ category.description|truncatechars:100 }}</div>
           {% endif %}
           <div class="direction-card-more">Подробнее</div>
         </div>

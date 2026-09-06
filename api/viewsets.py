@@ -4,14 +4,7 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 
 from clinics.models import Appointment, CallbackRequest
-from api.serializers import (
-    AppointmentModelSerializer,
-    AppointmentCreateSerializer,
-    AppointmentDetailSerializer,
-    AppointmentUpdateSerializer,
-    CallbackRequestModelSerializer,
-)
-from api.paginations import StandardResultsSetPagination
+from api.serializers import AppointmentSerializer, CallbackRequestModelSerializer
 
 
 class AppointmentViewSet(ModelViewSet):
@@ -21,15 +14,7 @@ class AppointmentViewSet(ModelViewSet):
         'doctor__clinic',
         'service',
     )
-    serializer_class = AppointmentModelSerializer
-    def get_serializer_class(self):
-        if self.action == 'create':
-            return AppointmentCreateSerializer
-        elif self.action == 'retrieve':
-            return AppointmentDetailSerializer
-        elif self.action in ('update', 'partial_update'):
-            return AppointmentUpdateSerializer
-        return AppointmentModelSerializer
+    serializer_class = AppointmentSerializer
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -43,28 +28,6 @@ class AppointmentViewSet(ModelViewSet):
             queryset = queryset.filter(status=appointment_status)
 
         return queryset
-
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        appointment = serializer.save()
-        return Response(
-            AppointmentDetailSerializer(appointment).data,
-            status=status.HTTP_201_CREATED,
-        )
-
-    def update(self, request, *args, **kwargs):
-        partial = kwargs.pop('partial', False)
-        instance = self.get_object()
-        serializer = AppointmentUpdateSerializer(
-            instance,
-            data=request.data,
-            partial=partial,
-            context={**self.get_serializer_context(), 'appointment': instance},
-        )
-        serializer.is_valid(raise_exception=True)
-        appointment = serializer.save()
-        return Response(AppointmentDetailSerializer(appointment).data)
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()

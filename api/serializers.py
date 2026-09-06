@@ -145,83 +145,93 @@ class CurrentUserSerializer(serializers.ModelSerializer):
         fields = ('username', 'email', 'role', 'clinic')
 
 
-class AppointmentModelSerializer(ModelSerializer):
-    class Meta:
-        model = Appointment
-        fields = '__all__'
-
-
-class AppointmentDetailSerializer(ModelSerializer):
+class AppointmentSerializer(ModelSerializer):
     patient_name = serializers.CharField(source='patient.full_name', read_only=True)
     doctor_name = serializers.CharField(source='doctor.full_name', read_only=True)
     service_name = serializers.CharField(source='service.name', read_only=True)
     clinic_name = serializers.CharField(source='doctor.clinic.name', read_only=True)
 
+    patient_first_name = serializers.CharField(max_length=100, write_only=True, required=False)
+    patient_last_name = serializers.CharField(max_length=100, write_only=True, required=False)
+    patient_phone = serializers.CharField(max_length=30, write_only=True, required=False)
+    patient_email = serializers.EmailField(required=False, allow_blank=True, write_only=True)
+    patient_birth_date = serializers.DateField(required=False, allow_null=True, write_only=True)
+    doctor_id = serializers.IntegerField(min_value=1, write_only=True, required=False)
+    service_id = serializers.IntegerField(min_value=1, write_only=True, required=False)
+    slot_id = serializers.IntegerField(min_value=1, required=False, allow_null=True, write_only=True)
+
     class Meta:
         model = Appointment
-        fields = '__all__'
-
-
-class AppointmentCreateSerializer(serializers.Serializer):
-    patient_first_name = serializers.CharField(max_length=100)
-    patient_last_name = serializers.CharField(max_length=100)
-    patient_phone = serializers.CharField(max_length=30)
-    patient_email = serializers.EmailField(required=False, allow_blank=True)
-    patient_birth_date = serializers.DateField(required=False, allow_null=True)
-    doctor_id = serializers.IntegerField(min_value=1)
-    service_id = serializers.IntegerField(min_value=1)
-    slot_id = serializers.IntegerField(min_value=1, required=False, allow_null=True)
-    scheduled_at = serializers.DateTimeField(required=False, allow_null=True)
-    notes = serializers.CharField(required=False, allow_blank=True, default='')
+        fields = [
+            'id', 'patient', 'doctor', 'service', 'slot', 'scheduled_at',
+            'status', 'notes', 'created_at', 'updated_at',
+            'patient_name', 'doctor_name', 'service_name', 'clinic_name',
+            'patient_first_name', 'patient_last_name', 'patient_phone',
+            'patient_email', 'patient_birth_date', 'doctor_id', 'service_id', 'slot_id',
+        ]
+        read_only_fields = ['id', 'created_at', 'updated_at', 'patient', 'doctor', 'service']
 
     def validate_scheduled_at(self, value):
-        if value is None:
-            return value
-        if value <= timezone.now():
+        if value is not None and value <= timezone.now():
             raise serializers.ValidationError('Дата приёма должна быть в будущем')
         return value
 
-    def validate_doctor_id(self, value):
-        if not Doctor.objects.filter(pk=value, is_active=True).exists():
-            raise serializers.ValidationError(
-                'Врач не найден или не принимает пациентов',
-            )
-        return value
-
-    def validate_service_id(self, value):
-        if not Service.objects.filter(pk=value, is_active=True).exists():
-            raise serializers.ValidationError('Услуга не найдена')
+    def validate_status(self, value):
+        if value == Appointment.Status.COMPLETED:
+            raise serializers.ValidationError('Статус "completed" устанавливается только администратором')
         return value
 
     def validate(self, data):
-        doctor = Doctor.objects.select_related('clinic').get(pk=data['doctor_id'])
+        doctor_id = data.get('doctor_id')
+        service_id = data.get('service_id')
+        slot_id = data.get('slot_id')
+        scheduled_at = data.get('scheduled_at')
 
-        if not doctor.clinic.is_active:
-            raise serializers.ValidationError('Клиника врача неактивна')
+        if self.instance is None:
+            if not doctor_id:
+                raise serializers.ValidationError({'doctor_id': 'Обязательное поле'})
+            if not service_id:
+                raise serializers.ValidationError({'service_id': 'Обязательное поле'})
+            if not slot_id and not scheduled_at:
+                raise serializers.ValidationError({'scheduled_at': 'Обязательное поле'})
 
-        service = Service.objects.get(pk=data['service_id'])
-        if service.clinic_id and service.clinic_id != doctor.clinic_id:
-            raise serializers.ValidationError(
-                'Услуга недоступна в клинике выбранного врача',
-            )
+        doctor = Doctor.objects.select_related('clinic').get(pk=doctor_id) if doctor_id else (self.instance.doctor if self.instance else None)
+        service = Service.objects.get(pk=service_id) if service_id else (self.instance.service if self.instance else None)
+
+        if doctor and not doctor.is_active:
+            raise serializers.ValidationError({'doctor_id': 'Врач не принимает пациентов'})
+        if doctor and not doctor.clinic.is_active:
+            raise serializers.ValidationError({'doctor_id': 'Клиника врача неактивна'})
+        if service and not service.is_active:
+            raise serializers.ValidationError({'service_id': 'Услуга недоступна'})
 
         slot = None
-        if data.get('slot_id'):
+        if slot_id:
             slot = DoctorScheduleSlot.objects.filter(
-                pk=data['slot_id'],
-                doctor=doctor,
-                is_available=True,
+                pk=slot_id, doctor=doctor, is_available=True
             ).first()
-            if slot is None:
+            if not slot:
                 raise serializers.ValidationError({'slot_id': 'Слот не найден или уже занят'})
             if slot.start_at <= timezone.now():
                 raise serializers.ValidationError({'slot_id': 'Слот уже неактуален'})
             data['scheduled_at'] = slot.start_at
-        else:
-            if data.get('scheduled_at') is None:
-                raise serializers.ValidationError({'scheduled_at': 'Обязательное поле'})
 
-        check_slot_available(doctor, service, data['scheduled_at'])
+        check_at = data.get('scheduled_at', self.instance.scheduled_at if self.instance else None)
+        if doctor and service and check_at:
+            end_time = check_at + timezone.timedelta(minutes=service.duration_minutes)
+            busy = Appointment.objects.filter(
+                doctor=doctor,
+                status__in=[Appointment.Status.SCHEDULED, Appointment.Status.CONFIRMED],
+                scheduled_at__lt=end_time,
+            )
+            if self.instance:
+                busy = busy.exclude(pk=self.instance.pk)
+            if slot is not None:
+                busy = busy.filter(slot__in=[slot, None])
+            for existing in busy:
+                existing_end = existing.scheduled_at + timezone.timedelta(minutes=existing.service.duration_minutes)
+                if existing.scheduled_at < end_time and existing_end > check_at:
+                    raise serializers.ValidationError('У врача уже есть запись на это время')
 
         data['doctor'] = doctor
         data['service'] = service
@@ -229,29 +239,25 @@ class AppointmentCreateSerializer(serializers.Serializer):
         return data
 
     def create(self, validated_data):
-        validated_data.pop('doctor_id')
-        validated_data.pop('service_id')
+        patient_first_name = validated_data.pop('patient_first_name', '')
+        patient_last_name = validated_data.pop('patient_last_name', '')
+        patient_phone = validated_data.pop('patient_phone', '')
+        patient_email = validated_data.pop('patient_email', '')
+        patient_birth_date = validated_data.pop('patient_birth_date', None)
         doctor = validated_data.pop('doctor')
         service = validated_data.pop('service')
-
-        phone = validated_data.pop('patient_phone')
-        first_name = validated_data.pop('patient_first_name')
-        last_name = validated_data.pop('patient_last_name')
-        email = validated_data.pop('patient_email', '')
-        birth_date = validated_data.pop('patient_birth_date', None)
-
-        patient, _ = Patient.objects.update_or_create(
-            phone=phone,
-            defaults={
-                'first_name': first_name,
-                'last_name': last_name,
-                'email': email,
-                'birth_date': birth_date,
-            },
-        )
-
         slot = validated_data.pop('slot', None)
         scheduled_at = validated_data.pop('scheduled_at')
+
+        patient, _ = Patient.objects.update_or_create(
+            phone=patient_phone,
+            defaults={
+                'first_name': patient_first_name,
+                'last_name': patient_last_name,
+                'email': patient_email,
+                'birth_date': patient_birth_date,
+            },
+        )
 
         appointment = Appointment.objects.create(
             patient=patient,
@@ -260,91 +266,16 @@ class AppointmentCreateSerializer(serializers.Serializer):
             slot=slot,
             scheduled_at=scheduled_at,
             notes=validated_data.pop('notes', ''),
+            status=Appointment.Status.SCHEDULED,
         )
         if slot is not None:
             slot.is_available = False
             slot.save(update_fields=['is_available'])
         return appointment
 
-
-class AppointmentUpdateSerializer(serializers.Serializer):
-    doctor_id = serializers.IntegerField(min_value=1, required=False)
-    service_id = serializers.IntegerField(min_value=1, required=False)
-    scheduled_at = serializers.DateTimeField(required=False)
-    status = serializers.ChoiceField(
-        choices=Appointment.Status.choices,
-        required=False,
-    )
-    notes = serializers.CharField(required=False, allow_blank=True)
-
-    def validate_scheduled_at(self, value):
-        if value is None:
-            return value
-        if value <= timezone.now():
-            raise serializers.ValidationError('Дата приёма должна быть в будущем')
-        return value
-
-    def validate_status(self, value):
-        if value == Appointment.Status.COMPLETED:
-            raise serializers.ValidationError(
-                'Статус "completed" устанавливается только администратором',
-            )
-        return value
-
-    def validate(self, data):
-        instance = self.context.get('appointment')
-        if instance is None:
-            return data
-
-        if instance.status == Appointment.Status.CANCELLED:
-            raise serializers.ValidationError('Нельзя изменить отменённую запись')
-
-        if instance.status == Appointment.Status.COMPLETED:
-            raise serializers.ValidationError('Нельзя изменить завершённую запись')
-
-        doctor = instance.doctor
-        if 'doctor_id' in data:
-            try:
-                doctor = Doctor.objects.select_related('clinic').get(
-                    pk=data['doctor_id'],
-                    is_active=True,
-                )
-            except Doctor.DoesNotExist:
-                raise serializers.ValidationError(
-                    'Врач не найден или не принимает пациентов',
-                )
-            if not doctor.clinic.is_active:
-                raise serializers.ValidationError('Клиника врача неактивна')
-
-        service = instance.service
-        if 'service_id' in data:
-            try:
-                service = Service.objects.get(pk=data['service_id'], is_active=True)
-            except Service.DoesNotExist:
-                raise serializers.ValidationError('Услуга не найдена')
-
-        if service.clinic_id and service.clinic_id != doctor.clinic_id:
-            raise serializers.ValidationError(
-                'Услуга недоступна в клинике выбранного врача',
-            )
-
-        scheduled_at = data.get('scheduled_at', instance.scheduled_at)
-        if 'scheduled_at' in data or 'doctor_id' in data or 'service_id' in data:
-            check_slot_available(
-                doctor, service, scheduled_at, exclude_id=instance.pk,
-            )
-
-        data['doctor'] = doctor
-        data['service'] = service
-        return data
-
     def update(self, instance, validated_data):
-        validated_data.pop('doctor_id', None)
-        validated_data.pop('service_id', None)
-
-        for field in ('doctor', 'service', 'scheduled_at', 'status', 'notes'):
+        for field in ('doctor', 'service', 'slot', 'scheduled_at', 'status', 'notes'):
             if field in validated_data:
                 setattr(instance, field, validated_data.pop(field))
-
         instance.save()
         return instance

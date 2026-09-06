@@ -147,6 +147,10 @@ def legal(request):
     return render(request, 'legal.html')
 
 
+def appointment_page(request):
+    return render(request, 'appointment.html')
+
+
 @require_POST
 def appointment_request(request):
     serializer = CallbackRequestModelSerializer(data={

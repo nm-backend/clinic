@@ -78,7 +78,7 @@
           <a href="#" class="review-read-more">Читать полностью</a>
           <div class="review-footer">
             <span class="review-date">{{ review.created_at|date:'d.m.Y' }}</span>
-            <span class="review-doctor">Врач: <span class="review-doctor-name">{{ review.doctor.last_name }} {{ review.doctor.first_name }} {{ review.doctor.middle_name }}</span></span>
+            <span class="review-doctor">Врач: <span class="review-doctor-name">{{ review.doctor.last_name }} {{ review.doctor.first_name }}</span></span>
           </div>
         </div>
       {% empty %}
@@ -99,34 +99,6 @@
       <img src="{% static 'img/5e2bfba032ba844b201cd81430b9b18c5f5a8bce.png' %}" alt="Лицензия" />
       <img src="{% static 'img/5e2bfba032ba844b201cd81430b9b18c5f5a8bce.png' %}" alt="Лицензия" />
       <img src="{% static 'img/5e2bfba032ba844b201cd81430b9b18c5f5a8bce.png' %}" alt="Лицензия" />
-    </div>
-  </div>
-</section>
-
-<section class="section section-callback">
-  <div class="container">
-    <div class="callback-card">
-      <div class="callback-form">
-        <h2 class="callback-title">Хотите, мы Вам перезвоним?</h2>
-        <p class="callback-subtitle">Оставьте заявку и мы подробно ответим на все Ваши вопросы!</p>
-        <form method="post" action="{% url 'callback-request' %}">
-          {% csrf_token %}
-          <input type="hidden" name="next" value="{% url 'about' %}">
-          <div class="form-field">
-            <label for="about-callback-name">Ваше ФИО</label>
-            <input type="text" id="about-callback-name" name="full_name" placeholder="Иванов Иван Иванович" required />
-          </div>
-          <div class="form-field">
-            <label for="about-callback-phone">Номер телефона</label>
-            <input type="tel" id="about-callback-phone" name="phone" placeholder="+7 (___) ___-__-__" required data-phone />
-          </div>
-          <button type="submit" class="btn btn-primary">Заказать звонок</button>
-          <p class="form-note">Нажимая на кнопку Заказать звонок вы соглашаетесь с <a href="{% url 'legal' %}">политикой конфиденциальности</a></p>
-        </form>
-      </div>
-      <div class="callback-photo">
-        <img src="{% static 'img/1b758ab0212d9897dbada094d2e596b142fdb30b.png' %}" alt="Врач" />
-      </div>
     </div>
   </div>
 </section>

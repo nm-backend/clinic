@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Запись на приём{% endblock %}
+
+{% block breadcrumbs %}
+  {% include 'components/breadcrumbs.html' with title='Запись на приём' %}
+{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h1 class="page-title">Записаться на приём</h1>
+    <p class="page-text">Заполните форму и мы свяжемся с вами для подтверждения времени приёма.</p>
+
+    <div class="appointment-form-wrapper">
+      <form class="modal-form" action="{% url 'appointment-request' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.path }}">
+
+        <div class="form-field">
+          <label for="appointment-name">Ваше ФИО</label>
+          <input type="text" id="appointment-name" name="full_name" placeholder="Иванов Иван Иванович" required />
+        </div>
+
+        <div class="form-field">
+          <label for="appointment-phone">Номер телефона</label>
+          <input type="tel" id="appointment-phone" name="phone" placeholder="+7 (___) ___-__-__" required />
+        </div>
+
+        <div class="form-field">
+          <label for="appointment-email">Email (необязательно)</label>
+          <input type="email" id="appointment-email" name="email" placeholder="email@example.com" />
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Отправить заявку</button>
+        <p class="form-note">Нажимая на кнопку «Отправить заявку» вы соглашаетесь с <a href="{% url 'legal' %}">политикой конфиденциальности</a></p>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

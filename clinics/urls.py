@@ -17,6 +17,7 @@ urlpatterns = [
     path('dms/', views.dms, name='dms'),
     path('analyses/', views.analyses, name='analyses'),
     path('legal/', views.legal, name='legal'),
+    path('appointment/', views.appointment_page, name='appointment-page'),
     path('forms/appointment/', views.appointment_request, name='appointment-request'),
     path('forms/callback/', views.callback_request, name='callback-request'),
 ]

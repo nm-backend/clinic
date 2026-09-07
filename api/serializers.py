@@ -1,5 +1,4 @@
 from django.contrib.auth import get_user_model
-from django.utils import timezone
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 
@@ -131,76 +130,4 @@ class AppointmentSerializer(ModelSerializer):
 
     class Meta:
         model = Appointment
-        fields = [
-            'id', 'patient', 'doctor', 'service', 'slot', 'scheduled_at',
-            'status', 'notes', 'created_at', 'updated_at',
-            'patient_name', 'doctor_name', 'service_name', 'clinic_name',
-        ]
-        read_only_fields = ['id', 'created_at', 'updated_at', 'patient_name', 'doctor_name', 'service_name', 'clinic_name']
-
-    def validate_scheduled_at(self, value):
-        if value is not None and value <= timezone.now():
-            raise serializers.ValidationError('Дата приёма должна быть в будущем')
-        return value
-
-    def validate_status(self, value):
-        if value == Appointment.Status.COMPLETED:
-            raise serializers.ValidationError('Статус "completed" устанавливается только администратором')
-        return value
-
-    def validate(self, data):
-        doctor = data.get('doctor')
-        service = data.get('service')
-        slot = data.get('slot')
-        scheduled_at = data.get('scheduled_at')
-
-        if self.instance is None:
-            if not doctor:
-                raise serializers.ValidationError({'doctor': 'Обязательное поле'})
-            if not service:
-                raise serializers.ValidationError({'service': 'Обязательное поле'})
-            if not slot and not scheduled_at:
-                raise serializers.ValidationError({'scheduled_at': 'Обязательное поле'})
-
-        if doctor and not doctor.is_active:
-            raise serializers.ValidationError({'doctor': 'Врач не принимает пациентов'})
-        if doctor and not doctor.clinic.is_active:
-            raise serializers.ValidationError({'doctor': 'Клиника врача неактивна'})
-        if service and not service.is_active:
-            raise serializers.ValidationError({'service': 'Услуга недоступна'})
-
-        if slot:
-            if slot.doctor != doctor:
-                raise serializers.ValidationError({'slot': 'Слот не принадлежит этому врачу'})
-            if not slot.is_available:
-                raise serializers.ValidationError({'slot': 'Слот уже занят'})
-            if slot.start_at <= timezone.now():
-                raise serializers.ValidationError({'slot': 'Слот уже неактуален'})
-            data['scheduled_at'] = slot.start_at
-
-        check_at = data.get('scheduled_at', self.instance.scheduled_at if self.instance else None)
-        if doctor and service and check_at:
-            end_time = check_at + timezone.timedelta(minutes=service.duration_minutes)
-            busy = Appointment.objects.filter(
-                doctor=doctor,
-                status__in=[Appointment.Status.SCHEDULED, Appointment.Status.CONFIRMED],
-                scheduled_at__lt=end_time,
-            )
-            if self.instance:
-                busy = busy.exclude(pk=self.instance.pk)
-            if slot:
-                busy = busy.filter(slot__in=[slot, None])
-            for existing in busy:
-                existing_end = existing.scheduled_at + timezone.timedelta(minutes=existing.service.duration_minutes)
-                if existing.scheduled_at < end_time and existing_end > check_at:
-                    raise serializers.ValidationError('У врача уже есть запись на это время')
-
-        return data
-
-    def create(self, validated_data):
-        slot = validated_data.pop('slot', None)
-        appointment = Appointment.objects.create(**validated_data)
-        if slot:
-            slot.is_available = False
-            slot.save(update_fields=['is_available'])
-        return appointment
+        fields = '__all__'

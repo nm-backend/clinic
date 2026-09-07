@@ -23,8 +23,8 @@ class AppointmentViewSet(ModelViewSet):
 
 
 class CallbackRequestViewSet(ModelViewSet):
+    queryset = CallbackRequest.objects.all()
     serializer_class = CallbackRequestModelSerializer
-    pagination_class = None
 
     def get_queryset(self):
         if not self.request.user.is_staff:

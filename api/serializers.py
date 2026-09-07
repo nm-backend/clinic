@@ -75,19 +75,8 @@ class EquipmentModelSerializer(ModelSerializer):
 class CallbackRequestModelSerializer(ModelSerializer):
     class Meta:
         model = CallbackRequest
-        fields = ('id', 'request_type', 'full_name', 'phone', 'comment', 'created_at')
+        fields = '__all__'
         read_only_fields = ('id', 'created_at')
-
-    def validate_full_name(self, value):
-        if len(value.strip()) < 3:
-            raise serializers.ValidationError('Укажите имя')
-        return value.strip()
-
-    def validate_phone(self, value):
-        digits = ''.join(ch for ch in value if ch.isdigit())
-        if len(digits) < 10:
-            raise serializers.ValidationError('Укажите корректный номер телефона')
-        return value.strip()
 
 
 class RegisterSerializer(serializers.Serializer):
@@ -113,7 +102,7 @@ class RegisterSerializer(serializers.Serializer):
         return user
 
 
-class CurrentUserSerializer(serializers.ModelSerializer):
+class CurrentUserSerializer(ModelSerializer):
     username = serializers.CharField(source='user.username', read_only=True)
     email = serializers.CharField(source='user.email', read_only=True)
 

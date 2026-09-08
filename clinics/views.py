@@ -1,141 +1,112 @@
-from django.shortcuts import get_object_or_404, redirect, render
-from django.views.decorators.http import require_POST
-
-from clinics.models import (
-    CallbackRequest,
-    Doctor,
-    Equipment,
-    Promotion,
-    Review,
-    Service,
-    ServiceCategory,
-)
-from api.serializers import CallbackRequestModelSerializer
+from django.shortcuts import render, redirect
+from .models import Doctor, ServiceDirection, Appointment, OmsDirection, CallbackRequest, Review
+from django.contrib import messages
+from .forms import OmsApplicationForm
+from django.core.paginator import Paginator
 
 
-def index(request):
-    categories = ServiceCategory.objects.all()[:8]
-    doctors = Doctor.objects.filter(is_active=True, clinic__is_active=True)[:8]
-    equipment = Equipment.objects.filter(is_active=True)
-    context = {
-        'categories': categories,
-        'doctors': doctors,
-        'equipment': equipment,
-        'promotions': Promotion.objects.filter(is_active=True),
-    }
-    return render(request, 'index.html', context)
-
-
-def directions(request):
-    return redirect('services')
-
-
-def direction_detail(request, slug):
-    category = get_object_or_404(ServiceCategory, slug=slug)
-    doctors = Doctor.objects.filter(category=category, is_active=True, clinic__is_active=True)
-    services = Service.objects.filter(category=category, is_active=True)
-    reviews = Review.objects.filter(doctor__category=category, is_active=True)[:3]
-    context = {
-        'category': category,
+def home_view(request):
+    doctors = Doctor.objects.all()
+    services = ServiceDirection.objects.all()
+    return render(request, 'index.html', {
         'doctors': doctors,
         'services': services,
-        'reviews': reviews,
-    }
-    return render(request, 'direction_detail.html', context)
+    })
 
 
-def doctors(request):
-    doctors = Doctor.objects.filter(is_active=True, clinic__is_active=True)
-    category_slug = request.GET.get('category')
-    if category_slug:
-        doctors = doctors.filter(category__slug=category_slug)
-    search = request.GET.get('q', '').strip()
-    if search:
-        doctors = doctors.filter(last_name__icontains=search)
+def doctors_page(request):
+    doctors = Doctor.objects.all()
+    return render(request, 'doctors.html', {'doctors': doctors},)
+
+
+def save_callback(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        phone = request.POST.get('phone')
+        if name and phone:
+            CallbackRequest.objects.create(name=name, phone=phone)
+        referer = request.META.get('HTTP_REFERER', '/')
+        if '?' in referer:
+            redirect_url = f"{referer}&success=1"
+        else:
+            redirect_url = f"{referer}?success=1"
+        return redirect(redirect_url)
+    return redirect(request.META.get('HTTP_REFERER', '/'))
+
+
+def services_list(request):
+    services = ServiceDirection.objects.all()
+    if request.method == "POST":
+        full_name = request.POST.get("full_name")
+        phone = request.POST.get("phone")
+        direction = request.POST.get("direction")
+        if full_name and phone and direction:
+            Appointment.objects.create(
+                full_name=full_name,
+                phone=phone,
+                direction=direction
+            )
+            messages.success(request, "Вы успешно записались на прием!")
+            return redirect('services_list')
     context = {
-        'doctors': doctors,
-        'categories': ServiceCategory.objects.all(),
-        'active_category': category_slug,
-        'search': search,
+        'services': services,
     }
-    return render(request, 'doctors.html', context)
-
-
-def services(request):
-    categories = ServiceCategory.objects.all()
-    all_services = Service.objects.filter(is_active=True)
-    grouped_services = []
-    for category in categories:
-        services_in_category = all_services.filter(category=category)
-        grouped_services.append({'category': category, 'services': services_in_category})
-    context = {'grouped_services': grouped_services}
     return render(request, 'services.html', context)
 
 
-def service_detail(request, pk):
-    return redirect('services')
+def direction_page(request):
+    return render(request, 'direction_detail.html')
 
 
-def promotions(request):
-    promotions = Promotion.objects.filter(is_active=True)
-    return render(request, 'promotions.html', {'promotions': promotions})
+def oms_page(request):
+    if request.method == "POST":
+        form = OmsApplicationForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Ваша заявка успешно отправлена!")
+            return redirect("oms_page")
+    else:
+        form = OmsApplicationForm()
+    directions = OmsDirection.objects.all()
+    return render(
+        request,
+        "oms.html",
+        {
+            "form": form,
+            "directions": directions,
+        },
+    )
 
 
-def about(request):
-    reviews = Review.objects.filter(is_active=True)[:3]
-    return render(request, 'about.html', {'reviews': reviews})
-
-
-def reviews(request):
-    reviews = Review.objects.filter(is_active=True)
-    return render(request, 'reviews.html', {'reviews': reviews})
-
-
-def contacts(request):
-    doctors = Doctor.objects.filter(is_active=True, clinic__is_active=True)[:8]
-    return render(request, 'contacts.html', {'doctors': doctors})
-
-
-def oms(request):
-    return render(request, 'oms.html')
-
-
-def dms(request):
+def dms_page(request):
     return render(request, 'dms.html')
 
 
-def analyses(request):
+def analysis_page(request):
     return render(request, 'analyses.html')
 
 
-def legal(request):
-    return render(request, 'legal.html')
+def promotions_page(request):
+    return render(request, 'promotions.html')
 
 
-def appointment_page(request):
-    return redirect('oms')
+def informations_page(request):
+    doctors = Doctor.objects.all()
+    return render(request, 'legal.html', {'doctors': doctors,})
 
 
-@require_POST
-def appointment_request(request):
-    serializer = CallbackRequestModelSerializer(data={
-        'request_type': CallbackRequest.Type.APPOINTMENT,
-        'full_name': request.POST.get('full_name', '').strip(),
-        'phone': request.POST.get('phone', '').strip(),
-    })
-    if serializer.is_valid():
-        serializer.save()
-    return redirect(request.POST.get('next', '/'))
+def about_the_clinic(request):
+    return render(request, 'about.html')
 
 
-@require_POST
-def callback_request(request):
-    serializer = CallbackRequestModelSerializer(data={
-        'request_type': CallbackRequest.Type.CALLBACK,
-        'full_name': request.POST.get('full_name', '').strip(),
-        'phone': request.POST.get('phone', '').strip(),
-        'comment': request.POST.get('comment', '').strip(),
-    })
-    if serializer.is_valid():
-        serializer.save()
-    return redirect(request.POST.get('next', '/'))
+def reviews_page(request):
+    reviews_list = Review.objects.all().order_by('-id')
+    paginator = Paginator(reviews_list, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'reviews.html', {'page_obj': page_obj})
+
+
+def contact_page(request):
+    doctors = Doctor.objects.all()
+    return render(request, 'contacts.html', {'doctors': doctors,})

@@ -20,18 +20,18 @@
     {% endif %}
 
     <div class="cards">
-        {% for item in grouped_services %}
+        {% for service in services %}
             <div class="service_card-cont">
                 <div class="pic">
-                    {% if item.category.image %}
-                        <img src="{% static 'images/' %}{{ item.category.image }}" alt="{{ item.category.name }}">
+                    {% if service.image %}
+                        <img src="{{ service.image.url }}" alt="{{ service.title }}">
                     {% else %}
-                        <img src="{% static 'images/Rectangle 5 (2).png' %}" alt="{{ item.category.name }}">
+                        <img src="{% static 'images/Rectangle 5 (2).png' %}" alt="{{ service.title }}">
                     {% endif %}
                 </div>
                 <div class="card_info">
-                    <h3>{{ item.category.name }}</h3>
-                    <a href="{% url 'direction_detail' item.category.slug %}" class="link">Подробнее</a>
+                    <h3>{{ service.title }}</h3>
+                    <a href="{% url 'direction_detail' service.id %}" class="link">Подробнее</a>
                 </div>
             </div>
         {% empty %}
@@ -57,8 +57,8 @@
                 <label for="direction">Выберите направление</label>
                 <select id="direction" name="direction" required>
                     <option value="" disabled selected>Выберите из списка...</option>
-                    {% for item in grouped_services %}
-                        <option value="{{ item.category.slug }}">{{ item.category.name }}</option>
+                    {% for service in services %}
+                        <option value="{{ service.title }}">{{ service.title }}</option>
                     {% endfor %}
                 </select>
             </div>

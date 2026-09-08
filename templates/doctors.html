@@ -19,7 +19,7 @@
         <article class="doctor-card">
           <div class="doctor-photo">
             {% if doctor.photo %}
-              <img src="{% static 'images/' %}{{ doctor.photo }}" alt="{{ doctor.full_name }}">
+              <img src="{{ doctor.photo.url }}" alt="{{ doctor.full_name }}">
             {% else %}
               <img src="{% static 'images/TDV_M63_010 1.png' %}" alt="Нет фото">
             {% endif %}

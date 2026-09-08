@@ -1,114 +1,63 @@
 from django.contrib import admin
-
-from clinics.models import (
-    Appointment,
-    CallbackRequest,
-    Clinic,
-    ClinicUser,
+from .models import (
     Doctor,
-    DoctorScheduleSlot,
-    Equipment,
-    License,
-    Partner,
-    Patient,
-    Promotion,
+    ServiceDirection,
+    Appointment,
+    OmsDirection,
+    OmsApplication,
+    CallbackRequest,
     Review,
-    Service,
-    ServiceCategory,
 )
-
-
-@admin.register(Clinic)
-class ClinicAdmin(admin.ModelAdmin):
-    list_display = ('name', 'city', 'address', 'phone', 'is_active')
-    list_filter = ('is_active',)
-    search_fields = ('name', 'city', 'address')
-
-
-@admin.register(ClinicUser)
-class ClinicUserAdmin(admin.ModelAdmin):
-    list_display = ('user', 'role', 'clinic')
-    list_filter = ('role', 'clinic')
-    search_fields = ('user__username', 'user__email', 'clinic__name')
 
 
 @admin.register(Doctor)
 class DoctorAdmin(admin.ModelAdmin):
-    list_display = ('last_name', 'first_name', 'specialty', 'category', 'clinic', 'is_active')
-    list_filter = ('clinic', 'specialty', 'is_active')
-    search_fields = ('last_name', 'first_name', 'specialty', 'qualification')
+    list_display = ('full_name', 'specialty')
+    search_fields = ('full_name', 'specialty')
 
 
-@admin.register(DoctorScheduleSlot)
-class DoctorScheduleSlotAdmin(admin.ModelAdmin):
-    list_display = ('doctor', 'start_at', 'end_at', 'is_available')
-    list_filter = ('is_available',)
-    search_fields = ('doctor__last_name', 'doctor__first_name')
-
-
-@admin.register(Patient)
-class PatientAdmin(admin.ModelAdmin):
-    list_display = ('last_name', 'first_name', 'phone', 'email')
-    search_fields = ('last_name', 'first_name', 'phone', 'email')
-
-
-@admin.register(ServiceCategory)
-class ServiceCategoryAdmin(admin.ModelAdmin):
-    list_display = ('name', 'slug')
-    search_fields = ('name', 'description')
-
-
-@admin.register(Service)
-class ServiceAdmin(admin.ModelAdmin):
-    list_display = ('name', 'category', 'clinic', 'price', 'duration_minutes', 'is_active')
-    list_filter = ('clinic', 'is_active')
-    search_fields = ('name', 'description')
-
-
-@admin.register(Promotion)
-class PromotionAdmin(admin.ModelAdmin):
-    list_display = ('title', 'valid_until', 'color', 'is_active')
-    list_filter = ('is_active',)
-    search_fields = ('title', 'description')
-
-
-@admin.register(Review)
-class ReviewAdmin(admin.ModelAdmin):
-    list_display = ('patient_name', 'doctor', 'rating', 'created_at', 'is_active')
-    list_filter = ('is_active', 'rating')
-    search_fields = ('patient_name', 'text', 'doctor__last_name')
-
-
-@admin.register(Equipment)
-class EquipmentAdmin(admin.ModelAdmin):
-    list_display = ('name', 'is_active')
-    list_filter = ('is_active',)
-    search_fields = ('name', 'description')
-
-
-@admin.register(CallbackRequest)
-class CallbackRequestAdmin(admin.ModelAdmin):
-    list_display = ('full_name', 'phone', 'request_type', 'is_processed', 'created_at')
-    list_filter = ('request_type', 'is_processed')
-    search_fields = ('full_name', 'phone')
+@admin.register(ServiceDirection)
+class ServiceDirectionAdmin(admin.ModelAdmin):
+    list_display = ('title',)
+    search_fields = ('title',)
 
 
 @admin.register(Appointment)
 class AppointmentAdmin(admin.ModelAdmin):
-    list_display = ('patient', 'doctor', 'service', 'slot', 'scheduled_at', 'status')
-    list_filter = ('status', 'doctor__clinic')
-    search_fields = ('patient__last_name', 'patient__first_name', 'patient__phone', 'doctor__last_name', 'doctor__first_name')
+    list_display = (
+        'full_name', 'phone', 'doctor',
+        'appointment_date', 'appointment_time',
+        'status', 'created_at',
+    )
+    list_filter = ('status', 'doctor', 'appointment_date')
+    search_fields = ('full_name', 'phone', 'doctor__full_name')
+    readonly_fields = ('created_at',)
 
 
-@admin.register(License)
-class LicenseAdmin(admin.ModelAdmin):
-    list_display = ('title', 'is_active')
-    list_filter = ('is_active',)
-    search_fields = ('title',)
+@admin.register(OmsDirection)
+class OmsDirectionAdmin(admin.ModelAdmin):
+    list_display = ('title', 'order')
+    list_editable = ('order',)
+    search_fields = ('title', 'description')
 
 
-@admin.register(Partner)
-class PartnerAdmin(admin.ModelAdmin):
-    list_display = ('name', 'url', 'is_active')
-    list_filter = ('is_active',)
-    search_fields = ('name',)
+@admin.register(OmsApplication)
+class OmsApplicationAdmin(admin.ModelAdmin):
+    list_display = ('name', 'phone', 'email', 'created_at')
+    search_fields = ('name', 'phone', 'email')
+    readonly_fields = ('created_at',)
+
+
+@admin.register(CallbackRequest)
+class CallbackRequestAdmin(admin.ModelAdmin):
+    list_display = ('name', 'phone', 'created_at')
+    list_filter = ('created_at',)
+    search_fields = ('name', 'phone')
+    readonly_fields = ('created_at',)
+
+
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ('full_name', 'doctor', 'rating', 'created_at')
+    list_filter = ('rating', 'created_at')
+    search_fields = ('full_name', 'doctor')

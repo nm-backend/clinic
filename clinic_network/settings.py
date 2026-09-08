@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -16,7 +17,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_spectacular',
     'clinics',
-    'api',
 ]
 
 MIDDLEWARE = [
@@ -71,15 +71,21 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.AllowAny',
+    ),
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Clinic Network API',
-    'DESCRIPTION': 'API сети медицинских центров для услуг, врачей и записи на приём.',
+    'TITLE': 'Clinic API',
+    'DESCRIPTION': 'Backend для клиники',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
 }

@@ -54,18 +54,18 @@
             </a>
         </div>
         <div class="services-list">
-        {% for category in categories %}
+        {% for service in services %}
             <div class="services-card">
                 <div class="pic">
-                    {% if category.image %}
-                        <img src="{% static 'images/' %}{{ category.image }}" alt="{{ category.name }}">
+                    {% if service.image %}
+                        <img src="{{ service.image.url }}" alt="{{ service.title }}">
                     {% else %}
-                        <img src="{% static 'images/Rectangle 5 (2).png' %}" alt="{{ category.name }}">
+                        <img src="{% static 'images/Rectangle 5 (2).png' %}" alt="{{ service.title }}">
                     {% endif %}
                 </div>
                 <div class="card-info">
-                    <h3>{{ category.name }}</h3>
-                    <a href="{% url 'direction_detail' category.slug %}" class="link2">Подробнее</a>
+                    <h3>{{ service.title }}</h3>
+                    <a href="{% url 'direction_detail' service.id %}" class="link2">Подробнее</a>
                 </div>
             </div>
         {% empty %}
@@ -85,7 +85,7 @@
         {% for doctor in doctors %}
             <div class="specialists_card">
                 {% if doctor.photo %}
-                    <img src="{% static 'images/' %}{{ doctor.photo }}" alt="{{ doctor.full_name }}">
+                    <img src="{{ doctor.photo.url }}" alt="{{ doctor.full_name }}">
                 {% else %}
                     <img src="{% static 'images/TDV_M63_010 1.png' %}" alt="{{ doctor.full_name }}">
                 {% endif %}

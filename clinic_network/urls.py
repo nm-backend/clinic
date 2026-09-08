@@ -1,20 +1,21 @@
 from django.contrib import admin
-from django.shortcuts import redirect
-from django.urls import include, path
-from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
-
-
-def redirect_to_v1_docs(request):
-    return redirect('/api/v1/swagger/')
-
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+from drf_spectacular.views import (
+    SpectacularAPIView,
+    SpectacularSwaggerView,
+    SpectacularRedocView,
+)
 
 urlpatterns = [
-    path('', include('clinics.urls')),
-    path('admin/', admin.site.urls),
-    path('api/v1/', include('api.urls')),
-    path('api/v1/schema/', SpectacularAPIView.as_view(), name='schema'),
-    path('api/v1/swagger/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
-    path('api/v1/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
-    path('api/swagger/', redirect_to_v1_docs),
-    path('api/redoc/', redirect_to_v1_docs),
+    path("admin/", admin.site.urls),
+    path("", include("clinics.urls")),
+    path("api/", include("clinics.api_urls")),
+    path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
+    path("api/docs/", SpectacularSwaggerView.as_view(), name="swagger_ui"),
+    path("api/redoc/", SpectacularRedocView.as_view(), name="redoc"),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -23,13 +23,13 @@
 
         <div class="reviews-grid">
 
-            {% for review in reviews %}
+            {% for review in page_obj %}
 
             <div class="review-card">
 
                 <div class="review-header">
 
-                    <h3>{{ review.patient_name }}</h3>
+                    <h3>{{ review.full_name }}</h3>
 
                     <div class="stars">
                         {% for i in "12345" %}
@@ -63,6 +63,20 @@
             <p>Пока отзывов нет.</p>
 
             {% endfor %}
+
+        </div>
+
+        {% if page_obj.has_other_pages %}
+        <div class="pagination">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}">← Назад</a>
+            {% endif %}
+            <span class="current">Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">Вперёд →</a>
+            {% endif %}
+        </div>
+        {% endif %}
 
         </div>
 

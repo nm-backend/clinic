@@ -391,26 +391,6 @@ class License(models.Model):
         return self.title
 
 
-class Partner(models.Model):
-    name = models.CharField('Название', max_length=200)
-    logo = models.CharField(
-        'Логотип (файл в static/img)',
-        max_length=200,
-        blank=True,
-        help_text='Имя файла в static/img',
-    )
-    url = models.URLField('Сайт партнёра', blank=True)
-    is_active = models.BooleanField('Активен', default=True)
-
-    class Meta:
-        verbose_name = 'Партнёр'
-        verbose_name_plural = 'Партнёры'
-        ordering = ['name']
-
-    def __str__(self):
-        return self.name
-
-
 class CallbackRequest(models.Model):
     class Type(models.TextChoices):
         CALLBACK = 'callback', 'Заказать звонок'

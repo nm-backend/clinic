@@ -1356,7 +1356,6 @@ header {
     font-family: 'Raleway', sans-serif;
 }
 
-/* Левая часть: текстовая карточка */
 .contacts-card {
     flex: 1;
     padding: 60px 40px 60px 80px;
@@ -1398,7 +1397,6 @@ header {
     margin: 0;
 }
 
-/* Зеленая кнопка */
 .contacts-card .btn-2 {
     display: inline-flex;
     align-items: center;
@@ -1418,7 +1416,6 @@ header {
     background-color: #329A4F;
 }
 
-/* Правая часть: карта */
 .contacts-map {
     flex: 1;
     position: relative;

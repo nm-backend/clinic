@@ -12,7 +12,6 @@ from clinics.models import (
     Doctor,
     DoctorScheduleSlot,
     Equipment,
-    Patient,
     Promotion,
     Review,
     Service,
@@ -83,7 +82,7 @@ class ServiceListAPIView(APIView):
 
 
 class AvailableSlotsAPIView(APIView):
-    def get(self, request, *args, **kwargs):
+    def get(self, request):
         doctor_id = request.query_params.get('doctor_id')
         day_value = request.query_params.get('date')
 
@@ -164,7 +163,7 @@ class EquipmentListAPIView(APIView):
 class RegisterAPIView(APIView):
     permission_classes = [AllowAny]
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request):
         serializer = RegisterSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
@@ -175,8 +174,12 @@ class RegisterAPIView(APIView):
 class CurrentUserAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
-    def get(self, request, *args, **kwargs):
-        profile = ClinicUser.objects.filter(user=request.user).first()
-        if profile is None:
-            profile = ClinicUser.objects.create(user=request.user, role=ClinicUser.Role.PATIENT)
+    def get(self, request):
+        try:
+            profile = ClinicUser.objects.get(user=request.user)
+        except ClinicUser.DoesNotExist:
+            profile = ClinicUser.objects.create(
+                user=request.user,
+                role=ClinicUser.Role.PATIENT,
+            )
         return Response(CurrentUserSerializer(profile).data)

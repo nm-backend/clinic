@@ -1,47 +1,70 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load static %}
 
-{% block title %}Услуги — Сеть клиник Томской области{% endblock %}
-
-{% block breadcrumbs %}
-  {% include 'components/breadcrumbs.html' with title='Услуги' %}
-{% endblock %}
+{% block title %}Направления нашей работы{% endblock %}
 
 {% block content %}
-<section class="section">
-  <div class="container">
-    <h1 class="page-title">Наши услуги</h1>
-
-    {% for group in grouped_services %}
-      <div class="services-block" id="cat-{{ group.category.slug }}">
-        <h2 class="section-title">{{ group.category.name }}</h2>
-        <table class="price-table">
-          <thead>
-            <tr>
-              <th>Услуга</th>
-              <th>Длительность</th>
-              <th>Цена</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for service in group.services %}
-              <tr>
-                <td><a href="{% url 'service_detail' pk=service.pk %}">{{ service.name }}</a></td>
-                <td>{{ service.duration_minutes }} мин</td>
-                <td>{{ service.price }} ₽</td>
-              </tr>
-            {% empty %}
-              <tr><td colspan="3">Услуг пока нет</td></tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-    {% endfor %}
-
-    <div class="cta-block">
-      <h2 class="cta-title">Не нашли нужную услугу?</h2>
-      <a href="{% url 'callback-request' %}" class="btn btn-primary">Заказать звонок</a>
+<div class="wrap">
+    <div class="crumbs">
+        <a href="/">Главная</a> / <span>Направления нашей работы</span>
     </div>
-  </div>
-</section>
+    
+    <h1 class="title">Направления нашей работы</h1>
+
+    {% if messages %}
+        <div class="message-box">
+            {% for message in messages %}
+                <div class="message {{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="cards">
+        {% for item in grouped_services %}
+            <div class="service_card-cont">
+                <div class="pic">
+                    {% if item.category.image %}
+                        <img src="{% static 'images/' %}{{ item.category.image }}" alt="{{ item.category.name }}">
+                    {% else %}
+                        <img src="{% static 'images/Rectangle 5 (2).png' %}" alt="{{ item.category.name }}">
+                    {% endif %}
+                </div>
+                <div class="card_info">
+                    <h3>{{ item.category.name }}</h3>
+                    <a href="{% url 'direction_detail' item.category.slug %}" class="link">Подробнее</a>
+                </div>
+            </div>
+        {% empty %}
+            <p>Направления пока не добавлены.</p>
+        {% endfor %}
+    </div>
+
+    <div class="form-box">
+        <h2>Запись на приём</h2>
+        <form method="post" class="form">
+            {% csrf_token %}
+            <div class="item">
+                <label for="full_name">Ваше ФИО</label>
+                <input type="text" id="full_name" name="full_name" placeholder="Иванов Иван Иванович" required>
+            </div>
+
+            <div class="item">
+                <label for="phone">Номер телефона</label>
+                <input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" required>
+            </div>
+
+            <div class="item">
+                <label for="direction">Выберите направление</label>
+                <select id="direction" name="direction" required>
+                    <option value="" disabled selected>Выберите из списка...</option>
+                    {% for item in grouped_services %}
+                        <option value="{{ item.category.slug }}">{{ item.category.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="submit" class="btn">Записаться на приём</button>
+        </form>
+    </div>
+</div>
 {% endblock %}

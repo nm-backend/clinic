@@ -1,72 +1,177 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load static %}
-{% block title %}Полис обязательного медицинского страхования (ОМС){% endblock %}
 
 {% block content %}
-<section class="hero-oms">
-  <div class="container">
-    <div class="hero-oms-inner">
-      <div class="hero-oms-text">
-        <h1 class="page-title">Полис обязательного медицинского страхования (ОМС)</h1>
-        <p class="section-text">Мы работаем по полису ОМС и предоставляем полный спектр медицинских услуг в рамках программы государственных гарантий бесплатного оказания гражданам медицинской помощи.</p>
-      </div>
-      <div class="hero-oms-image">
-        <img src="{% static 'img/promo.png' %}" alt="ОМС">
-      </div>
+<section class="banner">
+    <div class="container banner-inner">
+        <div class="banner-text">
+            <h1>Лечение по ОМС</h1>
+            <p>Лечение в частной клинике не всегда стоит больших денег. Каждый гражданин РФ имеет право получить бесплатную медицинскую помощь по полису (ОМС).</p>
+            <a href="#" class="button">Как получить лечение</a>
+        </div>
+        <div class="banner-image">
+            <img src="{% static 'images/Group 1882.png' %}" alt="Лечение по ОМС">
+        </div>
     </div>
-  </div>
 </section>
+<section class="steps-section">
+    <div class="container">
+        <h2 class="section-title">Как получить лечение?</h2>
+        
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <div class="step-card-inner">
+                    <div class="step-icon">
+                        <img src="{% static 'svg/Frame 153.svg'%}" alt="">
+                    </div>
+                    <p>Узнайте, входит ли интересующее вас лечение в программу для вашего региона</p>
+                </div>
+            </div>
 
-<section class="section">
-  <div class="container">
-    <h2 class="section-title">Как получить лечение по ОМС?</h2>
-    <div class="steps-grid">
-      <div class="step-card">
-        <span class="step-number">01</span>
-        <div class="step-title">Запишитесь на прием</div>
-        <div class="step-text">Оставьте заявку на сайте или позвоните по телефону</div>
-      </div>
-      <div class="step-card">
-        <span class="step-number">02</span>
-        <div class="step-title">Пройдите обследование</div>
-        <div class="step-text">Врач проведет осмотр и назначит необходимые обследования</div>
-      </div>
-      <div class="step-card">
-        <span class="step-number">03</span>
-        <div class="step-title">Получите лечение</div>
-        <div class="step-text">На основании результатов обследования будет назначено лечение</div>
-      </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <div class="step-card-inner">
+                    <div class="step-icon">
+                        <img src="{% static 'svg/Frame 129.svg'%}" alt="">
+                    </div>
+                    <p>Подготовьте необходимые документы и отправьте заявку на лечение</p>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <div class="step-card-inner">
+                    <div class="step-icon">
+                        <img src="{% static 'svg/Frame 153 (1).svg'%}" alt="">
+                    </div>
+                    <p>В течение 3-х рабочих дней специалист отдела ОМС свяжется с вами по указанному вами номеру телефона</p>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </section>
-
-<section class="section section-gray">
-  <div class="container">
-    <h2 class="section-title">Все направления лечения по ОМС</h2>
-    <div class="benefit-list">
-      <div class="benefit-item">Терапия и педиатрия</div>
-      <div class="benefit-item">Кардиология</div>
-      <div class="benefit-item">Неврология</div>
-      <div class="benefit-item">Хирургия</div>
-      <div class="benefit-item">Ортопедия и травматология</div>
-      <div class="benefit-item">Офтальмология</div>
-      <div class="benefit-item">Отоларингология</div>
-      <div class="benefit-item">Гинекология</div>
-      <div class="benefit-item">Урология</div>
-      <div class="benefit-item">Дерматовенерология</div>
-      <div class="benefit-item">Лабораторная диагностика</div>
-      <div class="benefit-item">Функциональная диагностика</div>
-      <div class="benefit-item">Физиотерапия</div>
+<section class="services-section">
+    <div class="container">
+        <h2 class="title">Все направления лечения по ОМС</h2>
+        <div class="services-grid">
+            {% for direction in directions %}
+            <div class="service-card">
+                <div class="service-card-content">
+                    <h3>{{ direction.title }}</h3>
+                    <p>{{ direction.description }}</p>
+                </div>
+                <a href="{{ direction.link }}" class="more-link">Подробнее</a>
+            </div>
+            {% empty %}
+            <p style="grid-column: 1 / -1; color: #6b7280;">Направления пока не добавлены.</p>
+            {% endfor %}
+        </div>
     </div>
-  </div>
 </section>
-
-<section class="section">
-  <div class="container">
-    <div class="cta-block">
-      <h3 class="cta-title">Заявка на лечение по ОМС</h3>
-      <a href="{% url 'appointment-request' %}" class="btn btn-primary btn-block">Оставить заявку</a>
+<section class="video-section">
+    <div class="container">
+        <div class="video-box">
+            <img src="{% static 'images/video.png' %}" alt="Видео о клинике">
+        </div>
     </div>
-  </div>
+</section>
+<section class="form-section" id="form-section">
+    <div class="container">
+        <h2 class="form-title">Заявка на лечение по ОМС</h2>
+        <p class="form-subtitle">Заполните поля ниже и прикрепите документ, чтобы отправить заявку</p>
+
+        <form action="{% url 'oms_page' %}" method="POST" class="oms-form" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Ваше ФИО</label>
+                    <input type="text" name="name" placeholder="Иванова Иван Иванович" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Дата рождения</label>
+                    <input type="date" name="birthdate" required>
+                </div>
+
+                <div class="form-group">
+                    <label>E-mail</label>
+                    <input type="email" name="email" placeholder="Poshta@gmail.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Номер телефона</label>
+                    <input type="number" name="phone" placeholder="+7 (___) ___-__-__" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Профиль</label>
+                    <select name="profile" required>
+                        <option value="" disabled selected>Эндокринология</option>
+                        <option value="1">Терапия</option>
+                        <option value="2">Неврология</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Медицинская услуга</label>
+                    <select name="service" required>
+                        <option value="" disabled selected>Эндокринология</option>
+                        <option value="1">Консультация</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Регион</label>
+                    <select name="region">
+                        <option value="" disabled selected>Эндокринология</option>
+                        <option value="1">Новосибирская обл.</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>ФИО и телефон вашего врача</label>
+                    <input type="text" name="doctor" placeholder="Иванова Анна +7 (___) ___-__-__">
+                </div>
+
+                <div class="form-group col-span-2">
+                    <label>Причина обращения</label>
+                    <input type="text" name="reason" placeholder="Причина обращения">
+                </div>
+
+                <div class="form-group col-span-2">
+                    <label>Откуда вы узнали о нас?</label>
+                    <select name="source">
+                        <option value="" disabled selected>Интернет</option>
+                        <option value="1">От врача</option>
+                        <option value="2">От знакомых</option>
+                    </select>
+                </div>
+            </div>
+
+            <p class="file-help-text">
+                Не забудьте  прикрепить выписку из медицинской документации или результаты исследований в соответствии с перечнем выше
+            </p>
+
+            <div class="file-attach-wrapper">
+                <label class="file-attach-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#27a754" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
+                    </svg>
+                    <span>Прикрепить документы</span>
+                    <input type="file" name="files" multiple hidden>
+                </label>
+            </div>
+
+            <div class="form-submit-wrapper">
+                <button type="submit" class="button button-submit">Оставить заявку</button>
+            </div>
+            
+            <p class="policy-notice">
+                Нажимая на кнопку Оставить заявку вы соглашаетесь с <a href="#">политикой конфиденциальности</a> и даете согласие на <a href="#">обработку персональных данных</a>
+            </p>
+        </form>
+    </div>
 </section>
 {% endblock %}

@@ -4,24 +4,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Доктор Рядом — Сеть клиник Томской области{% endblock %}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;900&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>Document</title>
+
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    {% block extra_head %}{% endblock %}
+    {% block extra_css %}{% endblock %}
 </head>
 <body>
-    <input type="checkbox" id="a11y-toggle" class="sr-only" />
+<input type="checkbox" id="modal-toggle" class="modal-toggle" {% if request.GET.success %}checked{% endif %}>
+<header>
+    <div class="information">
+        <h2>Сеть клиник Томской области</h2>
+        <div class="eye-block">
+            <img class="eye" src="{% static 'images/Frame 2379.png' %}" alt="Версия для слабовидящих">
+        </div>
+        <div class="btn_number">
+            <h1 class="number">+ 7 (978) 00-00-000</h1>
+            <label for="modal-toggle" class="btn-2">Записаться на прием</label>
+        </div>
+    </div>
 
-    {% include 'components/header.html' %}
+    <input id="burger-toggle" type="checkbox" hidden>
+    
+    <div class="header-main">
+        <a href="/" class="logo-link">
+            <img class="logo" src="{% static 'svg/image 1.svg' %}" alt="логотип">
+        </a>
+        
+        <label for="burger-toggle" class="burger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
 
-    <main>
-        {% block breadcrumbs %}{% endblock %}
-        {% block content %}{% endblock %}
-    </main>
+        <nav class="navigation">
+            <div class="nav-top">
+                <div class="text-logo">
+                    <img class="logo" src="{% static 'svg/image 1.svg' %}" alt="логотип">
+                    <h2 class="title_clinic">Сеть клиник Томской области</h2>
+                </div>
+                <label for="burger-toggle" class="close-btn">
+                    <img src="{% static 'svg/close.svg' %}" alt="close">
+                </label>
+            </div>
 
-    {% include 'components/footer.html' %}
-    {% include 'components/modals.html' %}
+            <div class="nav-links">
+                <a class="nav-link" href="{% url 'doctors_list' %}">Врачи</a>
+                <a class="nav-link" href="{% url 'services_list' %}">Услуги</a>
+                <a class="nav-link" href="{% url 'drection_page' %}">Диагностика</a>
+                <a class="nav-link" href="{% url 'analysis_page' %}">Анализы</a>
+                <a class="nav-link" href="{% url 'promotions_page' %}">Акции</a>
+                <a class="nav-link" href="{% url 'oms_page' %}">Пациентам</a>
+                <a class="nav-link" href="{% url 'dms_page' %}">ДМС</a>
+                <a class="nav-link" href="{% url 'about_the_clinic' %}">О клинике</a>
+                <a class="nav-link" href="{% url 'reviews' %}">Отзывы</a>
+                <a class="nav-link" href="{% url 'contact_page' %}">Контакты</a>
+            </div>
+
+            <div class="nav-bottom">
+                <div class="eye-btn">
+                    <img src="{% static 'images/Frame 2379.png' %}" alt="Версия для слабовидящих">
+                </div>
+                <h1 class="number">+ 7 (978) 00-00-000</h1> 
+                <div class="btn_number">
+                    <label for="modal-toggle" class="btn-2">Записаться на прием</label>
+                </div> 
+            </div>
+        </nav>
+    </div>
+</header>
+<div class="modal-overlay">
+    {% if not request.GET.success %}
+    <div class="modal-card">
+        <label for="modal-toggle" class="close-btn">
+            <img src="{% static 'svg/close.svg' %}" alt="close">
+        </label>
+        <h3 class="modal-title">Записаться на приём</h3>
+        <form action="{% url 'save_callback' %}" method="POST" class="modal-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>Ваше ФИО</label>
+                <input type="text" name="name" placeholder="Иванов Иван Иванович" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Номер телефона</label>
+                <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required>
+            </div>
+            
+            <button type="submit" class="submit-btn">Записаться на приём</button>
+            <p class="policy-text">
+                Нажимая на кнопку Записаться на приём вы соглашаетесь с 
+                <a href="#" class="policy-link">Политикой конфиденциальности</a>
+            </p>
+        </form>
+    </div>
+    {% else %}
+    <div class="modal-card modal-success">
+        <div class="success-icon">
+            <img src="{% static 'svg/tick (6) 1.svg' %}" alt="Успешно">
+        </div>
+        <p class="success-text">
+            Ваша заявка принята, в течение часа специалист Вам перезвонит
+        </p>
+        <a href="/" class="home-link">На главную</a>
+    </div>
+    {% endif %}
+</div>
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-info">
+            <div class="footer-logo">
+                <img src="{% static 'svg/image 1.svg' %}" alt="Ваш доктор рядом">
+            </div>
+
+            <div class="footer-contacts">
+                <div class="contact-item">
+                    <span class="label">Адрес</span>
+                    <p class="value">Москва, ул. Пушкина, д.43</p>
+                </div>
+
+                <div class="contact-item">
+                    <span class="label">Телефон</span>
+                    <p class="value">+7 (9__) ___-__-__</p>
+                </div>
+
+                <div class="contact-item">
+                    <span class="label">Почта</span>
+                    <p class="value">Poshta@gmail.com</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-nav">
+            <div class="nav-column">
+                <h4>О клинике</h4>
+                <ul>
+                    <li><a href="#">Название пункта меню</a></li>
+                    <li><a href="#">Название пункта меню</a></li>
+                    <li><a href="#">Название пункта меню</a></li>
+                    <li><a href="#">Название пункта меню</a></li>
+                    <li><a href="#">Название пункта меню</a></li>
+                    <li><a href="#">Название пункта меню</a></li>
+                    <li><a href="#">Название пункта меню</a></li>
+                    <li><a href="#">Название пункта меню</a></li>
+                </ul>
+            </div>
+
+            <div class="nav-column">
+                <h4>Врач</h4>
+                <ul>
+                     <li><a href="#">Название пункта меню</a></li>
+                    <li><a href="#">Название пункта меню</a></li>
+                    <li><a href="#">Название пункта меню</a></li>
+                    <li><a href="#">Название пункта меню</a></li>
+                    <li><a href="#">Название пункта меню</a></li>
+                    <li><a href="#">Название пункта меню</a></li>
+                    <li><a href="#">Название пункта меню</a></li>
+                    <li><a href="#">Название пункта меню</a></li>
+                </ul>
+            </div>
+
+            <div class="nav-column">
+                <h4>Пациентам</h4>
+                <ul>
+                     <li><a href="#">Название пункта меню</a></li>
+                    <li><a href="#">Название пункта меню</a></li>
+                    <li><a href="#">Название пункта меню</a></li>
+                    <li><a href="#">Название пункта меню</a></li>
+                    <li><a href="#">Название пункта меню</a></li>
+                    <li><a href="#">Название пункта меню</a></li>
+                    <li><a href="#">Название пункта меню</a></li>
+                    <li><a href="#">Название пункта меню</a></li>
+                </ul>
+            </div>
+
+            <div class="nav-column">
+                <h4>Услуги</h4>
+                <ul>
+                     <li><a href="#">Название пункта меню</a></li>
+                    <li><a href="#">Название пункта меню</a></li>
+                    <li><a href="#">Название пункта меню</a></li>
+                    <li><a href="#">Название пункта меню</a></li>
+                    <li><a href="#">Название пункта меню</a></li>
+                    <li><a href="#">Название пункта меню</a></li>
+                    <li><a href="#">Название пункта меню</a></li>
+                    <li><a href="#">Название пункта меню</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
 </body>
 </html>
+
+

@@ -1,39 +1,208 @@
-{% extends 'base.html' %}
+{% extends 'base.html'%}
 {% load static %}
 
-{% block title %}Акции — Сеть клиник Томской области{% endblock %}
+{% block content%}
 
-{% block breadcrumbs %}
-  {% include 'components/breadcrumbs.html' with title='Акции' %}
-{% endblock %}
+<section class="discounts_sections">
+    <div class="container">
+        <nav class="breadcrumbs">
+           <a href="/">Главная</a>
+           <span class="separator">&gt;</span>
+           <span class="current">Акции</span>
+        </nav>
+        <h3>Наши акции</h3>
+        <div class="mrt_cards">
+            <div class="promotions-1">
+          <h4>Скидка -20% на МРТ</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+               Viverra amet dolor sed mi tincidunt pharetra montes. 
+               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+               Viverra amet dolor sed mi tincidunt pharetra montes.
+            </p>
+            
+            <p>Акция действует до <br><strong class="data">22.03.2023</strong></p>
+            <a href="#" class="details-btn">
+                Подробнее
+            </a>
 
-{% block content %}
-<section class="section">
-  <div class="container">
-    <h1 class="page-title">Акции</h1>
-
-    <div class="promotions-grid">
-      {% for promo in promotions %}
-        <div class="promo-single {% if promo.color %}promo-single-colored{% endif %}"
-             {% if promo.color %}style="background-color: #{{ promo.color }};"{% endif %}>
-          <div class="promo-single-title">{{ promo.title }}</div>
-          {% if promo.valid_until %}
-            <div class="promo-single-date">
-              <span class="promo-date-label">Действует до</span>
-              <span class="promo-date-value">{{ promo.valid_until|date:'d.m.Y' }}</span>
+            <div class="image-mrt">
+                <img src="{% static 'images/image 4.png' %}" alt="img">
             </div>
-          {% endif %}
-          <a href="{% url 'appointment-request' %}" class="btn btn-primary promo-single-btn">Подробнее</a>
         </div>
-      {% empty %}
-        <p class="empty-text">Акции скоро появятся.</p>
-      {% endfor %}
+        <div class="promotions-1 card-blue">
+          <h4>Скидка -20% на МРТ</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+               Viverra amet dolor sed mi tincidunt pharetra montes. 
+               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+               Viverra amet dolor sed mi tincidunt pharetra montes.
+            </p>
+            
+            <p>Акция действует до <br><strong class="data">22.03.2023</strong></p>
+            <a href="#" class="details-btn">
+                Подробнее
+            </a>
+
+            <div class="image-mrt">
+                <img src="{% static 'images/image 4.png' %}" alt="img">
+            </div>
+        </div>
+        </div>
+        <div class="mini_cards">
+            <div class="promotion-mini purple">
+          <h4>Скидка -20% на МРТ</h4>
+          <p>Акция действует до<br><strong>22.03.2023</strong></p>
+          <a href="#">Подробнее</a>
+          <img src="{% static 'images/image 4.png' %}" alt="МРТ">
+        </div>
+        <div class="promotion-mini pink">
+           <h4>Скидка -20% на МРТ</h4>
+           <p>Акция действует до<br><strong>22.03.2023</strong></p>
+           <a href="#">Подробнее</a>
+           <img src="{% static 'images/image 4.png' %}" alt="МРТ">
+        </div>
+        <div class="promotion-mini yellow">
+          <h4>Скидка -20% на МРТ</h4>
+          <p>Акция действует до<br><strong>22.03.2023</strong></p>
+          <a href="#">Подробнее</a>
+          <img src="{% static 'images/image 4.png' %}" alt="МРТ">
+        </div>
+        <div class="promotion-mini blue">
+          <h4>Скидка -20% на МРТ</h4>
+          <p>Акция действует до<br><strong>22.03.2023</strong></p>
+          <a href="#">Подробнее</a>
+          <img src="{% static 'images/image 4.png' %}" alt="МРТ">
+        </div>
+        </div>
+        <div class="card_mini-cards">
+          <div class="promotions-1">
+          <h4>Скидка -20% на МРТ</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+               Viverra amet dolor sed mi tincidunt pharetra montes. 
+               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+               Viverra amet dolor sed mi tincidunt pharetra montes.
+            </p>
+            
+            <p>Акция действует до <br><strong class="data">22.03.2023</strong></p>
+            <a href="#" class="details-btn">
+                Подробнее
+            </a>
+
+            <div class="image-mrt">
+                <img src="{% static 'images/image 4.png' %}" alt="img">
+            </div>
+        </div>
+        <div class="promotion-mini purple">
+          <h4>Скидка -20% на МРТ</h4>
+          <p>Акция действует до<br><strong>22.03.2023</strong></p>
+          <a href="#">Подробнее</a>
+          <img src="{% static 'images/image 4.png' %}" alt="МРТ">
+        </div>
+        <div class="promotion-mini pink">
+           <h4>Скидка -20% на МРТ</h4>
+           <p>Акция действует до<br><strong>22.03.2023</strong></p>
+           <a href="#">Подробнее</a>
+           <img src="{% static 'images/image 4.png' %}" alt="МРТ">
+        </div>
+        <div class="promotion-mini yellow">
+          <h4>Скидка -20% на МРТ</h4>
+          <p>Акция действует до<br><strong>22.03.2023</strong></p>
+          <a href="#">Подробнее</a>
+          <img src="{% static 'images/image 4.png' %}" alt="МРТ">
+        </div>
+        <div class="promotion-mini blue">
+          <h4>Скидка -20% на МРТ</h4>
+          <p>Акция действует до<br><strong>22.03.2023</strong></p>
+          <a href="#">Подробнее</a>
+          <img src="{% static 'images/image 4.png' %}" alt="МРТ">
+        </div>
+        </div>
+        <div class="mrt_cards prom_cards">
+            <div class="promotions-1 card-blue">
+          <h4>Скидка -20% на МРТ</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+               Viverra amet dolor sed mi tincidunt pharetra montes. 
+               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+               Viverra amet dolor sed mi tincidunt pharetra montes.
+            </p>
+            
+            <p>Акция действует до <br><strong class="data">22.03.2023</strong></p>
+            <a href="#" class="details-btn">
+                Подробнее
+            </a>
+
+            <div class="image-mrt">
+                <img src="{% static 'images/image 4.png' %}" alt="img">
+            </div>
+        </div>
+        <div class="promotions-1 ">
+          <h4>Скидка -20% на МРТ</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+               Viverra amet dolor sed mi tincidunt pharetra montes. 
+               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+               Viverra amet dolor sed mi tincidunt pharetra montes.
+            </p>
+            
+            <p>Акция действует до <br><strong class="data">22.03.2023</strong></p>
+            <a href="#" class="details-btn">
+                Подробнее
+            </a>
+
+            <div class="image-mrt">
+                <img src="{% static 'images/image 4.png' %}" alt="img">
+            </div>
+        </div>
+        </div>
+    </div>
+</section>
+<section class="licenses-block">
+    <h2 class="licenses-title">Наши лицензии</h2>
+
+    <div class="licenses-grid">
+        <div class="license-card">
+            <img src="{% static 'images/license.png' %}" alt="Лицензия">
+        </div>
+        <div class="license-card">
+            <img src="{% static 'images/license.png' %}" alt="Лицензия">
+        </div>
+        <div class="license-card">
+            <img src="{% static 'images/license.png' %}" alt="Лицензия">
+        </div>
+        <div class="license-card">
+            <img src="{% static 'images/license.png' %}" alt="Лицензия">
+        </div>
+    </div>
+</section>
+<section class="callback-section">
+  <div class="callback-container">
+    <div class="callback-content">
+      <h2 class="callback-title">Хотите, мы Вам перезвоним?</h2>
+      <p class="callback-subtitle">Оставьте заявку и мы подробно ответим на все Ваши вопросы!</p>
+      
+      <form action="{% url 'save_callback' %}" method="POST" class="callback-form">
+        {% csrf_token %}
+        <div class="form-row">
+          <div class="input-group">
+            <label for="id_name">Ваше ФИО</label>
+            <input type="text" id="id_name" name="name" placeholder="Иванов Иван Иванович" required>
+          </div>
+          
+          <div class="input-group">
+            <label for="id_phone">Номер телефона</label>
+            <input type="tel" id="id_phone" name="phone" placeholder="+7 (___) ___-__-__" required>
+          </div>
+        </div>
+        
+        <button type="submit" class="callback-btn">Заказать звонок</button>
+      </form>
+      
+      <p class="callback-policy">
+        Нажимая на кнопку «Заказать звонок», вы соглашаетесь с 
+        <a href="#">политикой конфиденциальности</a>
+      </p>
     </div>
 
-    <div class="cta-block">
-      <h2 class="cta-title">Хотите узнать подробнее об акциях?</h2>
-      <p class="section-text" style="text-align:center;margin-bottom:24px;">Оставьте заявку и мы перезвоним вам</p>
-      <a href="{% url 'appointment-request' %}" class="btn btn-primary">Заказать звонок</a>
+    <div class="callback-image">
+      <img src="{% static 'images/doctor-with-stethoscope-2021-09-03-02-58-01-utc 1.png' %}" alt="Врач консультант">
     </div>
   </div>
 </section>

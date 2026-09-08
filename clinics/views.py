@@ -3,7 +3,6 @@ from django.views.decorators.http import require_POST
 
 from clinics.models import (
     CallbackRequest,
-    Clinic,
     Doctor,
     Equipment,
     Promotion,
@@ -28,8 +27,7 @@ def index(request):
 
 
 def directions(request):
-    context = {'categories': ServiceCategory.objects.all()}
-    return render(request, 'directions.html', context)
+    return redirect('services')
 
 
 def direction_detail(request, slug):
@@ -75,33 +73,27 @@ def services(request):
 
 
 def service_detail(request, pk):
-    service = get_object_or_404(Service, pk=pk, is_active=True)
-    doctors = Doctor.objects.filter(category=service.category, is_active=True, clinic__is_active=True)
-    context = {'service': service, 'doctors': doctors}
-    return render(request, 'service_detail.html', context)
+    return redirect('services')
 
 
 def promotions(request):
-    context = {'promotions': Promotion.objects.filter(is_active=True)}
-    return render(request, 'promotions.html', context)
+    promotions = Promotion.objects.filter(is_active=True)
+    return render(request, 'promotions.html', {'promotions': promotions})
 
 
 def about(request):
-    context = {
-        'reviews': Review.objects.filter(is_active=True)[:3],
-    }
-    return render(request, 'about.html', context)
+    reviews = Review.objects.filter(is_active=True)[:3]
+    return render(request, 'about.html', {'reviews': reviews})
 
 
 def reviews(request):
-    context = {'reviews': Review.objects.filter(is_active=True)}
-    return render(request, 'reviews.html', context)
+    reviews = Review.objects.filter(is_active=True)
+    return render(request, 'reviews.html', {'reviews': reviews})
 
 
 def contacts(request):
     doctors = Doctor.objects.filter(is_active=True, clinic__is_active=True)[:8]
-    context = {'doctors': doctors}
-    return render(request, 'contacts.html', context)
+    return render(request, 'contacts.html', {'doctors': doctors})
 
 
 def oms(request):
@@ -121,7 +113,7 @@ def legal(request):
 
 
 def appointment_page(request):
-    return render(request, 'appointment.html')
+    return redirect('oms')
 
 
 @require_POST

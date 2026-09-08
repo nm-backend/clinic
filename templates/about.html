@@ -1,104 +1,183 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load static %}
 
-{% block title %}О клинике — Доктор Рядом{% endblock %}
-
-{% block breadcrumbs %}
-  {% include 'components/breadcrumbs.html' with title='О клинике' %}
-{% endblock %}
-
 {% block content %}
-<section class="section">
-  <div class="container">
-    <h1 class="page-title">О клинике</h1>
-    <p class="page-text">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Metus vitae aenean amet nibh lacus, habitasse fermentum, donec id.
-      Nisl, mollis dolor nec id volutpat quis. Tempus suspendisse ipsum vitae rhoncus scelerisque sed. El tacnia eget eros dui purus,
-      tortor id senectus tristique. Eu rhoncus pretium diam hendrerit porta tincidunt at volutpat. El vestbulum, ulimcus risus tellus tellus,
-      magna. In eu sit lacus, turpis. Sed a commodo mauris amet. Maalesuada adipiscing a sit non proin El. aute augue sed ornna
-      pretium mattis nisl. In sit ut praesent libero neque adipiscing. Diam eget pulvinar neque morbi quis sed vulputate tellus. El
-      equestis gravida sed. Maalesuada et id sit amet, vitaie dictum tempor eget. Sapien purori a non pedentes eu. Enim habitant id arco.
-      Habitart tempor nisl commodo elementum ac amet, ante pellus. Neque eu ac feugiat eu aliquam du cursus donec.
-    </p>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <div class="timeline">
-      <div class="timeline-item">
-        <span class="timeline-year">2022</span>
-        <p class="timeline-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eu adipiscing amet habitant laoreet du at. Felis et duis erat proin. Arcu faubcus accumsan diam neque, egestas nibh dolor id vulputate. In odio nisl facilisis erat leo.</p>
-      </div>
-      <div class="timeline-item">
-        <span class="timeline-year">2021</span>
-        <p class="timeline-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eu adipiscing amet habitant laoreet du at. Felis et duis erat proin. Arcu faubcus accumsan diam neque, egestas nibh dolor id vulputate. In odio nisl facilisis erat leo.</p>
-      </div>
-      <div class="timeline-item">
-        <span class="timeline-year">2020</span>
-        <p class="timeline-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eu adipiscing amet habitant laoreet du at. Felis et duis erat proin. Arcu faubcus accumsan diam neque, egestas nibh dolor id vulputate. In odio nisl facilisis erat leo.</p>
-      </div>
-      <div class="timeline-item">
-        <span class="timeline-year">2019</span>
-        <p class="timeline-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eu adipiscing amet habitant laoreet du at. Felis et duis erat proin. Arcu faubcus accumsan diam neque, egestas nibh dolor id vulputate. In odio nisl facilisis erat leo.</p>
-      </div>
-      <div class="timeline-item">
-        <span class="timeline-year">2017</span>
-        <p class="timeline-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eu adipiscing amet habitant laoreet du at. Felis et duis erat proin. Arcu faubcus accumsan diam neque, egestas nibh dolor id vulputate. In odio nisl facilisis erat leo.</p>
-      </div>
-      <div class="timeline-item">
-        <span class="timeline-year">2005</span>
-        <p class="timeline-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eu adipiscing amet habitant laoreet du at. Felis et duis erat proin. Arcu faubcus accumsan diam neque, egestas nibh dolor id vulputate. In odio nisl facilisis erat leo.</p>
-      </div>
+<section class="about-use_sections">
+    <div class="container">
+        <nav class="breadcrumbs">
+           <a href="/">Главная</a>
+           <span class="separator">&gt;</span>
+           <span class="current">О клинике</span>
+        </nav>
+        <div class="about-us-container">
+            <h3>О клинике</h3>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Metus vitae aenean amet nibh lacus, habitasse fermentum, donec id.
+                Nisl, mollis dolor nec id volutpat quis. Tempus suspendisse ipsum vitae rhoncus scelerisque sed. Et lacinia eget eros duis purus, tortor id senectus tristique.
+                Eu, rhoncus pretium diam hendrerit porta tincidunt at volutpat. Et vestibulum, ultrices risus vel tellus, magna. In eu sit lacus, turpis. Sed a commodo mauris amet.
+                Malesuada adipiscing a sit non proin. Et, augue sed proin urna pretium mattis nisi. In sit ut praesent libero neque adipiscing. Diam eget pulvinar neque morbi quis sed vulputate tellus.
+                Et vel aliquet gravida sed. Malesuada id nisl amet, vitae dictum tempor turpis. Sit purus orci a non pellentesque lorem pulvinar id arcu. Habitant tempus nisi commodo elementum ac amet, ante platea.
+                Neque eu ac feugiat eu aliquam dui cursus donec. 
+            </p>
+        </div>
     </div>
-  </div>
 </section>
-
-<section class="section">
-  <div class="container">
-    <div class="section-header">
-      <h2 class="section-title">Отзывы наших пациентов</h2>
-      <div class="specialists-nav">
-        <button type="button" class="specialists-nav-btn" aria-label="Назад">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
-        </button>
-        <button type="button" class="specialists-nav-btn" aria-label="Вперёд">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-        </button>
-      </div>
-    </div>
-    <div class="reviews-grid">
-      {% for review in reviews %}
-        <div class="review-card">
-          <div class="review-head">
-            <span class="review-name">{{ review.patient_name }}, 37 лет</span>
-            <span class="review-stars">{% for i in "12345" %}<span class="star">&#9733;</span>{% endfor %}</span>
-          </div>
-          <p class="review-text">{{ review.text|truncatechars:200 }}</p>
-          <a href="#" class="review-read-more">Читать полностью</a>
-          <div class="review-footer">
-            <span class="review-date">{{ review.created_at|date:'d.m.Y' }}</span>
-            <span class="review-doctor">Врач: <span class="review-doctor-name">{{ review.doctor.last_name }} {{ review.doctor.first_name }}</span></span>
+<section class="history-section">
+    <div class="container">
+      <div class="items">
+        <div class="timeline-item">
+          <div class="timeline-year">2022</div>
+          <div class="timeline-content">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eu adipiscing amet habitant laoreet dui, at at. Felis et duis erat proin. Arcu faucibus accumsan diam neque, egestas nibh dolor id vulputate. In ac orci nisl facilisis leo.</p>
           </div>
         </div>
-      {% empty %}
-        <p class="empty-text">Отзывов пока нет. Станьте первым!</p>
-      {% endfor %}
+
+        <div class="timeline-item">
+          <div class="timeline-year">2021</div>
+          <div class="timeline-content">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eu adipiscing amet habitant laoreet dui, at at. Felis et duis erat proin. Arcu faucibus accumsan diam neque, egestas nibh dolor id vulputate. In ac orci nisl facilisis leo.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-year">2020</div>
+          <div class="timeline-content">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eu adipiscing amet habitant laoreet dui, at at. Felis et duis erat proin. Arcu faucibus accumsan diam neque, egestas nibh dolor id vulputate. In ac orci nisl facilisis leo.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-year">2019</div>
+          <div class="timeline-content">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eu adipiscing amet habitant laoreet dui, at at. Felis et duis erat proin. Arcu faucibus accumsan diam neque, egestas nibh dolor id vulputate. In ac orci nisl facilisis leo.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-year">2017</div>
+          <div class="timeline-content">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eu adipiscing amet habitant laoreet dui, at at. Felis et duis erat proin. Arcu faucibus accumsan diam neque, egestas nibh dolor id vulputate. In ac orci nisl facilisis leo.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-year">2005</div>
+          <div class="timeline-content">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eu adipiscing amet habitant laoreet dui, at at. Felis et duis erat proin. Arcu faucibus accumsan diam neque, egestas nibh dolor id vulputate. In ac orci nisl facilisis leo.</p>
+          </div>
+        </div>
+
+      </div>  
+    
     </div>
-    <div class="text-center" style="margin-top: 32px;">
-      <a href="{% url 'reviews' %}" class="btn btn-outline">Все отзывы</a>
+</section>
+<section class="reviews-section">
+  <div class="container">
+    <div class="reviews-header">
+      <h2 class="reviews-title">Отзывы наших пациентов</h2>
+      <div class="reviews-arrows">
+         <img src="{% static 'svg/Скрол.svg'%}" alt="button">
+      </div>
+    </div>
+
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-card-header">
+          <span class="review-author">Анна Петрова, 37 лет</span>
+          <div class="stars-cont">
+            <img src="{% static 'svg/star.svg'%}" alt="star">
+            <img src="{% static 'svg/star.svg'%}" alt="star">
+            <img src="{% static 'svg/star.svg'%}" alt="star">
+            <img src="{% static 'svg/star.svg'%}" alt="star">
+            <img src="{% static 'svg/star.svg'%}" alt="star">
+          </div>
+        </div>
+        <p class="review-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non tortor phasellus feugiat rhoncus id. Feugiat a, est urna laoreet aenean arcu tellus mauris sagittis. Morbi praesent nunc tortor risus aliquam lorem quam mauris. Enim, vitae, mi a sapien lectus dictum posuere. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        </p>
+        <a href="#" class="review-more">Читать полностью</a>
+        <div class="review-footer">
+          <span class="review-date">09.08.2021</span>
+          <span class="review-doctor">Врач: <a href="#">Петров Иван Иванович</a></span>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-card-header">
+          <span class="review-author">Анна Петрова, 37 лет</span>
+          <div class="stars-cont">
+            <img src="{% static 'svg/star.svg'%}" alt="star">
+            <img src="{% static 'svg/star.svg'%}" alt="star">
+            <img src="{% static 'svg/star.svg'%}" alt="star">
+            <img src="{% static 'svg/star.svg'%}" alt="star">
+            <img src="{% static 'svg/star.svg'%}" alt="star">
+          </div>
+        </div>
+        <p class="review-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non tortor phasellus feugiat rhoncus id. Feugiat a, est urna laoreet aenean arcu tellus mauris sagittis. Morbi praesent nunc tortor risus aliquam lorem quam mauris. Enim, vitae, mi a sapien lectus dictum posuere. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        </p>
+        <a href="#" class="review-more">Читать полностью</a>
+        <div class="review-footer">
+          <span class="review-date">09.08.2021</span>
+          <span class="review-doctor">Врач: <a href="#">Петров Иван Иванович</a></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="reviews-btn-wrapper">
+      <a href="{% url 'reviews'%}" class="reviews-all-btn">Все отзывы</a>
     </div>
   </div>
 </section>
+<section class="licenses-block">
+    <h2 class="licenses-title">Наши лицензии</h2>
 
-<section class="section section-gray">
-  <div class="container">
-    <h2 class="section-title">Наши лицензии</h2>
     <div class="licenses-grid">
-      <img src="{% static 'img/5e2bfba032ba844b201cd81430b9b18c5f5a8bce.png' %}" alt="Лицензия" />
-      <img src="{% static 'img/5e2bfba032ba844b201cd81430b9b18c5f5a8bce.png' %}" alt="Лицензия" />
-      <img src="{% static 'img/5e2bfba032ba844b201cd81430b9b18c5f5a8bce.png' %}" alt="Лицензия" />
-      <img src="{% static 'img/5e2bfba032ba844b201cd81430b9b18c5f5a8bce.png' %}" alt="Лицензия" />
+        <div class="license-card">
+            <img src="{% static 'images/license.png' %}" alt="Лицензия">
+        </div>
+        <div class="license-card">
+            <img src="{% static 'images/license.png' %}" alt="Лицензия">
+        </div>
+        <div class="license-card">
+            <img src="{% static 'images/license.png' %}" alt="Лицензия">
+        </div>
+        <div class="license-card">
+            <img src="{% static 'images/license.png' %}" alt="Лицензия">
+        </div>
+    </div>
+</section>
+<section class="callback-section">
+  <div class="callback-container">
+    <div class="callback-content">
+      <h2 class="callback-title">Хотите, мы Вам перезвоним?</h2>
+      <p class="callback-subtitle">Оставьте заявку и мы подробно ответим на все Ваши вопросы!</p>
+      
+      <form action="{% url 'save_callback' %}" method="POST" class="callback-form">
+        {% csrf_token %}
+        <div class="form-row">
+          <div class="input-group">
+            <label for="id_name">Ваше ФИО</label>
+            <input type="text" id="id_name" name="name" placeholder="Иванов Иван Иванович" required>
+          </div>
+          
+          <div class="input-group">
+            <label for="id_phone">Номер телефона</label>
+            <input type="number" id="id_phone" name="phone" placeholder="+7 (___) ___-__-__" required>
+          </div>
+        </div>
+        
+        <button type="submit" class="callback-btn">Заказать звонок</button>
+      </form>
+      
+      <p class="callback-policy">
+        Нажимая на кнопку «Заказать звонок», вы соглашаетесь с 
+        <a href="#">политикой конфиденциальности</a>
+      </p>
+    </div>
+
+    <div class="callback-image">
+      <img src="{% static 'images/doctor-with-stethoscope-2021-09-03-02-58-01-utc 1.png' %}" alt="Врач консультант">
     </div>
   </div>
 </section>

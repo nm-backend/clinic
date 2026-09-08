@@ -1,36 +1,107 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load static %}
 
-{% block title %}Отзывы — Сеть клиник Томской области{% endblock %}
-
-{% block breadcrumbs %}
-  {% include 'components/breadcrumbs.html' with title='Отзывы' %}
+{% block title %}
+Отзывы пациентов
 {% endblock %}
 
 {% block content %}
-<section class="section">
-  <div class="container">
-    <h1 class="page-title">Отзывы наших пациентов</h1>
-    <div class="reviews-grid">
-      {% for review in reviews %}
-        <div class="review-card">
-          <div class="review-head">
-            <span class="review-name">{{ review.patient_name }}, 37 лет</span>
-            <span class="review-stars">{% for i in "12345" %}<span class="star">&#9733;</span>{% endfor %}</span>
+
+<section class="reviews">
+
+    <div class="container">
+
+        <div class="breadcrumbs">
+            <a href="{% url 'home' %}">Главная</a>
+            <span>/</span>
+            <span>Отзывы наших пациентов</span>
+        </div>
+
+        <h2 class="reviews-title">
+            Отзывы наших пациентов
+        </h2>
+
+        <div class="reviews-grid">
+
+            {% for review in reviews %}
+
+            <div class="review-card">
+
+                <div class="review-header">
+
+                    <h3>{{ review.patient_name }}</h3>
+
+                    <div class="stars">
+                        {% for i in "12345" %}
+                            {% if forloop.counter <= review.rating %}
+                                ★
+                            {% else %}
+                                ☆
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+
+                </div>
+
+                <p class="review-text">
+                    {{ review.text|truncatewords:40 }}
+                </p>
+
+                <a href="#" class="read-more">
+                    Читать полностью
+                </a>
+
+                <div class="review-footer">
+                    <span>{{ review.created_at|date:"d.m.Y" }}</span>
+                    <span>Врач: {{ review.doctor }}</span>
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <p>Пока отзывов нет.</p>
+
+            {% endfor %}
+
+        </div>
+
+
+
+    </div>
+
+</section>
+<section class="callback-section">
+  <div class="callback-container">
+    <div class="callback-content">
+      <h2 class="callback-title">Хотите, мы Вам перезвоним?</h2>
+      <p class="callback-subtitle">Оставьте заявку и мы подробно ответим на все Ваши вопросы!</p>
+      
+      <form action="{% url 'save_callback' %}" method="POST" class="callback-form">
+        {% csrf_token %}
+        <div class="form-row">
+          <div class="input-group">
+            <label for="id_name">Ваше ФИО</label>
+            <input type="text" id="id_name" name="name" placeholder="Иванов Иван Иванович" required>
           </div>
-          <p class="review-text">{{ review.text|truncatechars:200 }}</p>
-          <a href="#" class="review-read-more">Читать полностью</a>
-          <div class="review-footer">
-            <span class="review-date">{{ review.created_at|date:'d.m.Y' }}</span>
-            <span class="review-doctor">Врач: <span class="review-doctor-name">{{ review.doctor.last_name }} {{ review.doctor.first_name }}</span></span>
+          
+          <div class="input-group">
+            <label for="id_phone">Номер телефона</label>
+            <input type="tel" id="id_phone" name="phone" placeholder="+7 (___) ___-__-__" required>
           </div>
         </div>
-      {% empty %}
-        <p class="empty-text">Отзывов пока нет. Станьте первым!</p>
-      {% endfor %}
+        
+        <button type="submit" class="callback-btn">Заказать звонок</button>
+      </form>
+      
+      <p class="callback-policy">
+        Нажимая на кнопку «Заказать звонок», вы соглашаетесь с 
+        <a href="#">политикой конфиденциальности</a>
+      </p>
     </div>
-    <div class="text-center" style="margin-top: 32px;">
-      <a href="{% url 'reviews' %}" class="btn btn-outline">Все отзывы</a>
+
+    <div class="callback-image">
+      <img src="{% static 'images/doctor-with-stethoscope-2021-09-03-02-58-01-utc 1.png' %}" alt="Врач консультант">
     </div>
   </div>
 </section>

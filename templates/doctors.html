@@ -1,52 +1,79 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load static %}
-{% block title %}Наши специалисты{% endblock %}
 
-{% block breadcrumbs %}
-  {% include 'components/breadcrumbs.html' with title='Врачи' %}
-{% endblock %}
+{% block title %}Наши врачи{% endblock %}
 
 {% block content %}
-<section class="section">
+<section class="doctors-page">
   <div class="container">
+    <nav class="breadcrumbs">
+      <a href="/">Главная</a>
+      <span class="separator">&gt;</span>
+      <span class="current">врачи</span>
+    </nav>
+
     <h1 class="page-title">Врачи</h1>
 
-    <form method="get" class="doctors-filters">
-      <div class="doctors-filter">
-        <label class="doctors-filter-label">Специализация</label>
-        <select class="doctors-filter-select" name="category" onchange="this.form.submit()">
-          <option value="">Все специализации</option>
-          {% for cat in categories %}
-          <option value="{{ cat.slug }}"{% if cat.slug == active_category %} selected{% endif %}>{{ cat.name }}</option>
-          {% endfor %}
-        </select>
-      </div>
-      <button type="submit" class="btn btn-outline">Применить</button>
-    </form>
-
-    <div class="doctors-sort">
-      <a href="?sort=name" class="doctors-sort-link">по алфавиту</a>
-      <a href="?sort=experience" class="doctors-sort-link">по стажу</a>
-    </div>
-
     <div class="doctors-grid">
-      {% for d in doctors %}
-      <div class="doctor-card">
-        <div class="doctor-photo">
-          {% if d.photo %}
-          <img src="{% static 'img/'|add:d.photo %}" alt="{{ d.full_name }}">
-          {% endif %}
-        </div>
-        <div class="doctor-card-info">
-          <div class="doctor-name">{{ d.full_name }}</div>
-          <div class="doctor-specialty">{{ d.specialty }}</div>
-          <a href="{% url 'appointment-page' %}" class="btn btn-primary btn-block doctor-card-btn">Запись на прием</a>
-        </div>
-      </div>
+      {% for doctor in doctors %}
+        <article class="doctor-card">
+          <div class="doctor-photo">
+            {% if doctor.photo %}
+              <img src="{% static 'images/' %}{{ doctor.photo }}" alt="{{ doctor.full_name }}">
+            {% else %}
+              <img src="{% static 'images/TDV_M63_010 1.png' %}" alt="Нет фото">
+            {% endif %}
+          </div>
+          
+          <div class="doctor-content">
+            <h3 class="doctor-name">{{ doctor.full_name }}</h3>
+            <p class="doctor-spec">{{ doctor.specialty }}</p>
+            
+            <div class="doctor-actions">
+              <a href="{% url 'doctors' %}" class="btn-green">Запись на прием</a>
+              <a href="#" class="btn-outline">Подробнее</a>
+            </div>
+          </div>
+        </article>
       {% empty %}
-      <p class="empty-text">Список специалистов скоро появится.</p>
+        <p>В базе данных пока нет врачей.</p>
       {% endfor %}
     </div>
+</section>
+<section class="callback-section">
+  <div class="callback-container">
+    <div class="callback-content">
+      <h2 class="callback-title">Хотите, мы Вам перезвоним?</h2>
+      <p class="callback-subtitle">Оставьте заявку и мы подробно ответим на все Ваши вопросы!</p>
+      
+      <form action="{% url 'save_callback' %}" method="POST" class="callback-form">
+        {% csrf_token %}
+        <div class="form-row">
+          <div class="input-group">
+            <label for="id_name">Ваше ФИО</label>
+            <input type="text" id="id_name" name="name" placeholder="Иванов Иван Иванович" required>
+          </div>
+          
+          <div class="input-group">
+            <label for="id_phone">Номер телефона</label>
+            <input type="tel" id="id_phone" name="phone" placeholder="+7 (___) ___-__-__" required>
+          </div>
+        </div>
+        
+        <button type="submit" class="callback-btn">Заказать звонок</button>
+      </form>
+      
+      <p class="callback-policy">
+        Нажимая на кнопку «Заказать звонок», вы соглашаетесь с 
+        <a href="#">политикой конфиденциальности</a>
+      </p>
+    </div>
+
+    <div class="callback-image">
+      <img src="{% static 'images/doctor-with-stethoscope-2021-09-03-02-58-01-utc 1.png' %}" alt="Врач консультант">
+    </div>
+         </div>
+       
   </div>
 </section>
 {% endblock %}

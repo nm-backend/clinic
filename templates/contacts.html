@@ -1,64 +1,126 @@
-{% extends 'base.html' %}
+{% extends 'base.html'%}
 {% load static %}
 
-{% block title %}Контакты — Доктор Рядом{% endblock %}
-
-{% block breadcrumbs %}
-  {% include 'components/breadcrumbs.html' with title='Контакты' %}
-{% endblock %}
 
 {% block content %}
-<section class="section section-contacts">
-  <div class="container contacts-inner">
-    <div class="contacts-info">
-      <h2 class="section-title section-title-light">Наши контакты</h2>
-      <p class="contacts-company">ООО «МЕДСЕРВИС». ИНН: 70142956ъб. КПП: 701701001. ОГРН: 1177031079180, дата регистрации: 03.08.2017</p>
-      <p class="contacts-chief">Главный врач: Храмов Павел Александрович</p>
-      <p class="contacts-reception">Приём граждан по вопросам качества оказания медицинских услуг — каждый четверг по предварительной записи по телефону: (3822) 50-00-49</p>
-      <div class="contacts-list">
-        <div class="contacts-item">
-          <span class="contacts-label">Адрес</span>
-          <span class="contacts-value">г. Томск, ул. 79 Гвардейской дивизии, 6</span>
-        </div>
-        <div class="contacts-item">
-          <span class="contacts-label">Телефон</span>
-          <span class="contacts-value">8 (3822) 50-00-49</span>
-        </div>
-        <div class="contacts-item">
-          <span class="contacts-label">Почта</span>
-          <span class="contacts-value">Poshta@gmail.com</span>
-        </div>
-        <div class="contacts-item">
-          <span class="contacts-label">График работы</span>
-          <span class="contacts-value">Понедельник — пятница: 8.00 — 20.00<br>Суббота: 9.00 — 17.00<br>Воскресенье: 10.00 — 16.00</span>
-        </div>
-      </div>
+<section class="contacts_section">
+    <div class="container">
+        <nav class="breadcrumbs">
+            <a href="/">Главная</a>
+            <span class="separator">&gt;</span>
+            <span class="current">Наши контакты</span>
+        </nav>
     </div>
-    <div class="contacts-map">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2345.678!2d84.95!3d56.47!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTbCsDI4JzEyLjAiTiA4NMKwNTcnMDAuMCJF!5e0!3m2!1sru!2sru!4v1" width="100%" height="400" style="border:0; border-radius: 18px;" allowfullscreen="" loading="lazy"></iframe>
+
+    <div class="global_container">
+        <div class="contact_informations">
+            <h3>Наши контакты</h3>
+            
+            <p class="company_info">
+                ООО «МЕДСЕРВИС», ИНН: 7017429626, КПП: 701701001, ОГРН: 1177031079180, дата регистрации: 03.08.2017
+                <br><br>
+                Главный врач: Храмов Павел Александрович
+                <br><br>
+                Прием граждан по вопросам качества оказания медицинских услуг – каждый четверг по предварительной записи по телефону: (3822) 50-00-49
+            </p>
+
+            <div class="contact_details">
+                <div class="contact_block">
+                    <span class="label">Адрес</span> <br>  
+                    <span class="value">г. Томск, ул. 79 Гвардейской дивизии, 6</span>
+                </div>
+
+                <div class="contact_block">
+                    <span class="label">Телефон</span> <br>
+                    <a href="tel:83822500049" class="value">8 (3822) 50-00-49</a>
+                </div>
+
+                <div class="contact_block">
+                    <span class="label">Почта</span> <br>
+                    <a href="mailto:Poshta@gmail.com" class="value">Poshta@gmail.com</a>
+                </div>
+
+                <div class="contact_block">
+                    <span class="label">График работы</span> <br>
+                    <div class="value">
+                        Понедельник — пятница: 8.00 — 20.00<br>
+                        Суббота: 9.00 — 17.00<br>
+                        Воскресенье: 10.00 — 16.00
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="maps_image">
+            <img src="{% static 'images/Rectangle 175.png' %}" alt="map">
+        </div>
     </div>
+</section>
+<section class="doctors-page">
+  <div class="container">
+    <h1 class="page-title">Наши специалисты</h1>
+
+    <div class="doctors-grid">
+      {% for doctor in doctors %}
+        <article class="doctor-card">
+          <div class="doctor-photo">
+            {% if doctor.photo %}
+              <img src="{% static 'images/' %}{{ doctor.photo }}" alt="{{ doctor.full_name }}">
+            {% else %}
+              <img src="{% static 'images/TDV_M63_010 1.png' %}" alt="Нет фото">
+            {% endif %}
+          </div>
+          
+          <div class="doctor-content">
+            <h3 class="doctor-name">{{ doctor.full_name }}</h3>
+            <p class="doctor-spec">{{ doctor.specialty }}</p>
+            
+            <div class="doctor-actions">
+              <a href="{% url 'doctors' %}" class="btn-green">Запись на прием</a>
+            </div>
+          </div>
+        </article>
+      {% empty %}
+        <p>В базе данных пока нет врачей.</p>
+      {% endfor %}
+    </div>
+</section>
+<section class="callback-section">
+  <div class="callback-container">
+    <div class="callback-content">
+      <h2 class="callback-title">Хотите, мы Вам перезвоним?</h2>
+      <p class="callback-subtitle">Оставьте заявку и мы подробно ответим на все Ваши вопросы!</p>
+      
+      <form action="{% url 'save_callback' %}" method="POST" class="callback-form">
+        {% csrf_token %}
+        <div class="form-row">
+          <div class="input-group">
+            <label for="id_name">Ваше ФИО</label>
+            <input type="text" id="id_name" name="name" placeholder="Иванов Иван Иванович" required>
+          </div>
+          
+          <div class="input-group">
+            <label for="id_phone">Номер телефона</label>
+            <input type="tel" id="id_phone" name="phone" placeholder="+7 (___) ___-__-__" required>
+          </div>
+        </div>
+        
+        <button type="submit" class="callback-btn">Заказать звонок</button>
+      </form>
+      
+      <p class="callback-policy">
+        Нажимая на кнопку «Заказать звонок», вы соглашаетесь с 
+        <a href="#">политикой конфиденциальности</a>
+      </p>
+    </div>
+
+    <div class="callback-image">
+      <img src="{% static 'images/doctor-with-stethoscope-2021-09-03-02-58-01-utc 1.png' %}" alt="Врач консультант">
+    </div>
+         </div>
+       
   </div>
 </section>
 
-<section class="section">
-  <div class="container">
-    <h2 class="section-title">Наши специалисты</h2>
-    <div class="doctors-grid">
-      {% for doctor in doctors %}
-        <div class="doctor-card">
-          <div class="doctor-photo">
-            {% if doctor.photo %}
-              <img src="{% static 'img/'|add:doctor.photo %}" alt="{{ doctor.full_name }}" />
-            {% endif %}
-          </div>
-          <div class="doctor-card-info">
-            <h3 class="doctor-name">{{ doctor.full_name }}</h3>
-            <p class="doctor-specialty">{{ doctor.specialty }}</p>
-            <a href="{% url 'appointment-request' %}" class="btn btn-primary btn-block doctor-card-btn">Запись на прием</a>
-          </div>
-        </div>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-{% endblock %}
+
+{% endblock%}

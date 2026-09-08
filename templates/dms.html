@@ -1,94 +1,201 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load static %}
-{% block title %}Добровольное медицинское страхование (ДМС){% endblock %}
 
 {% block content %}
-<section class="section">
-  <div class="container">
-    <div class="page-title">Добровольное медицинское страхование (ДМС)</div>
-    <p class="page-text">ДМС — это дополнительная медицинская страховка, которая расширяет стандартный пакет услуг по полису ОМС и дает доступ к расширенному спектру медицинских услуг.</p>
+<section class="dms-section">
+    <nav class="breadcrumbs">
+        <a href="/">Главная</a>
+        <span class="separator">&gt;</span>
+        <span class="current">ДМС</span>
+    </nav>
 
-    <div class="dms-layout">
-      <div class="dms-partners">
-        <h3 class="section-title" style="font-size:24px;">Наши партнеры по ДМС</h3>
-        <ul class="dms-partners-list">
-          <li><span class="dms-bullet"></span> РОСНО</li>
-          <li><span class="dms-bullet"></span> АльфаСтрахование</li>
-          <li><span class="dms-bullet"></span> Согласие</li>
-          <li><span class="dms-bullet"></span> Ренессанс</li>
-          <li><span class="dms-bullet"></span> ВСК</li>
-          <li><span class="dms-bullet"></span> Ингосстрах</li>
-          <li><span class="dms-bullet"></span> ЭРГО</li>
-          <li><span class="dms-bullet"></span> Максимум</li>
-          <li><span class="dms-bullet"></span> Спасские ворота</li>
-        </ul>
-      </div>
+    <div class="dms-card">
+        <h1 class="dms-title">Добровольное медицинское страхование</h1>
+        
+        <p class="dms-text">
+            Добровольное медицинское страхование позволяет получить широкий спектр услуг в различных областях врачебного обслуживания. Организации и граждане, заключившие договор ДМС, смогут проходить диагностику и лечиться в новой клинике, где применяется комплексный подход к пациенту. Врачи в своей работе используют самые современные методики, диагностика проводится на базе новейшего оборудования экспертного класса.
+        </p>
 
-      <div class="dms-services">
-        <h3 class="section-title" style="font-size:24px;">В рамках ДМС мы предлагаем</h3>
-        <ol class="dms-services-list">
-          <li>Консультации специалистов</li>
-          <li>Диагностические исследования</li>
-          <li>Лабораторные анализы</li>
-          <li>Ультразвуковая диагностика</li>
-          <li>ЭКГ и функциональная диагностика</li>
-          <li>Физиотерапевтические процедуры</li>
-          <li>Массаж</li>
-          <li>Стоматология</li>
-          <li>Гинекология</li>
-          <li>Дерматология</li>
-          <li>Офтальмология</li>
-          <li>Отоларингология</li>
-          <li>Хирургия</li>
-        </ol>
-      </div>
+        <p class="dms-text">
+            Наша клиника активно сотрудничает с ведущими страховыми компаниями России и предлагает пациентам полный спектр медицинских услуг по диагностике, лечению и восстановительным процедурам.
+        </p>
     </div>
+</section>
+<section class="dms-partners-section">
+  <div class="dms-container">
+    <h2 class="dms-title">Наши партнеры по ДМС</h2>
 
-    <div class="dms-detail-section">
-      <h3 class="section-title" style="font-size:24px;">Мы оказываем услуги ДМС</h3>
-      <div class="dms-detail-grid">
-        <div class="dms-detail-card">
-          <div class="dms-detail-title">Амбулаторно-поликлиническая помощь</div>
-          <p class="dms-detail-text">Консультации врачей-специалистов, диагностические исследования, лабораторные анализы, физиотерапия, массаж.</p>
+    <ul class="dms-grid">
+      <li>ПАО Энергогарант</li>
+      <li>СПАО Ингосстрах</li>
+      <li>ООО СК Капитал-полис</li>
+      <li>АО СК Совкомбанк Жизнь</li>
+      <li>САО ВСК</li>
+      <li>АО Альфа Страхование</li>
+      <li>ООО СК Альянс Жизнь</li>
+      <li>ООО АВП Рус</li>
+      <li>АО "Совкомбанк страхование"</li>
+      <li>ООО Капитал лайф страхование жизни</li>
+      <li>СК Арсенал</li>
+      <li>АО Страховая Бизнес Группа</li>
+      <li>ООО Национальная медслужба</li>
+      <li>ООО СМП-страхование</li>
+      <li>ООО Европ Ассистанс</li>
+      <li>ООО РегионМедСервис</li>
+      <li>ПАО СК Росгосстрах</li>
+      <li>ООО "СК Сбербанк Страхование" </li>
+      <li>ООО Оксиджен</li>
+      <li>СПАО Ресо-Гарантия</li>
+      <li>ООО Бестдоктор</li>
+      <li>АО Группа Ренессанс страхование</li>
+      <li>АО Группа страховых компаний Югория</li>
+      <li>ООО Уралсиб страхование</li>
+      <li>ООО "СК "Согласие"</li>
+      <li>ООО "СК Гелиос"</li>
+    </ul>
+
+    <div class="dms-info-box">
+      <p class="dms-text-primary">
+        Если у вас заключен договор добровольного медицинского страхования с одной из перечисленных компаний, вы можете записаться на обслуживание по телефону: 
+        <span class="dms-phone">+7 (3822) 50-00-49"</span>
+      </p>
+      <p class="dms-text-secondary">
+        Если в этом списке нет вашей страховой компании, вы можете обратиться к нам за консультацией и мы расскажем, как прикрепиться. Либо сообщите своему страховому агенту о своем желании проходить лечение по ДМС, а мы оформим все  необходимые документы, чтобы вы смогли воспользоваться своим полисом ДМС в нашем лечебном учреждении.
+      </p>
+    </div>
+  </div>
+</section>
+<section class="vhi-section">
+  <div class="vhi-container">
+    <h2 class="vhi-main-title">В рамках добровольного медицинского страхования мы предлагаем:</h2>
+
+    <div class="vhi-list">
+      <div class="vhi-item">
+        <div class="vhi-num">01</div>
+        <div class="vhi-text">
+            <p>Эффективное оказание медицинской помощи высокого уровня квалифицированными специалистами в рамках заключенного договора</p>
         </div>
-        <div class="dms-detail-card">
-          <div class="dms-detail-title">Стоматологическая помощь</div>
-          <p class="dms-detail-text">Лечение зубов, протезирование, имплантация, отбел зубов, профессиональная чистка.</p>
+      </div>
+
+      <div class="vhi-item">
+        <div class="vhi-num">02</div>
+        <div class="vhi-text">
+            <p>Выдачу на руки необходимых медицинских документов – результатов проведенной диагностики, выписок, справок, рекомендаций на бумажном или электронном носителе</p>
         </div>
-        <div class="dms-detail-card">
-          <div class="dms-detail-title">Профилактические осмотры</div>
-          <p class="dms-detail-text">Комплексные профилактические осмотры для выявления заболеваний на ранних стадиях.</p>
+      </div>
+
+      <div class="vhi-item">
+        <div class="vhi-num">03</div>
+        <div class="vhi-text">
+            <p>Отлаженную прозрачную систему взаиморасчетов с выдачей необходимых финансовых документов</p>
+        </div>
+      </div>
+
+      <div class="vhi-item">
+        <div class="vhi-num">04</div>
+        <div class="vhi-text">
+          <p>Сохранение в архиве результатов обследования, лечения и электронных вариантов историй болезни для последующего восстановления данных</p>
+        </div>
+      </div>
+
+      <div class="vhi-item">
+        <div class="vhi-num">05</div>
+        <div class="vhi-text">
+            <p>Использование медицинского оборудования последнего поколения экспертного класса от ведущих мировых производителей (МРТ-аппарат General Electric 1,5 Тесла, УЗИ-аппарат MINDRAY DC-70PRO X, рентген- высокоточный цифровой аппарат с минимальной лучевой нагрузкой PXP-100 CA фирмы POSKOM Co.Ltd с трубкой Toshiba и другие)</p>
+        </div>
+      </div>
+
+      <div class="vhi-item">
+        <div class="vhi-num">06</div>
+        <div class="vhi-text">
+          <p>Гибкую ценовую политику</p>
+        </div>
+      </div>
+
+      <div class="vhi-item">
+        <div class="vhi-num">07</div>
+        <div class="vhi-text">
+          <p>Контроль лечебного процесса администрацией клиники</p>
+        </div>
+      </div>
+
+      <div class="vhi-item">
+        <div class="vhi-num">08</div>
+        <div class="vhi-text">
+            <p>ДВОЙНОЙ КОНТРОЛЬ КАЧЕСТВА оказания медицинской помощи: со стороны экспертов клиники и со стороны экспертов страховой компании</p>
+        </div>
+      </div>
+
+      <div class="vhi-item">
+        <div class="vhi-num">09</div>
+        <div class="vhi-text">
+            <p>Предварительная запись, дающая возможность получить медицинское обслуживание без длительного ожидания и очередей</p>
+        </div>
+      </div>
+
+      <div class="vhi-item">
+        <div class="vhi-num">10</div>
+        <div class="vhi-text">
+            <p>Использование совершенных стандартов обслуживания, контроль качества предоставляемых медицинских услуг и обеспечение максимального комфорта для наших клиентов</p>
+        </div>
+      </div>
+
+      <div class="vhi-item">
+        <div class="vhi-num">11</div>
+        <div class="vhi-text">
+            <p>Проведение полного комплекса мероприятий, позволяющих поставить диагноз и провести лечение болезни</p>
+        </div>
+      </div>
+
+      <div class="vhi-item">
+        <div class="vhi-num">12</div>
+        <div class="vhi-text">
+          <p>Прикрепление к клинике по программам ДМС</p>
+        </div>
+      </div>
+
+      <div class="vhi-item">
+        <div class="vhi-num">13</div>
+        <div class="vhi-text">
+            <p>Прикрепление по программе ДМС (добровольного медицинского страхования) происходит через страховые компании – партнеры нашей клиники. С условиями прикрепления можно ознакомиться, связавшись непосредственно со страховыми компаниями</p>
         </div>
       </div>
     </div>
   </div>
 </section>
-
-<section class="section section-contacts">
+<section class="medical-services">
   <div class="container">
-    <div class="contacts-inner">
-      <div class="contacts-info">
-        <h2 class="section-title section-title-light">Контакты</h2>
-        <div class="contacts-list">
-          <div class="contacts-item">
-            <div class="contacts-label">Адрес</div>
-            <div class="contacts-value">г. Томск, ул. Белинского, 68</div>
-          </div>
-          <div class="contacts-item">
-            <div class="contacts-label">Телефон</div>
-            <div class="contacts-value">+7 (3822) 50-00-49</div>
-          </div>
-          <div class="contacts-item">
-            <div class="contacts-label">Часы работы</div>
-            <div class="contacts-value">Пн-Пт: 8:00 - 19:00</div>
-          </div>
-        </div>
-        <a href="{% url 'appointment-request' %}" class="btn btn-primary" style="margin-top:24px;">Записаться на прием</a>
-      </div>
-      <div class="contacts-map">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2680.1234567890123!2d84.9463!3d56.4647!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s56.4647%2C84.9463!5e0!3m2!1sru!2sru!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
-      </div>
+    <h2 class="services-title">Мы оказываем услуги ДМС по следующим направлениям:</h2>
+    <div class="medical-cards">
+        <img src="{% static 'images/Диагностика.png'%}" alt="">
+        <img src="{% static 'images/Лечение.png'%}" alt="">
+        <img src="{% static 'images/восстановление.png'%}" alt="">
     </div>
+ 
   </div>
+</section>
+<section class="contacts-block">
+    <div class="contacts-card">
+        <h2 class="contacts-title">Наши контакты</h2>
+
+        <div class="contacts-info">
+            <div class="contact-item">
+                <span class="label">Адрес</span>
+                <p class="value">г. Томск, ул. 79 Гвардейской дивизии, 6</p>
+            </div>
+
+            <div class="contact-item">
+                <span class="label">Телефон</span>
+                <p class="value">8 (3822) 50-00-49</p>
+            </div>
+
+            <div class="contact-item">
+                <span class="label">Почта</span>
+                <p class="value">info@docnear.ru</p>
+            </div>
+        </div>
+
+        <a href="#" class="contacts-btn">Записаться на прием</a>
+    </div>
 </section>
 {% endblock %}

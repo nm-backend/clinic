@@ -1,6 +1,5 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
-from rest_framework.serializers import ModelSerializer
 
 from clinics.models import (
     Appointment,
@@ -18,13 +17,13 @@ from clinics.models import (
 )
 
 
-class ClinicModelSerializer(ModelSerializer):
+class ClinicModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Clinic
         fields = '__all__'
 
 
-class DoctorModelSerializer(ModelSerializer):
+class DoctorModelSerializer(serializers.ModelSerializer):
     clinic_name = serializers.CharField(source='clinic.name', read_only=True)
     category_name = serializers.CharField(source='category.name', read_only=True)
 
@@ -33,13 +32,13 @@ class DoctorModelSerializer(ModelSerializer):
         fields = '__all__'
 
 
-class ServiceCategoryModelSerializer(ModelSerializer):
+class ServiceCategoryModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = ServiceCategory
         fields = '__all__'
 
 
-class ServiceModelSerializer(ModelSerializer):
+class ServiceModelSerializer(serializers.ModelSerializer):
     clinic_name = serializers.CharField(
         source='clinic.name',
         read_only=True,
@@ -52,13 +51,13 @@ class ServiceModelSerializer(ModelSerializer):
         fields = '__all__'
 
 
-class PromotionModelSerializer(ModelSerializer):
+class PromotionModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Promotion
         fields = '__all__'
 
 
-class ReviewModelSerializer(ModelSerializer):
+class ReviewModelSerializer(serializers.ModelSerializer):
     doctor_name = serializers.CharField(source='doctor.full_name', read_only=True)
 
     class Meta:
@@ -66,13 +65,13 @@ class ReviewModelSerializer(ModelSerializer):
         fields = '__all__'
 
 
-class EquipmentModelSerializer(ModelSerializer):
+class EquipmentModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Equipment
         fields = '__all__'
 
 
-class CallbackRequestModelSerializer(ModelSerializer):
+class CallbackRequestModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = CallbackRequest
         fields = '__all__'
@@ -94,15 +93,21 @@ class RegisterSerializer(serializers.Serializer):
         return attrs
 
     def create(self, validated_data):
-        validated_data.pop('password_confirm')
-        password = validated_data.pop('password')
-        role = validated_data.pop('role')
-        user = get_user_model().objects.create_user(**validated_data, password=password)
+        username = validated_data['username']
+        email = validated_data.get('email', '')
+        password = validated_data['password']
+        role = validated_data['role']
+
+        user = get_user_model().objects.create_user(
+            username=username,
+            email=email,
+            password=password,
+        )
         ClinicUser.objects.create(user=user, role=role)
         return user
 
 
-class CurrentUserSerializer(ModelSerializer):
+class CurrentUserSerializer(serializers.ModelSerializer):
     username = serializers.CharField(source='user.username', read_only=True)
     email = serializers.CharField(source='user.email', read_only=True)
 
@@ -111,7 +116,7 @@ class CurrentUserSerializer(ModelSerializer):
         fields = ('username', 'email', 'role', 'clinic')
 
 
-class AppointmentSerializer(ModelSerializer):
+class AppointmentSerializer(serializers.ModelSerializer):
     patient_name = serializers.CharField(source='patient.full_name', read_only=True)
     doctor_name = serializers.CharField(source='doctor.full_name', read_only=True)
     service_name = serializers.CharField(source='service.name', read_only=True)

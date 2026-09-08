@@ -9,7 +9,7 @@ class AppointmentViewSet(ModelViewSet):
     serializer_class = AppointmentSerializer
 
     def get_queryset(self):
-        appointments = Appointment.objects.all()
+        appointments = super().get_queryset()
 
         patient_phone = self.request.query_params.get('patient_phone')
         if patient_phone:

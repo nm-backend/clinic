@@ -1,96 +1,191 @@
-{% extends 'base.html' %}
-{% load static %}
-
-{% block title %}Анализы — Сеть клиник Томской области{% endblock %}
-
-{% block breadcrumbs %}
-  {% include 'components/breadcrumbs.html' with title='Анализы' %}
-{% endblock %}
+{% extends "base.html" %}
+{% load static%}
 
 {% block content %}
-<section class="section">
-  <div class="container">
-    <h1 class="page-title">Анализы</h1>
-    <p class="page-text">
-      Собственная лаборатория клиники выполняет более 300 видов исследований.
-      Результаты готовы в короткие сроки, их можно получить в клинике или по электронной почте.
-    </p>
+<section class="discounts_sections">
+    <div class="container">
+        <nav class="breadcrumbs">
+           <a href="/">Главная</a>
+           <span class="separator">&gt;</span>
+           <span class="current">Анализы</span>
+        </nav>
+        <h3>Анализы</h3>
+        <div class="mrt_cards">
+            <div class="promotions-1">
+          <h4>Скидка -20% на МРТ</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+               Viverra amet dolor sed mi tincidunt pharetra montes. 
+               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+               Viverra amet dolor sed mi tincidunt pharetra montes.
+            </p>
+            
+            <p>Акция действует до <br><strong class="data">22.03.2023</strong></p>
+            <a href="#" class="details-btn">
+                Подробнее
+            </a>
 
-    <div class="analyses-promo-grid">
-      <a href="{% url 'appointment-request' %}" class="analyses-promo-card analyses-promo-green">
-        <div class="analyses-promo-icon">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="rgba(255,255,255,0.2)"/><path d="M24 14v20M14 24h20" stroke="#fff" stroke-width="3"/></svg>
+            <div class="image-mrt">
+                <img src="{% static 'images/image 4.png' %}" alt="img">
+            </div>
         </div>
-        <div class="analyses-promo-title">Анализы</div>
-        <div class="analyses-promo-text">Более 300 видов исследований</div>
-      </a>
-      <a href="{% url 'appointment-request' %}" class="analyses-promo-card analyses-promo-orange">
-        <div class="analyses-promo-icon">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="24" fill="rgba(255,255,255,0.2)"/><path d="M24 14v20M14 24h20" stroke="#fff" stroke-width="3"/></svg>
+        <div class="promotions-1 card-blue">
+          <h4>Скидка -20% на МРТ</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+               Viverra amet dolor sed mi tincidunt pharetra montes. 
+               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+               Viverra amet dolor sed mi tincidunt pharetra montes.
+            </p>
+            
+            <p>Акция действует до <br><strong class="data">22.03.2023</strong></p>
+            <a href="#" class="details-btn">
+                Подробнее
+            </a>
+
+            <div class="image-mrt">
+                <img src="{% static 'images/image 4.png' %}" alt="img">
+            </div>
         </div>
-        <div class="analyses-promo-title">Записаться на прием</div>
-        <div class="analyses-promo-text">Запишитесь на прием для сдачи анализов</div>
-      </a>
+        </div>
+    </div>
+</section>
+<section class="steps-section">
+    <div class="container">
+        <h2 class="section-title">Как получить лечение?</h2>
+        
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <div class="step-card-inner">
+                    <div class="step-icon">
+                        <img src="{% static 'svg/Frame 153.svg'%}" alt="">
+                    </div>
+                    <p>Узнайте, входит ли интересующее вас лечение в программу для вашего региона</p>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <div class="step-card-inner">
+                    <div class="step-icon">
+                        <img src="{% static 'svg/Frame 129.svg'%}" alt="">
+                    </div>
+                    <p>Подготовьте необходимые документы и отправьте заявку на лечение</p>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <div class="step-card-inner">
+                    <div class="step-icon">
+                        <img src="{% static 'svg/Frame 153 (1).svg'%}" alt="">
+                    </div>
+                    <p>В течение 3-х рабочих дней специалист отдела ОМС свяжется с вами по указанному вами номеру телефона</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="popular_tests_sections">
+    <div class="container">
+        <h3>Популярные анализы</h3>
+        <div class="cards_popular_tests">
+            <img src="{% static 'images/1.png'%}" alt="card">
+            <img src="{% static 'images/2.png'%}" alt="card">
+            <img src="{% static 'images/3.png'%}" alt="card">
+            <img src="{% static 'images/4.png'%}" alt="card">
+            
+        </div>
+    </div>
+</section>
+<section class="analyses-section">
+  <div class="container cont">
+    
+    <div class="analyses-content">
+      <h2 class="analyses-title">Виды лабораторных анализов и исследований</h2>
+      
+      <div class="analyses-lists">
+        <ul class="analyses-list">
+          <li>Общие исследования крови</li>
+          <li>Биохимические исследования крови</li>
+          <li>Онкомаркеры</li>
+          <li>Общеклинические исследования кала</li>
+          <li>Панели аллергенов</li>
+          <li>Гистологические исследования</li>
+          <li>Гормональные исследования крови</li>
+          <li>Исследования мочи</li>
+          <li>Иммунологические исследования крови</li>
+        </ul>
+
+        <ul class="analyses-list">
+          <li>Гематологические исследования</li>
+          <li>Аллергологические исследования</li>
+          <li>Исследования кала</li>
+          <li>Аутоиммунные заболевания</li>
+          <li>Исследования спермы</li>
+          <li>Генетический анализ</li>
+          <li>Исследования крови на инфекции</li>
+          <li>Цитологические исследования</li>
+          <li>Исследования инфекционных заболеваний</li>
+        </ul>
+      </div>
     </div>
 
-    <div class="steps">
-      <h2 class="section-title">Как получить лечение?</h2>
-      <div class="steps-grid">
-        <div class="step-card">
-          <span class="step-number">01</span>
-          <h3 class="step-title">Запишитесь на прием</h3>
-          <p class="step-text">Оставьте заявку на сайте или позвоните по телефону</p>
-        </div>
-        <div class="step-card">
-          <span class="step-number">02</span>
-          <h3 class="step-title">Пройдите обследование</h3>
-          <p class="step-text">Врач проведет осмотр и назначит необходимые обследования</p>
-        </div>
-        <div class="step-card">
-          <span class="step-number">03</span>
-          <h3 class="step-title">Получите результаты</h3>
-          <p class="step-text">Результаты анализов будут готовы в кратчайшие сроки</p>
-        </div>
-      </div>
+    <div class="analyses-image-wrapper">
+      <img src="{% static 'images/Group 1895.png'%}" alt="Медицинский специалист" class="analyses-image">
     </div>
 
-    <div class="section-header">
-      <h2 class="section-title">Популярные анализы</h2>
+  </div>
+</section>
+<section class="licenses-block">
+    <h2 class="licenses-title">Наши лицензии</h2>
+
+    <div class="licenses-grid">
+        <div class="license-card">
+            <img src="{% static 'images/license.png' %}" alt="Лицензия">
+        </div>
+        <div class="license-card">
+            <img src="{% static 'images/license.png' %}" alt="Лицензия">
+        </div>
+        <div class="license-card">
+            <img src="{% static 'images/license.png' %}" alt="Лицензия">
+        </div>
+        <div class="license-card">
+            <img src="{% static 'images/license.png' %}" alt="Лицензия">
+        </div>
     </div>
-    <div class="analyses-grid">
-      <div class="analysis-card">
-        <h3 class="analysis-title">Клинический анализ крови</h3>
-        <p class="analysis-text">Общий анализ крови с лейкоцитарной формулой</p>
-      </div>
-      <div class="analysis-card">
-        <h3 class="analysis-title">Биохимический анализ крови</h3>
-        <p class="analysis-text">Оценка работы печени, почек, обмена веществ</p>
-      </div>
-      <div class="analysis-card">
-        <h3 class="analysis-title">Анализ мочи</h3>
-        <p class="analysis-text">Общий анализ мочи с микроскопией осадка</p>
-      </div>
-      <div class="analysis-card">
-        <h3 class="analysis-title">Гормональные исследования</h3>
-        <p class="analysis-text">Щитовидная железа, половые гормоны, инсулин</p>
-      </div>
+</section>
+<section class="callback-section">
+  <div class="callback-container">
+    <div class="callback-content">
+      <h2 class="callback-title">Хотите, мы Вам перезвоним?</h2>
+      <p class="callback-subtitle">Оставьте заявку и мы подробно ответим на все Ваши вопросы!</p>
+      
+      <form action="{% url 'save_callback' %}" method="POST" class="callback-form">
+        {% csrf_token %}
+        <div class="form-row">
+          <div class="input-group">
+            <label for="id_name">Ваше ФИО</label>
+            <input type="text" id="id_name" name="name" placeholder="Иванов Иван Иванович" required>
+          </div>
+          
+          <div class="input-group">
+            <label for="id_phone">Номер телефона</label>
+            <input type="tel" id="id_phone" name="phone" placeholder="+7 (___) ___-__-__" required>
+          </div>
+        </div>
+        
+        <button type="submit" class="callback-btn">Заказать звонок</button>
+      </form>
+      
+      <p class="callback-policy">
+        Нажимая на кнопку «Заказать звонок», вы соглашаетесь с 
+        <a href="#">политикой конфиденциальности</a>
+      </p>
     </div>
 
-    <div class="lab-types-section">
-      <div class="lab-types-text">
-        <h2 class="section-title">Виды лабораторных анализов</h2>
-        <p class="section-text">Наша лаборатория выполняет широкий спектр лабораторных исследований: клинические, биохимические, гормональные, иммунологические, микробиологические, генетические и другие анализы.</p>
-      </div>
-      <div class="lab-types-image">
-        <img src="{% static 'img/promo.png' %}" alt="Лаборатория">
-      </div>
-    </div>
-
-    <div class="cta-block">
-      <h2 class="cta-title">Заказать звонок</h2>
-      <p class="section-text" style="text-align:center;margin-bottom:24px;">Оставьте заявку и мы перезвоним вам в ближайшее время</p>
-      <a href="{% url 'appointment-request' %}" class="btn btn-primary">Заказать звонок</a>
+    <div class="callback-image">
+      <img src="{% static 'images/doctor-with-stethoscope-2021-09-03-02-58-01-utc 1.png' %}" alt="Врач консультант">
     </div>
   </div>
 </section>
-{% endblock %}
+{% endblock%}

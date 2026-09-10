@@ -11,7 +11,7 @@ from drf_spectacular.views import (
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("clinics.urls")),
-    path("api/", include("clinics.api_urls")),
+    path("api/", include("api.api_urls")),
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path("api/docs/", SpectacularSwaggerView.as_view(), name="swagger_ui"),
     path("api/redoc/", SpectacularRedocView.as_view(), name="redoc"),

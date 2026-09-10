@@ -1,6 +1,6 @@
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
-from . import api_views
+from api import api_views
 
 router = DefaultRouter()
 router.register(r'oms-directions', api_views.OmsDirectionViewSet, basename='omsdirection')

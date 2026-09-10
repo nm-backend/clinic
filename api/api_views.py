@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import generics, permissions, viewsets
 from rest_framework.filters import OrderingFilter, SearchFilter
-from .models import (
+from clinics.models import (
     Doctor,
     ServiceDirection,
     Appointment,
@@ -10,7 +10,7 @@ from .models import (
     CallbackRequest,
     Review,
 )
-from .serializers import (
+from api.serializers import (
     RegisterSerializer,
     DoctorSerializer,
     ServiceDirectionSerializer,

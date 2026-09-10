@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Doctor, ServiceDirection, Appointment, OmsDirection, CallbackRequest, Review
 from django.contrib import messages
 from .forms import OmsApplicationForm
@@ -56,6 +56,11 @@ def services_list(request):
 
 def direction_page(request):
     return render(request, 'direction_detail.html')
+
+
+def direction_detail(request, pk):
+    service = get_object_or_404(ServiceDirection, pk=pk)
+    return render(request, 'direction_detail.html', {'service': service})
 
 
 def oms_page(request):

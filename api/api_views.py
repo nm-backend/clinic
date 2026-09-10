@@ -41,7 +41,7 @@ class ServiceDirectionViewSet(generics.CreateAPIView, generics.ListAPIView):
     serializer_class = ServiceDirectionSerializer
     filter_backends = [SearchFilter, OrderingFilter]
     search_fields = ['title']
-    ordering_fields = ['title']
+    ordering_fields = ['order', 'title']
 
 
 class OmsDirectionViewSet(viewsets.ReadOnlyModelViewSet):

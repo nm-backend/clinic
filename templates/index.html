@@ -93,7 +93,7 @@
                 <h3>{{ doctor.full_name }}</h3>
                 <p>{{ doctor.specialty }}</p>
                 
-                <a href="{% url 'doctors' %}">Запись на прием</a>
+                <a href="{% url 'doctors_list' %}">Запись на прием</a>
             </div>
         {% empty %}
             <p>Специалисты пока не добавлены.</p>

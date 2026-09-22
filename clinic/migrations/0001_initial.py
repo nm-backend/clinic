@@ -121,7 +121,7 @@ class Migration(migrations.Migration):
                 ('status', models.CharField(choices=[('new', 'Новая'), ('confirmed', 'Подтверждена'), ('done', 'Завершена'), ('cancelled', 'Отменена')], default='new', max_length=20, verbose_name='Статус')),
                 ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Дата заявки')),
                 ('patient', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='appointments', to=settings.AUTH_USER_MODEL, verbose_name='Пациент')),
-                ('doctor', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='appointments', to='clinics.doctor', verbose_name='Врач')),
+                ('doctor', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='appointments', to='clinic.doctor', verbose_name='Врач')),
             ],
             options={
                 'verbose_name': 'Заявка на прием',

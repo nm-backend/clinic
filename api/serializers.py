@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.utils import timezone
 from rest_framework import serializers
-from clinics.models import (
+from clinic.models import (
     Doctor,
     ServiceDirection,
     Appointment,

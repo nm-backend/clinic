@@ -95,7 +95,7 @@ class OmsApplication(models.Model):
     name = models.CharField(max_length=255, verbose_name='ФИО')
     birthdate = models.DateField(max_length=50, verbose_name='Дата рождения')
     email = models.EmailField(verbose_name='E-mail')
-    phone = models.IntegerField(max_length=50, verbose_name='Телефон')
+    phone = models.CharField(max_length=50, verbose_name='Телефон')
     service = models.CharField(max_length=100, verbose_name='Услуга')
     region = models.CharField(max_length=100, blank=True, null=True, verbose_name='Регион')
     doctor = models.CharField(max_length=255, blank=True, null=True, verbose_name='Врач')
@@ -114,7 +114,7 @@ class OmsApplication(models.Model):
 
 class CallbackRequest(models.Model):
     name = models.CharField(max_length=255, verbose_name='ФИО')
-    phone = models.IntegerField(max_length=20, verbose_name='Номер телефона')
+    phone = models.CharField(max_length=20, verbose_name='Номер телефона')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата заявки')
 
     class Meta:

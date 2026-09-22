@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import generics, permissions, viewsets
 from rest_framework.filters import OrderingFilter, SearchFilter
-from clinics.models import (
+from clinic.models import (
     Doctor,
     ServiceDirection,
     Appointment,

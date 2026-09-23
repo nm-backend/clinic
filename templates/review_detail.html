@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}{{ review.full_name }}{% endblock %}
+
+{% block content %}
+<section class="reviews">
+  <div class="container" style="max-width: 700px; margin-top: 24px;">
+    <nav class="breadcrumbs">
+      <a href="{% url 'home' %}">Главная</a>
+      <span>/</span>
+      <a href="{% url 'reviews' %}">Отзывы</a>
+      <span>/</span>
+      <span>{{ review.full_name }}</span>
+    </nav>
+
+    <div class="review-card" style="margin-top: 24px;">
+      <div class="review-header">
+        <h1>{{ review.full_name }}</h1>
+        <div class="stars">
+          {% for i in "12345" %}
+            {% if forloop.counter <= review.rating %}★{% else %}☆{% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      <p class="review-text">{{ review.text }}</p>
+      <div class="review-footer">
+        <span>{{ review.created_at|date:"d.m.Y" }}</span>
+        <span>Возраст: {{ review.age }}</span>
+        <span>Врач: {{ review.doctor }}</span>
+      </div>
+      <p style="margin-top: 16px;">
+        <a href="{% url 'reviews' %}" class="btn-outline">К списку отзывов</a>
+      </p>
+    </div>
+  </div>
+</section>
+{% endblock %}

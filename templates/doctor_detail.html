@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ doctor.full_name }}{% endblock %}
+
+{% block content %}
+<section class="doctors-page">
+  <div class="container">
+    <nav class="breadcrumbs">
+      <a href="/">Главная</a>
+      <span class="separator">&gt;</span>
+      <a href="{% url 'doctors_list' %}">Врачи</a>
+      <span class="separator">&gt;</span>
+      <span class="current">{{ doctor.full_name }}</span>
+    </nav>
+
+    <div class="doctor-card" style="max-width: 600px; margin-top: 24px;">
+      <div class="doctor-photo">
+        {% if doctor.photo %}
+          <img src="{{ doctor.photo.url }}" alt="{{ doctor.full_name }}">
+        {% else %}
+          <img src="{% static 'images/TDV_M63_010 1.png' %}" alt="Нет фото">
+        {% endif %}
+      </div>
+      <div class="doctor-content">
+        <h1 class="doctor-name">{{ doctor.full_name }}</h1>
+        <p class="doctor-spec">{{ doctor.specialty }}</p>
+        <div class="doctor-actions">
+          <a href="{% if doctor.appointment_url %}{{ doctor.appointment_url }}{% else %}#{% endif %}" class="btn-green">Запись на прием</a>
+          <a href="{% url 'doctors_list' %}" class="btn-outline">К списку врачей</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

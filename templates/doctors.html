@@ -31,7 +31,7 @@
             
             <div class="doctor-actions">
               <a href="{% url 'doctors_list' %}" class="btn-green">Запись на прием</a>
-              <a href="#" class="btn-outline">Подробнее</a>
+              <a href="{% url 'doctor_detail' doctor.pk %}" class="btn-outline">Подробнее</a>
             </div>
           </div>
         </article>

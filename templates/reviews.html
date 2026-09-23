@@ -47,7 +47,7 @@
                     {{ review.text|truncatewords:40 }}
                 </p>
 
-                <a href="#" class="read-more">
+                <a href="{% url 'review_detail' review.pk %}" class="read-more">
                     Читать полностью
                 </a>
 

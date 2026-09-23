@@ -1294,7 +1294,6 @@ header {
     height: 90px;
 }
 
-.partner-card.active,
 .partner-card:hover {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     transform: translateY(-2px);
@@ -1327,13 +1326,6 @@ header {
     width: 270px;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.license-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
 }
 
 .license-card img {

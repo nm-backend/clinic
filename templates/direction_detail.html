@@ -15,11 +15,15 @@
   <div class="hero-card">
     <div class="container hero-card-inner">
       <div class="hero-content">
-        <h1 class="hero-title">Отоларингология</h1>
+        <h1 class="hero-title">{% if service %}{{ service.title }}{% else %}Отоларингология{% endif %}</h1>
         <p class="hero-description">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Metus vitae
-          aenean amet nibh lacus, habitasse fermentum, donec id. Nisl, mollis
-          dolor nec id volutpat quis.
+          {% if service %}
+            {{ service.title }} — одно из направлений нашей клиники. Запишитесь на консультацию к специалисту.
+          {% else %}
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Metus vitae
+            aenean amet nibh lacus, habitasse fermentum, donec id. Nisl, mollis
+            dolor nec id volutpat quis.
+          {% endif %}
         </p>
         <a href="#" class="hero-btn">Записаться</a>
       </div>

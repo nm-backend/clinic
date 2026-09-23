@@ -28,7 +28,7 @@ class RegisterView(generics.CreateAPIView):
     permission_classes = [permissions.AllowAny]
 
 
-class DoctorViewSet(generics.CreateAPIView, generics.ListAPIView):
+class DoctorListCreateView(generics.ListCreateAPIView):
     queryset = Doctor.objects.all()
     serializer_class = DoctorSerializer
     filter_backends = [SearchFilter, OrderingFilter]
@@ -36,7 +36,7 @@ class DoctorViewSet(generics.CreateAPIView, generics.ListAPIView):
     ordering_fields = ['full_name', 'specialty']
 
 
-class ServiceDirectionViewSet(generics.CreateAPIView, generics.ListAPIView):
+class ServiceDirectionListCreateView(generics.ListCreateAPIView):
     queryset = ServiceDirection.objects.all()
     serializer_class = ServiceDirectionSerializer
     filter_backends = [SearchFilter, OrderingFilter]
@@ -49,12 +49,13 @@ class OmsDirectionViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = OmsDirectionSerializer
 
 
-class ReviewViewSet(generics.CreateAPIView, generics.ListAPIView):
+class ReviewListCreateView(generics.ListCreateAPIView):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
 
 
 class AppointmentViewSet(viewsets.ModelViewSet):
+    queryset = Appointment.objects.all()
     serializer_class = AppointmentSerializer
     permission_classes = [permissions.IsAuthenticated]
 

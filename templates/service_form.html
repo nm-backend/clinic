@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}{% if object %}Редактировать направление{% else %}Добавить направление{% endif %}{% endblock %}
+
+{% block content %}
+<section class="doctors-page">
+  <div class="container" style="max-width: 600px; margin-top: 24px;">
+    <h1 class="page-title">{% if object %}Редактировать направление{% else %}Добавить направление{% endif %}</h1>
+
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label>{{ field.label }}</label>
+          {{ field }}
+          {% if field.errors %}
+            <p style="color: #c0392b; font-size: 14px;">{{ field.errors }}</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+      <button type="submit" class="btn-green">Сохранить</button>
+      <a href="{% url 'services_list' %}" class="btn-outline">Отмена</a>
+    </form>
+  </div>
+</section>
+{% endblock %}

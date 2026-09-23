@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from .models import Doctor, ServiceDirection, Appointment, OmsDirection, CallbackRequest, Review
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib import messages
-from .forms import OmsApplicationForm
-from django.core.paginator import Paginator
+from .models import Doctor, ServiceDirection, Appointment, OmsDirection, CallbackRequest, Review
+from .forms import OmsApplicationForm, DoctorForm, ServiceDirectionForm, ReviewForm
 
 
 def home_view(request):
@@ -14,23 +15,18 @@ def home_view(request):
     })
 
 
-def doctors_page(request):
-    doctors = Doctor.objects.all()
-    return render(request, 'doctors.html', {'doctors': doctors},)
-
-
 def save_callback(request):
     if request.method == 'POST':
         name = request.POST.get('name')
         phone = request.POST.get('phone')
         if name and phone:
             CallbackRequest.objects.create(name=name, phone=phone)
-        referer = request.META.get('HTTP_REFERER', '/')
-        if '?' in referer:
-            redirect_url = f"{referer}&success=1"
-        else:
-            redirect_url = f"{referer}?success=1"
-        return redirect(redirect_url)
+            referer = request.META.get('HTTP_REFERER', '/')
+            if '?' in referer:
+                redirect_url = f"{referer}&success=1"
+            else:
+                redirect_url = f"{referer}?success=1"
+            return redirect(redirect_url)
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
 
@@ -44,23 +40,15 @@ def services_list(request):
             Appointment.objects.create(
                 full_name=full_name,
                 phone=phone,
-                direction=direction
+                direction=direction,
             )
             messages.success(request, "Вы успешно записались на прием!")
             return redirect('services_list')
-    context = {
-        'services': services,
-    }
-    return render(request, 'services.html', context)
+    return render(request, 'services.html', {'services': services})
 
 
 def direction_page(request):
     return render(request, 'direction_detail.html')
-
-
-def direction_detail(request, pk):
-    service = get_object_or_404(ServiceDirection, pk=pk)
-    return render(request, 'direction_detail.html', {'service': service})
 
 
 def oms_page(request):
@@ -73,14 +61,10 @@ def oms_page(request):
     else:
         form = OmsApplicationForm()
     directions = OmsDirection.objects.all()
-    return render(
-        request,
-        "oms.html",
-        {
-            "form": form,
-            "directions": directions,
-        },
-    )
+    return render(request, "oms.html", {
+        "form": form,
+        "directions": directions,
+    })
 
 
 def dms_page(request):
@@ -97,21 +81,107 @@ def promotions_page(request):
 
 def informations_page(request):
     doctors = Doctor.objects.all()
-    return render(request, 'legal.html', {'doctors': doctors,})
+    return render(request, 'legal.html', {'doctors': doctors})
 
 
 def about_the_clinic(request):
     return render(request, 'about.html')
 
 
-def reviews_page(request):
-    reviews_list = Review.objects.all().order_by('-id')
-    paginator = Paginator(reviews_list, 10)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    return render(request, 'reviews.html', {'page_obj': page_obj})
-
-
 def contact_page(request):
     doctors = Doctor.objects.all()
-    return render(request, 'contacts.html', {'doctors': doctors,})
+    return render(request, 'contacts.html', {'doctors': doctors})
+
+
+class DoctorListView(ListView):
+    model = Doctor
+    template_name = 'doctors.html'
+    context_object_name = 'doctors'
+    paginate_by = 10
+    ordering = ['full_name']
+
+
+class DoctorDetailView(DetailView):
+    model = Doctor
+    template_name = 'doctor_detail.html'
+    context_object_name = 'doctor'
+
+
+class DoctorCreateView(CreateView):
+    model = Doctor
+    form_class = DoctorForm
+    template_name = 'doctor_form.html'
+    success_url = reverse_lazy('doctors_list')
+
+
+class DoctorUpdateView(UpdateView):
+    model = Doctor
+    form_class = DoctorForm
+    template_name = 'doctor_form.html'
+    success_url = reverse_lazy('doctors_list')
+
+
+class DoctorDeleteView(DeleteView):
+    model = Doctor
+    template_name = 'doctor_confirm_delete.html'
+    success_url = reverse_lazy('doctors_list')
+
+
+class ServiceDirectionDetailView(DetailView):
+    model = ServiceDirection
+    template_name = 'direction_detail.html'
+    context_object_name = 'service'
+
+
+class ServiceDirectionCreateView(CreateView):
+    model = ServiceDirection
+    form_class = ServiceDirectionForm
+    template_name = 'service_form.html'
+    success_url = reverse_lazy('services_list')
+
+
+class ServiceDirectionUpdateView(UpdateView):
+    model = ServiceDirection
+    form_class = ServiceDirectionForm
+    template_name = 'service_form.html'
+    success_url = reverse_lazy('services_list')
+
+
+class ServiceDirectionDeleteView(DeleteView):
+    model = ServiceDirection
+    template_name = 'service_confirm_delete.html'
+    success_url = reverse_lazy('services_list')
+
+
+class ReviewListView(ListView):
+    model = Review
+    template_name = 'reviews.html'
+    context_object_name = 'page_obj'
+    paginate_by = 10
+    ordering = ['-created_at']
+
+
+class ReviewDetailView(DetailView):
+    model = Review
+    template_name = 'review_detail.html'
+    context_object_name = 'review'
+
+
+class ReviewCreateView(CreateView):
+    model = Review
+    form_class = ReviewForm
+    template_name = 'review_form.html'
+    success_url = reverse_lazy('reviews')
+
+
+class ReviewUpdateView(UpdateView):
+    model = Review
+    form_class = ReviewForm
+    template_name = 'review_form.html'
+    success_url = reverse_lazy('reviews')
+
+
+class ReviewDeleteView(DeleteView):
+    model = Review
+    template_name = 'review_confirm_delete.html'
+    success_url = reverse_lazy('reviews')

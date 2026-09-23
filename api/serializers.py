@@ -53,31 +53,33 @@ class AppointmentSerializer(serializers.ModelSerializer):
         appointment_date = attrs.get('appointment_date')
         appointment_time = attrs.get('appointment_time')
 
-        if not doctor or not appointment_date or not appointment_time:
-            raise serializers.ValidationError(
-                'Укажите врача, дату и время приема.'
-            )
+        if self.instance is None:
+            if not doctor or not appointment_date or not appointment_time:
+                raise serializers.ValidationError(
+                    'Укажите врача, дату и время приема.'
+                )
 
-        if appointment_date < timezone.localdate():
+        if appointment_date and appointment_date < timezone.localdate():
             raise serializers.ValidationError(
                 'Нельзя записаться на прошедшую дату.'
             )
 
-        busy = Appointment.objects.filter(
-            doctor=doctor,
-            appointment_date=appointment_date,
-            appointment_time=appointment_time,
-        ).exclude(status='cancelled')
+        if doctor and appointment_date and appointment_time:
+            busy = Appointment.objects.filter(
+                doctor=doctor,
+                appointment_date=appointment_date,
+                appointment_time=appointment_time,
+            ).exclude(status='cancelled')
 
-        if self.instance:
-            busy = busy.exclude(id=self.instance.id)
+            if self.instance:
+                busy = busy.exclude(id=self.instance.id)
 
-        if busy.exists():
-            raise serializers.ValidationError(
-                'Это время у врача уже занято.'
-            )
+            if busy.exists():
+                raise serializers.ValidationError(
+                    'Это время у врача уже занято.'
+                )
 
-        if not attrs.get('direction'):
+        if doctor and not attrs.get('direction'):
             attrs['direction'] = doctor.specialty
 
         return attrs

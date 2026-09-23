@@ -61,7 +61,7 @@
                     <h3>{{ direction.title }}</h3>
                     <p>{{ direction.description }}</p>
                 </div>
-                <a href="{{ direction.link }}" class="more-link">Подробнее</a>
+                <a href="{% if direction.link %}{{ direction.link }}{% else %}#{% endif %}" class="more-link">Подробнее</a>
             </div>
             {% empty %}
             <p style="grid-column: 1 / -1; color: #6b7280;">Направления пока не добавлены.</p>
@@ -81,72 +81,59 @@
         <h2 class="form-title">Заявка на лечение по ОМС</h2>
         <p class="form-subtitle">Заполните поля ниже и прикрепите документ, чтобы отправить заявку</p>
 
+        {% if messages %}
+            {% for message in messages %}
+                <div class="message {{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
         <form action="{% url 'oms_page' %}" method="POST" class="oms-form" enctype="multipart/form-data">
             {% csrf_token %}
             
             <div class="form-grid">
                 <div class="form-group">
                     <label>Ваше ФИО</label>
-                    <input type="text" name="name" placeholder="Иванова Иван Иванович" required>
+                    {{ form.name }}
                 </div>
 
                 <div class="form-group">
                     <label>Дата рождения</label>
-                    <input type="date" name="birthdate" required>
+                    {{ form.birthdate }}
                 </div>
 
                 <div class="form-group">
                     <label>E-mail</label>
-                    <input type="email" name="email" placeholder="Poshta@gmail.com" required>
+                    {{ form.email }}
                 </div>
 
                 <div class="form-group">
                     <label>Номер телефона</label>
-                    <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Профиль</label>
-                    <select name="profile" required>
-                        <option value="" disabled selected>Эндокринология</option>
-                        <option value="1">Терапия</option>
-                        <option value="2">Неврология</option>
-                    </select>
+                    {{ form.phone }}
                 </div>
 
                 <div class="form-group">
                     <label>Медицинская услуга</label>
-                    <select name="service" required>
-                        <option value="" disabled selected>Эндокринология</option>
-                        <option value="1">Консультация</option>
-                    </select>
+                    {{ form.service }}
                 </div>
 
                 <div class="form-group">
                     <label>Регион</label>
-                    <select name="region">
-                        <option value="" disabled selected>Эндокринология</option>
-                        <option value="1">Новосибирская обл.</option>
-                    </select>
+                    {{ form.region }}
                 </div>
 
                 <div class="form-group">
                     <label>ФИО и телефон вашего врача</label>
-                    <input type="text" name="doctor" placeholder="Иванова Анна +7 (___) ___-__-__">
+                    {{ form.doctor }}
                 </div>
 
                 <div class="form-group col-span-2">
                     <label>Причина обращения</label>
-                    <input type="text" name="reason" placeholder="Причина обращения">
+                    {{ form.reason }}
                 </div>
 
                 <div class="form-group col-span-2">
                     <label>Откуда вы узнали о нас?</label>
-                    <select name="source">
-                        <option value="" disabled selected>Интернет</option>
-                        <option value="1">От врача</option>
-                        <option value="2">От знакомых</option>
-                    </select>
+                    {{ form.source }}
                 </div>
             </div>
 
@@ -160,7 +147,7 @@
                         <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
                     </svg>
                     <span>Прикрепить документы</span>
-                    <input type="file" name="file" hidden>
+                    {{ form.file }}
                 </label>
             </div>
 

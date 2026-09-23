@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Удалить направление{% endblock %}
+
+{% block content %}
+<section class="doctors-page">
+  <div class="container" style="max-width: 600px; margin-top: 24px;">
+    <h1 class="page-title">Удалить направление</h1>
+    <p>Вы уверены, что хотите удалить «{{ object.title }}»?</p>
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn-green">Да, удалить</button>
+      <a href="{% url 'services_list' %}" class="btn-outline">Отмена</a>
+    </form>
+  </div>
+</section>
+{% endblock %}

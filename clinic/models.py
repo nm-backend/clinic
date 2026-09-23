@@ -6,7 +6,7 @@ class Doctor(models.Model):
     full_name = models.CharField(max_length=255, verbose_name='ФИО врача')
     specialty = models.CharField(max_length=150, verbose_name='Специализация')
     photo = models.ImageField(upload_to='doctors/', verbose_name='Фотография')
-    appointment_url = models.URLField('Ссылка на запись', max_length=500, default='#', blank=True)
+    appointment_url = models.URLField('Ссылка на запись', max_length=500, blank=True, default='')
 
     class Meta:
         verbose_name = 'Врач'
@@ -19,7 +19,7 @@ class Doctor(models.Model):
 class ServiceDirection(models.Model):
     title = models.CharField('Название направления', max_length=150)
     image = models.ImageField('Изображение', upload_to='services/')
-    link_url = models.URLField('Ссылка/URL', max_length=200, blank=True, default='#')
+    link_url = models.URLField('Ссылка/URL', max_length=200, blank=True, default='')
 
     class Meta:
         verbose_name = 'Направление работы'
@@ -79,7 +79,7 @@ class Appointment(models.Model):
 class OmsDirection(models.Model):
     title = models.CharField(max_length=250, verbose_name='Название направления')
     description = models.CharField(verbose_name='Описание', max_length=500)
-    link = models.URLField(max_length=500, default='#', verbose_name='Ссылка')
+    link = models.URLField(max_length=500, blank=True, default='', verbose_name='Ссылка')
     order = models.PositiveIntegerField(default=0, verbose_name='Порядок сортировки')
 
     class Meta:
@@ -132,7 +132,7 @@ class Review(models.Model):
     doctor = models.CharField(max_length=150)
     text = models.TextField()
     rating = models.PositiveSmallIntegerField(default=5)
-    created_at = models.DateField()
+    created_at = models.DateField(auto_now_add=True)
 
     class Meta:
         verbose_name = 'Отзыв'

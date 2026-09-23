@@ -1,7 +1,6 @@
 from django.urls import path
 from .views import (
     home_view,
-    services_list,
     oms_page,
     dms_page,
     direction_page,
@@ -16,6 +15,7 @@ from .views import (
     DoctorCreateView,
     DoctorUpdateView,
     DoctorDeleteView,
+    ServiceDirectionListView,
     ServiceDirectionDetailView,
     ServiceDirectionCreateView,
     ServiceDirectionUpdateView,
@@ -34,7 +34,7 @@ urlpatterns = [
     path('doctors/<int:pk>/', DoctorDetailView.as_view(), name='doctor_detail'),
     path('doctors/<int:pk>/update/', DoctorUpdateView.as_view(), name='doctor_update'),
     path('doctors/<int:pk>/delete/', DoctorDeleteView.as_view(), name='doctor_delete'),
-    path('services/', services_list, name='services_list'),
+    path('services/', ServiceDirectionListView.as_view(), name='services_list'),
     path('services/create/', ServiceDirectionCreateView.as_view(), name='service_create'),
     path('services/<int:pk>/', ServiceDirectionDetailView.as_view(), name='direction_detail'),
     path('services/<int:pk>/update/', ServiceDirectionUpdateView.as_view(), name='service_update'),

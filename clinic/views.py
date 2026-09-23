@@ -30,23 +30,6 @@ def save_callback(request):
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
 
-def services_list(request):
-    services = ServiceDirection.objects.all()
-    if request.method == "POST":
-        full_name = request.POST.get("full_name")
-        phone = request.POST.get("phone")
-        direction = request.POST.get("direction")
-        if full_name and phone and direction:
-            Appointment.objects.create(
-                full_name=full_name,
-                phone=phone,
-                direction=direction,
-            )
-            messages.success(request, "Вы успешно записались на прием!")
-            return redirect('services_list')
-    return render(request, 'services.html', {'services': services})
-
-
 def direction_page(request):
     return render(request, 'direction_detail.html')
 
@@ -125,6 +108,25 @@ class DoctorDeleteView(DeleteView):
     model = Doctor
     template_name = 'doctor_confirm_delete.html'
     success_url = reverse_lazy('doctors_list')
+
+
+class ServiceDirectionListView(ListView):
+    model = ServiceDirection
+    template_name = 'services.html'
+    context_object_name = 'services'
+
+    def post(self, request):
+        full_name = request.POST.get("full_name")
+        phone = request.POST.get("phone")
+        direction = request.POST.get("direction")
+        if full_name and phone and direction:
+            Appointment.objects.create(
+                full_name=full_name,
+                phone=phone,
+                direction=direction,
+            )
+            messages.success(request, "Вы успешно записались на прием!")
+        return redirect('services_list')
 
 
 class ServiceDirectionDetailView(DetailView):

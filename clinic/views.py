@@ -126,6 +126,8 @@ class ServiceDirectionListView(ListView):
                 direction=direction,
             )
             messages.success(request, "Вы успешно записались на прием!")
+        else:
+            messages.error(request, "Заполните все поля.")
         return redirect('services_list')
 
 

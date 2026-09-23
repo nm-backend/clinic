@@ -17,9 +17,12 @@
             <span>Отзывы наших пациентов</span>
         </div>
 
-        <h2 class="reviews-title">
-            Отзывы наших пациентов
-        </h2>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+            <h2 class="reviews-title">
+                Отзывы наших пациентов
+            </h2>
+            <a href="{% url 'review_create' %}" class="btn-outline">Добавить отзыв</a>
+        </div>
 
         <div class="reviews-grid">
 

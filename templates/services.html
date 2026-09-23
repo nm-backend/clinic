@@ -9,7 +9,10 @@
         <a href="/">Главная</a> / <span>Направления нашей работы</span>
     </div>
     
-    <h1 class="title">Направления нашей работы</h1>
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+        <h1 class="title">Направления нашей работы</h1>
+        <a href="{% url 'service_create' %}" class="btn">Добавить направление</a>
+    </div>
 
     {% if messages %}
         <div class="message-box">

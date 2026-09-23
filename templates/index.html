@@ -48,7 +48,7 @@
         <div class="title-button">
             <h2>Направления нашей работы</h2>
 
-            <a class="btn" href="services/">
+            <a class="btn" href="{% url 'services_list' %}">
                 Все направления
                 <img src="{% static 'svg/Down_Arrow_3_.svg' %}" alt="стрелка">
             </a>
@@ -93,14 +93,14 @@
                 <h3>{{ doctor.full_name }}</h3>
                 <p>{{ doctor.specialty }}</p>
                 
-                <a href="{% url 'doctors_list' %}">Запись на прием</a>
+                <a href="{% url 'doctor_detail' doctor.pk %}">Запись на прием</a>
             </div>
         {% empty %}
             <p>Специалисты пока не добавлены.</p>
         {% endfor %}
     </div>
 
-    <a class="all-specialists" href="doctors/">Все специалисты</a>
+    <a class="all-specialists" href="{% url 'doctors_list' %}">Все специалисты</a>
 </section>
 <section class="promotions">
     <h3>Наши акции</h3>

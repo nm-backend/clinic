@@ -1,6 +1,5 @@
 from django.contrib.auth.models import User
 from rest_framework import generics, permissions, viewsets
-from rest_framework.filters import OrderingFilter, SearchFilter
 from clinic.models import (
     Doctor,
     ServiceDirection,
@@ -31,17 +30,11 @@ class RegisterView(generics.CreateAPIView):
 class DoctorListCreateView(generics.ListCreateAPIView):
     queryset = Doctor.objects.all()
     serializer_class = DoctorSerializer
-    filter_backends = [SearchFilter, OrderingFilter]
-    search_fields = ['full_name', 'specialty']
-    ordering_fields = ['full_name', 'specialty']
 
 
 class ServiceDirectionListCreateView(generics.ListCreateAPIView):
     queryset = ServiceDirection.objects.all()
     serializer_class = ServiceDirectionSerializer
-    filter_backends = [SearchFilter, OrderingFilter]
-    search_fields = ['title']
-    ordering_fields = ['title']
 
 
 class OmsDirectionViewSet(viewsets.ReadOnlyModelViewSet):

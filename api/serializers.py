@@ -46,7 +46,7 @@ class AppointmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Appointment
         fields = '__all__'
-        read_only_fields = ('patient', 'created_at')
+        read_only_fields = ('patient', 'created_at', 'status')
 
     def validate(self, attrs):
         doctor = attrs.get('doctor')
@@ -79,19 +79,10 @@ class AppointmentSerializer(serializers.ModelSerializer):
                     'Это время у врача уже занято.'
                 )
 
-        if doctor and not attrs.get('direction'):
-            attrs['direction'] = doctor.specialty
-
         return attrs
 
     def create(self, validated_data):
-        request = self.context.get('request')
-        user = request.user
-        validated_data['patient'] = user
-
-        if not validated_data.get('full_name'):
-            validated_data['full_name'] = user.get_full_name() or user.username
-
+        validated_data['patient'] = self.context['request'].user
         return Appointment.objects.create(**validated_data)
 
 

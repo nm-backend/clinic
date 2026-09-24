@@ -35,6 +35,8 @@
                 <div class="card_info">
                     <h3>{{ service.title }}</h3>
                     <a href="{% url 'direction_detail' service.id %}" class="link">Подробнее</a>
+                    <a href="{% url 'service_update' service.pk %}" class="link">Изменить</a>
+                    <a href="{% url 'service_delete' service.pk %}" class="link">Удалить</a>
                 </div>
             </div>
         {% empty %}

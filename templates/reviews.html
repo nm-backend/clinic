@@ -53,6 +53,8 @@
                 <a href="{% url 'review_detail' review.pk %}" class="read-more">
                     Читать полностью
                 </a>
+                <a href="{% url 'review_update' review.pk %}">Изменить</a>
+                <a href="{% url 'review_delete' review.pk %}">Удалить</a>
 
                 <div class="review-footer">
                     <span>{{ review.created_at|date:"d.m.Y" }}</span>

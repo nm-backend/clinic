@@ -35,6 +35,8 @@
             <div class="doctor-actions">
               <label for="modal-toggle" class="btn-green">Запись на прием</label>
               <a href="{% url 'doctor_detail' doctor.pk %}" class="btn-outline">Подробнее</a>
+              <a href="{% url 'doctor_update' doctor.pk %}" class="btn-outline">Изменить</a>
+              <a href="{% url 'doctor_delete' doctor.pk %}" class="btn-outline">Удалить</a>
             </div>
           </div>
         </article>
@@ -43,14 +45,14 @@
       {% endfor %}
     </div>
 
-    {% if doctors.has_other_pages %}
+    {% if page_obj.has_other_pages %}
     <div class="pagination">
-      {% if doctors.has_previous %}
-        <a href="?page={{ doctors.previous_page_number }}">← Назад</a>
+      {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">← Назад</a>
       {% endif %}
-      <span>Страница {{ doctors.number }} из {{ doctors.paginator.num_pages }}</span>
-      {% if doctors.has_next %}
-        <a href="?page={{ doctors.next_page_number }}">Вперёд →</a>
+      <span>Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
+      {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Вперёд →</a>
       {% endif %}
     </div>
     {% endif %}

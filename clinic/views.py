@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.core.paginator import Paginator
 from django.contrib import messages
 from .models import Doctor, ServiceDirection, Appointment, OmsDirection, CallbackRequest, Review
 from .forms import OmsApplicationForm, DoctorForm, ServiceDirectionForm, ReviewForm
@@ -76,6 +77,55 @@ def contact_page(request):
     return render(request, 'contacts.html', {'doctors': doctors})
 
 
+def services_list(request):
+    if request.method == 'POST':
+        full_name = request.POST.get('full_name')
+        phone = request.POST.get('phone')
+        direction = request.POST.get('direction')
+        if full_name and phone and direction:
+            Appointment.objects.create(
+                full_name=full_name,
+                phone=phone,
+                direction=direction,
+            )
+            messages.success(request, "Вы успешно записались на прием!")
+        else:
+            messages.error(request, "Заполните все поля.")
+        return redirect('services_list')
+    services = ServiceDirection.objects.all()
+    return render(request, 'services.html', {'services': services})
+
+
+def reviews_page(request):
+    paginator = Paginator(Review.objects.all(), 10)
+    page_obj = paginator.get_page(request.GET.get('page'))
+    return render(request, 'reviews.html', {'page_obj': page_obj})
+
+
+def delete_doctor(request, pk):
+    doctor = get_object_or_404(Doctor, pk=pk)
+    if request.method == 'POST':
+        doctor.delete()
+        return redirect('doctors_list')
+    return render(request, 'doctor_confirm_delete.html', {'object': doctor})
+
+
+def delete_service(request, pk):
+    service = get_object_or_404(ServiceDirection, pk=pk)
+    if request.method == 'POST':
+        service.delete()
+        return redirect('services_list')
+    return render(request, 'service_confirm_delete.html', {'object': service})
+
+
+def delete_review(request, pk):
+    review = get_object_or_404(Review, pk=pk)
+    if request.method == 'POST':
+        review.delete()
+        return redirect('reviews')
+    return render(request, 'review_confirm_delete.html', {'object': review})
+
+
 class DoctorListView(ListView):
     model = Doctor
     template_name = 'doctors.html'
@@ -104,33 +154,6 @@ class DoctorUpdateView(UpdateView):
     success_url = reverse_lazy('doctors_list')
 
 
-class DoctorDeleteView(DeleteView):
-    model = Doctor
-    template_name = 'doctor_confirm_delete.html'
-    success_url = reverse_lazy('doctors_list')
-
-
-class ServiceDirectionListView(ListView):
-    model = ServiceDirection
-    template_name = 'services.html'
-    context_object_name = 'services'
-
-    def post(self, request):
-        full_name = request.POST.get("full_name")
-        phone = request.POST.get("phone")
-        direction = request.POST.get("direction")
-        if full_name and phone and direction:
-            Appointment.objects.create(
-                full_name=full_name,
-                phone=phone,
-                direction=direction,
-            )
-            messages.success(request, "Вы успешно записались на прием!")
-        else:
-            messages.error(request, "Заполните все поля.")
-        return redirect('services_list')
-
-
 class ServiceDirectionDetailView(DetailView):
     model = ServiceDirection
     template_name = 'direction_detail.html'
@@ -151,20 +174,6 @@ class ServiceDirectionUpdateView(UpdateView):
     success_url = reverse_lazy('services_list')
 
 
-class ServiceDirectionDeleteView(DeleteView):
-    model = ServiceDirection
-    template_name = 'service_confirm_delete.html'
-    success_url = reverse_lazy('services_list')
-
-
-class ReviewListView(ListView):
-    model = Review
-    template_name = 'reviews.html'
-    context_object_name = 'page_obj'
-    paginate_by = 10
-    ordering = ['-created_at']
-
-
 class ReviewDetailView(DetailView):
     model = Review
     template_name = 'review_detail.html'
@@ -182,10 +191,4 @@ class ReviewUpdateView(UpdateView):
     model = Review
     form_class = ReviewForm
     template_name = 'review_form.html'
-    success_url = reverse_lazy('reviews')
-
-
-class ReviewDeleteView(DeleteView):
-    model = Review
-    template_name = 'review_confirm_delete.html'
     success_url = reverse_lazy('reviews')

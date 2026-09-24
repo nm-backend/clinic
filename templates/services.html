@@ -9,10 +9,7 @@
         <a href="/">Главная</a> / <span>Направления нашей работы</span>
     </div>
     
-    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
-        <h1 class="title">Направления нашей работы</h1>
-        <a href="{% url 'service_create' %}" class="btn">Добавить направление</a>
-    </div>
+    <h1 class="title">Направления нашей работы</h1>
 
     {% if messages %}
         <div class="message-box">
@@ -35,8 +32,6 @@
                 <div class="card_info">
                     <h3>{{ service.title }}</h3>
                     <a href="{% url 'direction_detail' service.id %}" class="link">Подробнее</a>
-                    <a href="{% url 'service_update' service.pk %}" class="link">Изменить</a>
-                    <a href="{% url 'service_delete' service.pk %}" class="link">Удалить</a>
                 </div>
             </div>
         {% empty %}

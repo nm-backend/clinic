@@ -12,10 +12,7 @@
       <span class="current">врачи</span>
     </nav>
 
-    <div class="title-button" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
-      <h1 class="page-title">Врачи</h1>
-      <a href="{% url 'doctor_create' %}" class="btn-outline">Добавить врача</a>
-    </div>
+    <h1 class="page-title">Врачи</h1>
 
     <div class="doctors-grid">
       {% for doctor in doctors %}
@@ -35,8 +32,6 @@
             <div class="doctor-actions">
               <label for="modal-toggle" class="btn-green">Запись на прием</label>
               <a href="{% url 'doctor_detail' doctor.pk %}" class="btn-outline">Подробнее</a>
-              <a href="{% url 'doctor_update' doctor.pk %}" class="btn-outline">Изменить</a>
-              <a href="{% url 'doctor_delete' doctor.pk %}" class="btn-outline">Удалить</a>
             </div>
           </div>
         </article>

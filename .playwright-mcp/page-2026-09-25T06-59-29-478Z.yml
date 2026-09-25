@@ -1,0 +1,232 @@
+- generic [active] [ref=f2e1]:
+  - checkbox "Записаться на прием Записаться на прием close" [ref=f2e2]
+  - banner [ref=f2e3]:
+    - generic [ref=f2e4]:
+      - heading "Сеть клиник Томской области" [level=2] [ref=f2e5]
+      - img "Версия для слабовидящих" [ref=f2e7] [cursor=pointer]
+      - generic [ref=f2e8]:
+        - heading "+ 7 (978) 00-00-000" [level=1] [ref=f2e9]
+        - generic [ref=f2e10] [cursor=pointer]: Записаться на прием
+    - generic [ref=f2e11]:
+      - link [ref=f2e12] [cursor=pointer]:
+        - /url: /
+        - img "логотип" [ref=f2e13]
+      - navigation [ref=f2e14]:
+        - generic [ref=f2e15]:
+          - link "Врачи" [ref=f2e16] [cursor=pointer]:
+            - /url: /doctors/
+          - link "Услуги" [ref=f2e17] [cursor=pointer]:
+            - /url: /services/
+          - link "Диагностика" [ref=f2e18] [cursor=pointer]:
+            - /url: /direction/
+          - link "Анализы" [ref=f2e19] [cursor=pointer]:
+            - /url: /analysis/
+          - link "Акции" [ref=f2e20] [cursor=pointer]:
+            - /url: /promotions/
+          - link "Пациентам" [ref=f2e21] [cursor=pointer]:
+            - /url: /oms/
+          - link "ДМС" [ref=f2e22] [cursor=pointer]:
+            - /url: /dms/
+          - link "О клинике" [ref=f2e23] [cursor=pointer]:
+            - /url: /about/
+          - link "Отзывы" [ref=f2e24] [cursor=pointer]:
+            - /url: /reviews/
+          - link "Контакты" [ref=f2e25] [cursor=pointer]:
+            - /url: /contacts/
+  - main [ref=f2e26]:
+    - generic [ref=f2e28]:
+      - navigation [ref=f2e29]:
+        - link "Главная" [ref=f2e30] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f2e31]: ">"
+        - generic [ref=f2e32]: Анализы
+      - heading "Анализы" [level=3] [ref=f2e33]
+      - generic [ref=f2e34]:
+        - generic [ref=f2e35]:
+          - heading "Скидка -20% на МРТ" [level=4] [ref=f2e36]
+          - paragraph [ref=f2e37]: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra amet dolor sed mi tincidunt pharetra montes. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra amet dolor sed mi tincidunt pharetra montes.
+          - paragraph [ref=f2e38]:
+            - text: Акция действует до
+            - strong [ref=f2e39]: 22.03.2023
+          - link "Подробнее" [ref=f2e40] [cursor=pointer]:
+            - /url: "#"
+          - img "img" [ref=f2e42]
+        - generic [ref=f2e43]:
+          - heading "Скидка -20% на МРТ" [level=4] [ref=f2e44]
+          - paragraph [ref=f2e45]: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra amet dolor sed mi tincidunt pharetra montes. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Viverra amet dolor sed mi tincidunt pharetra montes.
+          - paragraph [ref=f2e46]:
+            - text: Акция действует до
+            - strong [ref=f2e47]: 22.03.2023
+          - link "Подробнее" [ref=f2e48] [cursor=pointer]:
+            - /url: "#"
+          - img "img" [ref=f2e50]
+    - generic [ref=f2e52]:
+      - heading "Как получить лечение?" [level=2] [ref=f2e53]
+      - generic [ref=f2e54]:
+        - generic [ref=f2e55]:
+          - generic [ref=f2e56]: "1"
+          - paragraph [ref=f2e59]: Узнайте, входит ли интересующее вас лечение в программу для вашего региона
+        - generic [ref=f2e60]:
+          - generic [ref=f2e61]: "2"
+          - paragraph [ref=f2e64]: Подготовьте необходимые документы и отправьте заявку на лечение
+        - generic [ref=f2e65]:
+          - generic [ref=f2e66]: "3"
+          - paragraph [ref=f2e69]: В течение 3-х рабочих дней специалист отдела ОМС свяжется с вами по указанному вами номеру телефона
+    - generic [ref=f2e71]:
+      - heading "Популярные анализы" [level=3] [ref=f2e72]
+      - generic [ref=f2e73]:
+        - img "card" [ref=f2e74]
+        - img "card" [ref=f2e75]
+        - img "card" [ref=f2e76]
+        - img "card" [ref=f2e77]
+    - generic [ref=f2e79]:
+      - generic [ref=f2e80]:
+        - heading "Виды лабораторных анализов и исследований" [level=2] [ref=f2e81]
+        - generic [ref=f2e82]:
+          - list [ref=f2e83]:
+            - listitem [ref=f2e84]: Общие исследования крови
+            - listitem [ref=f2e85]: Биохимические исследования крови
+            - listitem [ref=f2e86]: Онкомаркеры
+            - listitem [ref=f2e87]: Общеклинические исследования кала
+            - listitem [ref=f2e88]: Панели аллергенов
+            - listitem [ref=f2e89]: Гистологические исследования
+            - listitem [ref=f2e90]: Гормональные исследования крови
+            - listitem [ref=f2e91]: Исследования мочи
+            - listitem [ref=f2e92]: Иммунологические исследования крови
+          - list [ref=f2e93]:
+            - listitem [ref=f2e94]: Гематологические исследования
+            - listitem [ref=f2e95]: Аллергологические исследования
+            - listitem [ref=f2e96]: Исследования кала
+            - listitem [ref=f2e97]: Аутоиммунные заболевания
+            - listitem [ref=f2e98]: Исследования спермы
+            - listitem [ref=f2e99]: Генетический анализ
+            - listitem [ref=f2e100]: Исследования крови на инфекции
+            - listitem [ref=f2e101]: Цитологические исследования
+            - listitem [ref=f2e102]: Исследования инфекционных заболеваний
+      - img "Медицинский специалист" [ref=f2e104]
+    - generic [ref=f2e105]:
+      - heading "Наши лицензии" [level=2] [ref=f2e106]
+      - generic [ref=f2e107]:
+        - img "Лицензия" [ref=f2e109]
+        - img "Лицензия" [ref=f2e111]
+        - img "Лицензия" [ref=f2e113]
+        - img "Лицензия" [ref=f2e115]
+    - generic [ref=f2e117]:
+      - generic [ref=f2e118]:
+        - heading "Хотите, мы Вам перезвоним?" [level=2] [ref=f2e119]
+        - paragraph [ref=f2e120]: Оставьте заявку и мы подробно ответим на все Ваши вопросы!
+        - generic [ref=f2e121]:
+          - generic [ref=f2e122]:
+            - generic [ref=f2e123]:
+              - generic [ref=f2e124]: Ваше ФИО
+              - textbox "Ваше ФИО" [ref=f2e125]:
+                - /placeholder: Иванов Иван Иванович
+            - generic [ref=f2e126]:
+              - generic [ref=f2e127]: Номер телефона
+              - textbox "Номер телефона" [ref=f2e128]:
+                - /placeholder: +7 (___) ___-__-__
+          - button "Заказать звонок" [ref=f2e129] [cursor=pointer]
+        - paragraph [ref=f2e130]:
+          - text: Нажимая на кнопку «Заказать звонок», вы соглашаетесь с
+          - link "политикой конфиденциальности" [ref=f2e131] [cursor=pointer]:
+            - /url: "#"
+      - img "Врач консультант" [ref=f2e133]
+  - contentinfo [ref=f2e134]:
+    - generic [ref=f2e135]:
+      - generic [ref=f2e136]:
+        - img "Ваш доктор рядом" [ref=f2e138]
+        - generic [ref=f2e139]:
+          - generic [ref=f2e140]:
+            - generic [ref=f2e141]: Адрес
+            - paragraph [ref=f2e142]: Москва, ул. Пушкина, д.43
+          - generic [ref=f2e143]:
+            - generic [ref=f2e144]: Телефон
+            - paragraph [ref=f2e145]: +7 (9__) ___-__-__
+          - generic [ref=f2e146]:
+            - generic [ref=f2e147]: Почта
+            - paragraph [ref=f2e148]: Poshta@gmail.com
+      - generic [ref=f2e149]:
+        - generic [ref=f2e150]:
+          - heading "О клинике" [level=4] [ref=f2e151]
+          - list [ref=f2e152]:
+            - listitem [ref=f2e153]:
+              - link "Название пункта меню" [ref=f2e154] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f2e155]:
+              - link "Название пункта меню" [ref=f2e156] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f2e157]:
+              - link "Название пункта меню" [ref=f2e158] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f2e159]:
+              - link "Название пункта меню" [ref=f2e160] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f2e161]:
+              - link "Название пункта меню" [ref=f2e162] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f2e163]:
+              - link "Название пункта меню" [ref=f2e164] [cursor=pointer]:
+                - /url: "#"
+        - generic [ref=f2e165]:
+          - heading "Врач" [level=4] [ref=f2e166]
+          - list [ref=f2e167]:
+            - listitem [ref=f2e168]:
+              - link "Название пункта меню" [ref=f2e169] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f2e170]:
+              - link "Название пункта меню" [ref=f2e171] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f2e172]:
+              - link "Название пункта меню" [ref=f2e173] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f2e174]:
+              - link "Название пункта меню" [ref=f2e175] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f2e176]:
+              - link "Название пункта меню" [ref=f2e177] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f2e178]:
+              - link "Название пункта меню" [ref=f2e179] [cursor=pointer]:
+                - /url: "#"
+        - generic [ref=f2e180]:
+          - heading "Пациентам" [level=4] [ref=f2e181]
+          - list [ref=f2e182]:
+            - listitem [ref=f2e183]:
+              - link "Название пункта меню" [ref=f2e184] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f2e185]:
+              - link "Название пункта меню" [ref=f2e186] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f2e187]:
+              - link "Название пункта меню" [ref=f2e188] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f2e189]:
+              - link "Название пункта меню" [ref=f2e190] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f2e191]:
+              - link "Название пункта меню" [ref=f2e192] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f2e193]:
+              - link "Название пункта меню" [ref=f2e194] [cursor=pointer]:
+                - /url: "#"
+        - generic [ref=f2e195]:
+          - heading "Услуги" [level=4] [ref=f2e196]
+          - list [ref=f2e197]:
+            - listitem [ref=f2e198]:
+              - link "Название пункта меню" [ref=f2e199] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f2e200]:
+              - link "Название пункта меню" [ref=f2e201] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f2e202]:
+              - link "Название пункта меню" [ref=f2e203] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f2e204]:
+              - link "Название пункта меню" [ref=f2e205] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f2e206]:
+              - link "Название пункта меню" [ref=f2e207] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f2e208]:
+              - link "Название пункта меню" [ref=f2e209] [cursor=pointer]:
+                - /url: "#"

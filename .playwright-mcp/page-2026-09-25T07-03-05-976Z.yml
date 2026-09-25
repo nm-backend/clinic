@@ -1,0 +1,156 @@
+- generic [active] [ref=f9e1]:
+  - checkbox "Записаться на прием Записаться на прием close" [ref=f9e2]
+  - banner [ref=f9e3]:
+    - generic [ref=f9e4]:
+      - heading "Сеть клиник Томской области" [level=2] [ref=f9e5]
+      - img "Версия для слабовидящих" [ref=f9e7] [cursor=pointer]
+      - generic [ref=f9e8]:
+        - heading "+ 7 (978) 00-00-000" [level=1] [ref=f9e9]
+        - generic [ref=f9e10] [cursor=pointer]: Записаться на прием
+    - generic [ref=f9e11]:
+      - link [ref=f9e12] [cursor=pointer]:
+        - /url: /
+        - img "логотип" [ref=f9e13]
+      - navigation [ref=f9e14]:
+        - generic [ref=f9e15]:
+          - link "Врачи" [ref=f9e16] [cursor=pointer]:
+            - /url: /doctors/
+          - link "Услуги" [ref=f9e17] [cursor=pointer]:
+            - /url: /services/
+          - link "Диагностика" [ref=f9e18] [cursor=pointer]:
+            - /url: /direction/
+          - link "Анализы" [ref=f9e19] [cursor=pointer]:
+            - /url: /analysis/
+          - link "Акции" [ref=f9e20] [cursor=pointer]:
+            - /url: /promotions/
+          - link "Пациентам" [ref=f9e21] [cursor=pointer]:
+            - /url: /oms/
+          - link "ДМС" [ref=f9e22] [cursor=pointer]:
+            - /url: /dms/
+          - link "О клинике" [ref=f9e23] [cursor=pointer]:
+            - /url: /about/
+          - link "Отзывы" [ref=f9e24] [cursor=pointer]:
+            - /url: /reviews/
+          - link "Контакты" [ref=f9e25] [cursor=pointer]:
+            - /url: /contacts/
+  - main [ref=f9e26]:
+    - generic [ref=f9e28]:
+      - heading "Добавить отзыв" [level=1] [ref=f9e29]
+      - generic [ref=f9e30]:
+        - generic [ref=f9e31]:
+          - generic [ref=f9e32]: Full name
+          - textbox "Иванов Иван Иванович" [ref=f9e33]
+        - generic [ref=f9e34]:
+          - generic [ref=f9e35]: Age
+          - spinbutton "30" [ref=f9e36]
+        - generic [ref=f9e37]:
+          - generic [ref=f9e38]: Doctor
+          - textbox "Иванов Иван Иванович" [ref=f9e39]
+        - generic [ref=f9e40]:
+          - generic [ref=f9e41]: Text
+          - textbox "Текст отзыва..." [ref=f9e42]
+        - generic [ref=f9e43]:
+          - generic [ref=f9e44]: Rating
+          - spinbutton "5" [ref=f9e45]
+        - button "Сохранить" [ref=f9e46]
+        - link "Отмена" [ref=f9e47] [cursor=pointer]:
+          - /url: /reviews/
+  - contentinfo [ref=f9e48]:
+    - generic [ref=f9e49]:
+      - generic [ref=f9e50]:
+        - img "Ваш доктор рядом" [ref=f9e52]
+        - generic [ref=f9e53]:
+          - generic [ref=f9e54]:
+            - generic [ref=f9e55]: Адрес
+            - paragraph [ref=f9e56]: Москва, ул. Пушкина, д.43
+          - generic [ref=f9e57]:
+            - generic [ref=f9e58]: Телефон
+            - paragraph [ref=f9e59]: +7 (9__) ___-__-__
+          - generic [ref=f9e60]:
+            - generic [ref=f9e61]: Почта
+            - paragraph [ref=f9e62]: Poshta@gmail.com
+      - generic [ref=f9e63]:
+        - generic [ref=f9e64]:
+          - heading "О клинике" [level=4] [ref=f9e65]
+          - list [ref=f9e66]:
+            - listitem [ref=f9e67]:
+              - link "Название пункта меню" [ref=f9e68] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f9e69]:
+              - link "Название пункта меню" [ref=f9e70] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f9e71]:
+              - link "Название пункта меню" [ref=f9e72] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f9e73]:
+              - link "Название пункта меню" [ref=f9e74] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f9e75]:
+              - link "Название пункта меню" [ref=f9e76] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f9e77]:
+              - link "Название пункта меню" [ref=f9e78] [cursor=pointer]:
+                - /url: "#"
+        - generic [ref=f9e79]:
+          - heading "Врач" [level=4] [ref=f9e80]
+          - list [ref=f9e81]:
+            - listitem [ref=f9e82]:
+              - link "Название пункта меню" [ref=f9e83] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f9e84]:
+              - link "Название пункта меню" [ref=f9e85] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f9e86]:
+              - link "Название пункта меню" [ref=f9e87] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f9e88]:
+              - link "Название пункта меню" [ref=f9e89] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f9e90]:
+              - link "Название пункта меню" [ref=f9e91] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f9e92]:
+              - link "Название пункта меню" [ref=f9e93] [cursor=pointer]:
+                - /url: "#"
+        - generic [ref=f9e94]:
+          - heading "Пациентам" [level=4] [ref=f9e95]
+          - list [ref=f9e96]:
+            - listitem [ref=f9e97]:
+              - link "Название пункта меню" [ref=f9e98] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f9e99]:
+              - link "Название пункта меню" [ref=f9e100] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f9e101]:
+              - link "Название пункта меню" [ref=f9e102] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f9e103]:
+              - link "Название пункта меню" [ref=f9e104] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f9e105]:
+              - link "Название пункта меню" [ref=f9e106] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f9e107]:
+              - link "Название пункта меню" [ref=f9e108] [cursor=pointer]:
+                - /url: "#"
+        - generic [ref=f9e109]:
+          - heading "Услуги" [level=4] [ref=f9e110]
+          - list [ref=f9e111]:
+            - listitem [ref=f9e112]:
+              - link "Название пункта меню" [ref=f9e113] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f9e114]:
+              - link "Название пункта меню" [ref=f9e115] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f9e116]:
+              - link "Название пункта меню" [ref=f9e117] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f9e118]:
+              - link "Название пункта меню" [ref=f9e119] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f9e120]:
+              - link "Название пункта меню" [ref=f9e121] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f9e122]:
+              - link "Название пункта меню" [ref=f9e123] [cursor=pointer]:
+                - /url: "#"

@@ -1,0 +1,202 @@
+- generic [active] [ref=f6e1]:
+  - checkbox "Записаться на прием Записаться на прием close" [ref=f6e2]
+  - banner [ref=f6e3]:
+    - generic [ref=f6e4]:
+      - heading "Сеть клиник Томской области" [level=2] [ref=f6e5]
+      - img "Версия для слабовидящих" [ref=f6e7] [cursor=pointer]
+      - generic [ref=f6e8]:
+        - heading "+ 7 (978) 00-00-000" [level=1] [ref=f6e9]
+        - generic [ref=f6e10] [cursor=pointer]: Записаться на прием
+    - generic [ref=f6e11]:
+      - link [ref=f6e12] [cursor=pointer]:
+        - /url: /
+        - img "логотип" [ref=f6e13]
+      - navigation [ref=f6e14]:
+        - generic [ref=f6e15]:
+          - link "Врачи" [ref=f6e16] [cursor=pointer]:
+            - /url: /doctors/
+          - link "Услуги" [ref=f6e17] [cursor=pointer]:
+            - /url: /services/
+          - link "Диагностика" [ref=f6e18] [cursor=pointer]:
+            - /url: /direction/
+          - link "Анализы" [ref=f6e19] [cursor=pointer]:
+            - /url: /analysis/
+          - link "Акции" [ref=f6e20] [cursor=pointer]:
+            - /url: /promotions/
+          - link "Пациентам" [ref=f6e21] [cursor=pointer]:
+            - /url: /oms/
+          - link "ДМС" [ref=f6e22] [cursor=pointer]:
+            - /url: /dms/
+          - link "О клинике" [ref=f6e23] [cursor=pointer]:
+            - /url: /about/
+          - link "Отзывы" [ref=f6e24] [cursor=pointer]:
+            - /url: /reviews/
+          - link "Контакты" [ref=f6e25] [cursor=pointer]:
+            - /url: /contacts/
+  - main [ref=f6e26]:
+    - generic [ref=f6e28]:
+      - generic [ref=f6e29]:
+        - heading "Лечение по ОМС" [level=1] [ref=f6e30]
+        - paragraph [ref=f6e31]: Лечение в частной клинике не всегда стоит больших денег. Каждый гражданин РФ имеет право получить бесплатную медицинскую помощь по полису (ОМС).
+        - link "Как получить лечение" [ref=f6e32] [cursor=pointer]:
+          - /url: "#"
+      - img "Лечение по ОМС" [ref=f6e34]
+    - generic [ref=f6e36]:
+      - heading "Как получить лечение?" [level=2] [ref=f6e37]
+      - generic [ref=f6e38]:
+        - generic [ref=f6e39]:
+          - generic [ref=f6e40]: "1"
+          - paragraph [ref=f6e43]: Узнайте, входит ли интересующее вас лечение в программу для вашего региона
+        - generic [ref=f6e44]:
+          - generic [ref=f6e45]: "2"
+          - paragraph [ref=f6e48]: Подготовьте необходимые документы и отправьте заявку на лечение
+        - generic [ref=f6e49]:
+          - generic [ref=f6e50]: "3"
+          - paragraph [ref=f6e53]: В течение 3-х рабочих дней специалист отдела ОМС свяжется с вами по указанному вами номеру телефона
+    - generic [ref=f6e55]:
+      - heading "Все направления лечения по ОМС" [level=2] [ref=f6e56]
+      - paragraph [ref=f6e58]: Направления пока не добавлены.
+    - img "Видео о клинике" [ref=f6e62]
+    - generic [ref=f6e64]:
+      - heading "Заявка на лечение по ОМС" [level=2] [ref=f6e65]
+      - paragraph [ref=f6e66]: Заполните поля ниже и прикрепите документ, чтобы отправить заявку
+      - generic [ref=f6e67]:
+        - generic [ref=f6e68]:
+          - generic [ref=f6e69]:
+            - generic [ref=f6e70]: Ваше ФИО
+            - textbox "Иванова Иван Иванович" [ref=f6e71]
+          - generic [ref=f6e72]:
+            - generic [ref=f6e73]: Дата рождения
+            - textbox [ref=f6e74]
+          - generic [ref=f6e75]:
+            - generic [ref=f6e76]: E-mail
+            - textbox "Poshta@gmail.com" [ref=f6e77]
+          - generic [ref=f6e78]:
+            - generic [ref=f6e79]: Номер телефона
+            - textbox "+7 (___) ___-__-__" [ref=f6e80]
+          - generic [ref=f6e81]:
+            - generic [ref=f6e82]: Медицинская услуга
+            - textbox "Название услуги" [ref=f6e83]
+          - generic [ref=f6e84]:
+            - generic [ref=f6e85]: Регион
+            - textbox "Регион" [ref=f6e86]
+          - generic [ref=f6e87]:
+            - generic [ref=f6e88]: ФИО и телефон вашего врача
+            - textbox "Иванова Анна +7 (___) ___-__-__" [ref=f6e89]
+          - generic [ref=f6e90]:
+            - generic [ref=f6e91]: Причина обращения
+            - textbox "Причина обращения" [ref=f6e92]
+          - generic [ref=f6e93]:
+            - generic [ref=f6e94]: Откуда вы узнали о нас?
+            - textbox "Источник" [ref=f6e95]
+        - paragraph [ref=f6e96]: Не забудьте прикрепить выписку из медицинской документации или результаты исследований в соответствии с перечнем выше
+        - generic [ref=f6e98] [cursor=pointer]:
+          - generic [ref=f6e101]: Прикрепить документы
+          - button "Прикрепить документы" [ref=f6e102]
+        - button "Оставить заявку" [ref=f6e104] [cursor=pointer]
+        - paragraph [ref=f6e105]:
+          - text: Нажимая на кнопку Оставить заявку вы соглашаетесь с
+          - link "политикой конфиденциальности" [ref=f6e106] [cursor=pointer]:
+            - /url: "#"
+          - text: и даете согласие на
+          - link "обработку персональных данных" [ref=f6e107] [cursor=pointer]:
+            - /url: "#"
+  - contentinfo [ref=f6e108]:
+    - generic [ref=f6e109]:
+      - generic [ref=f6e110]:
+        - img "Ваш доктор рядом" [ref=f6e112]
+        - generic [ref=f6e113]:
+          - generic [ref=f6e114]:
+            - generic [ref=f6e115]: Адрес
+            - paragraph [ref=f6e116]: Москва, ул. Пушкина, д.43
+          - generic [ref=f6e117]:
+            - generic [ref=f6e118]: Телефон
+            - paragraph [ref=f6e119]: +7 (9__) ___-__-__
+          - generic [ref=f6e120]:
+            - generic [ref=f6e121]: Почта
+            - paragraph [ref=f6e122]: Poshta@gmail.com
+      - generic [ref=f6e123]:
+        - generic [ref=f6e124]:
+          - heading "О клинике" [level=4] [ref=f6e125]
+          - list [ref=f6e126]:
+            - listitem [ref=f6e127]:
+              - link "Название пункта меню" [ref=f6e128] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f6e129]:
+              - link "Название пункта меню" [ref=f6e130] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f6e131]:
+              - link "Название пункта меню" [ref=f6e132] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f6e133]:
+              - link "Название пункта меню" [ref=f6e134] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f6e135]:
+              - link "Название пункта меню" [ref=f6e136] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f6e137]:
+              - link "Название пункта меню" [ref=f6e138] [cursor=pointer]:
+                - /url: "#"
+        - generic [ref=f6e139]:
+          - heading "Врач" [level=4] [ref=f6e140]
+          - list [ref=f6e141]:
+            - listitem [ref=f6e142]:
+              - link "Название пункта меню" [ref=f6e143] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f6e144]:
+              - link "Название пункта меню" [ref=f6e145] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f6e146]:
+              - link "Название пункта меню" [ref=f6e147] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f6e148]:
+              - link "Название пункта меню" [ref=f6e149] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f6e150]:
+              - link "Название пункта меню" [ref=f6e151] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f6e152]:
+              - link "Название пункта меню" [ref=f6e153] [cursor=pointer]:
+                - /url: "#"
+        - generic [ref=f6e154]:
+          - heading "Пациентам" [level=4] [ref=f6e155]
+          - list [ref=f6e156]:
+            - listitem [ref=f6e157]:
+              - link "Название пункта меню" [ref=f6e158] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f6e159]:
+              - link "Название пункта меню" [ref=f6e160] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f6e161]:
+              - link "Название пункта меню" [ref=f6e162] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f6e163]:
+              - link "Название пункта меню" [ref=f6e164] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f6e165]:
+              - link "Название пункта меню" [ref=f6e166] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f6e167]:
+              - link "Название пункта меню" [ref=f6e168] [cursor=pointer]:
+                - /url: "#"
+        - generic [ref=f6e169]:
+          - heading "Услуги" [level=4] [ref=f6e170]
+          - list [ref=f6e171]:
+            - listitem [ref=f6e172]:
+              - link "Название пункта меню" [ref=f6e173] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f6e174]:
+              - link "Название пункта меню" [ref=f6e175] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f6e176]:
+              - link "Название пункта меню" [ref=f6e177] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f6e178]:
+              - link "Название пункта меню" [ref=f6e179] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f6e180]:
+              - link "Название пункта меню" [ref=f6e181] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f6e182]:
+              - link "Название пункта меню" [ref=f6e183] [cursor=pointer]:
+                - /url: "#"

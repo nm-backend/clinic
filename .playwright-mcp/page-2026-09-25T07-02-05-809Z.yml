@@ -1,0 +1,182 @@
+- generic [active] [ref=f8e1]:
+  - checkbox "Записаться на прием Записаться на прием close" [ref=f8e2]
+  - banner [ref=f8e3]:
+    - generic [ref=f8e4]:
+      - heading "Сеть клиник Томской области" [level=2] [ref=f8e5]
+      - img "Версия для слабовидящих" [ref=f8e7] [cursor=pointer]
+      - generic [ref=f8e8]:
+        - heading "+ 7 (978) 00-00-000" [level=1] [ref=f8e9]
+        - generic [ref=f8e10] [cursor=pointer]: Записаться на прием
+    - generic [ref=f8e11]:
+      - link [ref=f8e12] [cursor=pointer]:
+        - /url: /
+        - img "логотип" [ref=f8e13]
+      - navigation [ref=f8e14]:
+        - generic [ref=f8e15]:
+          - link "Врачи" [ref=f8e16] [cursor=pointer]:
+            - /url: /doctors/
+          - link "Услуги" [ref=f8e17] [cursor=pointer]:
+            - /url: /services/
+          - link "Диагностика" [ref=f8e18] [cursor=pointer]:
+            - /url: /direction/
+          - link "Анализы" [ref=f8e19] [cursor=pointer]:
+            - /url: /analysis/
+          - link "Акции" [ref=f8e20] [cursor=pointer]:
+            - /url: /promotions/
+          - link "Пациентам" [ref=f8e21] [cursor=pointer]:
+            - /url: /oms/
+          - link "ДМС" [ref=f8e22] [cursor=pointer]:
+            - /url: /dms/
+          - link "О клинике" [ref=f8e23] [cursor=pointer]:
+            - /url: /about/
+          - link "Отзывы" [ref=f8e24] [cursor=pointer]:
+            - /url: /reviews/
+          - link "Контакты" [ref=f8e25] [cursor=pointer]:
+            - /url: /contacts/
+  - main [ref=f8e26]:
+    - generic [ref=f8e28]:
+      - generic [ref=f8e29]:
+        - link "Главная" [ref=f8e30] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f8e31]: /
+        - generic [ref=f8e32]: Отзывы наших пациентов
+      - generic [ref=f8e33]:
+        - heading "Отзывы наших пациентов" [level=2] [ref=f8e34]
+        - link "Добавить отзыв" [ref=f8e35] [cursor=pointer]:
+          - /url: /reviews/create/
+      - generic [ref=f8e36]:
+        - generic [ref=f8e37]:
+          - generic [ref=f8e38]:
+            - heading "Test User" [level=3] [ref=f8e39]
+            - generic [ref=f8e40]: ★ ★ ★ ★ ★
+          - paragraph [ref=f8e41]: Vse otlichno
+          - generic [ref=f8e42]:
+            - generic [ref=f8e43]: 25.09.2026
+            - generic [ref=f8e44]: "Врач: Ivanov"
+        - generic [ref=f8e45]:
+          - generic [ref=f8e46]:
+            - heading "Имрон" [level=3] [ref=f8e47]
+            - generic [ref=f8e48]: ★ ★ ★ ★ ★
+          - paragraph [ref=f8e49]: Гемморой
+          - generic [ref=f8e50]:
+            - generic [ref=f8e51]: 25.09.2026
+            - generic [ref=f8e52]: "Врач: Иван"
+    - generic [ref=f8e54]:
+      - generic [ref=f8e55]:
+        - heading "Хотите, мы Вам перезвоним?" [level=2] [ref=f8e56]
+        - paragraph [ref=f8e57]: Оставьте заявку и мы подробно ответим на все Ваши вопросы!
+        - generic [ref=f8e58]:
+          - generic [ref=f8e59]:
+            - generic [ref=f8e60]:
+              - generic [ref=f8e61]: Ваше ФИО
+              - textbox "Ваше ФИО" [ref=f8e62]:
+                - /placeholder: Иванов Иван Иванович
+            - generic [ref=f8e63]:
+              - generic [ref=f8e64]: Номер телефона
+              - textbox "Номер телефона" [ref=f8e65]:
+                - /placeholder: +7 (___) ___-__-__
+          - button "Заказать звонок" [ref=f8e66] [cursor=pointer]
+        - paragraph [ref=f8e67]:
+          - text: Нажимая на кнопку «Заказать звонок», вы соглашаетесь с
+          - link "политикой конфиденциальности" [ref=f8e68] [cursor=pointer]:
+            - /url: "#"
+      - img "Врач консультант" [ref=f8e70]
+  - contentinfo [ref=f8e71]:
+    - generic [ref=f8e72]:
+      - generic [ref=f8e73]:
+        - img "Ваш доктор рядом" [ref=f8e75]
+        - generic [ref=f8e76]:
+          - generic [ref=f8e77]:
+            - generic [ref=f8e78]: Адрес
+            - paragraph [ref=f8e79]: Москва, ул. Пушкина, д.43
+          - generic [ref=f8e80]:
+            - generic [ref=f8e81]: Телефон
+            - paragraph [ref=f8e82]: +7 (9__) ___-__-__
+          - generic [ref=f8e83]:
+            - generic [ref=f8e84]: Почта
+            - paragraph [ref=f8e85]: Poshta@gmail.com
+      - generic [ref=f8e86]:
+        - generic [ref=f8e87]:
+          - heading "О клинике" [level=4] [ref=f8e88]
+          - list [ref=f8e89]:
+            - listitem [ref=f8e90]:
+              - link "Название пункта меню" [ref=f8e91] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f8e92]:
+              - link "Название пункта меню" [ref=f8e93] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f8e94]:
+              - link "Название пункта меню" [ref=f8e95] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f8e96]:
+              - link "Название пункта меню" [ref=f8e97] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f8e98]:
+              - link "Название пункта меню" [ref=f8e99] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f8e100]:
+              - link "Название пункта меню" [ref=f8e101] [cursor=pointer]:
+                - /url: "#"
+        - generic [ref=f8e102]:
+          - heading "Врач" [level=4] [ref=f8e103]
+          - list [ref=f8e104]:
+            - listitem [ref=f8e105]:
+              - link "Название пункта меню" [ref=f8e106] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f8e107]:
+              - link "Название пункта меню" [ref=f8e108] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f8e109]:
+              - link "Название пункта меню" [ref=f8e110] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f8e111]:
+              - link "Название пункта меню" [ref=f8e112] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f8e113]:
+              - link "Название пункта меню" [ref=f8e114] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f8e115]:
+              - link "Название пункта меню" [ref=f8e116] [cursor=pointer]:
+                - /url: "#"
+        - generic [ref=f8e117]:
+          - heading "Пациентам" [level=4] [ref=f8e118]
+          - list [ref=f8e119]:
+            - listitem [ref=f8e120]:
+              - link "Название пункта меню" [ref=f8e121] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f8e122]:
+              - link "Название пункта меню" [ref=f8e123] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f8e124]:
+              - link "Название пункта меню" [ref=f8e125] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f8e126]:
+              - link "Название пункта меню" [ref=f8e127] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f8e128]:
+              - link "Название пункта меню" [ref=f8e129] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f8e130]:
+              - link "Название пункта меню" [ref=f8e131] [cursor=pointer]:
+                - /url: "#"
+        - generic [ref=f8e132]:
+          - heading "Услуги" [level=4] [ref=f8e133]
+          - list [ref=f8e134]:
+            - listitem [ref=f8e135]:
+              - link "Название пункта меню" [ref=f8e136] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f8e137]:
+              - link "Название пункта меню" [ref=f8e138] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f8e139]:
+              - link "Название пункта меню" [ref=f8e140] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f8e141]:
+              - link "Название пункта меню" [ref=f8e142] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f8e143]:
+              - link "Название пункта меню" [ref=f8e144] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=f8e145]:
+              - link "Название пункта меню" [ref=f8e146] [cursor=pointer]:
+                - /url: "#"

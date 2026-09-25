@@ -25,8 +25,8 @@ class ServiceDirectionAdmin(admin.ModelAdmin):
 @admin.register(Appointment)
 class AppointmentAdmin(admin.ModelAdmin):
     list_display = (
-        'full_name', 'phone', 'doctor',
-        'appointment_date', 'appointment_time',
+        'full_name', 'phone', 'direction',
+        'doctor', 'appointment_date', 'appointment_time',
         'status', 'created_at',
     )
     list_filter = ('status', 'doctor', 'appointment_date')

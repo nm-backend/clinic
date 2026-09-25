@@ -31,6 +31,26 @@ def save_callback(request):
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
 
+def save_appointment(request):
+    if request.method == 'POST':
+        full_name = request.POST.get('full_name')
+        phone = request.POST.get('phone')
+        direction = request.POST.get('direction')
+        if full_name and phone and direction:
+            Appointment.objects.create(
+                full_name=full_name,
+                phone=phone,
+                direction=direction,
+            )
+            referer = request.META.get('HTTP_REFERER', '/')
+            if '?' in referer:
+                redirect_url = f"{referer}&success=1"
+            else:
+                redirect_url = f"{referer}?success=1"
+            return redirect(redirect_url)
+    return redirect(request.META.get('HTTP_REFERER', '/'))
+
+
 def direction_page(request):
     return render(request, 'direction_detail.html')
 

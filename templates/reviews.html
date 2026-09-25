@@ -17,9 +17,12 @@
             <span>Отзывы наших пациентов</span>
         </div>
 
-            <h2 class="reviews-title">
-                Отзывы наших пациентов
-            </h2>
+            <div class="reviews-header">
+                <h2 class="reviews-title">
+                    Отзывы наших пациентов
+                </h2>
+                <a href="{% url 'review_create' %}" class="btn-outline">Добавить отзыв</a>
+            </div>
 
         <div class="reviews-grid">
 
@@ -46,10 +49,6 @@
                 <p class="review-text">
                     {{ review.text|truncatewords:40 }}
                 </p>
-
-                <a href="{% url 'review_detail' review.pk %}" class="read-more">
-                    Читать полностью
-                </a>
 
                 <div class="review-footer">
                     <span>{{ review.created_at|date:"d.m.Y" }}</span>

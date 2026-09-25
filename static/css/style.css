@@ -3022,7 +3022,6 @@ body {
   border: 1px solid rgba(13, 35, 59, 0.08);
   border-radius: 20px;
   padding: 22px;
-  box-shadow: 0 14px 30px rgba(15, 36, 54, 0.08);
 }
 
 .review-card-header {
@@ -4165,7 +4164,6 @@ body {
     border: 1px solid rgba(13, 35, 59, 0.08);
     border-radius: 20px;
     padding: 22px 22px 18px;
-    box-shadow: 0 14px 30px rgba(15, 36, 54, 0.08);
 }
 
 .review-card-header {
@@ -4350,9 +4348,15 @@ body {
 }
 
 .reviews-title {
-    margin: 0 0 28px;
+    margin: 0;
     font-size: clamp(30px, 4vw, 46px);
     color: #0d233b;
+}
+
+.reviews-header .btn-outline {
+    width: auto;
+    padding: 0 24px;
+    flex-shrink: 0;
 }
 
 .reviews-grid {
@@ -4366,7 +4370,6 @@ body {
     border: 1px solid rgba(13, 35, 59, 0.08);
     border-radius: 20px;
     padding: 22px;
-    box-shadow: 0 14px 30px rgba(15, 36, 54, 0.08);
 }
 
 .review-header {
@@ -4989,7 +4992,8 @@ body {
   color: #1a1a1a;
 }
 
-.modal-form input {
+.modal-form input,
+.modal-form select {
   padding: 14px 16px;
   border: 1px solid transparent;
   border-radius: 12px;
@@ -5006,7 +5010,8 @@ body {
   color: #a0aec0;
 }
 
-.modal-form input:focus {
+.modal-form input:focus,
+.modal-form select:focus {
   background-color: #ffffff;
   border-color: #27ae60;
 }
